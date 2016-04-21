@@ -37,6 +37,8 @@ If the recipient entry was added to the list by Compliance, it cannot be updated
 
 If an email address is duplicated in a single request, only the first instance will be processed.
 
+*Note:* `email`, which is an alias of `recipient`, attribute is supported but deprecated.
+
 + Request (application/json)
 
     + Headers
@@ -46,16 +48,16 @@ If an email address is duplicated in a single request, only the first instance w
 
         ```
         {
-        "recipients": [
-          {
-            "email": "rcpt_1@example.com",
-            "transactional": true,
-            "description": "User requested to not receive any transactional emails."
-          },
-          {
-            "email": "rcpt_2@example.com",
-            "non_transactional": true
-              }
+            "recipients": [
+                {
+                    "recipient": "rcpt_1@example.com",
+                    "transactional": true,
+                    "description": "User requested to not receive any transactional emails."
+                },
+                {
+                    "recipient": "rcpt_2@example.com",
+                    "non_transactional": true
+                }
             ]
         }
         ```
