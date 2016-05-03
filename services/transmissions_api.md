@@ -23,7 +23,7 @@ If you use [Postman](https://www.getpostman.com/) you can click the following bu
 |description | string |Description of the transmission|no | Maximum length - 1024 bytes|
 |metadata|JSON object|Transmission level metadata containing key/value pairs |no| Metadata is available during events through the Webhooks and is provided to the substitution engine.  A maximum of 1000 bytes of merged metadata (transmission level + recipient level) is available with recipient metadata taking precedence over transmission metadata when there are conflicts.  |
 |substitution_data|JSON object|Key/value pairs that are provided to the substitution engine| no | Recipient substitution data takes precedence over transmission substitution data. Unlike metadata, substitution data is not included in Webhook events. |
-|return_path | string |Email to use for envelope FROM ( **Note:** SparkPost Elite only )| yes | To support Variable Envelope Return Path (VERP), this field can also optionally be specified inside of the address object of a specific recipient in order to give the recipient a unique envelope MAIL FROM. |
+|return_path | string |Email to use for envelope FROM ( **Note:** SparkPost Elite only )| required for email tranmissions | To support Variable Envelope Return Path (VERP), this field can also optionally be specified inside of the address object of a specific recipient in order to give the recipient a unique envelope MAIL FROM. |
 |content| JSON object | Content that will be used to construct a message | yes | Specify a stored template or specify inline template content. When using a stored template, specify the "template_id" as described in Using a Stored Template.  Otherwise, provide the inline content using the fields described in Inline Content Attributes.  Maximum size - 20MBs|
 |total_recipients | number | Computed total recipients | no | Read only|
 |num_generated | number | Computed total number of messages generated | no |Read only|
@@ -52,8 +52,8 @@ The following attributes are used when specifying inline content in the transmis
 |html    |string  |HTML content for the email's text/html MIME part|At a minimum, html, text, or push is required.  |Expected in the UTF-8 charset with no Content-Transfer-Encoding applied.  Substitution syntax is supported. |
 |text    |string  |Text content for the email's text/plain MIME part|At a minimum, html, text, or push is required. |Expected in the UTF-8 charset with no Content-Transfer-Encoding applied.  Substitution syntax is supported.|
 |push    |JSON object  |Content of push notifications|At a minimum, html, text, or push is required. |See Push Attributes in Templates.|
-|subject |string  |Email subject line   | yes |Expected in the UTF-8 charset without RFC2047 encoding.  Substitution syntax is supported. |
-|from |string or JSON  | Address _"from" : "deals@company.com"_ or JSON object composed of the "name" and "email" fields _"from" : { "name" : "My Company", "email" : "deals@company.com" }_ used to compose the email's "From" header| yes | Substitution syntax is supported. |
+|subject |string  |Email subject line   | required for email transmissions |Expected in the UTF-8 charset without RFC2047 encoding.  Substitution syntax is supported. |
+|from |string or JSON  | Address _"from" : "deals@company.com"_ or JSON object composed of the "name" and "email" fields _"from" : { "name" : "My Company", "email" : "deals@company.com" }_ used to compose the email's "From" header| required for email transmissions | Substitution syntax is supported. |
 |reply_to |string  |Email address used to compose the email's "Reply-To" header | no | Substitution syntax is supported. |
 |headers| JSON | JSON dictionary containing headers other than "Subject", "From", "To", and "Reply-To"  | no |See the Header Notes. |
 |attachments| JSON | JSON array of attachments. | no | For a full description, see Attachment Attributes. |
@@ -163,7 +163,7 @@ Once message generation has been initiated, all messages in the transmission wil
   + num_rcpt_errors (optional, number, `3`) ... Maximum number of recipient errors that this call can return, otherwise all validation errors are returned.
 
 
-+ Request Create Transmission Using Inline Email Part Content (application/json)
++ Request Create Transmission for Mobile Push Using Inline Content (application/json)
 
     + Headers
 
@@ -178,11 +178,14 @@ Once message generation has been initiated, all messages in the transmission wil
 
           "recipients": [
             {
-              "return_path": "123@bounces.flintstone.com",
               "devices": [
                 {
                   "token": "<DEVICE_TOKEN>",
                   "os": "iOS"
+                },
+                {
+                  "token": "<REGISTRATION_TOKEN>",
+                  "os": "Android"
                 }
               ],
             }
@@ -224,7 +227,7 @@ Once message generation has been initiated, all messages in the transmission wil
         {
           "results": {
             "total_rejected_recipients": 0,
-            "total_accepted_recipients": 1,
+            "total_accepted_recipients": 2,
             "id": "11668787484950529"
           }
         }
@@ -242,7 +245,7 @@ Once message generation has been initiated, all messages in the transmission wil
           ]
         }
         
-+ Request Create Transmission for Mobile Push using Inline Content (application/json)
++ Request Create Transmission using Inline Email Part Content (application/json)
 
     + Headers
 
