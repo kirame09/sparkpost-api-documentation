@@ -233,17 +233,6 @@ Once message generation has been initiated, all messages in the transmission wil
         }
         ```
 
-+ Response 400 (application/json)
-
-        {
-          "errors" : [
-            {
-              "description" : "Unconfigured or unverified sending domain.",
-              "code" : "7001",
-              "message" : "Invalid domain"
-            }
-          ]
-        }
         
 + Request Create Transmission using Inline Email Part Content (application/json)
 
