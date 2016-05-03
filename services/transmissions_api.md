@@ -173,6 +173,85 @@ Once message generation has been initiated, all messages in the transmission wil
 
         ```
         {
+
+          "campaign_id": "christmas_campaign",
+
+          "recipients": [
+            {
+              "return_path": "123@bounces.flintstone.com",
+              "devices": [
+                {
+                  "token": "<DEVICE_TOKEN>",
+                  "os": "iOS"
+                }
+              ],
+            }
+          ],
+          "content": {
+            "push": {
+              "title" : "You have deals",
+              "body" : "You have new deals to check out. Head to the app to find out more",
+              "apn" : {
+                "aps" : {
+                  "alert" : {
+                    "title" : "You have IOS deals",
+                    "badge" : 1
+                  }
+                }
+              },
+              "gcm" : {
+                "notification" : {
+                  "title" : "You have Android deals",
+                  "body" : "Open your Android app to check out these awesome new deals",
+                  "color" : "#fa6423",
+                  "icon" : "myicon" 
+                }
+              }
+            }
+          }
+        }
+        ```
+
++ Response 200 (application/json)
+
+    + Headers
+
+            Authorization: 14ac5499cfdd2bb2859e4476d2e5b1d2bad079bf
+
+    + Body
+
+        ```
+        {
+          "results": {
+            "total_rejected_recipients": 0,
+            "total_accepted_recipients": 1,
+            "id": "11668787484950529"
+          }
+        }
+        ```
+
++ Response 400 (application/json)
+
+        {
+          "errors" : [
+            {
+              "description" : "Unconfigured or unverified sending domain.",
+              "code" : "7001",
+              "message" : "Invalid domain"
+            }
+          ]
+        }
+        
++ Request Create Transmission for Mobile Push using Inline Content (application/json)
+
+    + Headers
+
+            Authorization: 14ac5499cfdd2bb2859e4476d2e5b1d2bad079bf
+
+    + Body
+
+        ```
+        {
           "options": {
             "open_tracking": true,
             "click_tracking": true
@@ -243,18 +322,6 @@ Once message generation has been initiated, all messages in the transmission wil
           }
         }
         ```
-
-+ Response 400 (application/json)
-
-        {
-          "errors" : [
-            {
-              "description" : "Unconfigured or unverified sending domain.",
-              "code" : "7001",
-              "message" : "Invalid domain"
-            }
-          ]
-        }
 
 + Request Create Transmission with Inline RFC822 Content (application/json)
 
