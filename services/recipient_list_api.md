@@ -28,8 +28,8 @@ Recipients are described in a JSON array with the following fields:
 
 | Field         | Type     | Description                           | Required   | Notes   |
 |------------------------|:-:       |---------------------------------------|-------------|--------|
-|address | JSON object or string | Address information for a recipient  | At a minimum, address or devices is required | See the Address Attributes. Required for stored recipient lists. |
-|devices | JSON array | Array of device objects | At a minimum, address or devices is required. | Currently only supported for inline recipient lists. See Device Attributes. |
+|address | JSON object or string | Address information for a recipient  | At a minimum, address or mobile_address is required | See the Address Attributes. Required for stored recipient lists. |
+|mobile_address | JSON object | The mobile device receiving notifications | At a minimum, address or mobile_address is required. | Currently only supported for inline recipient lists. See Mobile Address Attributes. |
 |return_path | string |Email to use for envelope FROM ( **Note:** SparkPost Elite only )| no | To support Variable Envelope Return Path (VERP), this field provides a specific recipient a unique envelope MAIL FROM. |
 |tags | JSON array |Array of text labels associated with a recipient | no | Tags are available in Webhook events.  Maximum number of tags - 10 per recipient, 100 system wide.  Any tags over the limits are ignored.|
 |metadata | JSON object| Key/value pairs associated with a recipient |no | Metadata is available during events through the Webhooks and is provided to the substitution engine.  A maximum of 1000 bytes of merged metadata (transmission level + recipient level) is available with recipient metadata taking precedence over transmission metadata when there are conflicts.  |
@@ -78,7 +78,7 @@ or:
 
 The "To" header is only constructed for messages built from email part content.  The "To" header is not built for email_rfc822 content.
 
-#### Device Attributes
+#### Mobile Address Attributes
 | Field         | Type     | Description                           | Required   | Notes |
 |------------------------|:-:       |---------------------------------------|-------------| ------------|
 |token    |string       |Token used to uniquely identify a device   |yes  |Device token in APN, Registration token in GCM |
