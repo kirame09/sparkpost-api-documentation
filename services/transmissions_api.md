@@ -178,16 +178,16 @@ Once message generation has been initiated, all messages in the transmission wil
 
           "recipients": [
             {
-              "devices": [
-                {
+              "mobile_address": {
                   "token": "<DEVICE_TOKEN>",
                   "os": "iOS"
-                },
-                {
-                  "token": "<REGISTRATION_TOKEN>",
+                }
+            },
+            {
+              "mobile_address": {
+                  "token": "<DEVICE_TOKEN>",
                   "os": "Android"
                 }
-              ],
             }
           ],
           "content": {
