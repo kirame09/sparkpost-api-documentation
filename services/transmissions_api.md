@@ -183,9 +183,6 @@ Once message generation has been initiated, all messages in the transmission wil
 
         ```
         {
-
-          "campaign_id": "christmas_campaign",
-
           "recipients": [
             {
               "mobile_address": {
