@@ -51,13 +51,23 @@ The following attributes are used when specifying inline content in the transmis
 |------------------------|:-:       |---------------------------------------|-------------|--------|
 |html    |string  |HTML content for the email's text/html MIME part|At a minimum, html, text, or push is required.  |Expected in the UTF-8 charset with no Content-Transfer-Encoding applied.  Substitution syntax is supported. |
 |text    |string  |Text content for the email's text/plain MIME part|At a minimum, html, text, or push is required. |Expected in the UTF-8 charset with no Content-Transfer-Encoding applied.  Substitution syntax is supported.|
-|push    |JSON object  |Content of push notifications|At a minimum, html, text, or push is required. |See Push Attributes in Templates.|
+|push    |JSON object  |Content of push notifications|At a minimum, html, text, or push is required. |See Push Attributes.|
 |subject |string  |Email subject line   | required for email transmissions |Expected in the UTF-8 charset without RFC2047 encoding.  Substitution syntax is supported. |
 |from |string or JSON  | Address _"from" : "deals@company.com"_ or JSON object composed of the "name" and "email" fields _"from" : { "name" : "My Company", "email" : "deals@company.com" }_ used to compose the email's "From" header| required for email transmissions | Substitution syntax is supported. |
 |reply_to |string  |Email address used to compose the email's "Reply-To" header | no | Substitution syntax is supported. |
 |headers| JSON | JSON dictionary containing headers other than "Subject", "From", "To", and "Reply-To"  | no |See the Header Notes. |
 |attachments| JSON | JSON array of attachments. | no | For a full description, see Attachment Attributes. |
 |inline_images| JSON | JSON array of inline images. | no | For a full description, see Inline Image Attributes. |
+
+#### Push Attributes
+The following attributes control the contents of push notifications:
+
+| Field         | Type     | Description                           | Required   | Notes   |
+|------------------------|:-:       |---------------------------------------|-------------|--------|
+|title |string |Title text for push message. |yes |Overridden by value in "title" field in APN and GCM objects|
+|body |string |Body text for push message. |no | Overridden by value in the "body" field in APN and GCM objects|
+|apn |JSON object |payload for APN messages |no | Used for any push notifications sent to iOS devices (See Mobile Address Attributes). Values provided here take priority over those in "title" and "body". See Apple's [APN documentation](https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/TheNotificationPayload.html) for details |
+|gcm |JSON object | payload for GCM messages |no| Used for any push notifications sent to Android devices (See Mobile Address Attributes). Values provided here take priority over those in "title" and "body". See Google's [Notification Payload Support](https://developers.google.com/cloud-messaging/http-server-ref#notification-payload-support)
 
 #### Header Notes
 
