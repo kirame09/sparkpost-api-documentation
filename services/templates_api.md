@@ -45,8 +45,8 @@ The Push object is a JSON object with the following fields:
 |------------------------|:-:       |---------------------------------------|-------------|--------|
 |title |string |Title text for push message. |yes |Overridden by value in "title" field in APN and GCM objects|
 |body |string |Body text for push message. |no | Overridden by value in the "body" field in APN and GCM objects|
-|apn |JSON object |payload for APN messages |no | Used for any push notifications sent to iOS devices (See Device Attributes). Values provided here take priority over those in "title" and "body". See Apple's [APN documentation](https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/TheNotificationPayload.html) for details |
-|gcm |JSON object | payload for GCM messages |no| Used for any push notifications sent to Android devices (See Device Attributes). Values provided here take priority over those in "title" and "body". See Google's [Notification Payload Support](https://developers.google.com/cloud-messaging/http-server-ref#notification-payload-support)
+|apn |JSON object |payload for APN messages |no | Used for any push notifications sent to iOS devices (See Mobile Address Attributes). Values provided here take priority over those in "title" and "body". See Apple's [APN documentation](https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/TheNotificationPayload.html) for details |
+|gcm |JSON object | payload for GCM messages |no| Used for any push notifications sent to Android devices (See Mobile Address Attributes). Values provided here take priority over those in "title" and "body". See Google's [Notification Payload Support](https://developers.google.com/cloud-messaging/http-server-ref#notification-payload-support)
 #### Header Notes
 
 * Headers such as "Content-Type" and "Content-Transfer-Encoding" are not allowed here as they are auto generated upon construction of the email.
