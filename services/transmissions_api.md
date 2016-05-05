@@ -187,13 +187,15 @@ Once message generation has been initiated, all messages in the transmission wil
             {
               "mobile_address": {
                   "token": "<DEVICE_TOKEN>",
-                  "os": "iOS"
+                  "os": "iOS",
+                  "app_id": "<Application_Identifier>"
                 }
             },
             {
               "mobile_address": {
                   "token": "<DEVICE_TOKEN>",
-                  "os": "Android"
+                  "os": "Android",
+                  "app_id": "<Application_Identifier>"
                 }
             }
           ],
