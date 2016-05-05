@@ -83,6 +83,7 @@ The "To" header is only constructed for messages built from email part content. 
 |------------------------|:-:       |---------------------------------------|-------------| ------------|
 |token    |string       |Token used to uniquely identify a device   |yes  |Device token in APN, Registration token in GCM |
 |os |string |Operating system of device identified by token |yes |Valid values are "iOS" and "Android" |
+|app_id |string |GCM or APN identifier for your application|yes | |
 
 ## Create [/recipient-lists{?num_rcpt_errors}]
 
