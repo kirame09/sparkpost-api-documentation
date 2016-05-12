@@ -185,17 +185,20 @@ Once message generation has been initiated, all messages in the transmission wil
         {
           "recipients": [
             {
-                "token": "<DEVICE_TOKEN>",
-                "os": "iOS",
-                "app_id": "<Application_Identifier>",
-                "channel": "push"
-                
+                "address": {
+                    "token": "<DEVICE_TOKEN>",
+                    "os": "iOS",
+                    "app_id": "<Application_Identifier>",
+                    "channel": "push"
+                }
             },
             {
-                 "token": "<DEVICE_TOKEN>",
-                 "os": "Android",
-                 "app_id": "<Application_Identifier>",
-                 "channel": "push"
+                "address" : {
+                    "token": "<DEVICE_TOKEN>",
+                    "os": "Android",
+                    "app_id": "<Application_Identifier>",
+                    "channel": "push"
+                }
             }
           ],
           "content": {
