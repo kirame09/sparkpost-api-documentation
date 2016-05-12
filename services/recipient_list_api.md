@@ -29,7 +29,6 @@ Recipients are described in a JSON array with the following fields:
 | Field         | Type     | Description                           | Required   | Notes   |
 |------------------------|:-:       |---------------------------------------|-------------|--------|
 |address | JSON object, JSON array, or string | Address information for a recipient  | At a minimum, address or mobile_address is required | See the Address Attributes. Required for stored recipient lists. |
-|mobile_address | JSON object | Mobile device for push notifications | At a minimum, address or mobile_address is required. | Currently only supported for inline recipient lists. See Mobile Address Attributes. |
 |return_path | string |Email to use for envelope FROM ( **Note:** SparkPost Elite only )| no | To support Variable Envelope Return Path (VERP), this field provides a specific recipient a unique envelope MAIL FROM. |
 |tags | JSON array |Array of text labels associated with a recipient | no | Tags are available in Webhook events.  Maximum number of tags - 10 per recipient, 100 system wide.  Any tags over the limits are ignored.|
 |metadata | JSON object| Key/value pairs associated with a recipient |no | Metadata is available during events through the Webhooks and is provided to the substitution engine.  A maximum of 1000 bytes of merged metadata (transmission level + recipient level) is available with recipient metadata taking precedence over transmission metadata when there are conflicts.  |
@@ -44,7 +43,7 @@ object, it is described with the following fields:
 |email    |string       |Valid email address   |yes  |no|
 |name |string |User-friendly name for the email address |no |no|
 |header_to|string       |Email address to display in the "To" header instead of _address.email_ (for BCC)|no|no|
-|channel_type|string|The communication channel this address identifies|no|yes|
+|channel|string|The communication channel this address identifies|no|yes|
 |token|string|See Push Specific Attributes |no|yes|
 |os|string|See Push Specific Attributes |no|yes|
 |app_id|string|See Push Specific Attributes |no|yes|
@@ -86,7 +85,7 @@ The "To" header is only constructed for messages built from email part content. 
 #### Push Specific Attributes (Only supported for inline recipient lists)
 | Field         | Type     | Description                           | Notes |
 |------------------------|:-:       |---------------------------------------|-------------| ------------|
-|channel_type|string|The channel that will be used to reach this recipient|Valid values are "email" and "push", defaults to "email".|
+|channel|string|The channel that will be used to reach this recipient|Valid values are "email" and "push", defaults to "email".|
 |token    |string       |Token used to uniquely identify a device   |Device token in APN, Registration token in GCM |
 |os |string |Operating system of device identified by token | Valid values are "iOS" and "Android"|
 |app_id |string |GCM or APN identifier for your application| |
