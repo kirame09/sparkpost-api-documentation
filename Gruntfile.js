@@ -5,7 +5,6 @@ var matchdep = require('matchdep')
     , services = [
         'introduction.md',
         'substitutions_reference.md',
-        'account_api.md',
         'inbound_domains_api.md',
         'metrics_api.md',
         'message_events_api.md',
@@ -19,7 +18,8 @@ var matchdep = require('matchdep')
         'transmissions_api.md',
         'webhooks_api.md',
         'smtp_api.md'
-    ];
+    ], striptags = require('striptags')
+    , swiftype = require('swiftype');
 
 function _md2html(obj, val, idx) {
     var name = (val.split('.'))[0];
@@ -41,6 +41,13 @@ function sectionName(md) {
 function htmlFile(md) {
     var name = sectionName(md);
     return 'aglio/'+ name +'.html';
+}
+
+function html2swiftype(html) {
+  var htmlra = html.split('/');
+  var file = htmlra[htmlra.length-1];
+  var name = (file.split('.'))[0];
+  return 'swiftype/'+ name +'.json';
 }
 
 module.exports = function(grunt) {
@@ -257,6 +264,65 @@ module.exports = function(grunt) {
         fs.readdir('./services', function(err, files) {
             q.all(files.map(generatePreview)).then(done, done);
         });
+    });
+
+    grunt.registerTask('swiftype-upload', 'Uploads generated files to the Swiftype engine', function() {
+      // TODO: get api key from environment
+      /*
+      var apiKey = process.env.SWIFTYPE_API_KEY
+        , engine = 'sparkpost-api'
+        , docType = 'api-doc'
+        , obj = {
+          external_id: hfile,
+          fields: [
+            { name: 'title', value: title, type: 'string' },
+            { name: 'body', value: bodyText, type: 'text' },
+            { name: 'url', value hfile, type: 'enum' }
+          ]
+        };
+      */
+    });
+
+    grunt.registerTask('swiftype-gen', 'Outputs files suitable for importing into Swiftype', function() {
+      var done = this.async();
+      try {
+        fs.mkdirSync('./swiftype');
+      } catch(e){}
+
+      fs.readdir('./services', function(err, files) {
+        q.all(files.map(htmlFile)).then(function(hfiles) {
+          for (idx in hfiles) {
+            var hfile = hfiles[idx]
+              , html = undefined;
+            try {
+              html = fs.readFileSync(hfile);
+            } catch(e){}
+            if (html != undefined) {
+              $ = cheerio.load(html);
+              var title = $('html head title').text();
+              if (title === 'API Documentation') {
+                title = $('body h2.group-heading').text();
+              }
+              title = title.replace(/\s+¶$/, '');
+
+              $('nav').remove();
+              var bodyHtml = $('body').html();
+              bodyHtml = bodyHtml.replace(/></g, '> <');
+              bodyHtml = striptags(bodyHtml);
+              bodyHtml = bodyHtml.replace(/\s{2,}/g, ' ');
+
+              grunt.log.write('swiftype-gen: title=['+ title +'] body length '+ bodyHtml.length +"\n");
+              var obj = { title: title, body: bodyHtml, url: hfile };
+              // write out content to be indexed for this file
+              var jsonfn = html2swiftype(hfile);
+              grunt.log.write('swiftype-gen: OUT='+ jsonfn +"\n");
+              fs.writeFileSync(jsonfn, JSON.stringify(obj), 'utf-8');
+            } else {
+              grunt.log.write('swiftype-gen: ERROR reading '+ hfile +"\n");
+            }
+          }
+        }).then(done, done);
+      });
     });
 
     // grunt testFiles - runs apiary-blueprint-validator on individual blueprint files
