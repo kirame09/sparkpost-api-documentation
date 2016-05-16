@@ -58,8 +58,8 @@ module.exports = function(grunt) {
     var cheerio = require('cheerio');
     var swiftype // see swiftype-init
       , swiftypeApiKey = process.env.SWIFTYPE_API_KEY
-      , swiftypeEngine = 'sparkpostapi'
-      , swiftypeDoctype = 'api-doc';
+      , swiftypeEngine = 'sparkpost'
+      , swiftypeDoctype = 'apidoc';
 
 
     // Configure existing grunt tasks and create custom ones
@@ -274,24 +274,38 @@ module.exports = function(grunt) {
         });
     });
 
-    grunt.registerTask('swiftype-init', 'Makes sure our Swiftype container is initialized.', function() {
-      if (swiftypeApiKey === undefined || swiftypeApiKey === '') {
-        grunt.log.error("SWIFTYPE_API_KEY not found in environment!\n");
-        return null;
-      }
-      var done = this.async();
-      swiftype = new Swiftype({ apiKey: swiftypeApiKey });
+    function swiftypeIndex(jsonfn) {
+      var deferred = q.defer(), json;
 
-      swiftype.documentTypes.create({engine: swiftypeEngine, document_type: swiftypeDoctype}, function(err, res) {
-        if (err !== undefined && err !== null) {
-          return done(err);
-        } else if (res.error !== undefined) {
-          return done(Error(res.error));
-        }
-        grunt.log.write("create res: "+ JSON.stringify(res));
-        return done(Error(JSON.stringify(res)));
-      });
-    });
+      try {
+        json = fs.readFileSync(jsonfn);
+      } catch(e){ grunt.log.write(jsonfn +": "+ e +"\n"); }
+
+      if (json !== undefined) {
+        grunt.log.write('swiftype-upload read '+ json.length +' for ['+ jsonfn +"]\n");
+        var obj = JSON.parse(json);
+
+        swiftype.documents.create({
+          engine: swiftypeEngine,
+          documentType: swiftypeDoctype,
+          document: {
+            external_id: obj.url,
+            fields: [
+              { name: 'title', value: obj.title, type: 'string' },
+              { name: 'body', value: obj.body, type: 'text' },
+              { name: 'url', value: obj.url, type: 'enum' }
+            ]
+          }
+        }, function(err, res) {
+          if (err !== undefined && err !== null) {
+            deferred.reject(err);
+          } else if (res.error !== undefined) {
+            deferred.reject(Error(res.error));
+          }
+        });
+      }
+      return deferred.promise;
+    }
 
     grunt.registerTask('swiftype-upload', 'Uploads generated files to the Swiftype engine', function() {
       if (swiftypeApiKey === undefined || swiftypeApiKey === '') {
@@ -303,42 +317,10 @@ module.exports = function(grunt) {
 
       fs.readdir('./aglio', function(err, files) {
         if (err !== null) { done(err); }
-        q.all(files.map(html2swiftype)).then(function(jfiles) {
-          return q.all(jfiles.map(function(jsonfn) {
-            var json;
-            try {
-              json = fs.readFileSync(jsonfn);
-            } catch(e){ grunt.log.write(jsonfn +": "+ e +"\n"); }
-
-            if (json !== undefined) {
-              grunt.log.write('swiftype-upload read '+ json.length +' for ['+ jsonfn +"]\n");
-              var obj = JSON.parse(json);
-
-              var createDef = q.defer();
-              swiftype.documents.create({
-                engine: swiftypeEngine,
-                documentType: swiftypeDoctype,
-                document: {
-                  external_id: obj.url,
-                  fields: [
-                    { name: 'title', value: obj.title, type: 'string' },
-                    { name: 'body', value: obj.body, type: 'text' },
-                    { name: 'url', value: obj.url, type: 'enum' }
-                  ]
-                }
-              }, function(err, res) {
-                if (err !== undefined && err !== null) {
-                  createDef.reject(err);
-                } else if (res.error !== undefined) {
-                  createDef.reject(Error(res.error));
-                } else {
-                  grunt.log.write("created doc: "+ jsonfn +"\n");
-                }
-              });
-              return createDef.promise;
-            }
-          }));
-        }).then(done, done).done();
+        q.all(files.map(html2swiftype))
+          .then(swiftypeIndex)
+          .then(done, done)
+          .done();
       });
       return;
     });
@@ -369,6 +351,7 @@ module.exports = function(grunt) {
               $('script').remove();
               $('style').remove();
               var bodyHtml = $('body').html();
+              // FIXME: split each doc up into smaller chunks - basically anything we can deep link to
               bodyHtml = bodyHtml.replace(/></g, '> <');
               bodyHtml = striptags(bodyHtml);
               bodyHtml = bodyHtml.replace(/\s{2,}/g, ' ');
