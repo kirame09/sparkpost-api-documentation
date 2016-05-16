@@ -47,7 +47,8 @@ object, it is described with the following fields:
 |token|string|See Push Specific Attributes |no|yes|
 |os|string|See Push Specific Attributes |no|yes|
 |app_id|string|See Push Specific Attributes |no|yes|
-If "address" is a JSON array, each of its entries must either be a string or JSON object and will be individually interpretted as described above. Currently, only the first entry in the array will be used.
+
+In anticipation of upcoming multichannel support "address" can be a JSON array. If "address" is a JSON array, each of its entries must either be a string or JSON object and each will be individually interpretted as described above. Currently, only the first entry in the array will be used.
 
 **Constructing Headers using the Address Attributes**
 
