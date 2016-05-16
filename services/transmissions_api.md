@@ -64,10 +64,8 @@ The following attributes control the contents of push notifications:
 
 | Field         | Type     | Description                           | Required   | Notes   |
 |------------------------|:-:       |---------------------------------------|-------------|--------|
-|title |string |Title text for push message. |At a minimum, title, apn, or gcm is required|Only used to build payload when apn or gcm payloads are omitted|
-|body |string |Body text for push message. |no |Only used to build payload when apn or gcm payloads are omitted|
-|apn |JSON object |payload for APN messages |At a minimum, title, apn, or gcm is required | Used for any push notifications sent to iOS devices (See Mobile Address Attributes). This payload is delivered as is. See Apple's [APN documentation](https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/TheNotificationPayload.html) for details |
-|gcm |JSON object | payload for GCM messages |At a minimum, title, apn, or gcm is required| Used for any push notifications sent to Android devices (See Mobile Address Attributes). This payload is delivered as is. See Google's [Notification Payload Support](https://developers.google.com/cloud-messaging/http-server-ref#notification-payload-support)
+|apn |JSON object |payload for APN messages |At a minimum, apn or gcm is required | Used for any push notifications sent to apn devices (See Address Attributes). This payload is delivered as is. See Apple's [APN documentation](https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/TheNotificationPayload.html) for details |
+|gcm |JSON object | payload for GCM messages |At a minimum, apn or gcm is required| Used for any push notifications sent to gcm devices (See Address Attributes). This payload is delivered as is. See Google's [Notification Payload Support](https://developers.google.com/cloud-messaging/http-server-ref#notification-payload-support)
 
 #### Header Notes
 
@@ -186,19 +184,17 @@ Once message generation has been initiated, all messages in the transmission wil
           "recipients": [
             {
                 "address": {
+                    "channel": "apn",
                     "token": "<DEVICE_TOKEN>",
-                    "service": "apn",
-                    "app_id": "<Application_Identifier>",
-                    "channel": "push"
+                    "app_id": "<Application_Identifier>"
                 }
             },
             {
                 "address" : [
                     {
+                        "channel": "gcm",
                         "token": "<DEVICE_TOKEN>",
-                        "service": "gcm",
                         "app_id": "<Application_Identifier>",
-                        "channel": "push"
                     },
                     {
                         "email" : "fred@flinstone.com",
@@ -209,8 +205,6 @@ Once message generation has been initiated, all messages in the transmission wil
           ],
           "content": {
             "push": {
-              "title" : "You have deals",
-              "body" : "You have new deals to check out. Head to the app to find out more",
               "apn" : {
                 "aps" : {
                   "alert" : {
