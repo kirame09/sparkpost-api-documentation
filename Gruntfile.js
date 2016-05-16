@@ -366,6 +366,8 @@ module.exports = function(grunt) {
               title = title.replace(/\s+¶$/, '');
 
               $('nav').remove();
+              $('script').remove();
+              $('style').remove();
               var bodyHtml = $('body').html();
               bodyHtml = bodyHtml.replace(/></g, '> <');
               bodyHtml = striptags(bodyHtml);
