@@ -40,7 +40,7 @@ object, it is described with the following fields:
 
 | Field         | Type     | Description                           | Required  |Notes|
 |------------------------|:-:       |---------------------------------------|-------------|--------|
-|channel|string|The communication channel this address identifies|no - Defaults to "email"|Valid values are "email", "gcm", "apn"|
+|channel|string|The communication channel used to reach recipient|no - Defaults to "email"|Valid values are "email", "gcm", "apn". See Notes on channel below|
 |email    |string       |Valid email address   |required if channel is "email" |
 |name |string |User-friendly name for the email address |no |Used when channel is "email"|
 |header_to|string       |Email address to display in the "To" header instead of _address.email_ (for BCC)|no|Used when channel is "email"|
@@ -48,7 +48,9 @@ object, it is described with the following fields:
 |app_id|string|See Push Specific Attributes |required if channel is "gcm" or "apn"|
 
 ##### Address as an Array
-In anticipation of upcoming multichannel support "address" can be a JSON array. If "address" is a JSON array, each of its entries must either be a string or JSON object and each will be individually interpretted as described above in Address Attributes. Currently, *only the first entry* in the array will be used.
+In anticipation of upcoming multichannel support _address_ can be a JSON array. If _address_ is a JSON array, each of its entries must either be a string or JSON object and each will be individually interpretted as described above in Address Attributes. Currently, *only the first entry* in the array will be used.
+##### Notes on channel
+Communication channels other than email are currently only supported for inline recipient lists. Fields unrelated to the value of _channel_ are ignored. A field is considered unrelated if it is not required for that value of _channel_ unless mentioned otherwise in Notes
 
 **Constructing Headers using the Address Attributes**
 
