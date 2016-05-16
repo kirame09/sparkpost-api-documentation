@@ -45,7 +45,7 @@ object, it is described with the following fields:
 |header_to|string       |Email address to display in the "To" header instead of _address.email_ (for BCC)|no|no|
 |channel|string|The communication channel this address identifies|no|yes|
 |token|string|See Push Specific Attributes |no|yes|
-|os|string|See Push Specific Attributes |no|yes|
+|service|string|See Push Specific Attributes |no|yes|
 |app_id|string|See Push Specific Attributes |no|yes|
 
 In anticipation of upcoming multichannel support "address" can be a JSON array. If "address" is a JSON array, each of its entries must either be a string or JSON object and each will be individually interpretted as described above. Currently, only the first entry in the array will be used.
@@ -88,7 +88,7 @@ The "To" header is only constructed for messages built from email part content. 
 |------------------------|:-:       |---------------------------------------|-------------| ------------|
 |channel|string|The channel that will be used to reach this recipient|Valid values are "email" and "push", defaults to "email".|
 |token    |string       |Token used to uniquely identify a device   |Device token in APN, Registration token in GCM |
-|os |string |Operating system of device identified by token | Valid values are "iOS" and "Android"|
+|service |string |Service used to push to device| Valid values are "apn" and "gcm"|
 |app_id |string |GCM or APN identifier for your application| |
 
 ## Create [/recipient-lists{?num_rcpt_errors}]
