@@ -187,18 +187,24 @@ Once message generation has been initiated, all messages in the transmission wil
             {
                 "address": {
                     "token": "<DEVICE_TOKEN>",
-                    "os": "iOS",
+                    "service": "apn",
                     "app_id": "<Application_Identifier>",
                     "channel": "push"
                 }
             },
             {
-                "address" : {
-                    "token": "<DEVICE_TOKEN>",
-                    "os": "Android",
-                    "app_id": "<Application_Identifier>",
-                    "channel": "push"
-                }
+                "address" : [
+                    {
+                        "token": "<DEVICE_TOKEN>",
+                        "service": "gcm",
+                        "app_id": "<Application_Identifier>",
+                        "channel": "push"
+                    },
+                    {
+                        "email" : "fred@flinstone.com",
+                        "name" : "Fred"
+                    }
+                ]
             }
           ],
           "content": {
