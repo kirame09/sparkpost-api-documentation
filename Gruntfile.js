@@ -1,4 +1,6 @@
+/* jshint laxcomma: true, multistr: true */
 var matchdep = require('matchdep')
+    , assert = require('assert')
     , fs = require('fs')
     , q = require('q')
     , request = require('request')
@@ -19,7 +21,7 @@ var matchdep = require('matchdep')
         'webhooks_api.md',
         'smtp_api.md'
     ], striptags = require('striptags')
-    , swiftype = require('swiftype');
+    , Swiftype = require('swiftype');
 
 function _md2html(obj, val, idx) {
     var name = (val.split('.'))[0];
@@ -35,7 +37,7 @@ function sectionName(md) {
     if (name === 'introduction') {
         name = 'index';
     }
-    return name
+    return name;
 }
 
 function htmlFile(md) {
@@ -54,6 +56,11 @@ module.exports = function(grunt) {
     // Dynamically load any preexisting grunt tasks/modules
     matchdep.filterDev('grunt-*').forEach(grunt.loadNpmTasks);
     var cheerio = require('cheerio');
+    var swiftype // see swiftype-init
+      , swiftypeApiKey = process.env.SWIFTYPE_API_KEY
+      , swiftypeEngine = 'sparkpostapi'
+      , swiftypeDoctype = 'api-doc';
+
 
     // Configure existing grunt tasks and create custom ones
     grunt.initConfig({
@@ -115,7 +122,8 @@ module.exports = function(grunt) {
                                 var name = names[idx];
                                 var html = grunt.option('dom_munger.getnav.'+ name);
                                 if (html === undefined) {
-                                    grunt.log.fatal('no nav html for ['+ name +'], run dom_munger before copy!');
+                                    grunt.log.error('no nav html for ['+ name +'], run dom_munger before copy!');
+                                    return null;
                                 }
                                 allnav = allnav + html;
                             }
@@ -266,21 +274,73 @@ module.exports = function(grunt) {
         });
     });
 
+    grunt.registerTask('swiftype-init', 'Makes sure our Swiftype container is initialized.', function() {
+      if (swiftypeApiKey === undefined || swiftypeApiKey === '') {
+        grunt.log.error("SWIFTYPE_API_KEY not found in environment!\n");
+        return null;
+      }
+      var done = this.async();
+      swiftype = new Swiftype({ apiKey: swiftypeApiKey });
+
+      swiftype.documentTypes.create({engine: swiftypeEngine, document_type: swiftypeDoctype}, function(err, res) {
+        if (err !== undefined && err !== null) {
+          return done(err);
+        } else if (res.error !== undefined) {
+          return done(Error(res.error));
+        }
+        grunt.log.write("create res: "+ JSON.stringify(res));
+        return done(Error(JSON.stringify(res)));
+      });
+    });
+
     grunt.registerTask('swiftype-upload', 'Uploads generated files to the Swiftype engine', function() {
-      // TODO: get api key from environment
-      /*
-      var apiKey = process.env.SWIFTYPE_API_KEY
-        , engine = 'sparkpost-api'
-        , docType = 'api-doc'
-        , obj = {
-          external_id: hfile,
-          fields: [
-            { name: 'title', value: title, type: 'string' },
-            { name: 'body', value: bodyText, type: 'text' },
-            { name: 'url', value hfile, type: 'enum' }
-          ]
-        };
-      */
+      if (swiftypeApiKey === undefined || swiftypeApiKey === '') {
+        grunt.log.error("SWIFTYPE_API_KEY not found in environment!\n");
+        return null;
+      }
+      var done = this.async();
+      swiftype = new Swiftype({ apiKey: swiftypeApiKey });
+
+      fs.readdir('./aglio', function(err, files) {
+        if (err !== null) { done(err); }
+        q.all(files.map(html2swiftype)).then(function(jfiles) {
+          return q.all(jfiles.map(function(jsonfn) {
+            var json;
+            try {
+              json = fs.readFileSync(jsonfn);
+            } catch(e){ grunt.log.write(jsonfn +": "+ e +"\n"); }
+
+            if (json !== undefined) {
+              grunt.log.write('swiftype-upload read '+ json.length +' for ['+ jsonfn +"]\n");
+              var obj = JSON.parse(json);
+
+              var createDef = q.defer();
+              swiftype.documents.create({
+                engine: swiftypeEngine,
+                documentType: swiftypeDoctype,
+                document: {
+                  external_id: obj.url,
+                  fields: [
+                    { name: 'title', value: obj.title, type: 'string' },
+                    { name: 'body', value: obj.body, type: 'text' },
+                    { name: 'url', value: obj.url, type: 'enum' }
+                  ]
+                }
+              }, function(err, res) {
+                if (err !== undefined && err !== null) {
+                  createDef.reject(err);
+                } else if (res.error !== undefined) {
+                  createDef.reject(Error(res.error));
+                } else {
+                  grunt.log.write("created doc: "+ jsonfn +"\n");
+                }
+              });
+              return createDef.promise;
+            }
+          }));
+        }).then(done, done).done();
+      });
+      return;
     });
 
     grunt.registerTask('swiftype-gen', 'Outputs files suitable for importing into Swiftype', function() {
@@ -291,13 +351,13 @@ module.exports = function(grunt) {
 
       fs.readdir('./services', function(err, files) {
         q.all(files.map(htmlFile)).then(function(hfiles) {
-          for (idx in hfiles) {
+          for (var idx in hfiles) {
             var hfile = hfiles[idx]
               , html = undefined;
             try {
               html = fs.readFileSync(hfile);
             } catch(e){}
-            if (html != undefined) {
+            if (html !== undefined) {
               $ = cheerio.load(html);
               var title = $('html head title').text();
               if (title === 'API Documentation') {
