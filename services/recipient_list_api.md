@@ -28,7 +28,7 @@ Recipients are described in a JSON array with the following fields:
 
 | Field         | Type     | Description                           | Required   | Notes   |
 |------------------------|:-:       |---------------------------------------|-------------|--------|
-|address | JSON object, JSON array, or string | Address information for a recipient  | At a minimum, address or mobile_address is required | See the Address Attributes. Required for stored recipient lists. |
+|address | JSON object, JSON array, or string | Address information for a recipient  | yes| See the Address Attributes. |
 |return_path | string |Email to use for envelope FROM ( **Note:** SparkPost Elite only )| no | To support Variable Envelope Return Path (VERP), this field provides a specific recipient a unique envelope MAIL FROM. |
 |tags | JSON array |Array of text labels associated with a recipient | no | Tags are available in Webhook events.  Maximum number of tags - 10 per recipient, 100 system wide.  Any tags over the limits are ignored.|
 |metadata | JSON object| Key/value pairs associated with a recipient |no | Metadata is available during events through the Webhooks and is provided to the substitution engine.  A maximum of 1000 bytes of merged metadata (transmission level + recipient level) is available with recipient metadata taking precedence over transmission metadata when there are conflicts.  |
@@ -38,15 +38,14 @@ Recipients are described in a JSON array with the following fields:
 If the "address" field is a string type, it is interpreted as the email address. If it is a JSON
 object, it is described with the following fields:  
 
-| Field         | Type     | Description                           | Required for email  |Required for Push|
-|------------------------|:-:       |---------------------------------------|-------------|-------------|
-|email    |string       |Valid email address   |yes  |no|
-|name |string |User-friendly name for the email address |no |no|
-|header_to|string       |Email address to display in the "To" header instead of _address.email_ (for BCC)|no|no|
-|channel|string|The communication channel this address identifies|no|yes|
-|token|string|See Push Specific Attributes |no|yes|
-|service|string|See Push Specific Attributes |no|yes|
-|app_id|string|See Push Specific Attributes |no|yes|
+| Field         | Type     | Description                           | Required  |Notes|
+|------------------------|:-:       |---------------------------------------|-------------|--------|
+|channel|string|The communication channel this address identifies|no - Defaults to "email"|Valid values are "email", "gcm", "apn"|
+|email    |string       |Valid email address   |required if channel is "email" |
+|name |string |User-friendly name for the email address |no |Used when channel is "email"|
+|header_to|string       |Email address to display in the "To" header instead of _address.email_ (for BCC)|no|Used when channel is "email"|
+|token|string|See Push Specific Attributes |required if channel is "gcm" or "apn"|
+|app_id|string|See Push Specific Attributes |required if channel is "gcm" or "apn"|
 
 ##### Address as an Array
 In anticipation of upcoming multichannel support "address" can be a JSON array. If "address" is a JSON array, each of its entries must either be a string or JSON object and each will be individually interpretted as described above in Address Attributes. Currently, *only the first entry* in the array will be used.
@@ -87,9 +86,7 @@ The "To" header is only constructed for messages built from email part content. 
 #### Push Specific Attributes (Only supported for inline recipient lists)
 | Field         | Type     | Description                           | Notes |
 |------------------------|:-:       |---------------------------------------|-------------| ------------|
-|channel|string|The channel that will be used to reach this recipient|Valid values are "email" and "push", defaults to "email".|
 |token    |string       |Token used to uniquely identify a device   |Device token in APN, Registration token in GCM |
-|service |string |Service used to push to device| Valid values are "apn" and "gcm"|
 |app_id |string |GCM or APN identifier for your application| |
 
 ## Create [/recipient-lists{?num_rcpt_errors}]
