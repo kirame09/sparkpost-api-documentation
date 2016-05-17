@@ -333,20 +333,15 @@ module.exports = function(grunt) {
 
       fs.readdir('./services', function(err, files) {
         q.all(files.map(htmlFile)).then(function(hfiles) {
-          for (var idx in hfiles) {
-            var hfile = hfiles[idx]
+          for (var hidx in hfiles) {
+            var hfile = hfiles[hidx]
               , html = undefined;
             try {
               html = fs.readFileSync(hfile);
             } catch(e){}
+
             if (html !== undefined) {
               $ = cheerio.load(html);
-              var title = $('html head title').text();
-              if (title === 'API Documentation') {
-                title = $('body h2.group-heading').text();
-              }
-              title = title.replace(/\s+¶$/, '');
-
               // remove things we don't want to be indexed
               $('head').remove();
               $('nav').remove();
@@ -355,40 +350,56 @@ module.exports = function(grunt) {
               $('pre').remove();
 
               // split each doc up into smaller chunks - basically anything we can deep link to
-              var section = undefined;
-              // FIXME: this skips text before the first element with an id
-              //$('*[id]').nextUntil('*[id]').each(function(idx, elt) {
+              var frags = [];
+              var file = (((hfile.split(/\//))[1]).split(/\./))[0].replace(/_/g, '-');
+
+              // FIXME: this misses any text before the first element with an id
               $('*[id]').each(function(idx, elt) {
-                // FIXME: delay parsing <section> tags until we've got the rest done
                 if ($(elt).attr('id') !== undefined) {
-                  if (section === undefined) { section = 'index'; }
                   var id = $(this).attr('id');
-                  if (id === undefined) {
-                    section = title.toLowerCase().replace(/\s+/g, '-');
-                    id = section +'-top';
-                  } else {
-                    id = id.replace(/^header\-/, section +'_');
+                  id = id.replace(/^header\-/, file +'_');
+                  if (id === 'top') {
+                    id = file +'_'+ id;
+                  }
+
+                  var obj = {id: id, hfile: hfile};
+                  obj.tag = $(elt).prop('tagName');
+                  obj.html = $(elt).html();
+                  if (obj.html.length > 0) {
+                    frags.push(obj);
+                  //} else {
+                  //  grunt.log.write("ignoring "+ id +" with length "+ obj.html.length +"\n");
                   }
                 }
-                var eltHtml = $(elt).html();
+              });
+
+              // accumulate all chunks of html in an array
+              // iterate from largest to smallest number of characters:
+              //   iterage again from current+1 to smallest, removing matching substrings
+              // this is necessary because there isn't a .nextUntil(...) that
+              // searches depth-first, so we end up with "abcd" and "bc",
+              // grossly oversimplified
+              for (var i = 0; i < frags.length; i++) {
+                if (i < (frags.length-1)) {
+                  for (var j = i+1; j < frags.length; j++) {
+                    var idx = frags[i].html.indexOf(frags[j].html);
+                    if (idx != -1) {
+                      //grunt.log.write(frags[i].id +' ('+ frags[i].html.length +') contains '+ frags[j].id +' ('+ frags[j].html.length +")\n");
+                      frags[i].html = frags[i].html.substring(0, idx) + frags[i].html.substring(idx + frags[j].html.length);
+                      //grunt.log.write(frags[i].id +' ('+ frags[i].html.length +") after dedupe\n");
+                    }
+                  }
+                }
+                var eltHtml = frags[i].html;
                 eltHtml = eltHtml.replace(/></g, '> <');
                 eltHtml = striptags(eltHtml);
                 eltHtml = eltHtml.replace(/\s{2,}/g, ' ');
-                grunt.log.write("file="+ hfile +", tag="+ $(elt).prop('tagName') +", id=["+ id +"], len=["+ eltHtml.length +"]\n");
-              });
-              continue;
+                grunt.log.write("file="+ frags[i].hfile +", tag="+ frags[i].tag +", id=["+ frags[i].id +"], len=["+ eltHtml.length +"]\n");
+                frags[i].html = eltHtml;
 
-              var bodyHtml = $('body').html();
-              bodyHtml = bodyHtml.replace(/></g, '> <');
-              bodyHtml = striptags(bodyHtml);
-              bodyHtml = bodyHtml.replace(/\s{2,}/g, ' ');
-
-              grunt.log.write('swiftype-gen: title=['+ title +'] body length '+ bodyHtml.length +"\n");
-              var obj = { title: title, body: bodyHtml, url: hfile };
-              // write out content to be indexed for this file
-              var jsonfn = html2swiftype(hfile);
-              grunt.log.write('swiftype-gen: OUT='+ jsonfn +"\n");
-              fs.writeFileSync(jsonfn, JSON.stringify(obj), 'utf-8');
+                var fn = 'swiftype/' + frags[i].id +'.json';
+                fs.writeFileSync(fn, JSON.stringify(frags[i]), 'utf-8');
+              }
             } else {
               grunt.log.write('swiftype-gen: ERROR reading '+ hfile +"\n");
             }
