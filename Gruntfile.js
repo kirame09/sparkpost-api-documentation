@@ -278,7 +278,7 @@ module.exports = function(grunt) {
       var deferred = q.defer(), json;
 
       try {
-        json = fs.readFileSync(jsonfn);
+        json = fs.readFileSync('./swiftype/'+ jsonfn);
       } catch(e){ grunt.log.write(jsonfn +": "+ e +"\n"); }
 
       if (json !== undefined) {
@@ -315,10 +315,9 @@ module.exports = function(grunt) {
       var done = this.async();
       swiftype = new Swiftype({ apiKey: swiftypeApiKey });
 
-      fs.readdir('./aglio', function(err, files) {
+      fs.readdir('./swiftype', function(err, files) {
         if (err !== null) { done(err); }
-        q.all(files.map(html2swiftype))
-          .then(swiftypeIndex)
+        q.all(files.map(swiftypeIndex))
           .then(done, done)
           .done();
       });
@@ -390,8 +389,10 @@ module.exports = function(grunt) {
                     }
                   }
                 }
+
                 var eltBody = frags[i].body;
-                eltBody = eltBody.replace(/></g, '> <');
+                eltBody = eltBody.replace(/([^ ])</g, '$1 <');
+                eltBody = eltBody.replace(/>([^ ])/g, '> $1');
                 eltBody = striptags(eltBody);
                 eltBody = eltBody.replace(/\s{2,}/g, ' ');
                 grunt.log.write("file="+ frags[i].path +", tag="+ frags[i].tag +", id=["+ frags[i].id +"], len=["+ eltBody.length +"]\n");
