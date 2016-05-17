@@ -38,6 +38,16 @@ Recipients are described in a JSON array with the following fields:
 If the "address" field is a string type, it is interpreted as the email address. If it is a JSON
 object, it is described with the following fields:  
 
+| Field         | Type     | Description                           | Required  |
+|------------------------|:-:       |---------------------------------------|-------------|
+|email    |string       |Valid email address   |yes |
+|name |string |User-friendly name for the email address |no |
+|header_to|string       |Email address to display in the "To" header instead of _address.email_ (for BCC)|no |
+
+##### Address as an Array
+In anticipation of upcoming multichannel support _address_ can be a JSON array. 
+If _address_ is a JSON array, each of its elements must either be a string or JSON object. If the element is a string it will be interpretted as the email address. If it is a JSON object it is described with the following fields. Currently, *only the first entry* in the array will be used.
+
 | Field         | Type     | Description                           | Required  |Notes|
 |------------------------|:-:       |---------------------------------------|-------------|--------|
 |channel|string|The communication channel used to reach recipient|no - Defaults to "email"|Valid values are "email", "gcm", "apn". See Notes on channel below|
@@ -46,9 +56,6 @@ object, it is described with the following fields:
 |header_to|string       |Email address to display in the "To" header instead of _address.email_ (for BCC)|no|Used when channel is "email"|
 |token|string|See Push Specific Attributes |required if channel is "gcm" or "apn"|
 |app_id|string|See Push Specific Attributes |required if channel is "gcm" or "apn"|
-
-##### Address as an Array
-In anticipation of upcoming multichannel support _address_ can be a JSON array. If _address_ is a JSON array, each of its entries must either be a string or JSON object and each will be individually interpretted as described above in Address Attributes. Currently, *only the first entry* in the array will be used.
 ##### Notes on channel
 Communication channels other than email are currently only supported for inline recipient lists. Fields unrelated to the value of _channel_ are ignored. A field is considered unrelated if it is not required for that value of _channel_ unless mentioned otherwise in Notes
 
