@@ -289,11 +289,11 @@ module.exports = function(grunt) {
           engine: swiftypeEngine,
           documentType: swiftypeDoctype,
           document: {
-            external_id: obj.url,
+            external_id: obj.id,
             fields: [
-              { name: 'title', value: obj.title, type: 'string' },
+              { name: 'path', value: obj.path, type: 'string' },
               { name: 'body', value: obj.body, type: 'text' },
-              { name: 'url', value: obj.url, type: 'enum' }
+              { name: 'tag', value: obj.tag, type: 'enum' }
             ]
           }
         }, function(err, res) {
@@ -362,10 +362,10 @@ module.exports = function(grunt) {
                     id = file +'_'+ id;
                   }
 
-                  var obj = {id: id, hfile: hfile};
+                  var obj = {id: id, path: hfile};
                   obj.tag = $(elt).prop('tagName');
-                  obj.html = $(elt).html();
-                  if (obj.html.length > 0) {
+                  obj.body = $(elt).html();
+                  if (obj.body.length > 0) {
                     frags.push(obj);
                   //} else {
                   //  grunt.log.write("ignoring "+ id +" with length "+ obj.html.length +"\n");
@@ -382,20 +382,20 @@ module.exports = function(grunt) {
               for (var i = 0; i < frags.length; i++) {
                 if (i < (frags.length-1)) {
                   for (var j = i+1; j < frags.length; j++) {
-                    var idx = frags[i].html.indexOf(frags[j].html);
+                    var idx = frags[i].body.indexOf(frags[j].html);
                     if (idx != -1) {
-                      //grunt.log.write(frags[i].id +' ('+ frags[i].html.length +') contains '+ frags[j].id +' ('+ frags[j].html.length +")\n");
-                      frags[i].html = frags[i].html.substring(0, idx) + frags[i].html.substring(idx + frags[j].html.length);
-                      //grunt.log.write(frags[i].id +' ('+ frags[i].html.length +") after dedupe\n");
+                      //grunt.log.write(frags[i].id +' ('+ frags[i].body.length +') contains '+ frags[j].id +' ('+ frags[j].body.length +")\n");
+                      frags[i].body = frags[i].body.substring(0, idx) + frags[i].body.substring(idx + frags[j].body.length);
+                      //grunt.log.write(frags[i].id +' ('+ frags[i].body.length +") after dedupe\n");
                     }
                   }
                 }
-                var eltHtml = frags[i].html;
-                eltHtml = eltHtml.replace(/></g, '> <');
-                eltHtml = striptags(eltHtml);
-                eltHtml = eltHtml.replace(/\s{2,}/g, ' ');
-                grunt.log.write("file="+ frags[i].hfile +", tag="+ frags[i].tag +", id=["+ frags[i].id +"], len=["+ eltHtml.length +"]\n");
-                frags[i].html = eltHtml;
+                var eltBody = frags[i].body;
+                eltBody = eltBody.replace(/></g, '> <');
+                eltBody = striptags(eltBody);
+                eltBody = eltBody.replace(/\s{2,}/g, ' ');
+                grunt.log.write("file="+ frags[i].path +", tag="+ frags[i].tag +", id=["+ frags[i].id +"], len=["+ eltBody.length +"]\n");
+                frags[i].body = eltBody;
 
                 var fn = 'swiftype/' + frags[i].id +'.json';
                 fs.writeFileSync(fn, JSON.stringify(frags[i]), 'utf-8');
