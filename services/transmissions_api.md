@@ -183,11 +183,13 @@ Once message generation has been initiated, all messages in the transmission wil
         {
           "recipients": [
             {
-                "address": {
-                    "channel": "apn",
-                    "token": "<DEVICE_TOKEN>",
-                    "app_id": "<Application_Identifier>"
-                }
+                "address": [
+                    {
+                        "channel": "apn",
+                        "token": "<DEVICE_TOKEN>",
+                        "app_id": "<Application_Identifier>"
+                    }
+                ]
             },
             {
                 "address" : [
