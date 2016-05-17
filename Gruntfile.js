@@ -347,11 +347,38 @@ module.exports = function(grunt) {
               }
               title = title.replace(/\s+¶$/, '');
 
+              // remove things we don't want to be indexed
+              $('head').remove();
               $('nav').remove();
               $('script').remove();
               $('style').remove();
+              $('pre').remove();
+
+              // split each doc up into smaller chunks - basically anything we can deep link to
+              var section = undefined;
+              // FIXME: this skips text before the first element with an id
+              //$('*[id]').nextUntil('*[id]').each(function(idx, elt) {
+              $('*[id]').each(function(idx, elt) {
+                // FIXME: delay parsing <section> tags until we've got the rest done
+                if ($(elt).attr('id') !== undefined) {
+                  if (section === undefined) { section = 'index'; }
+                  var id = $(this).attr('id');
+                  if (id === undefined) {
+                    section = title.toLowerCase().replace(/\s+/g, '-');
+                    id = section +'-top';
+                  } else {
+                    id = id.replace(/^header\-/, section +'_');
+                  }
+                }
+                var eltHtml = $(elt).html();
+                eltHtml = eltHtml.replace(/></g, '> <');
+                eltHtml = striptags(eltHtml);
+                eltHtml = eltHtml.replace(/\s{2,}/g, ' ');
+                grunt.log.write("file="+ hfile +", tag="+ $(elt).prop('tagName') +", id=["+ id +"], len=["+ eltHtml.length +"]\n");
+              });
+              continue;
+
               var bodyHtml = $('body').html();
-              // FIXME: split each doc up into smaller chunks - basically anything we can deep link to
               bodyHtml = bodyHtml.replace(/></g, '> <');
               bodyHtml = striptags(bodyHtml);
               bodyHtml = bodyHtml.replace(/\s{2,}/g, ' ');
