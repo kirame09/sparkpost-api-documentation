@@ -64,8 +64,8 @@ The following attributes control the contents of push notifications:
 
 | Field         | Type     | Description                           | Required   | Notes   |
 |------------------------|:-:       |---------------------------------------|-------------|--------|
-|apn |JSON object |payload for APN messages |At a minimum, apn or gcm is required | Used for any push notifications sent to apn devices (See Address Attributes). This payload is delivered as is. See Apple's [APN documentation](https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/TheNotificationPayload.html) for details |
-|gcm |JSON object | payload for GCM messages |At a minimum, apn or gcm is required| Used for any push notifications sent to gcm devices (See Address Attributes). This payload is delivered as is. See Google's [Notification Payload Support](https://developers.google.com/cloud-messaging/http-server-ref#notification-payload-support)
+|apns |JSON object |payload for APNs messages |At a minimum, apns or gcm is required | Used for any push notifications sent to apns devices (See Address Attributes). This payload is delivered as is. See Apple's [APNs documentation](https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/TheNotificationPayload.html) for details |
+|gcm |JSON object | payload for GCM messages |At a minimum, apns or gcm is required| Used for any push notifications sent to gcm devices (See Address Attributes). This payload is delivered as is. See Google's [Notification Payload Support](https://developers.google.com/cloud-messaging/http-server-ref#notification-payload-support)
 
 #### Header Notes
 
@@ -185,7 +185,7 @@ Once message generation has been initiated, all messages in the transmission wil
             {
                 "address": [
                     {
-                        "channel": "apn",
+                        "channel": "apns",
                         "token": "<DEVICE_TOKEN>",
                         "app_id": "<Application_Identifier>"
                     }
@@ -207,7 +207,7 @@ Once message generation has been initiated, all messages in the transmission wil
           ],
           "content": {
             "push": {
-              "apn" : {
+              "apns" : {
                 "aps" : {
                   "alert" : {
                     "title" : "You have IOS deals",
