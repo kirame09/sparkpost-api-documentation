@@ -45,17 +45,11 @@ function htmlFile(md) {
     return 'aglio/'+ name +'.html';
 }
 
-function html2swiftype(html) {
-  var htmlra = html.split('/');
-  var file = htmlra[htmlra.length-1];
-  var name = (file.split('.'))[0];
-  return 'swiftype/'+ name +'.json';
-}
-
 module.exports = function(grunt) {
     // Dynamically load any preexisting grunt tasks/modules
     matchdep.filterDev('grunt-*').forEach(grunt.loadNpmTasks);
     var cheerio = require('cheerio');
+
     var swiftype // see swiftype-init
       , swiftypeApiKey = process.env.SWIFTYPE_API_KEY
       , swiftypeEngine = 'sparkpost'
@@ -293,7 +287,7 @@ module.exports = function(grunt) {
       } catch(e){ grunt.log.write(jsonfn +": "+ e +"\n"); }
 
       if (json !== undefined) {
-        grunt.log.write('swiftype-upload read '+ json.length +' for ['+ jsonfn +"]\n");
+        grunt.log.write('swiftype-index read '+ json.length +' for ['+ jsonfn +"]\n");
         var obj = JSON.parse(json);
 
         swiftype.documents.create({
@@ -318,7 +312,7 @@ module.exports = function(grunt) {
       return deferred.promise;
     }
 
-    grunt.registerTask('swiftype-upload', 'Uploads generated files to the Swiftype engine', function() {
+    grunt.registerTask('swiftype-index', 'Uploads generated files to the Swiftype engine for indexing', function() {
       if (swiftypeApiKey === undefined || swiftypeApiKey === '') {
         grunt.log.error("SWIFTYPE_API_KEY not found in environment!\n");
         return null;
@@ -326,7 +320,7 @@ module.exports = function(grunt) {
       var done = this.async();
       swiftype = new Swiftype({ apiKey: swiftypeApiKey });
 
-      fs.readdir('./swiftype', function(err, files) {
+      fs.readdir('./chunks', function(err, files) {
         if (err !== null) { done(err); }
         q.all(files.map(swiftypeIndex))
           .then(done, done)
@@ -335,10 +329,10 @@ module.exports = function(grunt) {
       return;
     });
 
-    grunt.registerTask('swiftype-gen', 'Outputs files suitable for importing into Swiftype', function() {
+    grunt.registerTask('chunk-docs', 'Splits html docs from Aglio into files suitable for exporting into a search service', function() {
       var done = this.async();
       try {
-        fs.mkdirSync('./swiftype');
+        fs.mkdirSync('./chunks');
       } catch(e){}
 
       fs.readdir('./services', function(err, files) {
@@ -393,6 +387,7 @@ module.exports = function(grunt) {
 
               // iterate over html chunks in order
               //   iterage again from current+1, removing matching substrings
+              var chunks = 0;
               for (var i = 0; i < frags.length; i++) {
                 if (i < (frags.length-1)) {
                   for (var j = i+1; j < frags.length; j++) {
@@ -420,18 +415,20 @@ module.exports = function(grunt) {
                 eltBody = eltBody.replace(/\bdata\s*:\s*\w+\b/g, '');
                 eltBody = eltBody.replace(/\bAuthorization\s*:\s*[0-9a-fA-F]+\b/g, '');
 
-                grunt.log.write("file="+ frags[i].path +", tag="+ frags[i].tag +", id=["+ frags[i].id +"], len=["+ eltBody.length +"]\n");
+                //grunt.log.write("file="+ frags[i].path +", tag="+ frags[i].tag +", id=["+ frags[i].id +"], len=["+ eltBody.length +"]\n");
                 frags[i].body = eltBody;
 
-                var fn = 'swiftype/' + frags[i].id +'.json';
+                var fn = 'chunks/' + frags[i].id +'.json';
                 var json = JSON.stringify(frags[i]);
                 // remove entities
                 json = json.replace(/&#x[0-9a-fA-F]+;/g, '');
                 json = json.replace(/&\w+;/g, '');
                 fs.writeFileSync(fn, json, 'utf-8');
+                chunks++;
               }
+              grunt.log.write(hfile +' split into '+ chunks +" chunks\n");
             } else {
-              grunt.log.write('swiftype-gen: ERROR reading '+ hfile +"\n");
+              grunt.log.write('chunk-docs: ERROR reading '+ hfile +"\n");
             }
           }
         }).then(done, done);
