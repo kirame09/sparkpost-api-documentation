@@ -342,33 +342,37 @@ module.exports = function(grunt) {
             if (html !== undefined) {
               $ = cheerio.load(html);
               // remove things we don't want to be indexed
-              $('head').remove();
-              $('nav').remove();
-              $('script').remove();
-              $('style').remove();
-              $('pre').remove();
+              for (var tag in ['head', 'nav', 'script', 'style', 'pre']) {
+                $(tag).remove();
+              }
 
-              // split each doc up into smaller chunks - basically anything we can deep link to
+              // split each doc up into smaller chunks that can be deep linked to
               var frags = [];
               var file = (((hfile.split(/\//))[1]).split(/\./))[0].replace(/_/g, '-');
 
               // FIXME: this misses any text before the first element with an id
               $('*[id]').each(function(idx, elt) {
-                if ($(elt).attr('id') !== undefined) {
-                  var id = $(this).attr('id');
-                  id = id.replace(/^header\-/, file +'_');
-                  if (id === 'top') {
-                    id = file +'_'+ id;
-                  }
+                var id = $(this).attr('id');
+                id = id.replace(/^header\-/, file +'_');
+                if (id === 'top') {
+                  id = file +'_'+ id;
+                }
 
-                  var obj = {id: id, path: hfile};
-                  obj.tag = $(elt).prop('tagName');
-                  obj.body = $(elt).html();
-                  if (obj.body.length > 0) {
-                    frags.push(obj);
-                  //} else {
-                  //  grunt.log.write("ignoring "+ id +" with length "+ obj.html.length +"\n");
-                  }
+                // get all the content until the next following-sibling with an id
+                // don't worry about descendants with ids since we'll dedupe later
+                var htmlRa = [];
+                $(elt).nextUntil('*[id]').each(function(idx, elt) {
+                  htmlRa.push($(elt).html());
+                });
+
+                var obj = {id: id, path: hfile};
+                obj.tag = $(elt).prop('tagName');
+                obj.body = $(elt).html() + htmlRa.join(' ');
+                obj.body = obj.body.replace(/\s+/g, ' ');
+                if (obj.body.length > 0) {
+                  frags.push(obj);
+                //} else {
+                //  grunt.log.write("ignoring "+ id +" with length "+ obj.html.length +"\n");
                 }
               });
 
@@ -381,7 +385,7 @@ module.exports = function(grunt) {
               for (var i = 0; i < frags.length; i++) {
                 if (i < (frags.length-1)) {
                   for (var j = i+1; j < frags.length; j++) {
-                    var idx = frags[i].body.indexOf(frags[j].html);
+                    var idx = frags[i].body.indexOf(frags[j].body);
                     if (idx != -1) {
                       //grunt.log.write(frags[i].id +' ('+ frags[i].body.length +') contains '+ frags[j].id +' ('+ frags[j].body.length +")\n");
                       frags[i].body = frags[i].body.substring(0, idx) + frags[i].body.substring(idx + frags[j].body.length);
@@ -390,6 +394,7 @@ module.exports = function(grunt) {
                   }
                 }
 
+                // normalize space so words aren't stuck together after striptags
                 var eltBody = frags[i].body;
                 eltBody = eltBody.replace(/([^ ])</g, '$1 <');
                 eltBody = eltBody.replace(/>([^ ])/g, '> $1');
@@ -399,7 +404,9 @@ module.exports = function(grunt) {
                 frags[i].body = eltBody;
 
                 var fn = 'swiftype/' + frags[i].id +'.json';
-                fs.writeFileSync(fn, JSON.stringify(frags[i]), 'utf-8');
+                var json = JSON.stringify(frags[i]);
+                //json = json.replace(/&#x[0-9a-fA-F]+;/g, '');
+                fs.writeFileSync(fn, json, 'utf-8');
               }
             } else {
               grunt.log.write('swiftype-gen: ERROR reading '+ hfile +"\n");
