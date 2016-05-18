@@ -353,8 +353,9 @@ module.exports = function(grunt) {
             if (html !== undefined) {
               $ = cheerio.load(html);
               // remove things we don't want to be indexed
-              for (var tag in ['head', 'nav', 'script', 'style', 'pre']) {
-                $(tag).remove();
+              var tags = ['head', 'nav', 'script', 'style', 'pre'];
+              for (var idx in tags) {
+                $(tags[idx]).remove();
               }
 
               // split each doc up into smaller chunks that can be deep linked to
