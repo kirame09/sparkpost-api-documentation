@@ -3,7 +3,7 @@ var matchdep = require('matchdep')
     , assert = require('assert')
     , fs = require('fs')
     , q = require('q')
-    , Beauty = require('js-beautify')
+    , Beautify = require('js-beautify')
     , request = require('request')
     , services = [
         'introduction.md',
@@ -22,7 +22,8 @@ var matchdep = require('matchdep')
         'webhooks_api.md',
         'smtp_api.md'
     ], striptags = require('striptags')
-    , Swiftype = require('swiftype');
+    , Swiftype = require('swiftype')
+    , Algolia = require('algoliasearch');
 
 function _md2html(obj, val, idx) {
     var name = (val.split('.'))[0];
@@ -51,11 +52,15 @@ module.exports = function(grunt) {
     matchdep.filterDev('grunt-*').forEach(grunt.loadNpmTasks);
     var cheerio = require('cheerio');
 
-    var swiftype // see swiftype-init
+    var swiftype
       , swiftypeApiKey = process.env.SWIFTYPE_API_KEY
       , swiftypeEngine = 'sparkpost'
       , swiftypeDoctype = 'apidoc';
 
+    var algolia
+      , algoliaIndex
+      , algoliaApiKey = process.env.ALGOLIA_API_KEY
+      , algoliaAppId = process.env.ALGOLIA_APP_ID;
 
     // Configure existing grunt tasks and create custom ones
     grunt.initConfig({
@@ -157,7 +162,7 @@ module.exports = function(grunt) {
                         var collapse = '    var nav = document.querySelectorAll(\'nav .resource-group .heading a[href$="#'+
                             anchor +'"]\');\n    toggleCollapseNav({target: nav[0]});\n';
                         content = content.replace(/(window\.onload\s*=\s*function\s*\(\)\s*\{[^}]+)\}/, '$1'+ collapse +'}');
-                        content = Beauty.html(content, {
+                        content = Beautify.html(content, {
                           indent_size: 2,
                           wrap_line_length: 0
                         });
@@ -284,11 +289,55 @@ module.exports = function(grunt) {
         });
     });
 
-    function swiftypeIndex(jsonfn) {
+    function algoliaIndexer(jsonfn) {
+      var json;
+
+      try {
+        json = fs.readFileSync('./chunks/'+ jsonfn);
+      } catch(e){ grunt.log.write(jsonfn +": "+ e +"\n"); }
+
+      if (json !== undefined) {
+        grunt.log.write('algolia-index read '+ json.length +' for ['+ jsonfn +"]\n");
+        var jobj = JSON.parse(json);
+        var obj = {
+          body: jobj.body,
+          anchor: jobj.id,
+          path: jobj.path
+        };
+        return algoliaIndex.addObject(obj, jobj.id);
+      }
+    }
+
+    grunt.registerTask('algolia-index', 'Uploads generated files to the Algolia engine for indexing', function() {
+      if (algoliaApiKey === undefined || algoliaApiKey === '') {
+        grunt.log.error("ALGOLIA_API_KEY not found in environment!\n");
+        return null;
+      }
+      if (algoliaAppId === undefined || algoliaAppId === '') {
+        grunt.log.error("ALGOLIA_APP_ID not found in environment!\n");
+        return null;
+      }
+      var done = this.async();
+      algolia = Algolia(algoliaAppId, algoliaApiKey);
+      algoliaIndex = algolia.initIndex('prod_public_api');
+
+      fs.readdir('./chunks', function(err, files) {
+        if (err !== null) {
+          done(err);
+        } else {
+          q.all(files.map(algoliaIndexer))
+            .then(done, done)
+            .done();
+        }
+      });
+      return;
+    });
+
+    function swiftypeIndexer(jsonfn) {
       var deferred = q.defer(), json;
 
       try {
-        json = fs.readFileSync('./swiftype/'+ jsonfn);
+        json = fs.readFileSync('./chunks/'+ jsonfn);
       } catch(e){ grunt.log.write(jsonfn +": "+ e +"\n"); }
 
       if (json !== undefined) {
@@ -326,10 +375,13 @@ module.exports = function(grunt) {
       swiftype = new Swiftype({ apiKey: swiftypeApiKey });
 
       fs.readdir('./chunks', function(err, files) {
-        if (err !== null) { done(err); }
-        q.all(files.map(swiftypeIndex))
-          .then(done, done)
-          .done();
+        if (err !== null) {
+          done(err);
+        } else {
+          q.all(files.map(swiftypeIndexer))
+            .then(done, done)
+            .done();
+        }
       });
       return;
     });
