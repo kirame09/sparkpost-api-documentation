@@ -3,6 +3,7 @@ var matchdep = require('matchdep')
     , assert = require('assert')
     , fs = require('fs')
     , q = require('q')
+    , Beauty = require('js-beautify')
     , request = require('request')
     , services = [
         'introduction.md',
@@ -156,6 +157,10 @@ module.exports = function(grunt) {
                         var collapse = '    var nav = document.querySelectorAll(\'nav .resource-group .heading a[href$="#'+
                             anchor +'"]\');\n    toggleCollapseNav({target: nav[0]});\n';
                         content = content.replace(/(window\.onload\s*=\s*function\s*\(\)\s*\{[^}]+)\}/, '$1'+ collapse +'}');
+                        content = Beauty.html(content, {
+                          indent_size: 2,
+                          wrap_line_length: 0
+                        });
 
                         return content;
                     }
@@ -391,10 +396,10 @@ module.exports = function(grunt) {
               for (var i = 0; i < frags.length; i++) {
                 if (i < (frags.length-1)) {
                   for (var j = i+1; j < frags.length; j++) {
-                    var idx = frags[i].body.indexOf(frags[j].body);
-                    if (idx != -1) {
+                    var fidx = frags[i].body.indexOf(frags[j].body);
+                    if (fidx != -1) {
                       //grunt.log.write(frags[i].id +' ('+ frags[i].body.length +') contains '+ frags[j].id +' ('+ frags[j].body.length +")\n");
-                      frags[i].body = frags[i].body.substring(0, idx) + frags[i].body.substring(idx + frags[j].body.length);
+                      frags[i].body = frags[i].body.substring(0, fidx) + frags[i].body.substring(fidx + frags[j].body.length);
                       //grunt.log.write(frags[i].id +' ('+ frags[i].body.length +") after dedupe\n");
                     }
                   }

@@ -19,6 +19,7 @@
     "grunt-contrib-watch": "^0.6.1",
     "grunt-dom-munger": "^3.4.0",
     "grunt-shell": "^1.1.2",
+    "js-beautify": "^1.6.2",
     "jsonlint": "^1.6.2",
     "matchdep": "^0.3.0",
     "protagonist": "^1.2.2",
