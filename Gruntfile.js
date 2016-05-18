@@ -144,6 +144,17 @@ module.exports = function(grunt) {
                         $(curNav).attr('style', 'font-weight:bold;background-color:#fa6423;color:#fff;');
                         allnav = $.html();
 
+                        // add more ids, to split up some of the bigger sections
+                        $ = cheerio.load(content);
+                        $('div.title strong code').each(function(idx, elt) {
+                          var text = $(elt).text();
+                          if (!text.match(/^\d+$/)) {
+                            var anchor = text.toLowerCase().replace(/\s+/g, '-');
+                            $(elt).parents('div.title').attr('id', anchor);
+                          }
+                        });
+                        content = $.html();
+
                         // replace single-page nav with the global nav we built above
                         content = content.replace(/<nav[^>]*>.*?<\/nav>/, '<nav>'+ allnav +'</nav>');
 
@@ -358,17 +369,20 @@ module.exports = function(grunt) {
                   id = file +'_'+ id;
                 }
 
+                var obj = {id: id, path: hfile};
+                obj.body = $('<div>').append($(elt).clone()).html();
+
                 // get all the content until the next following-sibling with an id
                 // don't worry about descendants with ids since we'll dedupe later
                 var htmlRa = [];
                 $(elt).nextUntil('*[id]').each(function(idx, elt) {
-                  htmlRa.push($(elt).html());
+                  htmlRa.push($('<div>').append($(elt).clone()).html());
                 });
 
-                var obj = {id: id, path: hfile};
                 obj.tag = $(elt).prop('tagName');
-                obj.body = $(elt).html() + htmlRa.join(' ');
+                obj.body = obj.body +' '+ htmlRa.join(' ');
                 obj.body = obj.body.replace(/\s+/g, ' ');
+                obj.body = obj.body.replace(/^\s+|\s+$/g, '');
                 if (obj.body.length > 0) {
                   frags.push(obj);
                 //} else {
@@ -376,12 +390,8 @@ module.exports = function(grunt) {
                 }
               });
 
-              // accumulate all chunks of html in an array
-              // iterate from largest to smallest number of characters:
-              //   iterage again from current+1 to smallest, removing matching substrings
-              // this is necessary because there isn't a .nextUntil(...) that
-              // searches depth-first, so we end up with "abcd" and "bc",
-              // grossly oversimplified
+              // iterate over html chunks in order
+              //   iterage again from current+1, removing matching substrings
               for (var i = 0; i < frags.length; i++) {
                 if (i < (frags.length-1)) {
                   for (var j = i+1; j < frags.length; j++) {
@@ -399,13 +409,24 @@ module.exports = function(grunt) {
                 eltBody = eltBody.replace(/([^ ])</g, '$1 <');
                 eltBody = eltBody.replace(/>([^ ])/g, '> $1');
                 eltBody = striptags(eltBody);
-                eltBody = eltBody.replace(/\s{2,}/g, ' ');
+                eltBody = eltBody.replace(/\s+/g, ' ');
+                eltBody = eltBody.replace(/^\s+|\s+$/g, '');
+
+                // remove uuids, dates, api keys, encoded images
+                eltBody = eltBody.replace(
+                    /\b[0-9a-fA-F]{8}\-(?:[0-9a-fA-F]{4}\-){3}[0-9a-fA-F]{12}\b/g, '');
+                eltBody = eltBody.replace(/\b\d{4}\-[01]?\d\-[0123]?\dT[012]?\d:\d?\d\b/g, '');
+                eltBody = eltBody.replace(/\bdata\s*:\s*\w+\b/g, '');
+                eltBody = eltBody.replace(/\bAuthorization\s*:\s*[0-9a-fA-F]+\b/g, '');
+
                 grunt.log.write("file="+ frags[i].path +", tag="+ frags[i].tag +", id=["+ frags[i].id +"], len=["+ eltBody.length +"]\n");
                 frags[i].body = eltBody;
 
                 var fn = 'swiftype/' + frags[i].id +'.json';
                 var json = JSON.stringify(frags[i]);
-                //json = json.replace(/&#x[0-9a-fA-F]+;/g, '');
+                // remove entities
+                json = json.replace(/&#x[0-9a-fA-F]+;/g, '');
+                json = json.replace(/&\w+;/g, '');
                 fs.writeFileSync(fn, json, 'utf-8');
               }
             } else {
