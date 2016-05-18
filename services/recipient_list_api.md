@@ -50,12 +50,12 @@ If _address_ is a JSON array, each of its elements must either be a string or JS
 
 | Field         | Type     | Description                           | Required  |Notes|
 |------------------------|:-:       |---------------------------------------|-------------|--------|
-|channel|string|The communication channel used to reach recipient|no - Defaults to "email"|Valid values are "email", "gcm", "apn". See Notes on channel below|
+|channel|string|The communication channel used to reach recipient|no - Defaults to "email"|Valid values are "email", "gcm", "apns". See Notes on channel below|
 |email    |string       |Valid email address   |required if channel is "email" |
 |name |string |User-friendly name for the email address |no |Used when channel is "email"|
 |header_to|string       |Email address to display in the "To" header instead of _address.email_ (for BCC)|no|Used when channel is "email"|
-|token|string|See Push Specific Attributes |required if channel is "gcm" or "apn"|
-|app_id|string|See Push Specific Attributes |required if channel is "gcm" or "apn"|
+|token|string|See Push Specific Attributes |required if channel is "gcm" or "apns"|
+|app_id|string|See Push Specific Attributes |required if channel is "gcm" or "apns"|
 ##### Notes on channel
 Communication channels other than email are currently only supported for inline recipient lists. Fields unrelated to the value of _channel_ are ignored. A field is considered unrelated if it is not required for that value of _channel_ unless mentioned otherwise in Notes
 
@@ -95,8 +95,8 @@ The "To" header is only constructed for messages built from email part content. 
 #### Push Specific Attributes (Only supported for inline recipient lists)
 | Field         | Type     | Description                           | Notes |
 |------------------------|:-:       |---------------------------------------|-------------| ------------|
-|token    |string       |Token used to uniquely identify a device   |Device token in APN, Registration token in GCM |
-|app_id |string |GCM or APN identifier for your application| |
+|token    |string       |Token used to uniquely identify a device   |Device token in APNs, Registration token in GCM |
+|app_id |string |GCM or APNs identifier for your application| |
 
 ## Create [/recipient-lists{?num_rcpt_errors}]
 
