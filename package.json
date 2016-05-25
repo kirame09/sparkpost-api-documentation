@@ -9,6 +9,7 @@
   },
   "dependencies": {},
   "devDependencies": {
+    "algoliasearch": "^3.14.2",
     "cheerio": "^0.20.0",
     "connect-livereload": "^0.5.3",
     "grunt": "^0.4.5",
@@ -26,7 +27,6 @@
     "q": "^1.2.0",
     "request": "^2.55.0",
     "striptags": "^2.1.1",
-    "swiftype": "^0.3.0",
     "yargs": "^3.8.0"
   },
   "repository": {

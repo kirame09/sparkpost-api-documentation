@@ -22,7 +22,6 @@ var matchdep = require('matchdep')
         'webhooks_api.md',
         'smtp_api.md'
     ], striptags = require('striptags')
-    , Swiftype = require('swiftype')
     , Algolia = require('algoliasearch');
 
 function _md2html(obj, val, idx) {
@@ -51,11 +50,6 @@ module.exports = function(grunt) {
     // Dynamically load any preexisting grunt tasks/modules
     matchdep.filterDev('grunt-*').forEach(grunt.loadNpmTasks);
     var cheerio = require('cheerio');
-
-    var swiftype
-      , swiftypeApiKey = process.env.SWIFTYPE_API_KEY
-      , swiftypeEngine = 'sparkpost'
-      , swiftypeDoctype = 'apidoc';
 
     var algolia
       , algoliaIndex
@@ -291,7 +285,6 @@ module.exports = function(grunt) {
 
     function algoliaIndexer(jsonfn) {
       var json;
-
       try {
         json = fs.readFileSync('./chunks/'+ jsonfn);
       } catch(e){ grunt.log.write(jsonfn +": "+ e +"\n"); }
@@ -326,59 +319,6 @@ module.exports = function(grunt) {
           done(err);
         } else {
           q.all(files.map(algoliaIndexer))
-            .then(done, done)
-            .done();
-        }
-      });
-      return;
-    });
-
-    function swiftypeIndexer(jsonfn) {
-      var deferred = q.defer(), json;
-
-      try {
-        json = fs.readFileSync('./chunks/'+ jsonfn);
-      } catch(e){ grunt.log.write(jsonfn +": "+ e +"\n"); }
-
-      if (json !== undefined) {
-        grunt.log.write('swiftype-index read '+ json.length +' for ['+ jsonfn +"]\n");
-        var obj = JSON.parse(json);
-
-        swiftype.documents.create({
-          engine: swiftypeEngine,
-          documentType: swiftypeDoctype,
-          document: {
-            external_id: obj.id,
-            fields: [
-              { name: 'path', value: obj.path, type: 'string' },
-              { name: 'body', value: obj.body, type: 'text' },
-              { name: 'tag', value: obj.tag, type: 'enum' }
-            ]
-          }
-        }, function(err, res) {
-          if (err !== undefined && err !== null) {
-            deferred.reject(err);
-          } else if (res.error !== undefined) {
-            deferred.reject(Error(res.error));
-          }
-        });
-      }
-      return deferred.promise;
-    }
-
-    grunt.registerTask('swiftype-index', 'Uploads generated files to the Swiftype engine for indexing', function() {
-      if (swiftypeApiKey === undefined || swiftypeApiKey === '') {
-        grunt.log.error("SWIFTYPE_API_KEY not found in environment!\n");
-        return null;
-      }
-      var done = this.async();
-      swiftype = new Swiftype({ apiKey: swiftypeApiKey });
-
-      fs.readdir('./chunks', function(err, files) {
-        if (err !== null) {
-          done(err);
-        } else {
-          q.all(files.map(swiftypeIndexer))
             .then(done, done)
             .done();
         }
@@ -437,22 +377,19 @@ module.exports = function(grunt) {
                 obj.body = obj.body.replace(/^\s+|\s+$/g, '');
                 if (obj.body.length > 0) {
                   frags.push(obj);
-                //} else {
-                //  grunt.log.write("ignoring "+ id +" with length "+ obj.html.length +"\n");
                 }
               });
 
               // iterate over html chunks in order
-              //   iterage again from current+1, removing matching substrings
+              //   iterate again from current+1, removing matching substrings
               var chunks = 0;
               for (var i = 0; i < frags.length; i++) {
                 if (i < (frags.length-1)) {
                   for (var j = i+1; j < frags.length; j++) {
                     var fidx = frags[i].body.indexOf(frags[j].body);
                     if (fidx != -1) {
-                      //grunt.log.write(frags[i].id +' ('+ frags[i].body.length +') contains '+ frags[j].id +' ('+ frags[j].body.length +")\n");
+                      // slice out duplicate sections
                       frags[i].body = frags[i].body.substring(0, fidx) + frags[i].body.substring(fidx + frags[j].body.length);
-                      //grunt.log.write(frags[i].id +' ('+ frags[i].body.length +") after dedupe\n");
                     }
                   }
                 }
@@ -472,7 +409,6 @@ module.exports = function(grunt) {
                 eltBody = eltBody.replace(/\bdata\s*:\s*\w+\b/g, '');
                 eltBody = eltBody.replace(/\bAuthorization\s*:\s*[0-9a-fA-F]+\b/g, '');
 
-                //grunt.log.write("file="+ frags[i].path +", tag="+ frags[i].tag +", id=["+ frags[i].id +"], len=["+ eltBody.length +"]\n");
                 frags[i].body = eltBody;
 
                 var fn = 'chunks/' + frags[i].id +'.json';
