@@ -28,7 +28,8 @@ Recipients are described in a JSON array with the following fields:
 
 | Field         | Type     | Description                           | Required   | Notes   |
 |------------------------|:-:       |---------------------------------------|-------------|--------|
-|address | JSON object, JSON array, or string | Address information for a recipient  | yes| See the Address Attributes. |
+|address | JSON object or string | Address information for a recipient  | At a minimum, address or multichannel_addresses is required| If both address and multichannel_addresses are specified only multichannel_addresses will be used. See the Address Attributes. |
+|multichannel_addresses | JSON array |Array of address objects for a recipient | At a minimum, address or multichannel_addresses is required |If both address and multichannel_addresses are specified only multichannel_addresses will be used.  See Multichannel Address attributes. |
 |return_path | string |Email to use for envelope FROM ( **Note:** SparkPost Elite only )| no | To support Variable Envelope Return Path (VERP), this field provides a specific recipient a unique envelope MAIL FROM. |
 |tags | JSON array |Array of text labels associated with a recipient | no | Tags are available in Webhook events.  Maximum number of tags - 10 per recipient, 100 system wide.  Any tags over the limits are ignored.|
 |metadata | JSON object| Key/value pairs associated with a recipient |no | Metadata is available during events through the Webhooks and is provided to the substitution engine.  A maximum of 1000 bytes of merged metadata (transmission level + recipient level) is available with recipient metadata taking precedence over transmission metadata when there are conflicts.  |
@@ -44,13 +45,12 @@ object, it is described with the following fields:
 |name |string |User-friendly name for the email address |no |
 |header_to|string       |Email address to display in the "To" header instead of _address.email_ (for BCC)|no |
 
-##### Address as an Array
-In anticipation of upcoming multichannel support _address_ can be a JSON array. 
-If _address_ is a JSON array, each of its elements must either be a string or JSON object. If the element is a string it will be interpretted as the email address. If it is a JSON object it is described with the following fields. Currently, *only the first entry* in the array will be used.
+#### Multichannel Address attributes
+In anticipation of upcoming multichannel support we have added the _multichannel_addresses_ array. Each of its elements must be a JSON object described with the following fields. Currently, *only the first entry* in the array will be used.
 
 | Field         | Type     | Description                           | Required  |Notes|
 |------------------------|:-:       |---------------------------------------|-------------|--------|
-|channel|string|The communication channel used to reach recipient|no - Defaults to "email"|Valid values are "email", "gcm", "apns". See Notes on channel below|
+|channel|string|The communication channel used to reach recipient|yes|Valid values are "email", "gcm", "apns". See Notes on channel below|
 |email    |string       |Valid email address   |required if channel is "email" |
 |name |string |User-friendly name for the email address |no |Used when channel is "email"|
 |header_to|string       |Email address to display in the "To" header instead of _address.email_ (for BCC)|no|Used when channel is "email"|
