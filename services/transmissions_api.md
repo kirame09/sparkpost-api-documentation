@@ -64,8 +64,8 @@ The following attributes control the contents of push notifications:
 
 | Field         | Type     | Description                           | Required   | Notes   |
 |------------------------|:-:       |---------------------------------------|-------------|--------|
-|apns |JSON object |payload for APNs messages |At a minimum, apns or gcm is required | Used for any push notifications sent to apns devices (See Address Attributes). This payload is delivered as is. See Apple's [APNs documentation](https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/TheNotificationPayload.html) for details |
-|gcm |JSON object | payload for GCM messages |At a minimum, apns or gcm is required| Used for any push notifications sent to gcm devices (See Address Attributes). This payload is delivered as is. See Google's [Notification Payload Support](https://developers.google.com/cloud-messaging/http-server-ref#notification-payload-support)
+|apns |JSON object |payload for APNs messages |At a minimum, apns or gcm is required | Used for any push notifications sent to apns devices (See Multichannel Address attributes). This payload is delivered as is. See Apple's [APNs documentation](https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/TheNotificationPayload.html) for details |
+|gcm |JSON object | payload for GCM messages |At a minimum, apns or gcm is required| Used for any push notifications sent to gcm devices (See Multichannel Address attributes). This payload is delivered as is. See Google's [Notification Payload Support](https://developers.google.com/cloud-messaging/http-server-ref#notification-payload-support)
 
 #### Header Notes
 
@@ -183,7 +183,7 @@ Once message generation has been initiated, all messages in the transmission wil
         {
           "recipients": [
             {
-                "address": [
+                "multichannel_addresses": [
                     {
                         "channel": "apns",
                         "token": "<DEVICE_TOKEN>",
@@ -192,7 +192,7 @@ Once message generation has been initiated, all messages in the transmission wil
                 ]
             },
             {
-                "address" : [
+                "multichannel_addresses" : [
                     {
                         "channel": "gcm",
                         "token": "<DEVICE_TOKEN>",
