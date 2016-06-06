@@ -45,7 +45,7 @@ mixin Parameters(params)
         table
             each param in params || []
                 tr
-                    td=self.urldec(param.name)
+                    td.markdown=self.urldec(param.name)
                     td.markdown
                         if param.required
                            strong.param-annotation (required) &nbsp;
