@@ -484,6 +484,11 @@ module.exports = function(grunt) {
                 eltBody = eltBody.replace(/\bdata\s*:\s*\w+\b/g, '');
                 eltBody = eltBody.replace(/\bAuthorization\s*:\s*[0-9a-fA-F]+\b/g, '');
 
+                // anything where the body is 3 words or less doesn't need to be indexed
+                if (eltBody.split(/\s+/).length <= 3) {
+                  continue;
+                }
+
                 //frags[i].html = frags[i].body; // DEBUG
                 frags[i].body = eltBody;
 
