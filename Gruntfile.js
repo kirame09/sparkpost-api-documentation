@@ -381,6 +381,10 @@ module.exports = function(grunt) {
       return;
     });
 
+    function bodyLength(a, b) {
+      return b.body.length - a.body.length;
+    }
+
     grunt.registerTask('chunk-docs', 'Splits html docs from Aglio into files suitable for exporting into a search service', function() {
       var done = this.async();
       try {
@@ -399,7 +403,7 @@ module.exports = function(grunt) {
             if (html !== undefined) {
               $ = cheerio.load(html);
               // remove things we don't want to be indexed
-              var tags = ['head', 'nav', 'script', 'style', 'pre'];
+              var tags = ['head', 'nav', 'script', 'style', 'pre', '.panel'];
               for (var idx in tags) {
                 $(tags[idx]).remove();
               }
@@ -411,10 +415,20 @@ module.exports = function(grunt) {
               // FIXME: this misses any text before the first element with an id
               $('*[id]').each(function(idx, elt) {
                 var id = $(this).attr('id');
-                id = id.replace(/^header\-/, file +'_');
-                if (id === 'top') {
-                  id = file +'_'+ id;
+
+                // nothing to see here
+                if (id === 'top' || id === 'menublock' || id === 'apipage') {
+                  return;
                 }
+                // or here. this is blank except for index and substitutions reference
+                if (id === 'contentblock') {
+                  if (file === 'index' || file === 'substitutions-reference') {
+                    id = file +'_'+ id;
+                  } else {
+                    return;
+                  }
+                }
+                id = id.replace(/^header\-/, file +'_');
 
                 var obj = {id: id, path: hfile};
                 obj.body = $('<div>').append($(elt).clone()).html();
@@ -427,7 +441,7 @@ module.exports = function(grunt) {
                 });
 
                 obj.tag = $(elt).prop('tagName');
-                obj.body = obj.body +' '+ htmlRa.join(' ');
+                obj.body = obj.body + htmlRa.join('');
                 obj.body = obj.body.replace(/\s+/g, ' ');
                 obj.body = obj.body.replace(/^\s+|\s+$/g, '');
                 if (obj.body.length > 0) {
@@ -435,9 +449,11 @@ module.exports = function(grunt) {
                 }
               });
 
+              // sort chunks descending by length
+              frags.sort(bodyLength);
+
               // iterate over html chunks in order
               //   iterate again from current+1, removing matching substrings
-              var chunks = 0;
               for (var i = 0; i < frags.length; i++) {
                 if (i < (frags.length-1)) {
                   for (var j = i+1; j < frags.length; j++) {
@@ -448,7 +464,10 @@ module.exports = function(grunt) {
                     }
                   }
                 }
+              }
 
+              var chunks = 0;
+              for (var i = 0; i < frags.length; i++) {
                 // normalize space so words aren't stuck together after striptags
                 var eltBody = frags[i].body;
                 eltBody = eltBody.replace(/([^ ])</g, '$1 <');
@@ -464,6 +483,7 @@ module.exports = function(grunt) {
                 eltBody = eltBody.replace(/\bdata\s*:\s*\w+\b/g, '');
                 eltBody = eltBody.replace(/\bAuthorization\s*:\s*[0-9a-fA-F]+\b/g, '');
 
+                //frags[i].html = frags[i].body; // DEBUG
                 frags[i].body = eltBody;
 
                 var fn = 'chunks/' + frags[i].id +'.json';
