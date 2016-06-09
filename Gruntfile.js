@@ -420,6 +420,10 @@ module.exports = function(grunt) {
                 if (id === 'top' || id === 'menublock' || id === 'apipage') {
                   return;
                 }
+                // or here. the postman stuff is easy to find.
+                if (id === 'header-using-postman') {
+                  return;
+                }
                 // or here. this is blank except for index and substitutions reference
                 if (id === 'contentblock') {
                   if (file === 'index' || file === 'substitutions-reference') {
@@ -489,7 +493,13 @@ module.exports = function(grunt) {
                   continue;
                 }
 
-                //frags[i].html = frags[i].body; // DEBUG
+                // we don't need h3.resource-heading
+                if (frags[i].body.match(/<h3 [^>]*class="[^"]*\bresource\-heading\b/i) && eltBody.match(/&#xA0;$/)) {
+                  //grunt.log.write("ignoring h3.resource-heading with content ["+ eltBody +"]\n")
+                  continue;
+                }
+
+                frags[i].html = frags[i].body; // DEBUG
                 frags[i].body = eltBody;
 
                 var fn = 'chunks/' + frags[i].id +'.json';
