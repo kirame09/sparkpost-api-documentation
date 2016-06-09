@@ -499,7 +499,7 @@ module.exports = function(grunt) {
                   continue;
                 }
 
-                frags[i].html = frags[i].body; // DEBUG
+                //frags[i].html = frags[i].body; // DEBUG
                 frags[i].body = eltBody;
 
                 var fn = 'chunks/' + frags[i].id +'.json';
