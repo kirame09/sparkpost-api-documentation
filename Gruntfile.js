@@ -444,6 +444,7 @@ module.exports = function(grunt) {
                 obj.body = obj.body + htmlRa.join('');
                 obj.body = obj.body.replace(/\s+/g, ' ');
                 obj.body = obj.body.replace(/^\s+|\s+$/g, '');
+                obj.body = obj.body.replace(/>\s+</g, '><');
                 if (obj.body.length > 0) {
                   frags.push(obj);
                 }
