@@ -201,7 +201,6 @@ A URL can be inserted into the template with triple curlies:
 
 ```
 <a href="https://{{{link}}}">click me</a>
-
 ```
 Note: The protocol ("https://") needs to be included before the variable.
 
