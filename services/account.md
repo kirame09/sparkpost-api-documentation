@@ -22,8 +22,8 @@ Get your SparkPost account information, including subscription status and quota 
 | created | string | ISO date account was created | |
 | updated | string | ISO date account details were last updated | |
 | status | string | account status - `active` | |
-| subscription | object | current subscription details | see *Subscription Properties* section) |
-| pending_subscription | object | pending subscription details | see *Subscription Properties* section) |
+| subscription | object | current subscription details | (see *Subscription Properties* section) |
+| pending_subscription | object | pending subscription details | (see *Subscription Properties* section) |
 | options | object | account-level tracking settings | (see *Options Properties* section) |
 | usage | object | account quota usage details | Specify 'include=usage' in query string to include usage info (see *Usage Properties* section) |
 

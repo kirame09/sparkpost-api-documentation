@@ -142,7 +142,7 @@ mixin Content()
     //- groups, resources, and actions.
     each resourceGroup in self.api.resourceGroups || []
         section.resource-group(class="searchable")
-            h2.group-heading(id=resourceGroup.elementId)
+            h1.group-heading(id=resourceGroup.elementId)
                 != resourceGroup.name || 'Resource Group'
                 = " "
                 a.permalink(href=resourceGroup.elementLink)
