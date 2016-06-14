@@ -5,6 +5,7 @@ var matchdep = require('matchdep')
     , q = require('q')
     , Beautify = require('js-beautify')
     , request = require('request')
+    , algoliaTools = require('./algoliaTools')
     , services = [
         'introduction.md',
         'substitutions-reference.md',
@@ -24,8 +25,7 @@ var matchdep = require('matchdep')
         'smtp-api.md'
     ]
     , staticTempDir = 'static/'
-    , striptags = require('striptags')
-    , Algolia = require('algoliasearch');
+    , striptags = require('striptags');
 
 function _md2html(obj, val, idx) {
     var name = (val.split('.'))[0];
@@ -55,6 +55,10 @@ module.exports = function(grunt) {
       grunt.option('output', '../sparkpost.github.io/_api/');
     }
 
+    if (!grunt.option('searchContentFile')) {
+      grunt.option('searchContentFile', 'forAlgolia.json');
+    }
+
     grunt.option('aglioTemplate', 'production');
 
     // Dynamically load any preexisting grunt tasks/modules
@@ -63,11 +67,6 @@ module.exports = function(grunt) {
 
     // Tell aglio / olio not to cache rendered output
     process.env.NOCACHE = '1';
-
-    var algolia
-      , algoliaIndex
-      , algoliaApiKey = process.env.ALGOLIA_API_KEY
-      , algoliaAppId = process.env.ALGOLIA_APP_ID;
 
     // Configure existing grunt tasks and create custom ones
     grunt.initConfig({
@@ -338,184 +337,49 @@ module.exports = function(grunt) {
         });
     });
 
-    function algoliaIndexer(jsonfn) {
-      var json;
-      try {
-        json = fs.readFileSync('./chunks/'+ jsonfn);
-      } catch(e){ grunt.log.write(jsonfn +": "+ e +"\n"); }
+    grunt.registerTask('createSearchContent', 'Convert Apiary blueprints into content for Algolia to index', function() {
+      var searchContentFile = grunt.option('searchContentFile');
 
-      if (json !== undefined) {
-        grunt.log.write('algolia-index read '+ json.length +' for ['+ jsonfn +"]\n");
-        var jobj = JSON.parse(json);
-        var obj = {
-          body: jobj.body,
-          anchor: jobj.id,
-          path: jobj.path
-        };
-        return algoliaIndex.addObject(obj, jobj.id);
-      }
-    }
-
-    grunt.registerTask('algolia-index', 'Uploads generated files to the Algolia engine for indexing', function() {
-      if (algoliaApiKey === undefined || algoliaApiKey === '') {
-        grunt.log.error("ALGOLIA_API_KEY not found in environment!\n");
+      if (!searchContentFile) {
+        grunt.fail.fatal('Required option missing: searchContentFile');
         return null;
       }
-      if (algoliaAppId === undefined || algoliaAppId === '') {
-        grunt.log.error("ALGOLIA_APP_ID not found in environment!\n");
-        return null;
-      }
+
       var done = this.async();
-      algolia = Algolia(algoliaAppId, algoliaApiKey);
-      algoliaIndex = algolia.initIndex('prod_public_api');
-
-      fs.readdir('./chunks', function(err, files) {
-        if (err !== null) {
-          done(err);
-        } else {
-          q.all(files.map(algoliaIndexer))
-            .then(done, done)
-            .done();
-        }
+      algoliaTools.createSearchContent(services, searchContentFile)
+      .then(done)
+      .catch(function(err) {
+        grunt.fail.fatal(err);
       });
-      return;
     });
 
-    function bodyLength(a, b) {
-      return b.body.length - a.body.length;
-    }
+    grunt.registerTask('updateAlgolia', 'Uploads generated content to the Algolia engine for indexing', function() {
+      var opts = {
+        searchContentFile: null,
+        algoliaAPIKey: null,
+        algoliaAppID: null,
+        algoliaIndexName: null
+      }
+      , ok = true;
 
-    grunt.registerTask('chunk-docs', 'Splits html docs from Aglio into files suitable for exporting into a search service', function() {
+      Object.keys(opts).forEach(function(key) {
+        opts[key] = grunt.option(key);
+        if (!opts[key]) {
+          grunt.fail.fatal('Required option missing: ' + key);
+          ok = false;
+        }
+      });
+
+      if (!ok) {
+        return null;
+      }
+
       var done = this.async();
-      try {
-        fs.mkdirSync('./chunks');
-      } catch(e){}
-
-      fs.readdir('./services', function(err, files) {
-        q.all(files.map(htmlFile)).then(function(hfiles) {
-          for (var hidx in hfiles) {
-            var hfile = hfiles[hidx]
-              , html = undefined;
-            try {
-              html = fs.readFileSync(hfile);
-            } catch(e){}
-
-            if (html !== undefined) {
-              $ = cheerio.load(html);
-              // remove things we don't want to be indexed
-              var tags = ['head', 'nav', 'script', 'style', 'pre', '.panel'];
-              for (var idx in tags) {
-                $(tags[idx]).remove();
-              }
-
-              // split each doc up into smaller chunks that can be deep linked to
-              var frags = [];
-              var file = (((hfile.split(/\//))[1]).split(/\./))[0].replace(/_/g, '-');
-
-              // FIXME: this misses any text before the first element with an id
-              $('*[id]').each(function(idx, elt) {
-                var id = $(this).attr('id');
-
-                // nothing to see here
-                if (id === 'top' || id === 'menublock' || id === 'apipage') {
-                  return;
-                }
-                // or here. the postman stuff is easy to find.
-                if (id === 'header-using-postman') {
-                  return;
-                }
-                // or here. this is blank except for index and substitutions reference
-                if (id === 'contentblock') {
-                  if (file === 'index' || file === 'substitutions-reference') {
-                    id = file +'_'+ id;
-                  } else {
-                    return;
-                  }
-                }
-                id = id.replace(/^header\-/, file +'_');
-
-                var obj = {id: id, path: hfile};
-                obj.body = $('<div>').append($(elt).clone()).html();
-
-                // get all the content until the next following-sibling with an id
-                // don't worry about descendants with ids since we'll dedupe later
-                var htmlRa = [];
-                $(elt).nextUntil('*[id]').each(function(idx, elt) {
-                  htmlRa.push($('<div>').append($(elt).clone()).html());
-                });
-
-                obj.tag = $(elt).prop('tagName');
-                obj.body = obj.body + htmlRa.join('');
-                obj.body = obj.body.replace(/\s+/g, ' ');
-                obj.body = obj.body.replace(/^\s+|\s+$/g, '');
-                obj.body = obj.body.replace(/>\s+</g, '><');
-                if (obj.body.length > 0) {
-                  frags.push(obj);
-                }
-              });
-
-              // sort chunks descending by length
-              frags.sort(bodyLength);
-
-              // iterate over html chunks in order
-              //   iterate again from current+1, removing matching substrings
-              for (var i = 0; i < frags.length; i++) {
-                if (i < (frags.length-1)) {
-                  for (var j = i+1; j < frags.length; j++) {
-                    var fidx = frags[i].body.indexOf(frags[j].body);
-                    if (fidx != -1) {
-                      // slice out duplicate sections
-                      frags[i].body = frags[i].body.substring(0, fidx) + frags[i].body.substring(fidx + frags[j].body.length);
-                    }
-                  }
-                }
-              }
-
-              var chunks = 0;
-              for (var i = 0; i < frags.length; i++) {
-                // normalize space so words aren't stuck together after striptags
-                var eltBody = frags[i].body;
-                eltBody = eltBody.replace(/([^ ])</g, '$1 <');
-                eltBody = eltBody.replace(/>([^ ])/g, '> $1');
-                eltBody = striptags(eltBody);
-                eltBody = eltBody.replace(/\s+/g, ' ');
-                eltBody = eltBody.replace(/^\s+|\s+$/g, '');
-
-                // remove uuids, dates, api keys, encoded images
-                eltBody = eltBody.replace(
-                    /\b[0-9a-fA-F]{8}\-(?:[0-9a-fA-F]{4}\-){3}[0-9a-fA-F]{12}\b/g, '');
-                eltBody = eltBody.replace(/\b\d{4}\-[01]?\d\-[0123]?\dT[012]?\d:\d?\d\b/g, '');
-                eltBody = eltBody.replace(/\bdata\s*:\s*\w+\b/g, '');
-                eltBody = eltBody.replace(/\bAuthorization\s*:\s*[0-9a-fA-F]+\b/g, '');
-
-                // anything where the body is 3 words or less doesn't need to be indexed
-                if (eltBody.split(/\s+/).length <= 3) {
-                  continue;
-                }
-
-                // we don't need h3.resource-heading
-                if (frags[i].body.match(/<h3 [^>]*class="[^"]*\bresource\-heading\b/i) && eltBody.match(/&#xA0;$/)) {
-                  //grunt.log.write("ignoring h3.resource-heading with content ["+ eltBody +"]\n")
-                  continue;
-                }
-
-                //frags[i].html = frags[i].body; // DEBUG
-                frags[i].body = eltBody;
-
-                var fn = 'chunks/' + frags[i].id +'.json';
-                var json = JSON.stringify(frags[i]);
-                // remove entities
-                json = json.replace(/&#x[0-9a-fA-F]+;/g, '');
-                json = json.replace(/&\w+;/g, '');
-                fs.writeFileSync(fn, json, 'utf-8');
-                chunks++;
-              }
-              grunt.log.write(hfile +' split into '+ chunks +" chunks\n");
-            } else {
-              grunt.log.write('chunk-docs: ERROR reading '+ hfile +"\n");
-            }
-          }
-        }).then(done, done);
+      algoliaTools.updateSearchIndex(opts.searchContentFile,
+        opts.algoliaAppID, opts.algoliaAPIKey, opts.algoliaIndexName, grunt.log.writeln)
+      .then(done)
+      .catch(function(err) {
+        grunt.fail.fatal(err);
       });
     });
 
@@ -559,6 +423,9 @@ module.exports = function(grunt) {
     // grunt static: validate apiary blueprint, build API HTML files and copy to local DevHub copy
     // Use --output change the location of the resulting API doc files.
     grunt.registerTask('static', ['test', 'aglio', 'dom_munger', 'copy:fixup_nav', 'copy:static_to_devhub']);
+
+    // Generate and upload new search content to Algolia
+    grunt.registerTask('syncSearch', ['createSearchContent', 'updateAlgolia']);
 
     // register default grunt command as grunt test
     grunt.registerTask('default', [ 'testFiles' ]);
