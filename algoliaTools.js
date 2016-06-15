@@ -58,7 +58,7 @@ function chunkMarkdown(markdown) {
   }));
 }
 
-// Visitor pattern for Protagonist AST trees. Visitor should implement at least on of:
+// Visitor pattern for Protagonist AST trees. Visitor should implement at least one of:
 //  - visitSection({...}, idx)
 //  - visitResourceGroup({...}, idx)
 //  - visitResGroupSection({...}, resGroup, idx, rgIdx)
@@ -123,7 +123,10 @@ function rank(idx, scale) {
 
 // Replicate Aglio/Olio's element ID and link generation logic.
 // Produce a rank for each searchable object to enable ordering in search results.
-// NOTE: search results are ordered by ascending rank.
+//
+// NOTE: Algolia uses each object's `rank` field to order search results.
+// It sorts in ascending order to produce a top-level -> nested object ordering.
+// e.g. 'recipient lists' comes before 'recipient lists - create'.
 function enrichAST(ast, path, serviceIdx) {
   visitAST(ast, {
     visitSection: (section, sIdx) => {
@@ -272,23 +275,23 @@ module.exports = {
     log = log || function() {};
     return q.ninvoke(client, 'copyIndex', indexName, tmpIdxName)
       .then(result => {
-        log(`Copying ${indexName} to ${tmpIdxName}...`);
+        log(`Copying Algolia index ${indexName} to ${tmpIdxName}...`);
         tmpIdx = client.initIndex(tmpIdxName);
         tmpIdx.waitTaskP = q.nbind(tmpIdx.waitTask, tmpIdx);
         return tmpIdx.waitTaskP(result.taskID);
       })
       .then(() => {
-        log(`Clearing ${tmpIdxName}...`);
+        log(`Clearing index ${tmpIdxName}...`);
         return q.ninvoke(tmpIdx, 'clearIndex');
       })
       .then(result => tmpIdx.waitTaskP(result.taskID))
       .then(() => {
-        log(`Importing ${searchables.length} searchable objects...`);
+        log(`Importing ${searchables.length} searchable objects to Algolia index ${tmpIdxName}...`);
         return q.ninvoke(tmpIdx, 'addObjects', searchables);
       })
       .then(result => tmpIdx.waitTaskP(result.taskID))
       .then(() => {
-        log(`Moving ${tmpIdxName} to ${indexName}...`);
+        log(`Moving Algolia index ${tmpIdxName} to ${indexName}...`);
         return q.ninvoke(client, 'moveIndex', tmpIdxName, indexName);
       })
       .then(result => tmpIdx.waitTaskP(result.taskID))

@@ -1,12 +1,10 @@
 /* jshint laxcomma: true, multistr: true */
 var matchdep = require('matchdep')
-    , assert = require('assert')
     , fs = require('fs')
     , q = require('q')
-    , Beautify = require('js-beautify')
     , request = require('request')
-    , algoliaTools = require('./algoliaTools')
     , rewriteRulesSnippet = require("grunt-connect-rewrite/lib/utils").rewriteRequest
+    , algoliaTools = require('./algoliaTools')
     , services = [
         'introduction.md',
         'substitutions-reference.md',
@@ -28,8 +26,7 @@ var matchdep = require('matchdep')
         'webhooks.md',
         'smtp-api.md'
     ]
-    , staticTempDir = 'static/'
-    , striptags = require('striptags');
+    , staticTempDir = 'static/';
 
 function _md2html(obj, val, idx) {
     var name = (val.split('.'))[0];
@@ -357,7 +354,10 @@ module.exports = function(grunt) {
 
       var done = this.async();
       algoliaTools.createSearchContent(services, searchContentFile)
-      .then(done)
+      .then(function() {
+        grunt.log.writeln('Search content written to ' + searchContentFile);
+        done();
+      })
       .catch(function(err) {
         grunt.fail.fatal(err);
       });
