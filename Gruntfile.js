@@ -74,6 +74,7 @@ module.exports = function(grunt) {
             themeFullWidth: true,
             themeEmoji: false,
             locals: {
+              _: require('lodash'),
               baseURI: '/api/v1'
             }
           }
