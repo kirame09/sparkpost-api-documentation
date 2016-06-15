@@ -180,7 +180,7 @@ function collectSearchables(ast) {
       searchables.push({
         resGroupName: resGroup.name,
         description: resGroup.description,
-        element: resGroup.element,
+        element: resGroup.element || 'resourceGroup',
         objectID: resGroup.elementLink,
         rank: resGroup.rank
       });
