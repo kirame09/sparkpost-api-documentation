@@ -11,7 +11,7 @@
 * You have installed [Git](http://git-scm.com/downloads) on your development machine
 * You have installed [Node.js and NPM](https://nodejs.org/) on your development machine
 
-The SparkPost API Docs in Apiary Blueprint format (based on Markdown)
+The SparkPost API Docs in API Blueprint format (based on Markdown)
 
 ## Installation
 
@@ -33,24 +33,19 @@ The SparkPost API Docs in Apiary Blueprint format (based on Markdown)
 
 ### Grunt Commands
 
-#### Apiary Blueprint Validator
+#### API Blueprint Validator
 
-Once all the dependencies are installed, you can execute the Apiary Blueprint Validator tests in the following ways:
+Once all the dependencies are installed, you can execute the API Blueprint Validator tests in the following ways:
 
 * Run the test on ALL /services/ files sequentially
-  ```grunt testFiles```
+  ```grunt test```
 
 * Run the test an individual /services/ file
   ```grunt shell:test:<filename>```
 
-#### Compile and Test
-
-* Concatenate ALL /services/ files into a single apiary.apib file, then test the compiled file
-  ```grunt compile```
-
 #### Static Docs Development Workflow
 
-You can use `grunt staticPreview` to generate API docs under `static/` and start an auto-regen watch process.
+You can use `grunt preview` to generate API docs under `static/` and start an auto-regen watch process.
 
 *Note: the output of this command is not identical to production renders. Its intended as a usable preview for development work.*
 
@@ -70,7 +65,7 @@ The Travis CI projects can be viewed here:
 ### Contributing
 [Guidelines for adding issues](docs/ADDING_ISSUES.markdown)
 
-[Apiary Blueprint Specification](https://github.com/apiaryio/api-blueprint/blob/master/API%20Blueprint%20Specification.md)
+[API Blueprint Specification](https://github.com/apiaryio/api-blueprint/blob/master/API%20Blueprint%20Specification.md)
 
 [Submitting pull requests](docs/CONTRIBUTING.markdown)
 

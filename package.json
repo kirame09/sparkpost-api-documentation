@@ -1,7 +1,7 @@
 {
   "name": "sparkpost-api-documentation",
   "version": "1.0.0",
-  "description": "This is the Apiary Blueprint source for the SparkPost API Documentation",
+  "description": "This is the API Blueprint source for the SparkPost API Documentation",
   "author": "Message Systems, Inc.",
   "scripts": {
     "test": "grunt",

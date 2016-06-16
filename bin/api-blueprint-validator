@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 var yargs = require('yargs')
-    .usage('Usage: $0 apiary.apib ')
+    .usage('Usage: $0 path/to/file.md ')
     .boolean(['validate-requests', 'validate-responses'])
     .default('validate-requests', true)
     .default('validate-responses', true),
