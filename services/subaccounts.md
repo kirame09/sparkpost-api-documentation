@@ -1,3 +1,6 @@
+title: Subaccounts
+description: Manage subaccounts, a way for service providers to provision and manage customers.
+
 # Group Subaccounts
 <a name="subaccounts-api"></a>
 API for retrieving and managing subaccounts associated with your Master Account.

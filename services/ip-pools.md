@@ -1,3 +1,6 @@
+title: IP Pools
+description: Manage IP pools, which allow you to group and assign dedicated IPs for sending.
+
 # Group IP Pools
 
 ## Using Postman

@@ -1,3 +1,6 @@
+title: Suppression List
+description: Manage your suppression list - a list of recipient email addresses to which you do NOT want to send email.
+
 # Group Suppression List
 <a name="suppression-list-api"></a>
 

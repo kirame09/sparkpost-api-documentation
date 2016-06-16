@@ -1,3 +1,6 @@
+title: SMTP API
+description: Use the X-MSYS-API header to customize options for messages sent via SMTP.
+
 # Group SMTP API
 <a name="smtp-api"></a>
 

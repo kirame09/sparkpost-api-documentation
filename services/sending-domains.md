@@ -1,3 +1,6 @@
+title: Sending Domains
+description: Manage sending domains, which are used to indicate who an email is from.
+
 # Group Sending Domains
 <a name="sending-domains-api"></a>
 

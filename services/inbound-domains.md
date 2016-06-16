@@ -1,3 +1,6 @@
+title: Inbound Domains
+description: Manage inbound domains, which enable you to customize the address to which inbound messages are sent.
+
 # Group Inbound Domains
 
 Specifying an inbound domain enables you to customize the address to which inbound messages are sent.

@@ -1,3 +1,6 @@
+title: Transmissions
+description: Use the transmissions API to send a batch of messages through SparkPost.
+
 # Group Transmissions
 <a name="transmissions-api"></a>
 
