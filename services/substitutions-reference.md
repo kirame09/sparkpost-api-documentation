@@ -1,3 +1,6 @@
+title: Substitutions Reference
+description: Documentation for the template language and substitution capabilities of SparkPost.
+
 ## Substitutions Reference
 <a name="substitutions-reference"></a>
 

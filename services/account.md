@@ -1,3 +1,6 @@
+title: Account
+description: Get your SparkPost account information, including subscription status and quota usage.
+
 # Group Account
 
 ## Using Postman

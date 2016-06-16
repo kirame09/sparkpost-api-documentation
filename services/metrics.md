@@ -1,3 +1,6 @@
+title: Metrics
+description: Query real-time data about message processing, message disposition, and campaign performance.
+
 # Group Metrics
 <a name="metrics-api"></a>
 

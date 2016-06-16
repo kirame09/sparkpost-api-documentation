@@ -1,9 +1,22 @@
 include mixins.jade
 
-!= '---\n'
-!= 'layout: default\n'
-!= 'title: API Reference\n'
-!= '---\n'
+- var metadata = self._.transform(self.api.metadata, function(result, value, key) {
+-   result[value.name] = value.value;
+- }, {});
+- var foo = self._.concat([1, 2], [3, 4]);
+- var title = metadata.title ? `${metadata.title} - API Reference` : "API Reference";
+
+| ---
+| layout: default
+| class: api-reference
+| title: "#{title}"
+= '\n'
+if metadata.description
+  | description: "#{metadata.description}"
+  = '\n'
+| ---
+= '\n'
+
 
 div(class='container-fluid')#apipage
     .row
