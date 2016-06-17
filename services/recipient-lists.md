@@ -1,3 +1,6 @@
+title: Recipient Lists
+description: Manage recipient lists, collections of recipients that can be used when sending messages.
+
 # Group Recipient Lists
 
 A recipient list is a collection of recipients that can be used in a transmission.  The Recipient

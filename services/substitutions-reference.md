@@ -1,7 +1,10 @@
+title: Substitutions Reference
+description: Documentation for the template language and substitution capabilities of SparkPost.
+
 ## Substitutions Reference
 <a name="substitutions-reference"></a>
 
-### Key Features
+## Key Features
 
 * Substitutions applied in top-level headers, text/plain, and text/html parts of REST API injected messages (SMTP message substitutions currently not supported)
 * Key/value substitutions using substitution data provided in an arbitrary JSON object format
@@ -12,7 +15,7 @@
 * Automatic HTML escaping of substitution values appearing in HTML parts of content
 * Automatic encoding of UTF-8 substitution values appearing in email headers
 
-### Substitution Data
+## Substitution Data
 
 Substitutions are applied per recipient using substitution data provided as part of
 the transmission and recipient JSON structures.  In the simplest case, substitution data is a JSON
@@ -51,7 +54,7 @@ Metadata can be used in substitutions in the same way as substitution data.
 
 
 
-### Template Start and End Markers
+## Template Start and End Markers
 
 As with some other templating languages, the start and end markers are defined as double curly braces.  For example:
 
@@ -83,7 +86,7 @@ The following will not be interpreted as a template:
 { { value } }
 ```
 
-### Determination of Expressions and Statements
+## Determination of Expressions and Statements
 
 When compiling a template, the substitution engine looks at the text between each pair of curly braces
 and determines whether it should be treated as an expression or a statement.  The
@@ -110,7 +113,7 @@ each.  The following are examples:
 {{ end }}
 ```
 
-### Missing Substitution Values
+## Missing Substitution Values
 
 An empty string is substituted for keys that do not appear in the substitution
 data or are present in the substitution data but have a value of JSON null.
@@ -139,7 +142,8 @@ Price is {{loop_var}}
 {{ end }}
 ```
 
-### Statements on Their Own Line
+## Statements on Their Own Line
+
 Substitution statements that exist on their own line of the template will **not**
 produce a blank line in the resulting output.  This is a convenience to the
 template writer.  In addition, any whitespace after the closing **}}** and before
@@ -165,7 +169,7 @@ Maryland
 End of template
 ```
 
-### Escaping Start and End Tags
+## Escaping Start and End Tags
 
 If you want a pair of opening or closing braces to appear in the content,
 you must escape them.  Use one of the following macros:
@@ -187,14 +191,23 @@ will yield:
 Here is a curly: {{
 ```
 
-### Escaping HTML Values
+## Escaping HTML Values
 
 The substitution engine automatically HTML escapes substitution values before they are
 inserted into the HTML part of the content.  Substitution values inserted into
 plain text portions of content are not HTML escaped.  In order to prevent
 HTML escaping, use triple curly braces.
 
-### Preventing HTML Escaping
+## Escaping Links
+
+A URL can be inserted into the template with triple curlies:
+
+```
+<a href="https://{{{link}}}">click me</a>
+```
+Note: The protocol ("https://") needs to be included before the variable.
+
+## Preventing HTML Escaping
 
 The substitution engine supports triple curly braces to signify that HTML escaping should not occur.
 
@@ -230,7 +243,7 @@ Example of using double curly braces renders angle brackets incorrectly:
 </body>
 ```
 
-### Personalized Links
+## Personalized Links
 
 Personalized links are supported.  A personalized link is defined as a target link that has one or more substitutions.
 For example:
@@ -286,13 +299,7 @@ Triple curlies are also necessary if the entire URL resides in substitution data
 }
 ```
 
-This URL can be inserted into the template using triple curlies:
-
-```
-<a href="{{{the_entire_url}}}">Go!</a>
-```
-
-### Link Names
+## Link Names
 
 Name all links using the **data-msys-linkname** custom attribute.  The link name has a maximum length of 63 characters and is truncated if it exceeds that limit. For example:
 
@@ -304,7 +311,7 @@ If this attribute is not specified, the link name will fall back to **Raw URL**.
 
 The link name will be incorporated into the click-tracked link and will be tracked in engagement events.
 
-### Unsubscribe Links
+## Unsubscribe Links
 
 It is possible to indicate that a link in your content be used to generate an unsubscribe event from SparkPost. This is done with the **data-msys-unsubscribe** custom attribute. For example:
 
@@ -314,7 +321,7 @@ It is possible to indicate that a link in your content be used to generate an un
 
 More information can be found [here](https://support.sparkpost.com/customer/portal/articles/1929894-setting-up-unsubscribe-links).
 
-### Per-link Disabling of Click Tracking
+## Per-link Disabling of Click Tracking
 
 When click-tracking is enabled for a transmission individual links can be skipped using the **data-msys-clicktrack** custom attribute. For example:
 
@@ -323,7 +330,7 @@ When click-tracking is enabled for a transmission individual links can be skippe
 ```
 
 
-### Custom Link Sub-Paths
+## Custom Link Sub-Paths
 
 It is possible to add a custom sub-path to a tracked URL using the **data-msys-sublink** custom attribute. For example:
 
@@ -339,7 +346,7 @@ http://<hostname>/f/custom_path/<encoded target url>
 
 An example of how to use **data-msys-sublink** to support iOS Universal Links in SparkPost Elite can be found [here](https://support.sparkpostelite.com/customer/en/portal/articles/2231112-ios9-universal-links-support?b_id=8730#Creating%20Universal%20Links%20in%20Templates%20&%20Sub-Pathing).
 
-### Link Attributes in Text Parts
+## Link Attributes in Text Parts
 
 The sections above describing the **data-msys-*** link attributes all show HTML `<a>` tag examples. However it is also possible to specify all of the same custom attributes for links in the `text` part of a message using a double-square-bracket notation. For example:
 
@@ -347,7 +354,7 @@ The sections above describing the **data-msys-*** link attributes all show HTML 
 http://www.example.com[[data-msys-clicktrack="0"]]
 ```
 
-### Substitutions Syntax Examples
+## Substitutions Syntax Examples
 
 This section contains syntax examples based on the following JSON substitution data:
 
@@ -388,19 +395,19 @@ This section contains syntax examples based on the following JSON substitution d
 }
 ```
 
-#### Basic Substitution
+### Basic Substitution
 
 ```
 Hello {{name}}
 ```
 
-#### Referencing a Nested Object
+### Referencing a Nested Object
 
 ```
 Street: {{address.street}}
 ```
 
-#### if then else Syntax
+### if then else Syntax
 
 Notice the "then" is not required.  The following are equivalent: 
 
@@ -418,7 +425,7 @@ Don't forget to sign up!
 {{end}}
 ```
 
-#### if not Syntax
+### if not Syntax
 
 ```
 {{if not signed_up}}
@@ -426,7 +433,7 @@ Don't forget to sign up!
 {{end}}
 ```
 
-#### elseif Syntax
+### elseif Syntax
 
 ```
 {{if signed_up}}
@@ -438,7 +445,7 @@ Please sign up
 {{end}}
 ```
 
-#### Expressions in Conditionals (`==`, `!=`, `<`, `>`, `and`, `or`)
+### Expressions in Conditionals (`==`, `!=`, `<`, `>`, `and`, `or`)
 
 ```
 {{if age > 30}}
@@ -457,7 +464,7 @@ do something
 {{end}}
 ```
 
-### Relational and Logical Operators
+## Relational and Logical Operators
 
 The relational and logical operators are as follows: 
 
@@ -484,7 +491,7 @@ The relational and logical operators are as follows:
 
 The length operator `#` gives the length of an array. From the sample data above: `#shopping_cart` produces `2`.
 
-### Array Iteration
+## Array Iteration
 
 The substitution language uses the `each` keyword for iteration.
 The value at each index of an array can be accessed within the each loop by using the `loop_var` variable. When using the `each` keyword to iterate over an array, the `loop_index` variable can be used to get the current index.
@@ -528,7 +535,7 @@ The following example uses `shopping_cart` and `a_nested_array`:
 The preceding example uses indentation for ease of reading.
 The indentation will appear in the rendered content, so it is not advisable to indent a production template. 
 
-### Links and Substitution Expressions Within Substitution Values
+## Links and Substitution Expressions Within Substitution Values
 
 Sometimes it may be convenient to place links and substitution expressions not only within
 a template, but within substitution values themselves.  For example, the 'my_html_chunk' substitution value
@@ -718,7 +725,7 @@ Finally, as a more realistic example, render_dynamic_content can also be used in
 }
 ```
 
-### Default Values
+## Default Values
 
 To create default values, use `or` syntax.  In the following example,
 if `name` does not exist as a substitution key, then the expression `null or 'Customer'`
@@ -728,7 +735,7 @@ will evaluate as `Customer`.
 Hello {{ name or 'Customer' }}
 ```
 
-### Macros
+## Macros
 
 Macros are function calls that may or may not take arguments.  The currently available macros are:
 
@@ -770,7 +777,7 @@ The four macros for outputting braces are listed below followed by their output:
 
 
 
-###  Reserved Recipient Substitution Variables
+##  Reserved Recipient Substitution Variables
 
 The following substitution variables are reserved and automatically available for each recipient:
 
@@ -792,7 +799,7 @@ Hello {{address.name}}
 Your email is {{address.email}} and your return path is {{return_path}}
 ```
 
-### Substitutions in email_rfc822 Headers
+## Substitutions in email_rfc822 Headers
 
 When it is desirable to have substitutions in RFC2047 encoded headers which are folded, be sure that
 each line of the header is separately RFC2047 encoded.  Otherwise, the server will not be able to decode
@@ -812,7 +819,7 @@ Subject: =?gb2312?B?ztLE3M3Mz8Kyo8Gntviyu8nLye3M5c7SxNzNzM/CsqPBp7b4srvJy8ntzOU=
    ztLE3M3Mz8Kyo8Gntvg=?=
 ```
 
-### Encoding Rules
+## Encoding Rules
 
 * If after substitution, a text/plain or text/html part contains 8-bit data,
 then that part will be quoted-printable encoded before being placed back into the

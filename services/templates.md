@@ -1,3 +1,6 @@
+title: Templates
+description: Manage reusable content templates that are run through the SparkPost substitution engine and can be used when sending messages.
+
 # Group Templates
 
 A template is a named collection of content stored on the server side.  Templates are used

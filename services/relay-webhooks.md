@@ -1,6 +1,11 @@
+title: Relay Webhooks
+description: Manage relay webhooks, a way to instruct SparkPost to accept inbound email on your behalf and forward it to you over HTTP.
+
 # Group Relay Webhooks
 
 **Note:** The Relay Webhooks API is available for SparkPost only.
+
+Relay Webhooks are a way to instruct SparkPost to accept inbound email on your behalf and forward it to you over HTTP for your own consumption.
 
 By configuring a relay webhook for a specified inbound domain, those inbound messages can be forwarded to a specified target over HTTP.  Before you create a relay webhook, be sure to first create an inbound domain that is properly configured. To create an inbound domain for your account, please use our Inbound Domains API. The Relay Webhooks API provides the means to create, list, retrieve, update, and delete a relay webhook.
 
@@ -26,12 +31,12 @@ If you use [Postman](https://www.getpostman.com/) you can click the following bu
 | protocol  | string | Inbound messaging protocol associated with this webhook | no - defaults to "SMTP" |                      |
 | domain    | string | Inbound domain associated with this webhook             | yes | To create an inbound domain for your account, please use the Inbound Domains API. |
 
-## Field Defintions
+## Field Definitions
 
 The following fields will be included in the JSON object posted to the relay webhooks target:
 
 | Field     | Type   | Description                                                 | Notes
-|-----------|--------|-----------------------------------------------------------------------|--------------|----------------------|
+|-----------|--------|-----------------------------------------------------------------------|--------------|
 | content   | object | Content that will be used to construct a relay message           | For a full description, see the Content Attributes. |
 | friendly_from | string | Email address used to compose the "From" header |
 | msg_from | string | SMTP envelope from |

@@ -11,7 +11,7 @@
 * You have installed [Git](http://git-scm.com/downloads) on your development machine
 * You have installed [Node.js and NPM](https://nodejs.org/) on your development machine
 
-The SparkPost API Docs in Apiary Blueprint format (based on Markdown)
+The SparkPost API Docs in API Blueprint format (based on Markdown)
 
 ## Installation
 
@@ -33,25 +33,39 @@ The SparkPost API Docs in Apiary Blueprint format (based on Markdown)
 
 ### Grunt Commands
 
-#### Apiary Blueprint Validator
+#### API Blueprint Validator
 
-Once all the dependencies are installed, you can execute the Apiary Blueprint Validator tests in the following ways:
+Once all the dependencies are installed, you can execute the API Blueprint Validator tests in the following ways:
 
 * Run the test on ALL /services/ files sequentially
-  ```grunt testFiles```
+  ```grunt test```
 
 * Run the test an individual /services/ file
   ```grunt shell:test:<filename>```
 
-#### Compile and Test
+#### Static Docs Development Workflow
 
-* Concatenate ALL /services/ files into a single apiary.apib file, then test the compiled file
-  ```grunt compile```
+You can use `grunt preview` to generate API docs under `static/` and start an auto-regen watch process.
+
+*Note: the output of this command is not identical to production renders. Its intended as a usable preview for development work.*
+
+### Deploying
+
+The API documentation lives at https://developers.sparkpost.com/api/. When a commit is made to the `master` branch of this repo, it triggers a Travis CI run that executes the code in `bin/copy-to-devhub.sh`. The automated workflow is as follows:
+
+* Clone the develop branch of the [SparkPost/sparkpost.github.io](https://github.com/SparkPost/sparkpost.github.io) repo
+* Generate the HTML files for the API docs into `sparkpost.gitub.io/_api`
+* Commit the changes, which triggers a Travis CI build for the `sparkpost.github.io` repo
+
+The Travis CI projects can be viewed here:
+
+* [sparkpost-api-documentation](https://travis-ci.org/SparkPost/sparkpost-api-documentation)
+* [sparkpost.github.io](https://travis-ci.org/SparkPost/sparkpost.github.io)
 
 ### Contributing
 [Guidelines for adding issues](docs/ADDING_ISSUES.markdown)
 
-[Apiary Blueprint Specification](https://github.com/apiaryio/api-blueprint/blob/master/API%20Blueprint%20Specification.md)
+[API Blueprint Specification](https://github.com/apiaryio/api-blueprint/blob/master/API%20Blueprint%20Specification.md)
 
 [Submitting pull requests](docs/CONTRIBUTING.markdown)
 
