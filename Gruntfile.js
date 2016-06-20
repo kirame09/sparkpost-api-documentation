@@ -207,11 +207,11 @@ module.exports = function(grunt) {
             test: {
                 command : function(file) {
                     file = './services/' + file;
-                    return 'node ./bin/api-blueprint-validator ' + file;
+                    return './bin/validate.sh ' + file;
                 },
                 options : {
                     stdout : true,
-                    stderr: false,
+                    stderr: true,
                     failOnError : true
                 }
             }
