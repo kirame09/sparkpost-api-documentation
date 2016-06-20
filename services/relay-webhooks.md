@@ -1,3 +1,6 @@
+title: Relay Webhooks
+description: Manage relay webhooks, a way to instruct SparkPost to accept inbound email on your behalf and forward it to you over HTTP.
+
 # Group Relay Webhooks
 
 **Note:** The Relay Webhooks API is available for SparkPost only.

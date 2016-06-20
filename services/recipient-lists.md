@@ -1,3 +1,6 @@
+title: Recipient Lists
+description: Manage recipient lists, collections of recipients that can be used when sending messages.
+
 # Group Recipient Lists
 
 A recipient list is a collection of recipients that can be used in a transmission.  The Recipient
@@ -42,7 +45,7 @@ object, it is described with the following fields:
 |------------------------|:-:       |---------------------------------------|-------------|
 |email    |string       |Valid email address   |yes  |
 |name |string |User-friendly name for the email address |no |
-|header_to|string       |Email address to display in the "To" header instead of _address.email_ (for BCC)|no|
+|header_to|string       |Email address to display in the "To" header instead of _address.email_ ([for CC and BCC](https://support.sparkpost.com/customer/en/portal/articles/2432290-using-cc-and-bcc-with-the-rest-api))|no|
 
 **Constructing Headers using the Address Attributes**
 

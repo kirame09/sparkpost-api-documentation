@@ -1,3 +1,6 @@
+title: Tracking Domains
+description: Manage tracking domains, which are used to wrap links in engagement tracking to report opens and clicks in your messages.
+
 # Group Tracking Domains
 <a name="tracking-domains-api"></a>
 

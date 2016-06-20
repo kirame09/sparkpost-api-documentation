@@ -80,6 +80,7 @@ module.exports = function(grunt) {
             themeFullWidth: true,
             themeEmoji: false,
             locals: {
+              _: require('lodash'),
               baseURI: '/api/v1'
             }
           }
@@ -194,18 +195,6 @@ module.exports = function(grunt) {
           }
         },
 
-        concat: {
-            options: {
-                banner: 'FORMAT: X-1A' + grunt.util.linefeed +
-                    'HOST: https://api.sparkpost.com/api/v1' +
-                    grunt.util.linefeed + grunt.util.linefeed
-            },
-            prod: {
-                src: services.map(function(s) { return 'services/' + s; }),
-                dest: 'apiary.apib'
-            }
-        },
-
       connect: {
         options: {
           port: 4000,
@@ -218,17 +207,6 @@ module.exports = function(grunt) {
             to: '$1.html'
           }
         ],
-        apiary: {
-          options: {
-            middleware: function(connect) {
-              return [
-                require('connect-livereload')(),
-                connect.static('apiary-previews'),
-                connect.directory('apiary-previews')
-              ];
-            }
-          }
-        },
         staticPreview: {
           options: {
             middleware: function(connect) {
@@ -246,29 +224,18 @@ module.exports = function(grunt) {
         shell: {
             test: {
                 command : function(file) {
-                    if (file) {
-                        file = './services/' + file;
-                    } else {
-                        file = 'apiary.apib';
-                    }
-                    return 'node ./bin/api-blueprint-validator ' + file;
+                    file = './services/' + file;
+                    return './bin/validate.sh ' + file;
                 },
                 options : {
                     stdout : true,
-                    stderr: false,
+                    stderr: true,
                     failOnError : true
                 }
             }
         },
 
         watch: {
-            apiaryDocs: {
-                files: [ 'services/*.md', 'Gruntfile.js' ],
-                tasks: [ 'generate-apiary-preview' ],
-                options: {
-                    livereload: true
-                }
-            },
             staticDocs: {
                 files: [ 'services/*.md', 'templates/production/*.jade', 'Gruntfile.js' ],
                 tasks: [ 'static' ],
@@ -284,64 +251,6 @@ module.exports = function(grunt) {
                 }
             }
         }
-    });
-
-    /**
-     * Generates an apiary preview for an .md file
-     * @param file The .md file
-     * @returns {*|promise}
-     */
-    function generatePreview(file) {
-        var deferred = q.defer();
-
-        var blueprint = 'FORMAT: X-1A' +
-            grunt.util.linefeed +
-            'HOST: https://api.sparkpost.com/api/v1' +
-            grunt.util.linefeed + grunt.util.linefeed +
-            '# SparkPost API v1' +
-            grunt.util.linefeed +
-            fs.readFileSync('./services/' + file, 'utf-8');
-        var embedOptions = { apiBlueprint: blueprint };
-
-        var body = '\
-<!DOCTYPE html>\n\
-<html lang="en">\n\
-<head>\n\
-  <meta charset="UTF-8">\n\
-  <title>' + file + '</title>\n\
-</head>\n\
-<body>\n\
-  <script src="https://api.apiary.io/seeds/embed.js"></script>\n\
-  <script>\n\
-    var embed = new Apiary.Embed(' + JSON.stringify(embedOptions) + ');\n\
-  </script>\n\
-</body>\n\
-</html>\
-';
-
-        var output = file.split('\.')[0] + '.html';
-
-        fs.writeFile('./apiary-previews/' + output, body, function(err) {
-            if (err) {
-                grunt.log.error('There was an error trying to write to ' + output, err);
-                return deferred.reject(err);
-            }
-            return deferred.resolve();
-        });
-
-        return deferred.promise;
-    }
-
-    // grunt generate-apiary-preview - creates apiary previews for all meta
-    grunt.registerTask('generate-apiary-preview', 'Creates preview files for all md files in services', function() {
-        var done = this.async();
-        try {
-            fs.mkdirSync('./apiary-previews');
-        } catch(e){}
-
-        fs.readdir('./services', function(err, files) {
-            q.all(files.map(generatePreview)).then(done, done);
-        });
     });
 
     grunt.registerTask('createSearchContent', 'Convert Apiary blueprints into content for Algolia to index', function() {
@@ -393,18 +302,6 @@ module.exports = function(grunt) {
       });
     });
 
-    // grunt testFiles - runs apiary-blueprint-validator on individual blueprint files
-    grunt.registerTask('testFiles', 'Validates individual blueprint files', services.map(function(s) {
-        return 'shell:test:' + s;
-    }));
-
-    //grunt preview - creates a live-reloaded preview of the docs, Apiary-style
-    grunt.registerTask('preview', 'View the apiary generated HTML files in the browser with all that live-reload goodness', [
-        'generate-apiary-preview',
-        'connect:apiary',
-        'watch:apiaryDocs'
-    ]);
-
     // Internal: grunt genStaticPreview: build preview HTML under static/
     grunt.registerTask('genStaticPreview', '', function() {
       // Call aglio with a preview template
@@ -413,25 +310,25 @@ module.exports = function(grunt) {
       grunt.task.run(['aglio', 'dom_munger', 'copy:fixup_nav', 'copy:static_preview_css']);
     });
 
-    // grunt staticPreview: build preview HTML under static/, open a browser and watch for changes
-    grunt.registerTask('staticPreview', 'View the static generated HTML files in the browser', [
+    // build preview HTML under static/, open a browser and watch for changes
+    grunt.registerTask('staticPreview', ['preview']);
+    grunt.registerTask('preview', 'View the static generated HTML files in the browser', [
         'configureRewriteRules',
         'genStaticPreview',
         'connect:staticPreview',
         'watch:staticPreview'
     ]);
 
-    // grunt test - runs apiary-blueprint-validator on combined apiary.apib file
-    grunt.registerTask('test', [ 'shell:test' ]);
-
-    // DEPRECATED: grunt compile - concatenates all the individual blueprint files and validates it
-    grunt.registerTask('compile', [ 'concat:prod', 'test' ]);
+    // runs api-blueprint-validator on individual blueprint files
+    grunt.registerTask('test', 'Validates individual blueprint files', services.map(function(s) {
+        return 'shell:test:' + s;
+    }));
 
     // grunt staticDev: build API HTML files, copy to local DevHub copy and then watch for changes
     // Use --output change the location of the resulting API doc files.
     grunt.registerTask('staticDev', ['static', 'watch:staticDocs']);
 
-    // grunt static: validate apiary blueprint, build API HTML files and copy to local DevHub copy
+    // grunt static: validate api blueprint, build API HTML files and copy to local DevHub copy
     // Use --output change the location of the resulting API doc files.
     grunt.registerTask('static', ['test', 'aglio', 'dom_munger', 'copy:fixup_nav', 'copy:static_to_devhub']);
 
@@ -439,5 +336,5 @@ module.exports = function(grunt) {
     grunt.registerTask('syncSearch', ['createSearchContent', 'updateAlgolia']);
 
     // register default grunt command as grunt test
-    grunt.registerTask('default', [ 'testFiles' ]);
+    grunt.registerTask('default', [ 'test' ]);
 };

@@ -1,3 +1,6 @@
+title: Sending IPs
+description: Manage the sending IPs for your account and assign them to IP pools.
+
 # Group Sending IPs
 
 ## Using Postman

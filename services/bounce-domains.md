@@ -1,3 +1,6 @@
+title: Bounce Domains
+description: Manage custom bounce domains, which are used for bounce reporting.
+
 # Group Bounce Domains
 <a name="bounce-domains-api"></a>
 

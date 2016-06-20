@@ -1,3 +1,6 @@
+title: Message Events
+description: Query detailed message event data for further analysis and processing.
+
 # Group Message Events
 <a name="message-events-api"></a>
 
