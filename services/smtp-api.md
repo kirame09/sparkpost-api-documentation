@@ -43,13 +43,15 @@ The fields supported in the X-MSYS-API header are as follows:
 
 | Field | Type | Description | Required | Notes |
 |-------|------|-------------|----------|-------|
-| open_tracking | boolean | Whether open tracking is enabled for this SMTP message | no | Defaults to false. |
-| click_tracking | boolean | Whether click tracking is enabled for this SMTP message | no | Defaults to false. |
+| open_tracking | boolean | Whether open tracking is enabled for this SMTP message | no | Defaults to false (also UI controllable). |
+| click_tracking | boolean | Whether click tracking is enabled for this SMTP message | no | Defaults to false (also UI controllable). |
 | transactional | boolean | Whether message is transactional or non-transactional for unsubscribe and suppression purposes (**Note:** no List-Unsubscribe header is included in transactional messages)| no | Defaults to false. |
 | sandbox| boolean| Whether or not to use the sandbox sending domain ( **Note:** SparkPost only ) | no | Defaults to false. |
 | skip_suppression| boolean| Whether or not to ignore customer suppression rules, for this SMTP message only. Only applicable if your configuration supports this parameter. ( **Note:** SparkPost Elite only )| no | Defaults to false. |
 | ip_pool | string | The ID of a dedicated IP pool associated with your account ( **Note:** SparkPost only ).  If this field is not provided, the account's default dedicated IP pool is used (if there are IPs assigned to it).  To explicitly bypass the account's default dedicated IP pool and instead fallback to the shared pool, specify a value of "sp_shared". Please note that this option does not apply to subaccounts. | no | For more information on dedicated IPs, see the [Support Center](https://support.sparkpost.com/customer/en/portal/articles/2002977-dedicated-ip-addresses)
 | inline_css| boolean| Whether or not to perform CSS inlining in HTML content | no | Defaults to false. |
+
+**Note:** The `open_tracking` and `click_tracking` variables may also be set account-wide in your [SMTP relay account settings](https://app.sparkpost.com/account/smtp). 
 
 ## Sending Messages with cc, bcc, and archive Recipients
 
