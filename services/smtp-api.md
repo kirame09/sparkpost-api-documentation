@@ -43,8 +43,8 @@ The fields supported in the X-MSYS-API header are as follows:
 
 | Field | Type | Description | Required | Notes |
 |-------|------|-------------|----------|-------|
-| open_tracking | boolean | Whether open tracking is enabled for this SMTP message | no | Defaults to false (also UI controllable). |
-| click_tracking | boolean | Whether click tracking is enabled for this SMTP message | no | Defaults to false (also UI controllable). |
+| open_tracking | boolean | Whether open tracking is enabled for this SMTP message | no | Defaults to false (see note below). |
+| click_tracking | boolean | Whether click tracking is enabled for this SMTP message | no | Defaults to false (see note below). |
 | transactional | boolean | Whether message is transactional or non-transactional for unsubscribe and suppression purposes (**Note:** no List-Unsubscribe header is included in transactional messages)| no | Defaults to false. |
 | sandbox| boolean| Whether or not to use the sandbox sending domain ( **Note:** SparkPost only ) | no | Defaults to false. |
 | skip_suppression| boolean| Whether or not to ignore customer suppression rules, for this SMTP message only. Only applicable if your configuration supports this parameter. ( **Note:** SparkPost Elite only )| no | Defaults to false. |
