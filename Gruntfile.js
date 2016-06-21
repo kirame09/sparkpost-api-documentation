@@ -162,17 +162,6 @@ module.exports = function(grunt) {
                         $(curNav).parent().addClass('current');
                         allnav = $.html();
 
-                        // add more ids, to split up some of the bigger sections
-                        $ = cheerio.load(content);
-                        $('div.title strong code').each(function(idx, elt) {
-                          var text = $(elt).text();
-                          if (!text.match(/^\d+$/)) {
-                            var anchor = text.toLowerCase().replace(/\s+/g, '-');
-                            $(elt).parents('div.title').attr('id', anchor);
-                          }
-                        });
-                        content = $.html();
-
                         // replace single-page nav with the global nav we built above
                         content = content.replace(/<nav([^>]*)>.*?<\/nav>/, '<nav$1>'+ allnav +'</nav>');
 

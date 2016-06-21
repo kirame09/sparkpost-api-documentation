@@ -256,7 +256,7 @@ module.exports = {
           return collectSearchables(ast);
         });
 
-        return [].concat.apply([], searchableObjects).map(genHash);
+        return [].concat.apply([], searchableObjects);
       })
       .then(searchables => {
         return writefilep(outputPath, JSON.stringify(searchables, null, '  '));
