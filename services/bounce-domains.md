@@ -6,6 +6,8 @@ description: Manage custom bounce domains, which are used for bounce reporting.
 
 **Note:** The Bounce Domains API is available for SparkPost only.
 
+**Note:** Only one custom bounce domain is permitted per account at this time.
+
 Bounce domains are used to report bounces, emails that were rejected from the recipient server.  By adding a custom bounce domain to your account, you can customize the address that is used for the Return Path header (which denotes the destination for out of band bounces). This custom bounce domain overrides the default Return-Path (also known as the envelope FROM) value of "sparkpostmail.com" for all messages sent.
 
 **Note:** Use of a bounce domain requires modification of your DNS records to include a CNAME record.
@@ -38,6 +40,8 @@ Detailed status for this bounce domain is described in a JSON object with the fo
 ### Create a Bounce Domain [POST]
 
 Create a Bounce Domain.
+
+**Note:** Only one custom bounce domain is permitted per account at this time.
 
 + Request (application/json)
 
@@ -178,7 +182,7 @@ Create a Bounce Domain.
 
 Retrieve a list of all bounce domains.
 
-**NOTE:** Only one custom bounce domain is permitted per account at this time.
+**Note:** Only one custom bounce domain is permitted per account at this time.
 
 + Request
 
