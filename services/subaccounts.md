@@ -2,10 +2,39 @@ title: Subaccounts
 description: Manage subaccounts, a way for service providers to provision and manage customers.
 
 # Group Subaccounts
-<a name="subaccounts-api"></a>
-API for retrieving and managing subaccounts associated with your Master Account.
 Subaccounts are a way for service providers to provision and manage their customers separately from each other and to provide assets and reporting data.
-For more general information pertaining to subaccounts, please see the [Subaccounts Introduction](index.html#header-subaccounts)
+
+## Introduction
+
+With the introduction of subaccounts, some of the APIs are now able to store and retrieve information at a more granular level.
+Subaccounts are a way for service providers to provision and manage their customers separately from each other and to provide assets and reporting data.
+
+The following APIs have subaccount support:
+
+* [Metrics](metrics.html) **(Note: Not available for Subaccount API keys)**
+* [Message Events](message-events.html)
+* [Sending Domains](sending-domains.html)
+* [Suppression List](suppression-list.html)
+* [SMTP API](smtp-api.html)
+* [Transmissions](transmissions.html)
+* [Tracking Domains](tracking-domains.html)
+
+### Terminology
+* Master Account - This refers to a Service Provider and their data
+* Subaccounts - This refers to a Service Provider's customer(s), and that customer's data
+
+### Managing subaccount data as a Service Provider
+* Master Accounts can set the `X-MSYS-SUBACCOUNT` HTTP header with the ID of their subaccount to manage subaccount data on their behalf
+  * For example, on a GET request to `/api/v1/sending-domains`, setting `X-MSYS-SUBACCOUNT` to `123` will only return sending domains which belong to Subaccount `123`
+  * The same applies to data management, setting `X-MSYS-SUBACCOUNT` to `123` on a POST request to `/api/v1/sending-domains` will create a sending domain belonging to Subaccount `123`
+* `X-MSYS-SUBACCOUNT` is not required, but if provided, must be a number
+
+### Managing master account data as a Service Provider
+* Setting `X-MSYS-SUBACCOUNT` to `0` will retrieve or manage Master Account data only
+* For POST/PUT/DELETE requests, omitting `X-MSYS-SUBACCOUNT` will result in the same behavior as setting `X-MSYS-SUBACCOUNT` to `0`
+* For GET requests, omitting `X-MSYS-SUBACCOUNT` will result in Master Account and Subaccount data in the response
+  * Subaccount data will have the key `subaccount_id` in the response object
+* Metrics and Message Events APIs do not use `X-MSYS-SUBACCOUNT`. Instead, setting the query parameter `subaccounts` to `0` will return only Master Account reporting data
 
 ## Subaccounts Collection [/subaccounts]
 
