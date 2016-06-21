@@ -1,8 +1,10 @@
+/* jshint laxcomma: true, multistr: true */
 var matchdep = require('matchdep')
     , fs = require('fs')
     , q = require('q')
     , request = require('request')
     , rewriteRulesSnippet = require("grunt-connect-rewrite/lib/utils").rewriteRequest
+    , algoliaTools = require('./algoliaTools')
     , services = [
         'introduction.md',
         'substitutions-reference.md',
@@ -40,7 +42,7 @@ function sectionName(md) {
     if (name === 'introduction') {
         name = 'index';
     }
-    return name
+    return name;
 }
 
 function htmlFile(md) {
@@ -52,6 +54,10 @@ module.exports = function(grunt) {
     // Relative to staticTempDir (!)
     if (!grunt.option('output')) {
       grunt.option('output', '../sparkpost.github.io/_api/');
+    }
+
+    if (!grunt.option('searchContentFile')) {
+      grunt.option('searchContentFile', 'forAlgolia.json');
     }
 
     grunt.option('aglioTemplate', 'production');
@@ -138,7 +144,8 @@ module.exports = function(grunt) {
                                 var name = names[idx];
                                 var html = grunt.option('dom_munger.getnav.'+ name);
                                 if (html === undefined) {
-                                    grunt.log.fatal('no nav html for ['+ name +'], run dom_munger before copy!');
+                                    grunt.log.error('no nav html for ['+ name +'], run dom_munger before copy!');
+                                    return null;
                                 }
                                 allnav = allnav + html;
                             }
@@ -235,6 +242,55 @@ module.exports = function(grunt) {
         }
     });
 
+    grunt.registerTask('createSearchContent', 'Convert Apiary blueprints into content for Algolia to index', function() {
+      var searchContentFile = grunt.option('searchContentFile');
+
+      if (!searchContentFile) {
+        grunt.fail.fatal('Required option missing: searchContentFile');
+        return null;
+      }
+
+      var done = this.async();
+      algoliaTools.createSearchContent(services, searchContentFile)
+      .then(function() {
+        grunt.log.writeln('Search content written to ' + searchContentFile);
+        done();
+      })
+      .catch(function(err) {
+        grunt.fail.fatal(err);
+      });
+    });
+
+    grunt.registerTask('updateAlgolia', 'Uploads generated content to the Algolia engine for indexing', function() {
+      var opts = {
+        searchContentFile: null,
+        algoliaAPIKey: null,
+        algoliaAppID: null,
+        algoliaIndexName: null
+      }
+      , ok = true;
+
+      Object.keys(opts).forEach(function(key) {
+        opts[key] = grunt.option(key);
+        if (!opts[key]) {
+          grunt.fail.fatal('Required option missing: ' + key);
+          ok = false;
+        }
+      });
+
+      if (!ok) {
+        return null;
+      }
+
+      var done = this.async();
+      algoliaTools.updateSearchIndex(opts.searchContentFile,
+        opts.algoliaAppID, opts.algoliaAPIKey, opts.algoliaIndexName, grunt.log.writeln)
+      .then(done)
+      .catch(function(err) {
+        grunt.fail.fatal(err);
+      });
+    });
+
     // Internal: grunt genStaticPreview: build preview HTML under static/
     grunt.registerTask('genStaticPreview', '', function() {
       // Call aglio with a preview template
@@ -257,7 +313,6 @@ module.exports = function(grunt) {
         return 'shell:test:' + s;
     }));
 
-
     // grunt staticDev: build API HTML files, copy to local DevHub copy and then watch for changes
     // Use --output change the location of the resulting API doc files.
     grunt.registerTask('staticDev', ['static', 'watch:staticDocs']);
@@ -265,6 +320,9 @@ module.exports = function(grunt) {
     // grunt static: validate api blueprint, build API HTML files and copy to local DevHub copy
     // Use --output change the location of the resulting API doc files.
     grunt.registerTask('static', ['test', 'aglio', 'dom_munger', 'copy:fixup_nav', 'copy:static_to_devhub']);
+
+    // Generate and upload new search content to Algolia
+    grunt.registerTask('syncSearch', ['createSearchContent', 'updateAlgolia']);
 
     // register default grunt command as grunt test
     grunt.registerTask('default', [ 'test' ]);
