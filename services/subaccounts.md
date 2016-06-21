@@ -2,8 +2,6 @@ title: Subaccounts
 description: Manage subaccounts, a way for service providers to provision and manage customers.
 
 # Group Subaccounts
-<a name="subaccounts-api"></a>
-API for retrieving and managing subaccounts associated with your Master Account.
 Subaccounts are a way for service providers to provision and manage their customers separately from each other and to provide assets and reporting data.
 
 ## Introduction
@@ -13,20 +11,20 @@ Subaccounts are a way for service providers to provision and manage their custom
 
 The following APIs have subaccount support:
 
-* [Metrics API](metrics.html) **(Note: Not available for Subaccount API keys)**
-* [Message Events API](message-events.html)
-* [Sending Domains API](sending-domains.html)
-* [Suppression List API](suppression-list.html)
+* [Metrics](metrics.html) **(Note: Not available for Subaccount API keys)**
+* [Message Events](message-events.html)
+* [Sending Domains](sending-domains.html)
+* [Suppression List](suppression-list.html)
 * [SMTP API](smtp-api.html)
-* [Transmissions API](transmissions.html)
-* [Tracking Domains API](tracking-domains.html)
+* [Transmissions](transmissions.html)
+* [Tracking Domains](tracking-domains.html)
 
 ### Terminology
 * Master Account - This refers to a Service Provider and their data
 * Subaccounts - This refers to a Service Provider's customer(s), and that customer's data
 
 ### Managing subaccount data as a Service Provider
-* Master Accounts can set `X-MSYS-SUBACCOUNT` with the ID of their subaccount to manage subaccount data on their behalf
+* Master Accounts can set the `X-MSYS-SUBACCOUNT` HTTP header with the ID of their subaccount to manage subaccount data on their behalf
   * For example, on a GET request to `/api/v1/sending-domains`, setting `X-MSYS-SUBACCOUNT` to `123` will only return sending domains which belong to Subaccount `123`
   * The same applies to data management, setting `X-MSYS-SUBACCOUNT` to `123` on a POST request to `/api/v1/sending-domains` will create a sending domain belonging to Subaccount `123`
 * `X-MSYS-SUBACCOUNT` is not required, but if provided, must be a number
