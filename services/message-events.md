@@ -131,8 +131,8 @@ List descriptions of the event fields that could be included in a response from 
                     "sampleValue": "1"
                 },
                 "timestamp": {
-                    "description": "Event date and time, in Unix timestamp format (integer seconds since 00:00:00 GMT 1970-01-01)",
-                    "sampleValue": 1427736822
+                    "description": "Event date and time formatted as: YYYY-MM-DDTHH:MM±hh:mm",
+                    "sampleValue": "2015-11-24T16:15:54.000+00:00"
                 },
                 "transmission_id": {
                     "description": "Transmission which originated this message",
@@ -190,7 +190,7 @@ List an example of the event data that will be included in a response from the M
                 "subject": "Summer deals are here!",
                 "template_id": "templ-1234",
                 "template_version": "1",
-                "timestamp": 1427736822,
+                "timestamp": "2015-11-24T16:15:54.000+00:00",
                 "transmission_id": "65832150921904138",
                 "type": "bounce"
             }
@@ -338,7 +338,7 @@ Perform a filtered search for message event data. The response is sorted by desc
         "routing_domain": "example.com",
         "template_id": "templ-1234",
         "template_version": "1",
-        "timestamp": 1427736822
+        "timestamp": "2014-07-20T08:01-00:00"
       },
       {
         "type": "policy_rejection",
