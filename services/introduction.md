@@ -13,8 +13,6 @@ There are two service types available:  [SparkPost](http://sparkpost.com/), our 
 | `https://yourdomain.sparkpostelite.com/api/v1` | SparkPost Elite |
 | `https://yourdomain.msyscloud.com/api/v1` | SparkPost Elite (prior to June 2015) |
 
-Note: To prevent abuse, our servers enforce request rate limiting, which may trigger responses with HTTP status code 429.
-
 ## API Conventions
 * API versioning is handled using a major version number in the URL, e.g. /api/v1/endpoint.
 * /something is equivalent to /something/.
@@ -83,3 +81,46 @@ To use SparkPost as an SMTP relay you need to point your SMTP client (or local M
 * Please contact your Technical Account Manager for details on your SMTP endpoint.
 
 The SMTP relay optionally supports advanced API features using the [SMTP API](smtp-api.html).  To create an API key, login to your SparkPost [Account Credentials](https://app.sparkpost.com/account/credentials) page.
+
+
+## Rate Limiting
+Note: To prevent abuse, our servers enforce request rate limiting, which may trigger responses with HTTP status code 429. If you use the sandbox domain (sparkpostbox.com) for testing you are limited to 50 emails.
+
+To learn more about rate limiting see our [support article](https://support.sparkpost.com/customer/portal/articles/2030894)
+
+## Errors
+
+If your account has been suspended due to concern about a possible violation of our [Messaging Policy](https://www.sparkpost.com/policies) please contact us at [abuse@sparkpost.com](mailto:abuse@sparkpost.com).
+
+When you make an API call you may receive an error message in response. Either there is something wrong with your request or something went wrong on our end. Errors respond with an error code and JSON that contains a more precise message, description and API code.
+### Example Error
+```
+422 Unprocessable Entity
+```
+```
+{
+  "errors": [
+    {
+      "message": "required field is missing",
+      "description": "content object or template_id required",
+      "code": "1400"
+    }
+  ]
+}
+```
+
+### Error Table
+|Code|Status Name           |Description                                                                   |Suggested Action|
+|----|----------------------|------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------|
+|400 |Bad Request           |There is a problem with your request.                                         |Check your request follows the API documentation and uses correct syntax.                                                                           |
+|401 |Unauthorized          |You don't have the needed authorization to make the request.                  |Make sure you are using a valid API key with the necessary permissions for your request.                                                            |
+|403 |Forbidden             |The server understood the request but refused to fulfill it.                  |See if your SparkPost plan includes the resource you are requesting and your API key has the necessary premissions.                                 |
+|404 |Not Found             |The server couldn't find the requested file.                                  |Change your request URL to match a valid API endpoint.                                                                                              |
+|405 |Method Not Allowed    |The resource does not have the specified method. (e.g. PUT on transmissions)  |Change the method to follow the documentation for the resource.                                                                                     |
+|409 |Conflict              |A conflict arose from your request. (e.g. user already exists with that email)|Modify the payload to clear the conflict.                                                                                                           |
+|415 |Unsupported Media Type|The request is not in a supported format.                                     |Check that your Content-Type header is a supported type and that your request adheres to the documentation.                                         |
+|420 |Exceed Sending Limit  |You sent too many requests in a given time period.                            |Check that you are with in the limits of your SparkPost plan. (If you are using the sandbox domain you'll need to add a sending domain to continue.)|
+|422 |Unprocessable Entity  |The request was syntactically correct but failed do to semantic errors.       |Make sure that you have all the required fields and that your data is valid.                                                                        |
+|500 |Internal Server Error |Something went wrong on our end.                                              |Try the request again later. If the error does not resolve, [contact support](https://support.sparkpost.com/).                                      |
+|503 |Service Unavailable   |We are experiencing higher than normal levels of traffic.                     |Try the request again.                                                                                                                              |
+
