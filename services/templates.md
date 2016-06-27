@@ -3,8 +3,7 @@ description: Manage reusable content templates that are run through the SparkPos
 
 # Group Templates
 
-A template is a named collection of content stored on the server side.  Templates are used
-in a transmission by providing the id of the template at the time of transmission submission.  Each textual component of the
+A template is a named collection of content stored on the server side.  Templates are used in a transmission by providing the id of the template at the time of transmission submission.  Each textual component of the
 template (headers, text, and html) is run through the substitution engine
 to produce recipient specific email messages.  The Templates API provides the means to manage your templates.
 
