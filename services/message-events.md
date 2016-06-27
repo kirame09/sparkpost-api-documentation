@@ -131,7 +131,7 @@ List descriptions of the event fields that could be included in a response from 
                     "sampleValue": "1"
                 },
                 "timestamp": {
-                    "description": "Event date and time formatted as: YYYY-MM-DDTHH:MM±hh:mm",
+                    "description": "Event date and time formatted as: YYYY-MM-DDTHH:MM:SS.SSS±hh:mm",
                     "sampleValue": "2015-11-24T16:15:54.000+00:00"
                 },
                 "transmission_id": {
@@ -258,7 +258,7 @@ Perform a filtered search for message event data. The response is sorted by desc
         "routing_domain": "example.com",
         "template_id": "templ-1234",
         "template_version": "1",
-        "timestamp": "2014-07-20T08:01-00:00",
+        "timestamp": "2014-07-20T08:01.000-00:00",
         "transmission_id": "65832150921904138"
       },
       {
@@ -283,7 +283,7 @@ Perform a filtered search for message event data. The response is sorted by desc
         "routing_domain": "example.com",
         "template_id": "templ-1234",
         "template_version": "1",
-        "timestamp": "2014-07-20T08:01-00:00",
+        "timestamp": "2014-07-20T08:01.000-00:00",
         "transmission_id": "65832150921904138"
       },
       {
@@ -305,7 +305,7 @@ Perform a filtered search for message event data. The response is sorted by desc
         "routing_domain": "example.com",
         "template_id": "templ-1234",
         "template_version": "1",
-        "timestamp": "2014-07-20T08:01-00:00",
+        "timestamp": "2014-07-20T08:01.000-00:00",
         "transmission_id": "65832150921904138"
       },
       {
@@ -322,7 +322,7 @@ Perform a filtered search for message event data. The response is sorted by desc
         "report_by": "server.email.com",
         "report_to": "abuse.example.com",
         "template_id": "templ-1234",
-        "timestamp": "2014-07-20T08:01-00:00",
+        "timestamp": "2014-07-20T08:01.000-00:00",
         "user_str": "Additional Example Information"
       },
       {
@@ -338,7 +338,7 @@ Perform a filtered search for message event data. The response is sorted by desc
         "routing_domain": "example.com",
         "template_id": "templ-1234",
         "template_version": "1",
-        "timestamp": "2014-07-20T08:01-00:00"
+        "timestamp": "2014-07-20T08:01.000-00:00"
       },
       {
         "type": "policy_rejection",
@@ -360,7 +360,7 @@ Perform a filtered search for message event data. The response is sorted by desc
         "remote_addr": "127.0.0.1",
         "template_id": "templ-1234",
         "template_version": "1",
-        "timestamp": "2014-07-20T08:01-00:00",
+        "timestamp": "2014-07-20T08:01.000-00:00",
         "transmission_id": "65832150921904138"
       },
       {
@@ -388,7 +388,7 @@ Perform a filtered search for message event data. The response is sorted by desc
         "routing_domain": "example.com",
         "template_id": "templ-1234",
         "template_version": "1",
-        "timestamp": "2014-07-20T08:01-00:00",
+        "timestamp": "2014-07-20T08:01.000-00:00",
         "transmission_id": "65832150921904138"
       },
       {
@@ -410,7 +410,7 @@ Perform a filtered search for message event data. The response is sorted by desc
         "target_link_url": "http://example.com",
         "template_id": "templ-1234",
         "template_version": "1",
-        "timestamp": "2014-07-20T08:01-00:00",
+        "timestamp": "2014-07-20T08:01.000-00:00",
         "transmission_id": "65832150921904138",
         "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.118 Safari/537.36",
         "geo_ip": {
@@ -438,7 +438,7 @@ Perform a filtered search for message event data. The response is sorted by desc
         "rcpt_to": "recipient@example.com",
         "template_id": "templ-1234",
         "template_version": "1",
-        "timestamp": "2014-07-20T08:01-00:00",
+        "timestamp": "2014-07-20T08:01.000-00:00",
         "transmission_id": "65832150921904138",
         "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.118 Safari/537.36",
         "geo_ip": {
@@ -468,7 +468,7 @@ Perform a filtered search for message event data. The response is sorted by desc
         "routing_domain": "example.com",
         "template_id": "templ-1234",
         "template_version": "1",
-        "timestamp": "2014-07-20T08:01-00:00",
+        "timestamp": "2014-07-20T08:01.000-00:00",
         "transmission_id": "65832150921904138"
       },
       {
@@ -490,7 +490,7 @@ Perform a filtered search for message event data. The response is sorted by desc
         "routing_domain": "example.com",
         "template_id": "templ-1234",
         "template_version": "1",
-        "timestamp": "2014-07-20T08:01-00:00",
+        "timestamp": "2014-07-20T08:01.000-00:00",
         "transmission_id": "65832150921904138"
       },
       {
@@ -510,7 +510,7 @@ Perform a filtered search for message event data. The response is sorted by desc
         "rcpt_to": "recipient@example.com",
         "template_id": "templ-1234",
         "template_version": "1",
-        "timestamp": "2014-07-20T08:01-00:00",
+        "timestamp": "2014-07-20T08:01.000-00:00",
         "transmission_id": "65832150921904138"
       },
       {
@@ -530,7 +530,7 @@ Perform a filtered search for message event data. The response is sorted by desc
         "rcpt_to": "recipient@example.com",
         "template_id": "templ-1234",
         "template_version": "1",
-        "timestamp": "2014-07-20T08:01-00:00",
+        "timestamp": "2014-07-20T08:01.000-00:00",
         "transmission_id": "65832150921904138",
         "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.118 Safari/537.36"
       }
