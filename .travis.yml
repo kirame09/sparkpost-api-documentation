@@ -7,7 +7,8 @@ install:
 before_script:
 - grunt test
 script:
-- bash bin/copy-to-dev-hub.sh
+- bash bin/copy-to-dev-hub.sh && grunt syncSearch --algoliaAppID=$ALGOLIA_APP_ID --algoliaIndexName=APIDocsProd
+  --algoliaAPIKey=$ALGOLIA_API_KEY
 branches:
   only:
   - master
@@ -20,6 +21,8 @@ env:
   - secure: J2Qyzd0EO28+JErmdGH1SpM+o/kZ9pFGm/hajq29K2d8ggbdvou9SbbXzMgrxy6QtqXkvPo2Wy4ADgT/HCl/fT1bDkFm5Il5IYWp20TWsJo/VHcZ0jrBZgTA4EdEc6KwA9NYMPBgOtSga/wZeyOvJjhp4yuOgFrvgQaJcagQX3M=
   - secure: TlwIlkEySp+kzv1usOWAbZlLLKd+nH4JjZTJcx2ND4eqSnHtQ6LWeyqK78mcBDe/Ci72pBwLf6uLwVu9hVqwk35LYIux16Bct1/xJYcttlZtfMLz5QDVNpuCzr6gfb52CUCvAIuqUW1HBvLoYWPvgoiUfIru4WzVcvf6xZLY1kA=
   - secure: NOFYquSM5nlppvCsU9pE7njNVfCvbOt959yRbgowg7s70bQIsek1iozHHPQIfMKDE7MD6ZSt96kJtbflY8GbXy4hspdXz546F+fFqd52TUUl8izuD93jGUqUAioX6rmN4kWfog3G8yMzjPWrORV9VW3sMD36CO+pEfkj7vs9Y10=
+  - secure: Y8ovZI48mx1OI+dCiIWNW0/sGtlR1DiL0QKe2jrHccNr/L8VssAUp0rTfKuyId2IsuV/0JDD6J/W/2nlqbkJ86EQ4212VGiNyIdcRK7jbzphDQsX4bq8Eb9cE3i1k/Q1PRVDziKNYhA2v+YmvgeUgTeEI/mB4qufTk/FZlOrGVQ=
+  - secure: OHZjGlUScS/O4CadFQQIZ3Gh2cJxt76UEXRsSXzxGxBxOViHBoc9JenK2CkpNSpEUWEsyIt8BJ6dbIbT8U8HYBcmT3DY0HdtUN/QAv/uwRhXdIhbanaLLD6u+GgyBYQlkUShvdSSYhN9dIPpsPw0f3KUt3nzWhlf0DXhjFL1f/s=
 addons:
   apt:
     sources:
