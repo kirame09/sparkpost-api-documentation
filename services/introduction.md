@@ -86,7 +86,6 @@ The SMTP relay optionally supports advanced API features using the [SMTP API](sm
 ## Rate Limiting
 Note: To prevent abuse, our servers enforce request rate limiting, which may trigger responses with HTTP status code 429. If you use the sandbox domain (sparkpostbox.com) for testing you are limited to 50 emails.
 
-To learn more about rate limiting see our [support article](https://support.sparkpost.com/customer/portal/articles/2030894)
 
 ## Errors
 
