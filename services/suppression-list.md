@@ -15,6 +15,8 @@ Transactional messages are single recipient messages that are used operationally
 
 In addition to the customer-specific exclusion list, Message Systems maintains a global suppression list across all customers.
 
+**Note: SparkPost supports a suppression list of up to 1,000,000 entries. It is therefore a good idea to periodically update your own database with recent suppressions and then purge the list in SparkPost. If you use the [SparkPost recipient list capability](recipient-lists), your lists should also be maintained in a similar manner.**
+
 ## Using Postman
 
 If you use [Postman](https://www.getpostman.com/) you can click the following button to import the SparkPost API as a collection:
