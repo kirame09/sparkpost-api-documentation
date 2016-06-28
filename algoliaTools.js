@@ -49,7 +49,7 @@ function cleanHeading(heading) {
 // Split markdown content into heading/content pairs
 function chunkMarkdown(markdown) {
   let lines = markdown.split(/\n/).map((line, lidx) => ({line: line, lineidx: lidx}));
-  let headings = lines.filter(line => line.line.match(/\s*#+/));
+  let headings = lines.filter(line => line.line.match(/^\s*#+/));
   return headings.map((heading, hidx) => ({
     heading: cleanHeading(heading.line),
     content: lines.slice(heading.lineidx+1, hidx < headings.length-1 ? headings[hidx+1].lineidx : lines.length)
