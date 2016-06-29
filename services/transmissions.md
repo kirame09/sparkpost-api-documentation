@@ -132,8 +132,6 @@ Use the _options.start_time_ attribute to delay generation of messages.  The sch
 
 You can create a transmission in a number of ways. In all cases, you can use the **num_rcpt_errors** parameter to limit the number of recipient errors returned.
 
-**Note:** The "return_path" in the POST request body applies to SparkPost Elite only.
-
 **Note:** Sending limits apply to SparkPost only. When a transmission is created in SparkPost, the number of messages in the transmission is compared to the sending limit of your account. If the transmission will cause you to exceed your sending limit, the entire transmission results in an error and no messages are sent.  Note that no messages will be sent for the given transmission, regardless of the number of messages that caused you to exceed your sending limit. In this case, the Transmission API will return an HTTP 420 error code with an error detailing whether you would exceed your hourly, daily, or sandbox sending limit.
 
 #### Using Inline Email Part Content
@@ -176,24 +174,29 @@ Once message generation has been initiated, all messages in the transmission wil
         ```
         {
           "options": {
+          	"start_time": "now",
             "open_tracking": true,
-            "click_tracking": true
+            "click_tracking": true,
+            "transactional": false,
+            "sandbox": false,
+            "ip_pool": "sp_shared",
+            "inline_css": false
           },
-
+		  "description": "Christmas Campaign Email",
           "campaign_id": "christmas_campaign",
-          "return_path": "bounces-christmas-campaign@flintstone.com",
 
           "metadata": {
-            "user_type": "students"
+            "user_type": "students",
+            "education_level": "college"
           },
 
           "substitution_data": {
-            "sender": "Big Store Team"
+            "sender": "Big Store Team",
+            "holiday_name": "Christmas"
           },
 
           "recipients": [
             {
-              "return_path": "123@bounces.flintstone.com",
               "address": {
                 "email": "wilma@flintstone.com",
                 "name": "Wilma Flintstone"
@@ -205,10 +208,12 @@ Once message generation has been initiated, all messages in the transmission wil
                 "flintstone"
               ],
               "metadata": {
+                "age": "24",
                 "place": "Bedrock"
               },
               "substitution_data": {
-                "customer_type": "Platinum"
+                "customer_type": "Platinum",
+                "year": "Freshman"
               }
             }
           ],
@@ -265,63 +270,77 @@ Once message generation has been initiated, all messages in the transmission wil
             Authorization: 14ac5499cfdd2bb2859e4476d2e5b1d2bad079bf
 
   + Body
+		{
+          "options": {
+          	"start_time": "now",
+            "open_tracking": true,
+            "click_tracking": true,
+            "transactional": false,
+            "sandbox": false,
+            "ip_pool": "",
+            "inline_css": false
+          },
+		  "description": "Christmas Campaign Email",
+          "campaign_id": "christmas_campaign",
 
+          "metadata": {
+            "user_type": "students",
+            "education_level": "college"
+          },
+
+          "substitution_data": {
+            "sender": "Big Store Team",
+            "holiday_name": "Christmas"
+          },
+
+          "recipients": [
             {
-              "options": {
-                "open_tracking": true,
-                "click_tracking": true
+              "address": {
+                "email": "wilma@flintstone.com",
+                "name": "Wilma Flintstone"
               },
-              "campaign_id": "christmas_campaign",
-              "return_path": "bounces-christmas-campaign@flintstone.com",
+              "tags": [
+                "greeting",
+                "prehistoric",
+                "fred",
+                "flintstone"
+              ],
               "metadata": {
-                "user_type": "students"
+                "age": "24",
+                "place": "Bedrock"
               },
               "substitution_data": {
-                "sender": "Big Store Team"
+              	"first_name": "Wilma",
+                "customer_type": "Platinum",
+                "year": "Freshman"
+              }
+            },
+            {
+              "address": {
+                "email": "abc@flintstone.com",
+                "name": "Fred Flintstone"
               },
-              "recipients": [
-                {
-                  "return_path": "123@bounces.flintstone.com",
-                  "address": {
-                    "email": "wilma@flintstone.com",
-                    "name": "Wilma Flintstone"
-                  },
-                  "tags": [
-                    "greeting",
-                    "prehistoric",
-                    "fred",
-                    "flintstone"
-                  ],
-                  "metadata": {
-                    "place": "Bedrock"
-                  },
-                  "substitution_data": {
-                    "name": "Will Smith"
-                  }
-                },
-                {
-                  "address": {
-                    "email": "abc@flintstone.com",
-                    "name": "Fred Fintstone"
-                  },
-                  "tags": [
-                    "greeting",
-                    "prehistoric",
-                    "fred",
-                    "flintstone"
-                  ],
-                  "metadata": {
-                    "place": "MD"
-                  },
-                  "substitution_data": {
-                    "name": "Fred"
-                  }
-                }
+              "tags": [
+                "greeting",
+                "prehistoric",
+                "fred",
+                "flintstone"
               ],
-              "content": {
-                "email_rfc822": "Content-Type: text\/plain\r\nTo: \"{{address.name}}\" <{{address.email}}>\r\n\r\n Hi {{name}} \nSave big this Christmas in your area {{place}}! \nClick http://www.mysite.com and get huge discount\n Hurry, this offer is only to {{user_type}}\n {{sender}}\r\n"
+              "metadata": {
+                "age": "33",
+                "place": "NY"
+              },
+              "substitution_data": {
+              	"first_name": "Fred",
+                "customer_type": "Sliver",
+                "year": "Senior"
               }
             }
+          ],
+          "content": {
+            "email_rfc822": "Content-Type: text\/plain\r\nTo: \"{{address.name}}\" <{{address.email}}>\r\n\r\n Hi {{first_name}} \nSave big this Christmas in your area {{place}}! \nClick http://www.mysite.com and get huge discount\n Hurry, this offer is only to {{customer_type}}\n {{sender}}\r\n"
+          }
+        }
 
 + Response 200 (application/json)
 
@@ -358,7 +377,6 @@ Once message generation has been initiated, all messages in the transmission wil
 
             {
                 "campaign_id": "christmas_campaign",
-                "return_path": "bounces-christmas-campaign@flintstone.com",
 
                 "recipients": {
                   "list_id": "christmas_sales_2013"
@@ -424,18 +442,17 @@ Once message generation has been initiated, all messages in the transmission wil
                 "use_draft_template": false
               },
 
-              "return_path": "bounces-christmas-campaign@flintstone.com",
-
               "metadata": {
-                "user_type": "students"
+                "user_type": "students",
+                "age_group": "18-35"
               },
               "substitution_data": {
-                "subkey": "subvalue"
+                "status": "shopping",
+                "holiday": "Thanksgiving"
               },
 
               "recipients": [
                 {
-                  "return_path": "123@bounces.flintstone.com",
                   "address": {
                     "email": "wilma@flintstone.com",
                     "name": "Wilma Flintstone"
@@ -447,14 +464,15 @@ Once message generation has been initiated, all messages in the transmission wil
                     "flintstone"
                   ],
                   "metadata": {
+                  	"age": "24",
                     "place": "Bedrock"
                   },
                   "substitution_data": {
-                    "subrcptkey": "subrcptvalue"
+                    "first_name": "Wilma",
+                    "last_name": "Flintstone"
                   }
                 },
                 {
-                  "return_path": "456@bounces.flintstone.com",
                   "address": {
                     "email": "abc@flintstone.com"
                   },
@@ -465,6 +483,7 @@ Once message generation has been initiated, all messages in the transmission wil
                     "flintstone"
                   ],
                   "metadata": {
+					"age": "33",
                     "place": "MD"
                   }
                 }
@@ -588,7 +607,6 @@ Once message generation has been initiated, all messages in the transmission wil
             {
                 "name" : "Fall Sale",
                 "campaign_id": "fall",
-                "return_path": "deals@company.com",
 
                 "options": {
                   "start_time" : "2015-10-11T08:00:00-04:00",
@@ -728,8 +746,6 @@ Retrieve the details about a transmission by specifying its ID in the URI path.
 
 The response for a transmission using an inline template will include "template_id":"inline".  Inline templates cannot be specifically queried.
 
-**Note:** The "return_path" is returned in the response for SparkPost Elite only.
-
 + Parameters
     + id (required, number, `11714265276872`) ... ID of the transmission
 
@@ -756,7 +772,6 @@ The response for a transmission using an inline template will include "template_
                 "template_id": "Bob's template",
                 "use_draft_template": false
               },
-              "return_path": "fred@flintstone.com",
               "rcpt_list_chunk_size": 100,
               "rcpt_list_total_chunks": 1,
               "num_rcpts": 10,
@@ -766,7 +781,7 @@ The response for a transmission using an inline template will include "template_
               "generation_end_time": "2014-05-22T15:13:00+00:00",
               "substitution_data": "",
               "metadata": {
-                "key1": "value1"
+                "is_snowing": "yes"
               },
               "options": {
                 "open_tracking": "",
@@ -903,7 +918,7 @@ The example response shows a query on _campaign_id=thanksgiving_, with **templat
 
 + Parameters
   + campaign_id (optional, string,`thanksgiving`) ... ID of the campaign used by the transmissions
-  + template_id (optional, string,`thanksgiving_template`) ... ID of the template used by the transmissions
+  + template_id (optional, string, `thanksgiving-template`) ... ID of the template used by the transmissions
 
 + Request
 
@@ -939,7 +954,7 @@ The example response shows a query on _campaign_id=thanksgiving_, with **templat
             },
             {
               "content" : {
-                "template_id": "thanksgiving_template"
+                "template_id": "thanksgiving-template"
               },
               "id": "11713048079237202",
               "campaign_id": "thanksgiving",

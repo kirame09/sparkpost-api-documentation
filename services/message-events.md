@@ -206,20 +206,20 @@ Perform a filtered search for message event data. The response is sorted by desc
 
 + Parameters
     + bounce_classes (optional, number, `1`) ... delimited list of bounce classification codes to search. (See [Bounce Classification Codes.](https://support.sparkpost.com/customer/portal/articles/1929896))
-    + campaign_ids (optional, string, `Example Campaign Name`) ... delimited list of campaign ID's to search (i.e. campaign_id used during creation of a transmission).
-    + delimiter = `,` (optional, string, `:`) ... Specifies the delimiter for query parameter lists
+    + campaign_ids (optional, string, `Example Campaign Name`) ... delimited list of campaign ID's to search (i.e. the campaign id used during creation of a transmission).
+    + delimiter = `,` (optional, string, `,`) ... Specifies the delimiter for query parameter lists
     + events (optional, list, `delivery, injection, bounce, delay, policy_rejection, out_of_band, open, click, generation_failure, generation_rejection, spam_complaint, list_unsubscribe, link_unsubscribe`) ... delimited list of event types to search. Defaults to all event types.
-    + friendly_froms (optional, list, `sender@mail.example.com`) ... delimited list of friendly_froms to search.
+    + friendly_froms (optional, list, `sender@mail.example.com`) ... delimited list of friendly from emails to search.
     + from = `One hour ago` (optional, datetime, `2014-07-20T08:00`) ... Datetime in format of YYYY-MM-DDTHH:MM.
     + message_ids (optional, list, `0e0d94b7-9085-4e3c-ab30-e3f2cd9c273e`) ... delimited list of message ID's to search.
-    + page = `1` (optional, number, `25`) ... The results page number to return. Used with per_page for paging through results.
-    + per_page = `1000` (optional, number, `100`) ... Number of results to return per page. Must be between 1 and 10,000 (inclusive).
+    + page = `1` (optional, number, `1`) ... The results page number to return. Used with per_page for paging through results.
+    + per_page = `1000` (optional, number, `1000`) ... Number of results to return per page. Must be between 1 and 10,000 (inclusive).
     + reason (optional, string, `bounce`) ... Bounce/failure/rejection reason that will be matched using a wildcard (e.g., %reason%).
     + recipients (optional, list, `recipient@example.com`) ... delimited list of recipients to search.
     + subaccounts (optional, list, `101`) ... delimited list of subaccount ID's to search.
 
     + template_ids (optional, list, `templ-1234`) ... delimited list of template ID's to search.
-    + timezone =`UTC` (optional, string, `America/New_York`) ... Standard timezone identification string.
+    + timezone =`UTC` (optional, string, `UTC`) ... Standard timezone identification string.
     + to = `now` (optional, datetime, `2014-07-20T09:00`) ... Datetime in format of YYYY-MM-DDTHH:MM.
     + transmission_ids (optional, list, `65832150921904138`) ... delimited list of transmission ID's to search (i.e. id generated during creation of a transmission).
 

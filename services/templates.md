@@ -181,12 +181,11 @@ Fully formed email_rfc822 content may be provided instead of the "text", "html",
           "id" : "summer_sale",
           "name" : "Summer Sale!",
           "published" : true,
-
+          "description": "Template for a Summer Sale!"
           "options": {
             "open_tracking" : false,
             "click_tracking" : true
           },
-
           "content": {
             "from": {
               "email": "marketing@bounces.company.example",

@@ -77,7 +77,7 @@ Create a relay webhook by providing a **relay webhooks object** as the POST requ
             {
               "name": "Replies Webhook",
               "target": "https://webhooks.customer.example/replies",
-              "auth_token": "",
+              "auth_token": "5ebe2294ecd0e0f08eab7690d2a6ee69",
               "match":
                 {
                   "protocol": "SMTP",
@@ -193,7 +193,7 @@ List all your relay webhooks.
                 "id": "12013026328707075",
                 "name": "Replies Webhook",
                 "target": "https://webhooks.customer.example/replies",
-                "auth_token": "",
+                "auth_token": "5ebe2294ecd0e0f08eab7690d2a6ee69",
                 "match":
                   {
                     "protocol": "SMTP",
@@ -244,7 +244,7 @@ Retrieve a specific relay webhook by specifying the webhook ID in the URI path.
             "results": {
               "name": "Replies Webhook",
               "target": "https://webhooks.customer.example/replies",
-              "auth_token": "",
+              "auth_token": "5ebe2294ecd0e0f08eab7690d2a6ee69",
               "match": {
                   "protocol": "SMTP",
                   "domain": "email.example.com"
@@ -301,7 +301,13 @@ Update a relay webhook by specifying the webhook ID in the URI path.
         ```
             {
               "name": "New Replies Webhook",
-              "target": "https://webhook.customer.example/replies"
+              "target": "https://webhook.customer.example/replies",
+              "auth_token": "A different auth token",
+              "match":
+                {
+                  "protocol": "SMTP",
+                  "domain": "email.a-different-domain.com"
+                }
             }
         ```
 

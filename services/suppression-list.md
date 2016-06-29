@@ -168,7 +168,7 @@ If the recipient is not in the customer-specific exclusion list, an HTTP status 
 In addition to the list entry attributes, the response body also includes "created" and "updated" timestamps.
 
 + Parameters
-  + recipient_email (required, string, `rcpt_1@example.com`) ... Recipient email address
+  + recipient_email (required, string, `rcpt@example.com`) ... Recipient email address
 
 
 + Request
@@ -211,7 +211,7 @@ Delete a recipient from the list by specifying the recipient's email address in 
 If the recipient is not in the customer-specific exclusion list, an HTTP status of 404 is returned. If the recipient is in the list, an HTTP status of 204 is returned indicating a successful deletion.
 
 + Parameters
-    + recipient_email (required, string, `rcpt_1@example.com`) ... Recipient email address
+    + recipient_email (required, string, `rcpt@example.com`) ... Recipient email address
 
 
 + Request

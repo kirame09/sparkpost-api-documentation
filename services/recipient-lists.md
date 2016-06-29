@@ -91,8 +91,6 @@ recipient list "id" is not provided in the POST request body, one will be genera
 in the results body.  Use the **num_rcpt_errors** parameter to limit the number of recipient errors
 returned.
 
-**Note:** The "return_path" in the POST request body applies to SparkPost Elite only.
-
 + Parameters
   + num_rcpt_errors (optional, number, `3`) ... Maximum number of recipient errors that this call can return, otherwise all validation errors are returned.
 
@@ -114,53 +112,62 @@ returned.
           },
           "recipients": [
               {
-                  "return_path": "return-path-wilmaflin@tstone.com",
                   "address": {
                       "email": "wilmaflin@yahoo.com",
                       "name": "Wilma"
-                  },
-                  "metadata": {
-                      "place": "Bedrock"
-                  },
-                  "substitution_data": {
-                      "subrcptkey": "subrcptvalue"
                   },
                   "tags": [
                       "greeting",
                       "prehistoric",
                       "fred",
                       "flintstone"
-                  ]
+                  ],
+                  "metadata": {
+                      "age": "24",
+                      "place": "Bedrock"
+                  },
+                  "substitution_data": {
+                      "favorite_color": "SparkPost Orange", 
+                      "job": "Software Engineer"
+                  }
               },
               {
-                  "return_path": "return-path-abc@tstone.com",
                   "address": {
                       "email": "abc@flintstone.com",
                       "name": "ABC"
                   },
-                  "metadata": {
-                      "place": "MD"
-                  },
                   "tags": [
                       "driver",
-                      "computer science",
-                      "fred",
                       "flintstone"
-                  ]
+                  ],
+                  "metadata": {
+                      "age": "52",
+                      "place": "MD"
+                  },
+                  "substitution_data": {
+                      "favorite_color": "Sky Blue", 
+                      "job": "Driver"
+                  }
               },
               {
-                  "return_path": "return-path-def@tstone.com",
-                   "address": {
+                  "address": {
                       "email": "fred.jones@flintstone.com",
                       "name": "Grad Student Office",
                       "header_to": "grad-student-office@flintstone.com"
                   },
                   "tags": [
                       "driver",
-                      "computer science",
                       "fred",
                       "flintstone"
-                  ]
+                  ],
+                  "metadata": {
+                      "age": "33",
+                      "place": "NY"
+                  },
+                  "substitution_data": {
+                      "favorite_color": "Bright Green"
+                      "job": "Firefighter"
+                  }
               }
           ]
         }
@@ -236,8 +243,6 @@ returned.
 Retrieve details about a specified recipient list by specifying its id in the URI path.  To
 retrieve the recipients contained in a list, the list must be specified and the **show_recipients** parameter must be set to true.
 
-**Note:** The "return_path" in the POST request body applies to SparkPost Elite only.
-
 + Parameters
     + id (required, string, `unique_id_4_graduate_students`) ... Identifier of the recipient list
     + show_recipients (optional, boolean, `true`) ... If set to true, return attributes for all recipients.
@@ -264,14 +269,13 @@ retrieve the recipients contained in a list, the list must be specified and the 
                     "internal_id": 112,
                     "list_group_id": 12321
                 },
-                "total_accepted_recipients": 2,
+                "total_accepted_recipients": 3,
                 "recipients": [
                     {
                         "address": {
                             "email": "wilmaflin@yahoo.com",
                             "name": "Wilma"
                         },
-                        "return_path": "return-path-wilmaflin@tstone.com",
                         "tags": [
                             "greeting",
                             "prehistoric",
@@ -279,10 +283,12 @@ retrieve the recipients contained in a list, the list must be specified and the 
                             "flintstone"
                         ],
                         "metadata": {
+                            "age": "24",
                             "place": "Bedrock"
                         },
                         "substitution_data": {
-                            "subrcptkey": "subrcptvalue"
+                            "favorite_color": "SparkPost Orange", 
+                            "job": "Software Engineer"
                         }
                     },
                     {
@@ -290,15 +296,37 @@ retrieve the recipients contained in a list, the list must be specified and the 
                             "email": "abc@flintstone.com",
                             "name": "ABC"
                         },
-                        "return_path": "return-path-abc@tstone.com",
                         "tags": [
                             "driver",
-                            "computer science",
+                            "flintstone"
+                        ],
+                        "metadata": {
+                            "age": "52",
+                            "place": "MD"
+                        },
+                        "substitution_data": {
+                            "favorite_color": "Sky Blue", 
+                            "job": "Driver"
+                        }
+                    },
+                    {
+                        "address": {
+                            "email": "fred.jones@flintstone.com",
+                            "name": "Grad Student Office",
+                            "header_to": "grad-student-office@flintstone.com"
+                        },
+                        "tags": [
+                            "driver",
                             "fred",
                             "flintstone"
                         ],
                         "metadata": {
-                            "place": "MD"
+                            "age": "33",
+                            "place": "NY"
+                        },
+                        "substitution_data": {
+                            "favorite_color": "Bright Green"
+                            "job": "Firefighter"
                         }
                     }
                 ]
@@ -351,7 +379,7 @@ results.  To retrieve recipient details, use the RETRIEVE API for a specified re
                     "internal_id": 112,
                     "list_group_id": 12321
                 },
-                "total_accepted_recipients": 2
+                "total_accepted_recipients": 3
             },
             {
                 "id": "unique_id_4_undergraduates",
@@ -420,31 +448,38 @@ number of rejected recipients will only be returned if a "recipients" array is p
                           "email": "wilmaflin@yahoo.com",
                           "name": "Wilma"
                       },
-                      "metadata": {
-                          "place": "Bedrock"
-                      },
-                      "substitution_data": {
-                          "subrcptkey": "subrcptvalue"
-                      },
                       "tags": [
                           "greeting",
                           "prehistoric",
                           "fred",
                           "flintstone"
-                      ]
+                      ],
+                      "metadata": {
+                          "age": "24",
+                          "place": "Bedrock"
+                      },
+                      "substitution_data": {
+                          "favorite_color": "SparkPost Orange", 
+                          "job": "Software Engineer"
+                      }
                   },
                   {
                       "address": {
-                          "email": "fred.jones@flintstone.com",
-                          "name": "Grad Student Office",
-                          "header_to": "grad-student-office@flintstone.com"
+                          "email": "abc@flintstone.com",
+                          "name": "ABC"
                       },
                       "tags": [
                           "driver",
-                          "computer science",
-                          "fred",
                           "flintstone"
-                      ]
+                      ],
+                      "metadata": {
+                          "age": "52",
+                          "place": "MD"
+                      },
+                      "substitution_data": {
+                          "favorite_color": "Sky Blue", 
+                          "job": "Driver"
+                      }
                   }
               ]
           }

@@ -14,9 +14,38 @@ tags, IP pool, Cc, Bcc, and archive recipient lists and disable open and/or clic
 options as JSON strings, as the value of the header field is a JSON object that specifies the relevant options:
 
 ```
-X-MSYS-API: {"options" : {"open_tracking" : false, "click_tracking" : true},
-   "metadata" : {"key" : "value"}, "tags" : ["cat", "dog"], "campaign_id" :
-   "my_campaign"}
+X-MSYS-API: {
+  "campaign_id": "my_campaign",
+  "metadata" : {
+    "has_pets": true,
+    "pet_name": "Spot"
+  },
+  "cc": [
+    { "email": "cc_recip_1@gmail.com", "name": "CC 1" },
+    { "email": "cc_recip_2@gmail.com", "name": "CC 2" }
+  ],
+  "bcc": [
+    { "email": "bcc_recip_1@gmail.com", "name": "BCC 1" }
+    { "email": "bcc_recip_2@gmail.com", "name": "BCC 2" }
+  ],
+  "archive": [
+    { "email": "archive_recip_1@gmail.com", "name": "Archive 1" }
+    { "email": "archive_recip_2@gmail.com", "name": "Archive 2" }
+  ],
+  "tags": [
+    "cat",
+    "dog"
+  ],
+  "options" : {
+    "open_tracking": false,
+    "click_tracking": false,
+    "transactional": false,
+    "sandbox": false,
+    "skip_suppression": false,
+    "ip_pool": "sp_shared",
+    "inline_css": false
+  }
+}
 ```
 
 Click and open tracking are disabled by default in SMTP messages sent through SparkPost.  To enable click and open tracking in SMTP messages, add the X-MSYS-API header as follows:
@@ -116,8 +145,8 @@ of a folded header:
 
 ```
 X-MSYS-API: {"options" : {"open_tracking" : false, "click_tracking" : true},
-   "metadata" : {"key" : "value"}, "tags" : ["cat", "dog"], "campaign_id" :
-   "my_campaign"}
+   "metadata" : {"has_pets" : true, "pet_name": "Spot" }, "tags" : ["cat",
+   "dog"], "campaign_id" : "my_campaign"}
 ```
 
 Be aware that when the header is unfolded on the receiving system, as per rfc2822 (https://www.ietf.org/rfc/rfc2822.txt),

@@ -156,7 +156,6 @@ As described in "Webhooks Object Properties", webhook creation entails a test PO
                 "grant_type": "client_credentials"
             }
           },
-          "auth_token": "",
           "events": [
             "delivery",
             "injection",
