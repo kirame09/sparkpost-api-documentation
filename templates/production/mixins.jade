@@ -62,17 +62,16 @@ mixin Parameters(params)
                                           if param.values.length > 1 && idx < param.values.length-1
                                           | ,
 
-mixin RequestResponse(request, response, action)
-    if request.name
-      h3 Example: #{request.name}
-    else
-      h3 Example
+mixin Request(request, action)
     if request.description
         .markdown
             .description!= self.markdown(request.description)
     .panel(class='request panel-default')
         .panel-heading
-            h4.panel-title Request
+            if request.name
+                h4.panel-title Request: #{request.name}
+            else
+                h4.panel-title Request
         .panel-body
             p.uri 
                 code
@@ -80,16 +79,18 @@ mixin RequestResponse(request, response, action)
                     != self.baseURI + action.colorizedUriTemplate
             +Headers('Request Headers', request)
             +Code(request.body)
-    if response.body
-        .panel(class='response panel-default')
-            .panel-heading
-                h4.panel-title Response (HTTP status code: #{response.name})
-            .panel-body
+
+mixin Response(response, action)
+    .panel(class='response panel-default')
+        .panel-heading
+            h4.panel-title Response (HTTP status code: #{response.name})
+        .panel-body
+            if response.body
                 +Headers('Response Headers', response)
                 +Code(response.body)
-    else
-        .response
-            h4 Response: (HTTP status code: #{response.name})
+            else
+                | Empty response body
+
 
 mixin Headers(title, reqres)
     // Weed out the noisy obvious headers
@@ -124,10 +125,13 @@ mixin Code(codestr)
       pre!= self.highlight(codestr, 'json')
 
 mixin Examples(resourceGroup, resource, action)
+    h3 Examples
     each example in action.examples
         each req, idx in example.requests
-            +RequestResponse(req, example.responses[idx], action)
-            hr
+            +Request(req, action)
+        each resp, idx in example.responses
+            +Response(resp, action)
+    hr
 
 mixin Content()
     //- Page header and API description
