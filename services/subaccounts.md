@@ -19,6 +19,8 @@ The following APIs have subaccount support:
 * [Transmissions](transmissions.html)
 * [Tracking Domains](tracking-domains.html)
 
+**Please note that all subaccount-level transmissions must use inline recipients and content. Recipient lists and stored templates do not support subaccounts.**
+
 ### Terminology
 * Master Account - This refers to a Service Provider and their data
 * Subaccounts - This refers to a Service Provider's customer(s), and that customer's data

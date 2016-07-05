@@ -51,8 +51,8 @@ mixin Parameters(params)
                            strong.param-annotation (required) &nbsp;
                         != self.markdown(param.description)
                         if param.example
-                            | Example:
-                            code #{param.name}=#{param.example}
+                            em
+                              | Example: #{param.example}
                         if param.values.length
                             .param-value-list
                                 | Values: 
