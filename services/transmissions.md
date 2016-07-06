@@ -252,7 +252,8 @@ Once message generation has been initiated, all messages in the transmission wil
         ```
 
 + Response 400 (application/json)
-
+    
+        ```
         {
           "errors" : [
             {
@@ -262,6 +263,7 @@ Once message generation has been initiated, all messages in the transmission wil
             }
           ]
         }
+        ```
 
 + Request Create Transmission with Inline RFC822 Content (application/json)
 
@@ -365,6 +367,88 @@ Once message generation has been initiated, all messages in the transmission wil
             }
           ]
         }
+        
++ Request Create Transmission Using CC Header (application/json)
+
+    + Headers
+
+            Authorization: 14ac5499cfdd2bb2859e4476d2e5b1d2bad079bf
+
+    + Body
+
+        ```
+        {
+          "options": {
+          	"start_time": "now",
+            "open_tracking": true,
+            "click_tracking": true,
+            "transactional": false,
+            "sandbox": false,
+            "ip_pool": "sp_shared",
+            "inline_css": false
+          },
+		  "description": "Christmas Campaign Email",
+          "campaign_id": "christmas_campaign",
+
+          "recipients": [
+            {
+              "address": {
+                "email": "wilma@flintstone.com"
+              }
+            },
+            {
+              "address": {
+                "email": "pebbles@flintstone.com",
+                "header_to": "wilma@flintstone.com"
+              }
+            }
+          ],
+          "content": {
+            "from": {
+              "name": "Fred Flintstone",
+              "email": "fred@flintstone.com"
+            },
+            "subject": "Big Christmas savings!",
+            "reply_to": "Christmas Sales <sales@flintstone.com>",
+            "headers": {
+              "CC": "pebbles@flintstone.com"
+            },
+            "text": "Hi, \nSave big this Christmas in your area! \nClick http://www.mysite.com and get huge discount!",
+          }
+        }
+        ```
+
++ Response 200 (application/json)
+
+    + Headers
+
+            Authorization: 14ac5499cfdd2bb2859e4476d2e5b1d2bad079bf
+
+    + Body
+
+        ```
+        {
+          "results": {
+            "total_rejected_recipients": 0,
+            "total_accepted_recipients": 2,
+            "id": "11668787484950529"
+          }
+        }
+        ```
+
++ Response 400 (application/json)
+    
+        ```
+        {
+          "errors" : [
+            {
+              "description" : "Unconfigured or unverified sending domain.",
+              "code" : "7001",
+              "message" : "Invalid domain"
+            }
+          ]
+        }
+        ```
 
 
 + Request Create Transmission with Stored Recipient List (application/json)
