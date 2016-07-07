@@ -90,7 +90,11 @@ To use a DKIM Signing Domain Identifier different to the Sending Domain, set the
     + Body
 
            {
-               "domain": "example1.com"
+               "domain": "example1.com",
+               "tracking_domain": "click.example1.com",
+               "generate_dkim": true,
+               "shared_with_subaccounts": false
+
            }
 
 + Response 200 (application/json)

@@ -634,8 +634,6 @@ Attempting to insert a chunk of plain text:
 
 Finally, as a more realistic example, render_dynamic_content can also be used inside an 'each' loop. Full transmission json examples follow.
 
-**Note:** The following example applies to SparkPost only.
-
 ```
 {
   "recipients": [
@@ -676,52 +674,6 @@ Finally, as a more realistic example, render_dynamic_content can also be used in
     "from": "test@example.com",
     "subject": "offers"
   }
-}
-```
-
-**Note:** The following example applies to SparkPost Elite only.
-
-```
-{
-  "recipients": [
-    {
-      "address": {
-        "email": "foo@example.com"
-      },
-      "substitution_data": {
-        "name": "The A-Team",
-        "offers": [ "offer2", "offer1" ]
-      }
-    },
-    {
-      "address": {
-        "email": "bar@example.com"
-      },
-      "substitution_data": {
-        "name": "Johnnie Rico",
-        "offers": [ "offer3" ]
-      }
-    }
-  ],
-  "substitution_data": {
-    "dynamic_html": {
-      "offer1": "<a href=\"http://t.com/offer/1?name={{name}}\">Premium-brand wirecutters</a>",
-      "offer2": "<a href=\"http://t.com/offer/2?name={{name}}\">Corks</a>",
-      "offer3": "<a href=\"http://t.com/offer/3?name={{name}}\">Super-effective bug spray</a>"
-    },
-    "dynamic_plain": {
-      "offer1": "Premium-brand wirecutters -- http://t.com/offer/1?name={{name}}",
-      "offer2": "Corks -- http://t.com/offer/2?name={{name}}",
-      "offer3": "Super-effective bug spray -- http://t.com/offer/3?name={{name}}"
-    }
-  }
-  "content": {
-    "text": "Today's special offers:\n\n{{each offers}}\n* {{render_dynamic_content(dynamic_plain[loop_var])}}\n{{end}}\n",
-    "html": "<p>Today's special offers</p><ul>\n{{each offers}}\n<li>{{render_dynamic_content(dynamic_html[loop_var])}}</li>\n{{end}}\n</ul>",
-    "from": "test@example.com",
-    "subject": "offers"
-  },
-  "return_path": "test@example.com"
 }
 ```
 

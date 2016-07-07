@@ -107,7 +107,9 @@ Subaccounts are allowed to send mail using the SMTP protocol or Transmissions AP
             {
               "name": "Sparkle Ponies",
               "key_label": "API Key for Sparkle Ponies Subaccount",
-              "key_grants": ["smtp/inject", "sending_domains/manage", "message_events/view", "suppression_lists/manage", "tracking_domains/view", "tracking_domains/manage"]
+              "key_grants": ["smtp/inject", "sending_domains/manage", "message_events/view", "suppression_lists/manage", "tracking_domains/view", "tracking_domains/manage"],
+              "key_valid_ips": [],
+              "ip_pool": ""
             }
 
 + Response 200 (application/json)
@@ -218,7 +220,8 @@ Update an existing subaccount's information. You can update the following inform
 
             {
               "name": "Hey Joe! Garage and Parts",
-              "status": "suspended"
+              "status": "suspended",
+              "ip_pool": ""
             }
 
 + Parameters
