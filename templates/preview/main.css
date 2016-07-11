@@ -1,0 +1,29 @@
+#menublock {
+  background-color: #333;
+  padding-top: 10px;
+}
+
+.heading a {
+  color: #fa6423;
+  padding-top: 10px;
+  padding-bottom: 5px;
+}
+
+h2 a.permalink, h3 a.permalink {
+  display: none;
+}
+
+.collapse-content a {
+  color: white;
+}
+
+.collapse-content ul li {
+  padding-bottom: 10px;
+  padding-left: 10px;
+}
+
+.collapse-content ul li ul li {
+  padding-top: 5px;
+  padding-bottom: 5px;
+
+}

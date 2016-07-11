@@ -1,3 +1,6 @@
+title: Recipient Lists
+description: Manage recipient lists, collections of recipients that can be used when sending messages.
+
 # Group Recipient Lists
 
 A recipient list is a collection of recipients that can be used in a transmission.  The Recipient
@@ -43,7 +46,7 @@ object, it is described with the following fields:
 |------------------------|:-:       |---------------------------------------|-------------|
 |email    |string       |Valid email address   |yes |
 |name |string |User-friendly name for the email address |no |
-|header_to|string       |Email address to display in the "To" header instead of _address.email_ (for BCC)|no |
+|header_to|string       |Email address to display in the "To" header instead of _address.email_ ([for CC and BCC](https://support.sparkpost.com/customer/en/portal/articles/2432290-using-cc-and-bcc-with-the-rest-api))|no|
 
 #### Multichannel Address attributes
 In anticipation of upcoming multichannel support we have added the _multichannel_addresses_ array. Each of its elements must be a JSON object described with the following fields. Currently, *only the first entry* in the array will be used.
@@ -51,11 +54,11 @@ In anticipation of upcoming multichannel support we have added the _multichannel
 | Field         | Type     | Description                           | Required  |Notes|
 |------------------------|:-:       |---------------------------------------|-------------|--------|
 |channel|string|The communication channel used to reach recipient|yes|Valid values are "email", "gcm", "apns". See Notes on channel below|
-|email    |string       |Valid email address   |required if channel is "email" |
+|email    |string       |Valid email address   |required if channel is "email" | |
 |name |string |User-friendly name for the email address |no |Used when channel is "email"|
 |header_to|string       |Email address to display in the "To" header instead of _address.email_ (for BCC)|no|Used when channel is "email"|
-|token|string|See Push Specific Attributes |required if channel is "gcm" or "apns"|
-|app_id|string|See Push Specific Attributes |required if channel is "gcm" or "apns"|
+|token|string|See Push Specific Attributes ( **Note:** SparkPost Elite only )|required if channel is "gcm" or "apns"||
+|app_id|string|See Push Specific Attributes ( **Note:** SparkPost Elite only )|required if channel is "gcm" or "apns"| ||
 ##### Notes on channel
 Communication channels other than email are currently only supported for inline recipient lists. Fields unrelated to the value of _channel_ are ignored. A field is considered unrelated if it is not required for that value of _channel_ unless mentioned otherwise in Notes
 
@@ -109,8 +112,6 @@ recipient list "id" is not provided in the POST request body, one will be genera
 in the results body.  Use the **num_rcpt_errors** parameter to limit the number of recipient errors
 returned.
 
-**Note:** The "return_path" in the POST request body applies to SparkPost Elite only.
-
 + Parameters
   + num_rcpt_errors (optional, number, `3`) ... Maximum number of recipient errors that this call can return, otherwise all validation errors are returned.
 
@@ -132,53 +133,62 @@ returned.
           },
           "recipients": [
               {
-                  "return_path": "return-path-wilmaflin@tstone.com",
                   "address": {
                       "email": "wilmaflin@yahoo.com",
                       "name": "Wilma"
-                  },
-                  "metadata": {
-                      "place": "Bedrock"
-                  },
-                  "substitution_data": {
-                      "subrcptkey": "subrcptvalue"
                   },
                   "tags": [
                       "greeting",
                       "prehistoric",
                       "fred",
                       "flintstone"
-                  ]
+                  ],
+                  "metadata": {
+                      "age": "24",
+                      "place": "Bedrock"
+                  },
+                  "substitution_data": {
+                      "favorite_color": "SparkPost Orange",
+                      "job": "Software Engineer"
+                  }
               },
               {
-                  "return_path": "return-path-abc@tstone.com",
                   "address": {
                       "email": "abc@flintstone.com",
                       "name": "ABC"
                   },
-                  "metadata": {
-                      "place": "MD"
-                  },
                   "tags": [
                       "driver",
-                      "computer science",
-                      "fred",
                       "flintstone"
-                  ]
+                  ],
+                  "metadata": {
+                      "age": "52",
+                      "place": "MD"
+                  },
+                  "substitution_data": {
+                      "favorite_color": "Sky Blue",
+                      "job": "Driver"
+                  }
               },
               {
-                  "return_path": "return-path-def@tstone.com",
-                   "address": {
+                  "address": {
                       "email": "fred.jones@flintstone.com",
                       "name": "Grad Student Office",
                       "header_to": "grad-student-office@flintstone.com"
                   },
                   "tags": [
                       "driver",
-                      "computer science",
                       "fred",
                       "flintstone"
-                  ]
+                  ],
+                  "metadata": {
+                      "age": "33",
+                      "place": "NY"
+                  },
+                  "substitution_data": {
+                      "favorite_color": "Bright Green"
+                      "job": "Firefighter"
+                  }
               }
           ]
         }
@@ -254,8 +264,6 @@ returned.
 Retrieve details about a specified recipient list by specifying its id in the URI path.  To
 retrieve the recipients contained in a list, the list must be specified and the **show_recipients** parameter must be set to true.
 
-**Note:** The "return_path" in the POST request body applies to SparkPost Elite only.
-
 + Parameters
     + id (required, string, `unique_id_4_graduate_students`) ... Identifier of the recipient list
     + show_recipients (optional, boolean, `true`) ... If set to true, return attributes for all recipients.
@@ -282,14 +290,13 @@ retrieve the recipients contained in a list, the list must be specified and the 
                     "internal_id": 112,
                     "list_group_id": 12321
                 },
-                "total_accepted_recipients": 2,
+                "total_accepted_recipients": 3,
                 "recipients": [
                     {
                         "address": {
                             "email": "wilmaflin@yahoo.com",
                             "name": "Wilma"
                         },
-                        "return_path": "return-path-wilmaflin@tstone.com",
                         "tags": [
                             "greeting",
                             "prehistoric",
@@ -297,10 +304,12 @@ retrieve the recipients contained in a list, the list must be specified and the 
                             "flintstone"
                         ],
                         "metadata": {
+                            "age": "24",
                             "place": "Bedrock"
                         },
                         "substitution_data": {
-                            "subrcptkey": "subrcptvalue"
+                            "favorite_color": "SparkPost Orange",
+                            "job": "Software Engineer"
                         }
                     },
                     {
@@ -308,15 +317,37 @@ retrieve the recipients contained in a list, the list must be specified and the 
                             "email": "abc@flintstone.com",
                             "name": "ABC"
                         },
-                        "return_path": "return-path-abc@tstone.com",
                         "tags": [
                             "driver",
-                            "computer science",
+                            "flintstone"
+                        ],
+                        "metadata": {
+                            "age": "52",
+                            "place": "MD"
+                        },
+                        "substitution_data": {
+                            "favorite_color": "Sky Blue",
+                            "job": "Driver"
+                        }
+                    },
+                    {
+                        "address": {
+                            "email": "fred.jones@flintstone.com",
+                            "name": "Grad Student Office",
+                            "header_to": "grad-student-office@flintstone.com"
+                        },
+                        "tags": [
+                            "driver",
                             "fred",
                             "flintstone"
                         ],
                         "metadata": {
-                            "place": "MD"
+                            "age": "33",
+                            "place": "NY"
+                        },
+                        "substitution_data": {
+                            "favorite_color": "Bright Green"
+                            "job": "Firefighter"
                         }
                     }
                 ]
@@ -369,7 +400,7 @@ results.  To retrieve recipient details, use the RETRIEVE API for a specified re
                     "internal_id": 112,
                     "list_group_id": 12321
                 },
-                "total_accepted_recipients": 2
+                "total_accepted_recipients": 3
             },
             {
                 "id": "unique_id_4_undergraduates",
@@ -438,31 +469,38 @@ number of rejected recipients will only be returned if a "recipients" array is p
                           "email": "wilmaflin@yahoo.com",
                           "name": "Wilma"
                       },
-                      "metadata": {
-                          "place": "Bedrock"
-                      },
-                      "substitution_data": {
-                          "subrcptkey": "subrcptvalue"
-                      },
                       "tags": [
                           "greeting",
                           "prehistoric",
                           "fred",
                           "flintstone"
-                      ]
+                      ],
+                      "metadata": {
+                          "age": "24",
+                          "place": "Bedrock"
+                      },
+                      "substitution_data": {
+                          "favorite_color": "SparkPost Orange",
+                          "job": "Software Engineer"
+                      }
                   },
                   {
                       "address": {
-                          "email": "fred.jones@flintstone.com",
-                          "name": "Grad Student Office",
-                          "header_to": "grad-student-office@flintstone.com"
+                          "email": "abc@flintstone.com",
+                          "name": "ABC"
                       },
                       "tags": [
                           "driver",
-                          "computer science",
-                          "fred",
                           "flintstone"
-                      ]
+                      ],
+                      "metadata": {
+                          "age": "52",
+                          "place": "MD"
+                      },
+                      "substitution_data": {
+                          "favorite_color": "Sky Blue",
+                          "job": "Driver"
+                      }
                   }
               ]
           }

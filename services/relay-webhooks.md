@@ -1,6 +1,11 @@
+title: Relay Webhooks
+description: Manage relay webhooks, a way to instruct SparkPost to accept inbound email on your behalf and forward it to you over HTTP.
+
 # Group Relay Webhooks
 
 **Note:** The Relay Webhooks API is available for SparkPost only.
+
+Relay Webhooks are a way to instruct SparkPost to accept inbound email on your behalf and forward it to you over HTTP for your own consumption.
 
 By configuring a relay webhook for a specified inbound domain, those inbound messages can be forwarded to a specified target over HTTP.  Before you create a relay webhook, be sure to first create an inbound domain that is properly configured. To create an inbound domain for your account, please use our Inbound Domains API. The Relay Webhooks API provides the means to create, list, retrieve, update, and delete a relay webhook.
 
@@ -26,12 +31,12 @@ If you use [Postman](https://www.getpostman.com/) you can click the following bu
 | protocol  | string | Inbound messaging protocol associated with this webhook | no - defaults to "SMTP" |                      |
 | domain    | string | Inbound domain associated with this webhook             | yes | To create an inbound domain for your account, please use the Inbound Domains API. |
 
-## Field Defintions
+## Field Definitions
 
 The following fields will be included in the JSON object posted to the relay webhooks target:
 
 | Field     | Type   | Description                                                 | Notes
-|-----------|--------|-----------------------------------------------------------------------|--------------|----------------------|
+|-----------|--------|-----------------------------------------------------------------------|--------------|
 | content   | object | Content that will be used to construct a relay message           | For a full description, see the Content Attributes. |
 | friendly_from | string | Email address used to compose the "From" header |
 | msg_from | string | SMTP envelope from |
@@ -53,7 +58,60 @@ Content for a relay webhook is described in a JSON object with the following fie
 | email_rfc822 | string | Raw MIME content for an email | If the Raw MIME content contains at least one non UTF-8 encoded character, the entire "email_rfc822" JSON value will be base64 encoded and the "email_rfc822_is_base64" JSON boolean value will be set to true |
 | email_rfc822_is_base64 | boolean | Whether or not the "email_rfc822" value is base64 encoded |
 
+### Example Payload
 
+Once registered, your relay webhook HTTP endpoint will receive inbound emails in the JSON form described above. Here is an example of the payload which your endpoint can expect to receive:
+
+```json
+[
+  {
+    "msys": {
+      "relay_message": {
+        "content": {
+          "email_rfc822": "Return-Path: <me@here.com>\r\nMIME-Version: 1.0\r\nFrom: me@here.com\r\nReceived: by 10.114.82.10 with HTTP; Mon, 4 Jul 2016 07:53:14 -0700 (PDT)\r\nDate: Mon, 4 Jul 2016 15:53:14 +0100\r\nMessage-ID: <484810298443-112311-xqxbby@mail.there.com>\r\nSubject: Relay webhooks rawk!\r\nTo: you@there.com\r\nContent-Type: multipart/alternative; boundary=deaddeaffeedf00fall45dbhail980dhypnot0ad\r\n\r\n--deaddeaffeedf00fall45dbhail980dhypnot0ad\r\nContent-Type: text/plain; charset=UTF-8\r\nHi there SparkPostians.\r\n\r\n--deaddeaffeedf00fall45dbhail980dhypnot0ad\r\nContent-Type: text/html; charset=UTF-8\r\n\r\n<p>Hi there <strong>SparkPostians</strong></p>\r\n\r\n--deaddeaffeedf00fall45dbhail980dhypnot0ad--\r\n",
+          "email_rfc822_is_base64": false,
+          "headers": [
+            {
+              "Return-Path": "<me@here.com>"
+            },
+            {
+              "MIME-Version": "1.0"
+            },
+            {
+              "From": "me@here.com"
+            },
+            {
+              "Received": "by 10.114.82.10 with HTTP; Mon, 4 Jul 2016 07:53:14 -0700 (PDT)"
+            },
+            {
+              "Date": "Mon, 4 Jul 2016 15:53:14 +0100"
+            },
+            {
+              "Message-ID": "<484810298443-112311-xqxbby@mail.there.com>"
+            },
+            {
+              "Subject": "Relay webhooks rawk!"
+            },
+            {
+              "To": "you@there.com"
+            }
+          ],
+          "html": "<p>Hi there <strong>SparkPostians</strong>.</p>",
+          "text": "Hi there SparkPostians.",
+          "to": [
+            "your@yourdomain.com"
+          ],
+          "customer_id": "1337",
+          "friendly_from": "me@here.com",
+          "msg_from": "me@here.com",
+          "rcpt_to": "you@there.com",
+          "webhook_id": "4839201967643219"
+        }
+      }
+    }
+  }
+]
+```
 
 ## Create and List [/relay-webhooks]
 
@@ -72,7 +130,7 @@ Create a relay webhook by providing a **relay webhooks object** as the POST requ
             {
               "name": "Replies Webhook",
               "target": "https://webhooks.customer.example/replies",
-              "auth_token": "",
+              "auth_token": "5ebe2294ecd0e0f08eab7690d2a6ee69",
               "match":
                 {
                   "protocol": "SMTP",
@@ -188,7 +246,7 @@ List all your relay webhooks.
                 "id": "12013026328707075",
                 "name": "Replies Webhook",
                 "target": "https://webhooks.customer.example/replies",
-                "auth_token": "",
+                "auth_token": "5ebe2294ecd0e0f08eab7690d2a6ee69",
                 "match":
                   {
                     "protocol": "SMTP",
@@ -239,7 +297,7 @@ Retrieve a specific relay webhook by specifying the webhook ID in the URI path.
             "results": {
               "name": "Replies Webhook",
               "target": "https://webhooks.customer.example/replies",
-              "auth_token": "",
+              "auth_token": "5ebe2294ecd0e0f08eab7690d2a6ee69",
               "match": {
                   "protocol": "SMTP",
                   "domain": "email.example.com"
@@ -296,7 +354,13 @@ Update a relay webhook by specifying the webhook ID in the URI path.
         ```
             {
               "name": "New Replies Webhook",
-              "target": "https://webhook.customer.example/replies"
+              "target": "https://webhook.customer.example/replies",
+              "auth_token": "A different auth token",
+              "match":
+                {
+                  "protocol": "SMTP",
+                  "domain": "email.a-different-domain.com"
+                }
             }
         ```
 

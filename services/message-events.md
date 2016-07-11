@@ -1,3 +1,6 @@
+title: Message Events
+description: Query detailed message event data for further analysis and processing.
+
 # Group Message Events
 <a name="message-events-api"></a>
 
@@ -15,7 +18,7 @@ If you use [Postman](https://www.getpostman.com/) you can click the following bu
 
 
 ## Copyrights
-__**The SparkPost message events API uses MaxMind software [MaxMind License](/docs/3RD_PARTY_LICENSES.md)**__
+__**The SparkPost message events API uses MaxMind software [MaxMind License](https://www.maxmind.com/download/geoip/database/LICENSE.txt)**__
 
 ## Events Documentation [/message-events/events/documentation]
 
@@ -128,8 +131,8 @@ List descriptions of the event fields that could be included in a response from 
                     "sampleValue": "1"
                 },
                 "timestamp": {
-                    "description": "Event date and time, in Unix timestamp format (integer seconds since 00:00:00 GMT 1970-01-01)",
-                    "sampleValue": 1427736822
+                    "description": "Event date and time formatted as: YYYY-MM-DDTHH:MM:SS.SSS±hh:mm",
+                    "sampleValue": "2015-11-24T16:15:54.000+00:00"
                 },
                 "transmission_id": {
                     "description": "Transmission which originated this message",
@@ -187,7 +190,7 @@ List an example of the event data that will be included in a response from the M
                 "subject": "Summer deals are here!",
                 "template_id": "templ-1234",
                 "template_version": "1",
-                "timestamp": 1427736822,
+                "timestamp": "2015-11-24T16:15:54.000+00:00",
                 "transmission_id": "65832150921904138",
                 "type": "bounce"
             }
@@ -195,29 +198,30 @@ List an example of the event data that will be included in a response from the M
     }
   ```
 
-## Message Events [/message-events{?bounce_classes,campaign_ids,events,friendly_froms,from,message_ids,page,per_page,reason,recipients,subaccounts,template_ids,timezone,to,transmission_ids}]
+## Message Events [/message-events{?bounce_classes,campaign_ids,delimiter,events,friendly_froms,from,message_ids,page,per_page,reason,recipients,subaccounts,template_ids,timezone,to,transmission_ids}]
 
 ### Search for Message Events [GET]
 
 Perform a filtered search for message event data. The response is sorted by descending timestamp.
 
 + Parameters
-    + bounce_classes (optional, number, `1`) ... Comma-delimited list of bounce classification codes to search. (See [Bounce Classification Codes.](https://support.sparkpost.com/customer/portal/articles/1929896))
-    + campaign_ids (optional, string, `Example Campaign Name`) ... Comma-delimited list of campaign ID's to search (i.e. campaign_id used during creation of a transmission).
-    + events (optional, list, `delivery, injection, bounce, delay, policy_rejection, out_of_band, open, click, generation_failure, generation_rejection, spam_complaint, list_unsubscribe, link_unsubscribe`) ... Comma-delimited list of event types to search. Defaults to all event types.
-    + friendly_froms (optional, list, `sender@mail.example.com`) ... Comma-delimited list of friendly_froms to search.
+    + bounce_classes (optional, number, `1`) ... delimited list of bounce classification codes to search. (See [Bounce Classification Codes.](https://support.sparkpost.com/customer/portal/articles/1929896))
+    + campaign_ids (optional, string, `Example Campaign Name`) ... delimited list of campaign ID's to search (i.e. the campaign id used during creation of a transmission).
+    + delimiter = `,` (optional, string, `,`) ... Specifies the delimiter for query parameter lists
+    + events (optional, list, `delivery, injection, bounce, delay, policy_rejection, out_of_band, open, click, generation_failure, generation_rejection, spam_complaint, list_unsubscribe, link_unsubscribe`) ... delimited list of event types to search. Defaults to all event types.
+    + friendly_froms (optional, list, `sender@mail.example.com`) ... delimited list of friendly from emails to search.
     + from = `One hour ago` (optional, datetime, `2014-07-20T08:00`) ... Datetime in format of YYYY-MM-DDTHH:MM.
-    + message_ids (optional, list, `0e0d94b7-9085-4e3c-ab30-e3f2cd9c273e`) ... Comma-delimited list of message ID's to search.
-    + page = `1` (optional, number, `25`) ... The results page number to return. Used with per_page for paging through results.
-    + per_page = `1000` (optional, number, `100`) ... Number of results to return per page. Must be between 1 and 10,000 (inclusive).
+    + message_ids (optional, list, `0e0d94b7-9085-4e3c-ab30-e3f2cd9c273e`) ... delimited list of message ID's to search.
+    + page = `1` (optional, number, `1`) ... The results page number to return. Used with per_page for paging through results.
+    + per_page = `1000` (optional, number, `1000`) ... Number of results to return per page. Must be between 1 and 10,000 (inclusive).
     + reason (optional, string, `bounce`) ... Bounce/failure/rejection reason that will be matched using a wildcard (e.g., %reason%).
-    + recipients (optional, list, `recipient@example.com`) ... Comma-delimited list of recipients to search.
-    + subaccounts (optional, list, `101`) ... Comma-delimited list of subaccount ID's to search.
+    + recipients (optional, list, `recipient@example.com`) ... delimited list of recipients to search.
+    + subaccounts (optional, list, `101`) ... delimited list of subaccount ID's to search.
 
-    + template_ids (optional, list, `templ-1234`) ... Comma-delimited list of template ID's to search.
-    + timezone =`UTC` (optional, string, `America/New_York`) ... Standard timezone identification string.
+    + template_ids (optional, list, `templ-1234`) ... delimited list of template ID's to search.
+    + timezone =`UTC` (optional, string, `UTC`) ... Standard timezone identification string.
     + to = `now` (optional, datetime, `2014-07-20T09:00`) ... Datetime in format of YYYY-MM-DDTHH:MM.
-    + transmission_ids (optional, list, `65832150921904138`) ... Comma-delimited list of transmission ID's to search (i.e. id generated during creation of a transmission).
+    + transmission_ids (optional, list, `65832150921904138`) ... delimited list of transmission ID's to search (i.e. id generated during creation of a transmission).
 
 + Request
 
@@ -254,7 +258,7 @@ Perform a filtered search for message event data. The response is sorted by desc
         "routing_domain": "example.com",
         "template_id": "templ-1234",
         "template_version": "1",
-        "timestamp": "2014-07-20T08:01-00:00",
+        "timestamp": "2014-07-20T08:01.000-00:00",
         "transmission_id": "65832150921904138"
       },
       {
@@ -279,7 +283,7 @@ Perform a filtered search for message event data. The response is sorted by desc
         "routing_domain": "example.com",
         "template_id": "templ-1234",
         "template_version": "1",
-        "timestamp": "2014-07-20T08:01-00:00",
+        "timestamp": "2014-07-20T08:01.000-00:00",
         "transmission_id": "65832150921904138"
       },
       {
@@ -301,7 +305,7 @@ Perform a filtered search for message event data. The response is sorted by desc
         "routing_domain": "example.com",
         "template_id": "templ-1234",
         "template_version": "1",
-        "timestamp": "2014-07-20T08:01-00:00",
+        "timestamp": "2014-07-20T08:01.000-00:00",
         "transmission_id": "65832150921904138"
       },
       {
@@ -318,7 +322,7 @@ Perform a filtered search for message event data. The response is sorted by desc
         "report_by": "server.email.com",
         "report_to": "abuse.example.com",
         "template_id": "templ-1234",
-        "timestamp": "2014-07-20T08:01-00:00",
+        "timestamp": "2014-07-20T08:01.000-00:00",
         "user_str": "Additional Example Information"
       },
       {
@@ -334,7 +338,7 @@ Perform a filtered search for message event data. The response is sorted by desc
         "routing_domain": "example.com",
         "template_id": "templ-1234",
         "template_version": "1",
-        "timestamp": 1427736822
+        "timestamp": "2014-07-20T08:01.000-00:00"
       },
       {
         "type": "policy_rejection",
@@ -356,7 +360,7 @@ Perform a filtered search for message event data. The response is sorted by desc
         "remote_addr": "127.0.0.1",
         "template_id": "templ-1234",
         "template_version": "1",
-        "timestamp": "2014-07-20T08:01-00:00",
+        "timestamp": "2014-07-20T08:01.000-00:00",
         "transmission_id": "65832150921904138"
       },
       {
@@ -384,7 +388,7 @@ Perform a filtered search for message event data. The response is sorted by desc
         "routing_domain": "example.com",
         "template_id": "templ-1234",
         "template_version": "1",
-        "timestamp": "2014-07-20T08:01-00:00",
+        "timestamp": "2014-07-20T08:01.000-00:00",
         "transmission_id": "65832150921904138"
       },
       {
@@ -406,7 +410,7 @@ Perform a filtered search for message event data. The response is sorted by desc
         "target_link_url": "http://example.com",
         "template_id": "templ-1234",
         "template_version": "1",
-        "timestamp": "2014-07-20T08:01-00:00",
+        "timestamp": "2014-07-20T08:01.000-00:00",
         "transmission_id": "65832150921904138",
         "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.118 Safari/537.36",
         "geo_ip": {
@@ -434,7 +438,7 @@ Perform a filtered search for message event data. The response is sorted by desc
         "rcpt_to": "recipient@example.com",
         "template_id": "templ-1234",
         "template_version": "1",
-        "timestamp": "2014-07-20T08:01-00:00",
+        "timestamp": "2014-07-20T08:01.000-00:00",
         "transmission_id": "65832150921904138",
         "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.118 Safari/537.36",
         "geo_ip": {
@@ -464,7 +468,7 @@ Perform a filtered search for message event data. The response is sorted by desc
         "routing_domain": "example.com",
         "template_id": "templ-1234",
         "template_version": "1",
-        "timestamp": "2014-07-20T08:01-00:00",
+        "timestamp": "2014-07-20T08:01.000-00:00",
         "transmission_id": "65832150921904138"
       },
       {
@@ -486,7 +490,7 @@ Perform a filtered search for message event data. The response is sorted by desc
         "routing_domain": "example.com",
         "template_id": "templ-1234",
         "template_version": "1",
-        "timestamp": "2014-07-20T08:01-00:00",
+        "timestamp": "2014-07-20T08:01.000-00:00",
         "transmission_id": "65832150921904138"
       },
       {
@@ -506,7 +510,7 @@ Perform a filtered search for message event data. The response is sorted by desc
         "rcpt_to": "recipient@example.com",
         "template_id": "templ-1234",
         "template_version": "1",
-        "timestamp": "2014-07-20T08:01-00:00",
+        "timestamp": "2014-07-20T08:01.000-00:00",
         "transmission_id": "65832150921904138"
       },
       {
@@ -526,7 +530,7 @@ Perform a filtered search for message event data. The response is sorted by desc
         "rcpt_to": "recipient@example.com",
         "template_id": "templ-1234",
         "template_version": "1",
-        "timestamp": "2014-07-20T08:01-00:00",
+        "timestamp": "2014-07-20T08:01.000-00:00",
         "transmission_id": "65832150921904138",
         "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.118 Safari/537.36"
       }

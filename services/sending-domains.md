@@ -1,3 +1,6 @@
+title: Sending Domains
+description: Manage sending domains, which are used to indicate who an email is from.
+
 # Group Sending Domains
 <a name="sending-domains-api"></a>
 
@@ -14,7 +17,7 @@ If you use [Postman](https://www.getpostman.com/) you can click the following bu
 | Field         | Type     | Description                           | Required   | Notes   |
 |------------------------|:-:       |---------------------------------------|-------------|--------|
 |domain    | string | Name of the sending domain | yes |The domain name will be used as the "From:" header address in the email.|
-|tracking_domain | string | Associated tracking domain | no | example: "click.example1.com". **Note**: linking tracking domains to sending domains belonging to subaccounts is coming soon.|
+|tracking_domain | string | Associated tracking domain | no | example: "click.example1.com". **Note**: tracking domain and sending domain must belong to the same subaccount to be linked together.|
 |status | JSON object | JSON object containing status details, including whether this domain's ownership has been verified  | no | Read only. For a full description, see the Status Attributes.|
 |dkim | JSON object | JSON object in which DKIM key configuration is defined | no | For a full description, see the DKIM Attributes.|
 |generate_dkim | boolean | Whether to generate a DKIM keypair on creation | no | defaults to true |
@@ -86,19 +89,20 @@ To use a DKIM Signing Domain Identifier different to the Sending Domain, set the
 
     + Body
 
-        ```
-        {
-            "domain": "example1.com"
-        }
-        ```
+           {
+               "domain": "example1.com",
+               "tracking_domain": "click.example1.com",
+               "generate_dkim": true,
+               "shared_with_subaccounts": false
 
-+ Response 200 (application/json; charset=utf-8)
+           }
 
-        ```
++ Response 200 (application/json)
+
         {
           "results": {
             "message": "Successfully Created domain.",
-            "domain": "example1.com"
+            "domain": "example1.com",
             "dkim": {
               "public": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC+W6scd3XWwvC/hPRksfDYFi3ztgyS9OSqnnjtNQeDdTSD1DRx/xFar2wjmzxp2+SnJ5pspaF77VZveN3P/HVmXZVghr3asoV9WBx/uW1nDIUxU35L4juXiTwsMAbgMyh3NqIKTNKyMDy4P8vpEhtH1iv/BrwMdBjHDVCycB8WnwIDAQAB",
               "selector": "scph0316",
@@ -116,14 +120,12 @@ To use a DKIM Signing Domain Identifier different to the Sending Domain, set the
 
     + Body
 
-        ```
-        {
-            "domain": "example1.com",
-            "generate_dkim": false
-        }
-        ```
+           {
+               "domain": "example1.com",
+               "generate_dkim": false
+           }
 
-+ Response 200 (application/json; charset=utf-8)
++ Response 200 (application/json)
 
         {
           "results": {
@@ -140,24 +142,22 @@ To use a DKIM Signing Domain Identifier different to the Sending Domain, set the
 
     + Body
 
-        ```
-        {
-            "domain": "example1.com",
-            "tracking_domain": "click.example1.com",
-            "dkim": {  "private": "MIICXgIBAAKBgQC+W6scd3XWwvC/hPRksfDYFi3ztgyS9OSqnnjtNQeDdTSD1DRx/xFar2wjmzxp2+SnJ5pspaF77VZveN3P/HVmXZVghr3asoV9WBx/uW1nDIUxU35L4juXiTwsMAbgMyh3NqIKTNKyMDy4P8vpEhtH1iv/BrwMdBjHDVCycB8WnwIDAQABAoGBAITb3BCRPBi5lGhHdn+1RgC7cjUQEbSb4eFHm+ULRwQ0UIPWHwiVWtptZ09usHq989fKp1g/PfcNzm8c78uTS6gCxfECweFCRK6EdO6cCCr1cfWvmBdSjzYhODUdQeyWZi2ozqd0FhGWoV4VHseh4iLj36DzleTLtOZj3FhAo1WJAkEA68T+KkGeDyWwvttYtuSiQCCTrXYAWTQnkIUxduCp7Ap6tVeIDn3TaXTj74UbEgaNgLhjG4bX//fdeDW6PaK9YwJBAM6xJmwHLPMgwNVjiz3u/6fhY3kaZTWcxtMkXCjh1QE82KzDwqyrCg7EFjTtFysSHCAZxXZMcivGl4TZLHnydJUCQQCx16+M+mAatuiCnvxlQUMuMiSTNK6Amzm45u9v53nlZeY3weYMYFdHdfe1pebMiwrT7MI9clKebz6svYJVmdtXAkApDAc8VuR3WB7TgdRKNWdyGJGfoD1PO1ZE4iinOcoKV+IT1UCY99Kkgg6C7j62n/8T5OpRBvd5eBPpHxP1F9BNAkEA5Nf2VO9lcTetksHdIeKK+F7sio6UZn0Rv7iUo3ALrN1D1cGfWIh2dj3ko1iSreyNVSwGW0ePP27qDmU+u6/Y1g==",
-                "public": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC+W6scd3XWwvC/hPRksfDYFi3ztgyS9OSqnnjtNQeDdTSD1DRx/xFar2wjmzxp2+SnJ5pspaF77VZveN3P/HVmXZVghr3asoV9WBx/uW1nDIUxU35L4juXiTwsMAbgMyh3NqIKTNKyMDy4P8vpEhtH1iv/BrwMdBjHDVCycB8WnwIDAQAB",
-                "selector": "scph0316",
-                "headers": "from:to:subject:date"
-            }
-        }
-        ```
+          {
+              "domain": "example1.com",
+              "tracking_domain": "click.example1.com",
+              "dkim": {  "private": "MIICXgIBAAKBgQC+W6scd3XWwvC/hPRksfDYFi3ztgyS9OSqnnjtNQeDdTSD1DRx/xFar2wjmzxp2+SnJ5pspaF77VZveN3P/HVmXZVghr3asoV9WBx/uW1nDIUxU35L4juXiTwsMAbgMyh3NqIKTNKyMDy4P8vpEhtH1iv/BrwMdBjHDVCycB8WnwIDAQABAoGBAITb3BCRPBi5lGhHdn+1RgC7cjUQEbSb4eFHm+ULRwQ0UIPWHwiVWtptZ09usHq989fKp1g/PfcNzm8c78uTS6gCxfECweFCRK6EdO6cCCr1cfWvmBdSjzYhODUdQeyWZi2ozqd0FhGWoV4VHseh4iLj36DzleTLtOZj3FhAo1WJAkEA68T+KkGeDyWwvttYtuSiQCCTrXYAWTQnkIUxduCp7Ap6tVeIDn3TaXTj74UbEgaNgLhjG4bX//fdeDW6PaK9YwJBAM6xJmwHLPMgwNVjiz3u/6fhY3kaZTWcxtMkXCjh1QE82KzDwqyrCg7EFjTtFysSHCAZxXZMcivGl4TZLHnydJUCQQCx16+M+mAatuiCnvxlQUMuMiSTNK6Amzm45u9v53nlZeY3weYMYFdHdfe1pebMiwrT7MI9clKebz6svYJVmdtXAkApDAc8VuR3WB7TgdRKNWdyGJGfoD1PO1ZE4iinOcoKV+IT1UCY99Kkgg6C7j62n/8T5OpRBvd5eBPpHxP1F9BNAkEA5Nf2VO9lcTetksHdIeKK+F7sio6UZn0Rv7iUo3ALrN1D1cGfWIh2dj3ko1iSreyNVSwGW0ePP27qDmU+u6/Y1g==",
+                  "public": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC+W6scd3XWwvC/hPRksfDYFi3ztgyS9OSqnnjtNQeDdTSD1DRx/xFar2wjmzxp2+SnJ5pspaF77VZveN3P/HVmXZVghr3asoV9WBx/uW1nDIUxU35L4juXiTwsMAbgMyh3NqIKTNKyMDy4P8vpEhtH1iv/BrwMdBjHDVCycB8WnwIDAQAB",
+                  "selector": "scph0316",
+                  "headers": "from:to:subject:date"
+              }
+          }
 
-+ Response 200 (application/json; charset=utf-8)
++ Response 200 (application/json)
 
         {
           "results": {
             "message": "Successfully Created domain.",
-            "domain": "example1.com"
+            "domain": "example1.com",
             "dkim": {
               "public": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC+W6scd3XWwvC/hPRksfDYFi3ztgyS9OSqnnjtNQeDdTSD1DRx/xFar2wjmzxp2+SnJ5pspaF77VZveN3P/HVmXZVghr3asoV9WBx/uW1nDIUxU35L4juXiTwsMAbgMyh3NqIKTNKyMDy4P8vpEhtH1iv/BrwMdBjHDVCycB8WnwIDAQAB",
               "selector": "scph0316",
@@ -169,31 +169,27 @@ To use a DKIM Signing Domain Identifier different to the Sending Domain, set the
 
 + Response 400 (application/json)
 
-      ```
-      {
-        "errors": [
-          {
-            "message": "invalid params",
-            "description": "Tracking domain 'click.example1.com' is not a registered tracking domain",
-            "code": "1200"
-          }
-        ]
-      }
-      ```
+           {
+             "errors": [
+               {
+                 "message": "invalid params",
+                 "description": "Tracking domain 'click.example1.com' is not a registered tracking domain",
+                 "code": "1200"
+               }
+             ]
+           }
 
 + Response 422 (application/json)
 
-    ```
-    {
-      "errors": [
-        {
-          "message": "invalid data format/type",
-          "description": "Error validating domain name syntax for domain: '(domain)'",
-          "code": "1300"
-        }
-      ]
-    }
-    ```
+           {
+             "errors": [
+               {
+                 "message": "invalid data format/type",
+                 "description": "Error validating domain name syntax for domain: '(domain)'",
+                 "code": "1300"
+               }
+             ]
+           }
 
 ### List all Sending Domains [GET]
 
@@ -206,9 +202,8 @@ List an overview of all sending domains in the system.
             Authorization: 14ac5499cfdd2bb2859e4476d2e5b1d2bad079bf
             Accept: application/json
 
-+ Response 200 (application/json; charset=utf-8)
++ Response 200 (application/json)
 
-        ```
         {
             "results": [
                 {
@@ -221,7 +216,8 @@ List an overview of all sending domains in the system.
                         "dkim_status": "valid",
                         "compliance_status": "valid",
                         "postmaster_at_status": "valid"
-                    }
+                    },
+                    "shared_with_subaccounts": false
                 },
                 {
                     "domain": "example2.com",
@@ -232,11 +228,11 @@ List an overview of all sending domains in the system.
                         "dkim_status": "pending",
                         "compliance_status": "pending",
                         "postmaster_at_status": "pending"
-                    }
+                    },
+                    "shared_with_subaccounts": false
                 }
             ]
         }
-        ```
 
 ## Retrieve, Update, and Delete [/sending-domains/{domain}]
 
@@ -254,9 +250,8 @@ Retrieve a sending domain by specifying its domain name in the URI path.  The re
             Authorization: 14ac5499cfdd2bb2859e4476d2e5b1d2bad079bf
             Accept: application/json
 
-+ Response 200 (application/json; charset=utf-8)
++ Response 200 (application/json)
 
-        ```
         {
             "results": {
                 "tracking_domain": "click.example1.com",
@@ -272,11 +267,10 @@ Retrieve a sending domain by specifying its domain name in the URI path.  The re
                     "headers": "from:to:subject:date",
                     "public": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC+W6scd3XWwvC/hPRksfDYFi3ztgyS9OSqnnjtNQeDdTSD1DRx/xFar2wjmzxp2+SnJ5pspaF77VZveN3P/HVmXZVghr3asoV9WBx/uW1nDIUxU35L4juXiTwsMAbgMyh3NqIKTNKyMDy4P8vpEhtH1iv/BrwMdBjHDVCycB8WnwIDAQAB",
                     "selector": "hello_selector"
-                }
+                },
+                "shared_with_subaccounts": false
             }
         }
-        ```
-
 
 ### Update a Sending Domain [PUT]
 
@@ -299,18 +293,17 @@ To remove the DKIM Signing Domain Identifier for a Sending Domain, use the empty
 
     + Body
 
-        ```
-        {
-            "tracking_domain": "click.example1.com",
-            "dkim": {  "private": "MIICXgIBAAKBgQC+W6scd3XWwvC/hPRksfDYFi3ztgyS9OSqnnjtNQeDdTSD1DRx/xFar2wjmzxp2+SnJ5pspaF77VZveN3P/HVmXZVghr3asoV9WBx/uW1nDIUxU35L4juXiTwsMAbgMyh3NqIKTNKyMDy4P8vpEhtH1iv/BrwMdBjHDVCycB8WnwIDAQABAoGBAITb3BCRPBi5lGhHdn+1RgC7cjUQEbSb4eFHm+ULRwQ0UIPWHwiVWtptZ09usHq989fKp1g/PfcNzm8c78uTS6gCxfECweFCRK6EdO6cCCr1cfWvmBdSjzYhODUdQeyWZi2ozqd0FhGWoV4VHseh4iLj36DzleTLtOZj3FhAo1WJAkEA68T+KkGeDyWwvttYtuSiQCCTrXYAWTQnkIUxduCp7Ap6tVeIDn3TaXTj74UbEgaNgLhjG4bX//fdeDW6PaK9YwJBAM6xJmwHLPMgwNVjiz3u/6fhY3kaZTWcxtMkXCjh1QE82KzDwqyrCg7EFjTtFysSHCAZxXZMcivGl4TZLHnydJUCQQCx16+M+mAatuiCnvxlQUMuMiSTNK6Amzm45u9v53nlZeY3weYMYFdHdfe1pebMiwrT7MI9clKebz6svYJVmdtXAkApDAc8VuR3WB7TgdRKNWdyGJGfoD1PO1ZE4iinOcoKV+IT1UCY99Kkgg6C7j62n/8T5OpRBvd5eBPpHxP1F9BNAkEA5Nf2VO9lcTetksHdIeKK+F7sio6UZn0Rv7iUo3ALrN1D1cGfWIh/Y1g==",
-                "public": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC+W6scd3XWwvC/hPRksfDYFi3ztgyS9OSqnnjtNQeDdTSD1DRx/xFar2wjmzxp2+SnJ5pspaF77VZveN3P/HVmXZVghr3asoV9WBx/uW1nDIUxU35L4juXiTwsMAbgMyh3NqIKTNKyMDy4P8vpEhtH1iv/BrwMdBjHDVCycB8WnwIDAQAB",
-                "selector": "hello_selector",
-                "headers": "from:to:subject:date"
-            }
-        }
-        ```
+           {
+               "tracking_domain": "click.example1.com",
+               "dkim": {
+                   "private": "MIICXgIBAAKBgQC+W6scd3XWwvC/hPRksfDYFi3ztgyS9OSqnnjtNQeDdTSD1DRx/xFar2wjmzxp2+SnJ5pspaF77VZveN3P/HVmXZVghr3asoV9WBx/uW1nDIUxU35L4juXiTwsMAbgMyh3NqIKTNKyMDy4P8vpEhtH1iv/BrwMdBjHDVCycB8WnwIDAQABAoGBAITb3BCRPBi5lGhHdn+1RgC7cjUQEbSb4eFHm+ULRwQ0UIPWHwiVWtptZ09usHq989fKp1g/PfcNzm8c78uTS6gCxfECweFCRK6EdO6cCCr1cfWvmBdSjzYhODUdQeyWZi2ozqd0FhGWoV4VHseh4iLj36DzleTLtOZj3FhAo1WJAkEA68T+KkGeDyWwvttYtuSiQCCTrXYAWTQnkIUxduCp7Ap6tVeIDn3TaXTj74UbEgaNgLhjG4bX//fdeDW6PaK9YwJBAM6xJmwHLPMgwNVjiz3u/6fhY3kaZTWcxtMkXCjh1QE82KzDwqyrCg7EFjTtFysSHCAZxXZMcivGl4TZLHnydJUCQQCx16+M+mAatuiCnvxlQUMuMiSTNK6Amzm45u9v53nlZeY3weYMYFdHdfe1pebMiwrT7MI9clKebz6svYJVmdtXAkApDAc8VuR3WB7TgdRKNWdyGJGfoD1PO1ZE4iinOcoKV+IT1UCY99Kkgg6C7j62n/8T5OpRBvd5eBPpHxP1F9BNAkEA5Nf2VO9lcTetksHdIeKK+F7sio6UZn0Rv7iUo3ALrN1D1cGfWIh/Y1g==",
+                   "public": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC+W6scd3XWwvC/hPRksfDYFi3ztgyS9OSqnnjtNQeDdTSD1DRx/xFar2wjmzxp2+SnJ5pspaF77VZveN3P/HVmXZVghr3asoV9WBx/uW1nDIUxU35L4juXiTwsMAbgMyh3NqIKTNKyMDy4P8vpEhtH1iv/BrwMdBjHDVCycB8WnwIDAQAB",
+                   "selector": "hello_selector",
+                   "headers": "from:to:subject:date"
+               }
+           }
 
-+ Response 200 (application/json; charset=utf-8)
++ Response 200 (application/json)
 
         {
             "results": {
@@ -321,31 +314,27 @@ To remove the DKIM Signing Domain Identifier for a Sending Domain, use the empty
 
 + Response 400 (application/json)
 
-      ```
-      {
-        "errors": [
-          {
-            "message": "invalid params",
-            "description": "Tracking domain '(domain)' is not a registered tracking domain",
-            "code": "1200"
-          }
-        ]
-      }
-      ```
+           {
+             "errors": [
+               {
+                 "message": "invalid params",
+                 "description": "Tracking domain '(domain)' is not a registered tracking domain",
+                 "code": "1200"
+               }
+             ]
+           }
 
 + Response 422 (application/json)
 
-    ```
-    {
-      "errors": [
-        {
-          "message": "invalid data format/type",
-          "description": "Error validating domain name syntax for domain: '(domain)'",
-          "code": "1300"
-        }
-      ]
-    }
-    ```
+           {
+             "errors": [
+               {
+                 "message": "invalid data format/type",
+                 "description": "Error validating domain name syntax for domain: '(domain)'",
+                 "code": "1300"
+               }
+             ]
+           }
 
 ### Delete a Sending Domain [DELETE]
 
@@ -379,7 +368,7 @@ Delete an existing sending domain.
             }
 
 
-## Verify [/sending-domains/{domain_name}/verify]
+## Verify [/sending-domains/{domain}/verify]
 
 ### Verify a Sending Domain [POST]
 
@@ -388,7 +377,22 @@ The verify resource operates differently depending on the provided request field
   * Including the fields "postmaster_at_verify" and/or "abuse_at_verify" in the request results in an email sent to the specified sending domain's postmaster@ and/or abuse@ mailbox where a verification link can be clicked.
   * Including the fields "postmaster_at_token" and/or "abuse_at_token" in the request initiates a check of the provided token(s) against the stored token(s) for the specified sending domain.
 
+DKIM public key verification requires the following:
+  * A valid DKIM record must be in the DNS for the sending domain being verified.
+  * The record must use the sending domain's public key in the "p=" tag.
+  * If a k= tag is defined, it must be set to "rsa".
+  * If an h= tag is defined, it must be set to "sha256".
+
+SPF verification requires the following:
+  * A valid SPF record must be in the DNS for the sending domain being verified.
+  * The record must contain "v=spf1".
+  * The record must contain "include:sparkpostmail.com".
+  * The record must use either "~all" or "-all".
+
 The domain's "status" object is returned on success.
+
++ Parameters
+  + domain (required, string, `example1.com`) ... Name of the domain
 
 + Request Verify DKIM and SPF (application/json)
 
@@ -397,17 +401,14 @@ The domain's "status" object is returned on success.
             Authorization: 14ac5499cfdd2bb2859e4476d2e5b1d2bad079bf
     + Body
 
-        ```
-        {
-            "dkim_verify": true,
-            "spf_verify": true
-        }
-        ```
+           {
+               "dkim_verify": true,
+               "spf_verify": true
+           }
 
 
-+ Response 200 (application/json; charset=utf-8)
++ Response 200 (application/json)
 
-        ```
         {
             "results": {
                 "ownership_verified": true,
@@ -422,7 +423,6 @@ The domain's "status" object is returned on success.
                 "postmaster_at_status": "unverified"
             }
         }
-        ```
 
 + Request Initiate postmaster@ email (application/json)
 
@@ -431,15 +431,12 @@ The domain's "status" object is returned on success.
             Authorization: 14ac5499cfdd2bb2859e4476d2e5b1d2bad079bf
     + Body
 
-        ```
-        {
-            "postmaster_at_verify": true
-        }
-        ```
+           {
+               "postmaster_at_verify": true
+           }
 
-+ Response 200 (application/json; charset=utf-8)
++ Response 200 (application/json)
 
-        ```
         {
             "results": {
                 "ownership_verified": false,
@@ -450,7 +447,6 @@ The domain's "status" object is returned on success.
                 "postmaster_at_status": "unverified"
             }
         }
-        ```
 
 + Request Verify postmaster@ correct token (application/json)
 
@@ -459,15 +455,12 @@ The domain's "status" object is returned on success.
             Authorization: 14ac5499cfdd2bb2859e4476d2e5b1d2bad079bf
     + Body
 
-        ```
-        {
-            "postmaster_at_token": "rcayptmrczdnrnqfsxyrzljmtsxvjzxb"
-        }
-        ```
+           {
+               "postmaster_at_token": "rcayptmrczdnrnqfsxyrzljmtsxvjzxb"
+           }
 
-+ Response 200 (application/json; charset=utf-8)
++ Response 200 (application/json)
 
-        ```
         {
             "results": {
                 "ownership_verified": true,
@@ -478,7 +471,6 @@ The domain's "status" object is returned on success.
                 "postmaster_at_status": "valid"
             }
         }
-        ```
 
 + Request Verify abuse@ incorrect token (application/json)
 
@@ -487,15 +479,12 @@ The domain's "status" object is returned on success.
             Authorization: 14ac5499cfdd2bb2859e4476d2e5b1d2bad079bf
     + Body
 
-        ```
-        {
-            "abuse_at_token": "AN_INCORRECT_OR_EXPIRED_TOKEN"
-        }
-        ```
+           {
+               "abuse_at_token": "AN_INCORRECT_OR_EXPIRED_TOKEN"
+           }
 
-+ Response 200 (application/json; charset=utf-8)
++ Response 200 (application/json)
 
-        ```
         {
             "results": {
                 "ownership_verified": false,
@@ -506,7 +495,6 @@ The domain's "status" object is returned on success.
                 "postmaster_at_status": "unverified"
             }
         }
-        ```
 
 + Request Unable to process abuse@ request (application/json)
 
@@ -515,15 +503,12 @@ The domain's "status" object is returned on success.
             Authorization: 14ac5499cfdd2bb2859e4476d2e5b1d2bad079bf
     + Body
 
-        ```
-        {
-            "abuse_at_verify": true
-        }
-        ```
+           {
+               "abuse_at_verify": true
+           }
 
-+ Response 400 (application/json; charset=utf-8)
++ Response 400 (application/json)
 
-        ```
         {
            "errors": [
               {
@@ -533,4 +518,3 @@ The domain's "status" object is returned on success.
               }
            ]
         }
-        ```

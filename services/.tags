@@ -1,0 +1,330 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	0	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+Group Account	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/account.md	/^# Group Account$/;"	function	line:4
+Using Postman	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/account.md	/^## Using Postman$/;"	function	line:6
+Account [/account{?include}]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/account.md	/^## Account [\/account{?include}]$/;"	function	line:12
+Get your account information [GET]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/account.md	/^## Get your account information [GET]$/;"	function	line:14
+Account Properties	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/account.md	/^#### Account Properties$/;"	function	line:18
+Subscription Properties	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/account.md	/^#### Subscription Properties$/;"	function	line:33
+Options Properties	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/account.md	/^#### Options Properties$/;"	function	line:42
+Usage Properties	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/account.md	/^#### Usage Properties$/;"	function	line:49
+Daily/Monthly Usage Properties	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/account.md	/^#### Daily\/Monthly Usage Properties$/;"	function	line:57
+Group Bounce Domains	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/bounce-domains.md	/^# Group Bounce Domains$/;"	function	line:4
+Using Postman	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/bounce-domains.md	/^## Using Postman$/;"	function	line:15
+Bounce Domains Attributes	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/bounce-domains.md	/^## Bounce Domains Attributes$/;"	function	line:21
+Status Attributes	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/bounce-domains.md	/^### Status Attributes$/;"	function	line:28
+Create and List [/bounce-domains]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/bounce-domains.md	/^## Create and List [\/bounce-domains]$/;"	function	line:38
+Create a Bounce Domain [POST]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/bounce-domains.md	/^### Create a Bounce Domain [POST]$/;"	function	line:40
+List Bounce Domains [GET]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/bounce-domains.md	/^### List Bounce Domains [GET]$/;"	function	line:181
+Retrieve and Delete [/bounce-domains/{domain}]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/bounce-domains.md	/^## Retrieve and Delete [\/bounce-domains\/{domain}]$/;"	function	line:212
+Retrieve a Bounce Domain [GET]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/bounce-domains.md	/^### Retrieve a Bounce Domain [GET]$/;"	function	line:214
+Delete a Bounce Domain [DELETE]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/bounce-domains.md	/^### Delete a Bounce Domain [DELETE]$/;"	function	line:259
+Verify [/bounce-domains/{domain}/verify]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/bounce-domains.md	/^## Verify [\/bounce-domains\/{domain}\/verify]$/;"	function	line:289
+Verify a Bounce Domain [POST]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/bounce-domains.md	/^### Verify a Bounce Domain [POST]$/;"	function	line:291
+Group Inbound Domains	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/inbound-domains.md	/^# Group Inbound Domains$/;"	function	line:4
+Inbound Domains Attributes	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/inbound-domains.md	/^#### Inbound Domains Attributes$/;"	function	line:18
+Using Postman	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/inbound-domains.md	/^## Using Postman$/;"	function	line:24
+Create and List [/inbound-domains]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/inbound-domains.md	/^## Create and List [\/inbound-domains]$/;"	function	line:30
+Create an Inbound Domain [POST]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/inbound-domains.md	/^### Create an Inbound Domain [POST]$/;"	function	line:32
+List all Inbound Domains [GET]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/inbound-domains.md	/^### List all Inbound Domains [GET]$/;"	function	line:141
+Retrieve and Delete [/inbound-domains/{domain}]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/inbound-domains.md	/^## Retrieve and Delete [\/inbound-domains\/{domain}]$/;"	function	line:180
+Retrieve an Inbound Domain [GET]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/inbound-domains.md	/^### Retrieve an Inbound Domain [GET]$/;"	function	line:182
+Delete an Inbound Domain [DELETE]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/inbound-domains.md	/^### Delete an Inbound Domain [DELETE]$/;"	function	line:233
+SparkPost API	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/introduction.md	/^# SparkPost API$/;"	function	line:3
+API Endpoints	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/introduction.md	/^## API Endpoints$/;"	function	line:8
+API Conventions	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/introduction.md	/^## API Conventions$/;"	function	line:16
+Authentication	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/introduction.md	/^## Authentication$/;"	function	line:28
+Using Postman	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/introduction.md	/^## Using Postman$/;"	function	line:33
+Using cURL	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/introduction.md	/^## Using cURL$/;"	function	line:39
+SMTP Relay Endpoints	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/introduction.md	/^## SMTP Relay Endpoints$/;"	function	line:60
+SparkPost SMTP Endpoint	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/introduction.md	/^### SparkPost SMTP Endpoint$/;"	function	line:63
+SparkPost Elite SMTP Endpoint	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/introduction.md	/^### SparkPost Elite SMTP Endpoint$/;"	function	line:79
+Rate Limiting	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/introduction.md	/^## Rate Limiting$/;"	function	line:86
+Errors	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/introduction.md	/^## Errors$/;"	function	line:90
+Example Error	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/introduction.md	/^### Example Error$/;"	function	line:95
+Error Table	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/introduction.md	/^### Error Table$/;"	function	line:111
+Group IP Pools	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/ip-pools.md	/^# Group IP Pools$/;"	function	line:4
+Using Postman	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/ip-pools.md	/^## Using Postman$/;"	function	line:6
+IP Pool Properties	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/ip-pools.md	/^#### IP Pool Properties$/;"	function	line:12
+IP Pools [/ip-pools]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/ip-pools.md	/^## IP Pools [\/ip-pools]$/;"	function	line:20
+List IP Pools [GET]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/ip-pools.md	/^## List IP Pools [GET]$/;"	function	line:22
+Create an IP Pool [POST]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/ip-pools.md	/^## Create an IP Pool [POST]$/;"	function	line:51
+Request Body Attributes	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/ip-pools.md	/^#### Request Body Attributes$/;"	function	line:55
+IP Pools Resource [/ip-pools/{id}]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/ip-pools.md	/^## IP Pools Resource [\/ip-pools\/{id}]$/;"	function	line:83
+Get IP Pool [GET]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/ip-pools.md	/^## Get IP Pool [GET]$/;"	function	line:85
+Update an IP Pool [PUT]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/ip-pools.md	/^## Update an IP Pool [PUT]$/;"	function	line:128
+Request Body Attributes	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/ip-pools.md	/^#### Request Body Attributes$/;"	function	line:132
+Delete an IP Pool [DELETE]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/ip-pools.md	/^## Delete an IP Pool [DELETE]$/;"	function	line:185
+Group Message Events	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/message-events.md	/^# Group Message Events$/;"	function	line:4
+Data retention	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/message-events.md	/^## Data retention$/;"	function	line:9
+Using Postman	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/message-events.md	/^## Using Postman$/;"	function	line:13
+Copyrights	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/message-events.md	/^## Copyrights$/;"	function	line:20
+Events Documentation [/message-events/events/documentation]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/message-events.md	/^## Events Documentation [\/message-events\/events\/documentation]$/;"	function	line:23
+Documentation [GET]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/message-events.md	/^### Documentation [GET]$/;"	function	line:25
+Events Samples [/message-events/events/samples{?events}]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/message-events.md	/^## Events Samples [\/message-events\/events\/samples{?events}]$/;"	function	line:147
+Samples [GET]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/message-events.md	/^### Samples [GET]$/;"	function	line:149
+Message Events [/message-events{?bounce_classes,campaign_ids,delimiter,events,friendly_froms,from,message_ids,page,per_page,reason,recipients,subaccounts,template_ids,timezone,to,transmission_ids}]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/message-events.md	/^## Message Events [\/message-events{?bounce_classes,campaign_ids,delimiter,events,friendly_froms,from,message_ids,page,per_page,reason,recipients,subaccounts,template_ids,timezone,to,transmission_ids}]$/;"	function	line:201
+Search for Message Events [GET]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/message-events.md	/^### Search for Message Events [GET]$/;"	function	line:203
+Group Metrics	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/metrics.md	/^# Group Metrics$/;"	function	line:4
+Data retention	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/metrics.md	/^## Data retention$/;"	function	line:12
+Using Postman	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/metrics.md	/^## Using Postman$/;"	function	line:16
+Metrics API Deliverability Glossary	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/metrics.md	/^## Metrics API Deliverability Glossary$/;"	function	line:22
+Discoverability Links [/metrics/]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/metrics.md	/^## Discoverability Links [\/metrics\/]$/;"	function	line:57
+Metrics Discoverability Links [GET]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/metrics.md	/^### Metrics Discoverability Links [GET]$/;"	function	line:153
+Deliverability Metrics [/metrics/deliverability{?from,to,delimiter,domains,campaigns,templates,sending_ips,ip_pools,sending_domains,subaccounts,metrics,timezone}]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/metrics.md	/^## Deliverability Metrics [\/metrics\/deliverability{?from,to,delimiter,domains,campaigns,templates,sending_ips,ip_pools,sending_domains,subaccounts,metrics,timezone}]$/;"	function	line:171
+Deliverability Metrics Summary [GET]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/metrics.md	/^### Deliverability Metrics Summary [GET]$/;"	function	line:364
+Deliverability Metrics by Domain [/metrics/deliverability/domain{?from,to,delimiter,domains,campaigns,templates,sending_ips,ip_pools,sending_domains,subaccounts,metrics,timezone,order_by,limit}]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/metrics.md	/^## Deliverability Metrics by Domain [\/metrics\/deliverability\/domain{?from,to,delimiter,domains,campaigns,templates,sending_ips,ip_pools,sending_domains,subaccounts,metrics,timezone,order_by,limit}]$/;"	function	line:429
+Deliverability Metrics by Domain [GET]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/metrics.md	/^### Deliverability Metrics by Domain [GET]$/;"	function	line:603
+Deliverability Metrics by Binding [/metrics/deliverability/binding{?from,to,delimiter,domains,campaigns,templates,bindings,binding_groups,subaccounts,metrics,timezone,limit,order_by}]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/metrics.md	/^## Deliverability Metrics by Binding [\/metrics\/deliverability\/binding{?from,to,delimiter,domains,campaigns,templates,bindings,binding_groups,subaccounts,metrics,timezone,limit,order_by}]$/;"	function	line:668
+Deliverability Metrics by Binding [GET]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/metrics.md	/^### Deliverability Metrics by Binding [GET]$/;"	function	line:672
+Deliverability Metrics by Binding Group [/metrics/deliverability/binding-group{?from,to,delimiter,domains,campaigns,templates,bindings,binding_groups,subaccounts,metrics,timezone,limit,order_by}]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/metrics.md	/^## Deliverability Metrics by Binding Group [\/metrics\/deliverability\/binding-group{?from,to,delimiter,domains,campaigns,templates,bindings,binding_groups,subaccounts,metrics,timezone,limit,order_by}]$/;"	function	line:675
+Deliverability Metrics by Binding Group [GET]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/metrics.md	/^### Deliverability Metrics by Binding Group [GET]$/;"	function	line:679
+Deliverability Metrics by Sending IP [/metrics/deliverability/sending-ip{?from,to,delimiter,domains,campaigns,templates,sending_ips,ip_pools,sending_domains,subaccounts,metrics,timezone,limit,order_by}]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/metrics.md	/^## Deliverability Metrics by Sending IP [\/metrics\/deliverability\/sending-ip{?from,to,delimiter,domains,campaigns,templates,sending_ips,ip_pools,sending_domains,subaccounts,metrics,timezone,limit,order_by}]$/;"	function	line:682
+Deliverability Metrics by Sending IP [GET]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/metrics.md	/^### Deliverability Metrics by Sending IP [GET]$/;"	function	line:857
+Deliverability Metrics by IP Pool [/metrics/deliverability/ip-pool{?from,to,delimiter,domains,campaigns,templates,sending_ips,ip_pools,sending_domains,subaccounts,metrics,timezone,limit,order_by}]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/metrics.md	/^## Deliverability Metrics by IP Pool [\/metrics\/deliverability\/ip-pool{?from,to,delimiter,domains,campaigns,templates,sending_ips,ip_pools,sending_domains,subaccounts,metrics,timezone,limit,order_by}]$/;"	function	line:918
+Deliverability Metrics by IP Pool [GET]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/metrics.md	/^### Deliverability Metrics by IP Pool [GET]$/;"	function	line:1092
+Deliverability Metrics by Sending Domain [/metrics/deliverability/sending-domain{?from,to,delimiter,domains,campaigns,templates,sending_ips,ip_pools,sending_domains,subaccounts,metrics,timezone,limit,order_by}]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/metrics.md	/^## Deliverability Metrics by Sending Domain [\/metrics\/deliverability\/sending-domain{?from,to,delimiter,domains,campaigns,templates,sending_ips,ip_pools,sending_domains,subaccounts,metrics,timezone,limit,order_by}]$/;"	function	line:1155
+Deliverability Metrics by Sending Domain [GET]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/metrics.md	/^### Deliverability Metrics by Sending Domain [GET]$/;"	function	line:1343
+Deliverability Metrics by Subaccount [/metrics/deliverability/subaccount{?from,to,delimiter,domains,campaigns,templates,sending_ips,ip_pools,sending_domains,subaccounts,metrics,timezone,limit,order_by}]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/metrics.md	/^## Deliverability Metrics by Subaccount [\/metrics\/deliverability\/subaccount{?from,to,delimiter,domains,campaigns,templates,sending_ips,ip_pools,sending_domains,subaccounts,metrics,timezone,limit,order_by}]$/;"	function	line:1405
+Deliverability Metrics by Subaccount [GET]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/metrics.md	/^### Deliverability Metrics by Subaccount [GET]$/;"	function	line:1593
+Deliverability Metrics by Campaign [/metrics/deliverability/campaign{?from,to,delimiter,domains,campaigns,templates,sending_ips,ip_pools,sending_domains,subaccounts,metrics,timezone,limit,order_by}]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/metrics.md	/^## Deliverability Metrics by Campaign [\/metrics\/deliverability\/campaign{?from,to,delimiter,domains,campaigns,templates,sending_ips,ip_pools,sending_domains,subaccounts,metrics,timezone,limit,order_by}]$/;"	function	line:1655
+Deliverability Metrics by Campaign [GET]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/metrics.md	/^### Deliverability Metrics by Campaign [GET]$/;"	function	line:1829
+Deliverability Metrics by Template [/metrics/deliverability/template{?from,to,delimiter,domains,campaigns,templates,sending_ips,ip_pools,sending_domains,subaccounts,metrics,timezone,limit,order_by}]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/metrics.md	/^## Deliverability Metrics by Template [\/metrics\/deliverability\/template{?from,to,delimiter,domains,campaigns,templates,sending_ips,ip_pools,sending_domains,subaccounts,metrics,timezone,limit,order_by}]$/;"	function	line:1894
+Deliverability Metrics by Template [GET]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/metrics.md	/^### Deliverability Metrics by Template [GET]$/;"	function	line:2068
+Deliverability Metrics by Watched Domain [/metrics/deliverability/watched-domain{?from,to,delimiter,domains,campaigns,templates,sending_ips,ip_pools,sending_domains,subaccounts,metrics,timezone,limit,order_by}]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/metrics.md	/^## Deliverability Metrics by Watched Domain [\/metrics\/deliverability\/watched-domain{?from,to,delimiter,domains,campaigns,templates,sending_ips,ip_pools,sending_domains,subaccounts,metrics,timezone,limit,order_by}]$/;"	function	line:2133
+Deliverability Metrics by Watched Domain [GET]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/metrics.md	/^### Deliverability Metrics by Watched Domain [GET]$/;"	function	line:2307
+Time Series [/metrics/deliverability/time-series{?from,to,delimiter,domains,campaigns,templates,sending_ips,ip_pools,sending_domains,subaccounts,precision,metrics,timezone}]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/metrics.md	/^## Time Series [\/metrics\/deliverability\/time-series{?from,to,delimiter,domains,campaigns,templates,sending_ips,ip_pools,sending_domains,subaccounts,precision,metrics,timezone}]$/;"	function	line:2373
+Time-Series Metrics [GET]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/metrics.md	/^### Time-Series Metrics [GET]$/;"	function	line:2593
+Bounce Reasons [/metrics/deliverability/bounce-reason{?from,to,delimiter,domains,campaigns,templates,sending_ips,ip_pools,sending_domains,subaccounts,metrics,timezone,limit}]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/metrics.md	/^## Bounce Reasons [\/metrics\/deliverability\/bounce-reason{?from,to,delimiter,domains,campaigns,templates,sending_ips,ip_pools,sending_domains,subaccounts,metrics,timezone,limit}]$/;"	function	line:2676
+Bounce Reason Metrics [GET]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/metrics.md	/^### Bounce Reason Metrics [GET]$/;"	function	line:2766
+Bounce Reasons By Domain [/metrics/deliverability/bounce-reason/domain{?from,to,delimiter,domains,campaigns,templates,sending_ips,ip_pools,sending_domains,subaccounts,metrics,timezone,limit}]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/metrics.md	/^## Bounce Reasons By Domain [\/metrics\/deliverability\/bounce-reason\/domain{?from,to,delimiter,domains,campaigns,templates,sending_ips,ip_pools,sending_domains,subaccounts,metrics,timezone,limit}]$/;"	function	line:2803
+Bounce Reason Metrics By Domain [GET]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/metrics.md	/^### Bounce Reason Metrics By Domain [GET]$/;"	function	line:2899
+Bounce Classifications [/metrics/deliverability/bounce-classification{?from,to,delimiter,domains,campaigns,templates,sending_ips,ip_pools,sending_domains,subaccounts,metrics,timezone,limit}]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/metrics.md	/^## Bounce Classifications [\/metrics\/deliverability\/bounce-classification{?from,to,delimiter,domains,campaigns,templates,sending_ips,ip_pools,sending_domains,subaccounts,metrics,timezone,limit}]$/;"	function	line:2936
+Bounce Classification Metrics [GET]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/metrics.md	/^### Bounce Classification Metrics [GET]$/;"	function	line:3018
+Rejection Reasons [/metrics/deliverability/rejection-reason{?from,to,delimiter,domains,campaigns,templates,sending_ips,ip_pools,sending_domains,subaccounts,timezone,limit}]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/metrics.md	/^## Rejection Reasons [\/metrics\/deliverability\/rejection-reason{?from,to,delimiter,domains,campaigns,templates,sending_ips,ip_pools,sending_domains,subaccounts,timezone,limit}]$/;"	function	line:3055
+Rejection Reason Metrics [GET]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/metrics.md	/^### Rejection Reason Metrics [GET]$/;"	function	line:3119
+Rejection Reasons By Domain [/metrics/deliverability/rejection-reason/domain{?from,to,delimiter,domains,campaigns,templates,sending_ips,ip_pools,sending_domains,subaccounts,timezone,limit}]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/metrics.md	/^## Rejection Reasons By Domain [\/metrics\/deliverability\/rejection-reason\/domain{?from,to,delimiter,domains,campaigns,templates,sending_ips,ip_pools,sending_domains,subaccounts,timezone,limit}]$/;"	function	line:3142
+Rejection Reason Metrics By Domain [GET]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/metrics.md	/^### Rejection Reason Metrics By Domain [GET]$/;"	function	line:3212
+Delay Reasons [/metrics/deliverability/delay-reason{?from,to,delimiter,domains,campaigns,templates,sending_ips,ip_pools,sending_domains,subaccounts,timezone,limit}]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/metrics.md	/^## Delay Reasons [\/metrics\/deliverability\/delay-reason{?from,to,delimiter,domains,campaigns,templates,sending_ips,ip_pools,sending_domains,subaccounts,timezone,limit}]$/;"	function	line:3235
+Delay Reason Metrics [GET]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/metrics.md	/^### Delay Reason Metrics [GET]$/;"	function	line:3293
+Delay Reasons By Domain [/metrics/deliverability/delay-reason/domain{?from,to,delimiter,domains,campaigns,templates,sending_ips,ip_pools,sending_domains,subaccounts,timezone,limit}]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/metrics.md	/^## Delay Reasons By Domain [\/metrics\/deliverability\/delay-reason\/domain{?from,to,delimiter,domains,campaigns,templates,sending_ips,ip_pools,sending_domains,subaccounts,timezone,limit}]$/;"	function	line:3323
+Delay Reason Metrics By Domain [GET]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/metrics.md	/^### Delay Reason Metrics By Domain [GET]$/;"	function	line:3387
+Engagement Details [/metrics/deliverability/link-name{?from,to,delimiter,timezone,campaigns,templates,subaccounts,sending_domains,metrics,limit}]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/metrics.md	/^## Engagement Details [\/metrics\/deliverability\/link-name{?from,to,delimiter,timezone,campaigns,templates,subaccounts,sending_domains,metrics,limit}]$/;"	function	line:3416
+Engagement Details [GET]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/metrics.md	/^### Engagement Details [GET]$/;"	function	line:3474
+Deliveries By Attempt [/metrics/deliverability/attempt{?from,to,delimiter,domains,campaigns,templates,sending_ips,ip_pools,bindings,binding_groups,sending_domains,subaccounts,timezone}]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/metrics.md	/^## Deliveries By Attempt [\/metrics\/deliverability\/attempt{?from,to,delimiter,domains,campaigns,templates,sending_ips,ip_pools,bindings,binding_groups,sending_domains,subaccounts,timezone}]$/;"	function	line:3508
+Deliveries By Attempt [GET]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/metrics.md	/^### Deliveries By Attempt [GET]$/;"	function	line:3560
+Binding Groups List [/metrics/binding-groups{?from,to,timezone,match,limit}]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/metrics.md	/^## Binding Groups List [\/metrics\/binding-groups{?from,to,timezone,match,limit}]$/;"	function	line:3590
+Bindings Groups List [GET]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/metrics.md	/^### Bindings Groups List [GET]$/;"	function	line:3594
+Binding Groups List [/metrics/bindings{?from,to,timezone,match,limit}]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/metrics.md	/^## Binding Groups List [\/metrics\/bindings{?from,to,timezone,match,limit}]$/;"	function	line:3597
+Bindings List [GET]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/metrics.md	/^### Bindings List [GET]$/;"	function	line:3601
+IP Pools List [/metrics/ip-pools{?from,to,timezone,match,limit}]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/metrics.md	/^## IP Pools List [\/metrics\/ip-pools{?from,to,timezone,match,limit}]$/;"	function	line:3604
+IP Pools List [GET]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/metrics.md	/^### IP Pools List [GET]$/;"	function	line:3645
+Sending IPs List [/metrics/sending-ips{?from,to,timezone,match,limit}]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/metrics.md	/^## Sending IPs List [\/metrics\/sending-ips{?from,to,timezone,match,limit}]$/;"	function	line:3668
+Sending IPs List [GET]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/metrics.md	/^### Sending IPs List [GET]$/;"	function	line:3709
+Campaigns List [/metrics/campaigns{?from,to,timezone,limit,match}]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/metrics.md	/^## Campaigns List [\/metrics\/campaigns{?from,to,timezone,limit,match}]$/;"	function	line:3732
+Campaigns List [GET]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/metrics.md	/^### Campaigns List [GET]$/;"	function	line:3773
+Domains List [/metrics/domains{?from,to,timezone,limit,match}]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/metrics.md	/^## Domains List [\/metrics\/domains{?from,to,timezone,limit,match}]$/;"	function	line:3796
+Domains List [GET]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/metrics.md	/^### Domains List [GET]$/;"	function	line:3837
+Group Relay Webhooks	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/relay-webhooks.md	/^# Group Relay Webhooks$/;"	function	line:4
+Using Postman	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/relay-webhooks.md	/^## Using Postman$/;"	function	line:12
+Relay Webhooks Object Properties	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/relay-webhooks.md	/^## Relay Webhooks Object Properties$/;"	function	line:18
+Match Object Properties	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/relay-webhooks.md	/^### Match Object Properties$/;"	function	line:27
+Field Definitions	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/relay-webhooks.md	/^## Field Definitions$/;"	function	line:34
+Content Attributes	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/relay-webhooks.md	/^### Content Attributes$/;"	function	line:46
+Example Payload	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/relay-webhooks.md	/^### Example Payload$/;"	function	line:61
+Create and List [/relay-webhooks]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/relay-webhooks.md	/^## Create and List [\/relay-webhooks]$/;"	function	line:116
+Create a Relay Webhook [POST]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/relay-webhooks.md	/^### Create a Relay Webhook [POST]$/;"	function	line:118
+List all Relay Webhooks [GET]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/relay-webhooks.md	/^### List all Relay Webhooks [GET]$/;"	function	line:228
+Retrieve, Update, and Delete [/relay-webhooks/{webhook_id}]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/relay-webhooks.md	/^## Retrieve, Update, and Delete [\/relay-webhooks\/{webhook_id}]$/;"	function	line:275
+Retrieve a Relay Webhook [GET]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/relay-webhooks.md	/^### Retrieve a Relay Webhook [GET]$/;"	function	line:277
+Update a Relay Webhook [PUT]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/relay-webhooks.md	/^### Update a Relay Webhook [PUT]$/;"	function	line:339
+Delete a Relay Webhook [DELETE]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/relay-webhooks.md	/^### Delete a Relay Webhook [DELETE]$/;"	function	line:473
+Group Sending Domains	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/sending-domains.md	/^# Group Sending Domains$/;"	function	line:4
+Using Postman	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/sending-domains.md	/^## Using Postman$/;"	function	line:9
+Sending Domain Attributes	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/sending-domains.md	/^## Sending Domain Attributes$/;"	function	line:15
+DKIM Attributes	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/sending-domains.md	/^### DKIM Attributes$/;"	function	line:27
+Status Attributes	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/sending-domains.md	/^### Status Attributes$/;"	function	line:39
+Verify Attributes	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/sending-domains.md	/^### Verify Attributes$/;"	function	line:52
+DNS Attributes	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/sending-domains.md	/^### DNS Attributes$/;"	function	line:65
+Create [/sending-domains]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/sending-domains.md	/^## Create [\/sending-domains]$/;"	function	line:74
+Create a Sending Domain [POST]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/sending-domains.md	/^### Create a Sending Domain [POST]$/;"	function	line:76
+List all Sending Domains [GET]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/sending-domains.md	/^### List all Sending Domains [GET]$/;"	function	line:194
+Retrieve, Update, and Delete [/sending-domains/{domain}]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/sending-domains.md	/^## Retrieve, Update, and Delete [\/sending-domains\/{domain}]$/;"	function	line:237
+Retrieve a Sending Domain [GET]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/sending-domains.md	/^### Retrieve a Sending Domain [GET]$/;"	function	line:239
+Update a Sending Domain [PUT]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/sending-domains.md	/^### Update a Sending Domain [PUT]$/;"	function	line:275
+Delete a Sending Domain [DELETE]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/sending-domains.md	/^### Delete a Sending Domain [DELETE]$/;"	function	line:339
+Verify [/sending-domains/{domain}/verify]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/sending-domains.md	/^## Verify [\/sending-domains\/{domain}\/verify]$/;"	function	line:371
+Verify a Sending Domain [POST]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/sending-domains.md	/^### Verify a Sending Domain [POST]$/;"	function	line:373
+Group Sending IPs	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/sending-ips.md	/^# Group Sending IPs$/;"	function	line:4
+Using Postman	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/sending-ips.md	/^## Using Postman$/;"	function	line:6
+Sending IP Properties	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/sending-ips.md	/^#### Sending IP Properties$/;"	function	line:12
+Sending IPs [/sending-ips]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/sending-ips.md	/^## Sending IPs [\/sending-ips]$/;"	function	line:20
+Get all sending IPs [GET]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/sending-ips.md	/^## Get all sending IPs [GET]$/;"	function	line:22
+Sending IP Resource [/sending-ips/{external_ip}]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/sending-ips.md	/^## Sending IP Resource [\/sending-ips\/{external_ip}]$/;"	function	line:49
+Get a Sending IP [GET]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/sending-ips.md	/^## Get a Sending IP [GET]$/;"	function	line:51
+Update a Sending IP [PUT]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/sending-ips.md	/^## Update a Sending IP [PUT]$/;"	function	line:96
+Request Body Attributes	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/sending-ips.md	/^#### Request Body Attributes$/;"	function	line:100
+Group SMTP API	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/smtp-api.md	/^# Group SMTP API$/;"	function	line:4
+Options Attributes	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/smtp-api.md	/^## Options Attributes$/;"	function	line:71
+Sending Messages with cc, bcc, and archive Recipients	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/smtp-api.md	/^## Sending Messages with cc, bcc, and archive Recipients$/;"	function	line:85
+Comments on Header Length	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/smtp-api.md	/^## Comments on Header Length$/;"	function	line:140
+Group Subaccounts	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/subaccounts.md	/^# Group Subaccounts$/;"	function	line:4
+Introduction	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/subaccounts.md	/^## Introduction$/;"	function	line:7
+Terminology	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/subaccounts.md	/^### Terminology$/;"	function	line:24
+Managing subaccount data as a Service Provider	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/subaccounts.md	/^### Managing subaccount data as a Service Provider$/;"	function	line:28
+Managing master account data as a Service Provider	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/subaccounts.md	/^### Managing master account data as a Service Provider$/;"	function	line:34
+Subaccounts Collection [/subaccounts]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/subaccounts.md	/^## Subaccounts Collection [\/subaccounts]$/;"	function	line:41
+List subaccounts [GET]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/subaccounts.md	/^### List subaccounts [GET]$/;"	function	line:43
+Create new subaccount [POST]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/subaccounts.md	/^### Create new subaccount [POST]$/;"	function	line:80
+Request Body Attributes	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/subaccounts.md	/^#### Request Body Attributes$/;"	function	line:88
+Subaccounts Entity [/subaccounts/{subaccount_id}]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/subaccounts.md	/^## Subaccounts Entity [\/subaccounts\/{subaccount_id}]$/;"	function	line:173
+List specific subaccount [GET]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/subaccounts.md	/^### List specific subaccount [GET]$/;"	function	line:175
+Edit a subaccount [PUT]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/subaccounts.md	/^### Edit a subaccount [PUT]$/;"	function	line:202
+Request Body Attributes	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/subaccounts.md	/^#### Request Body Attributes$/;"	function	line:205
+Substitutions Reference	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/substitutions-reference.md	/^## Substitutions Reference$/;"	function	line:4
+Key Features	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/substitutions-reference.md	/^## Key Features$/;"	function	line:7
+Substitution Data	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/substitutions-reference.md	/^## Substitution Data$/;"	function	line:18
+Template Start and End Markers	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/substitutions-reference.md	/^## Template Start and End Markers$/;"	function	line:57
+Determination of Expressions and Statements	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/substitutions-reference.md	/^## Determination of Expressions and Statements$/;"	function	line:89
+Missing Substitution Values	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/substitutions-reference.md	/^## Missing Substitution Values$/;"	function	line:116
+Statements on Their Own Line	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/substitutions-reference.md	/^## Statements on Their Own Line$/;"	function	line:145
+Escaping Start and End Tags	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/substitutions-reference.md	/^## Escaping Start and End Tags$/;"	function	line:172
+Escaping HTML Values	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/substitutions-reference.md	/^## Escaping HTML Values$/;"	function	line:194
+Escaping Links	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/substitutions-reference.md	/^## Escaping Links$/;"	function	line:201
+Preventing HTML Escaping	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/substitutions-reference.md	/^## Preventing HTML Escaping$/;"	function	line:210
+Personalized Links	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/substitutions-reference.md	/^## Personalized Links$/;"	function	line:246
+Link Names	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/substitutions-reference.md	/^## Link Names$/;"	function	line:302
+Unsubscribe Links	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/substitutions-reference.md	/^## Unsubscribe Links$/;"	function	line:314
+Per-link Disabling of Click Tracking	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/substitutions-reference.md	/^## Per-link Disabling of Click Tracking$/;"	function	line:324
+Custom Link Sub-Paths	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/substitutions-reference.md	/^## Custom Link Sub-Paths$/;"	function	line:333
+Link Attributes in Text Parts	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/substitutions-reference.md	/^## Link Attributes in Text Parts$/;"	function	line:349
+Substitutions Syntax Examples	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/substitutions-reference.md	/^## Substitutions Syntax Examples$/;"	function	line:357
+Basic Substitution	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/substitutions-reference.md	/^### Basic Substitution$/;"	function	line:398
+Referencing a Nested Object	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/substitutions-reference.md	/^### Referencing a Nested Object$/;"	function	line:404
+if then else Syntax	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/substitutions-reference.md	/^### if then else Syntax$/;"	function	line:410
+if not Syntax	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/substitutions-reference.md	/^### if not Syntax$/;"	function	line:428
+elseif Syntax	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/substitutions-reference.md	/^### elseif Syntax$/;"	function	line:436
+Expressions in Conditionals (`==`, `!=`, `<`, `>`, `and`, `or`)	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/substitutions-reference.md	/^### Expressions in Conditionals (`==`, `!=`, `<`, `>`, `and`, `or`)$/;"	function	line:448
+Relational and Logical Operators	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/substitutions-reference.md	/^## Relational and Logical Operators$/;"	function	line:467
+Array Iteration	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/substitutions-reference.md	/^## Array Iteration$/;"	function	line:494
+Links and Substitution Expressions Within Substitution Values	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/substitutions-reference.md	/^## Links and Substitution Expressions Within Substitution Values$/;"	function	line:538
+Default Values	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/substitutions-reference.md	/^## Default Values$/;"	function	line:680
+Macros	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/substitutions-reference.md	/^## Macros$/;"	function	line:690
+Reserved Recipient Substitution Variables	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/substitutions-reference.md	/^##  Reserved Recipient Substitution Variables$/;"	function	line:732
+Substitutions in email_rfc822 Headers	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/substitutions-reference.md	/^## Substitutions in email_rfc822 Headers$/;"	function	line:754
+Encoding Rules	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/substitutions-reference.md	/^## Encoding Rules$/;"	function	line:774
+Group Suppression List	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/suppression-list.md	/^# Group Suppression List$/;"	function	line:4
+Using Postman	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/suppression-list.md	/^## Using Postman$/;"	function	line:20
+List Entry Attributes	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/suppression-list.md	/^## List Entry Attributes$/;"	function	line:26
+Bulk Insert/Update [/suppression-list/]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/suppression-list.md	/^## Bulk Insert\/Update [\/suppression-list\/]$/;"	function	line:35
+Insert or Update List Entries [PUT]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/suppression-list.md	/^### Insert or Update List Entries [PUT]$/;"	function	line:37
+Search [/suppression-list{?to,from,types,sources,limit}]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/suppression-list.md	/^## Search [\/suppression-list{?to,from,types,sources,limit}]$/;"	function	line:103
+Search for List Entries [GET]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/suppression-list.md	/^### Search for List Entries [GET]$/;"	function	line:105
+Retrieve, Delete [/suppression-list/{recipient_email}]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/suppression-list.md	/^## Retrieve, Delete [\/suppression-list\/{recipient_email}]$/;"	function	line:160
+Retrieve a Recipient Suppression Status [GET]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/suppression-list.md	/^### Retrieve a Recipient Suppression Status [GET]$/;"	function	line:162
+Delete a List Entry [DELETE]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/suppression-list.md	/^### Delete a List Entry [DELETE]$/;"	function	line:207
+Insert or Update a List Entry [PUT]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/suppression-list.md	/^### Insert or Update a List Entry [PUT]$/;"	function	line:246
+Group Templates	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/templates.md	/^# Group Templates$/;"	function	line:4
+Using Postman	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/templates.md	/^## Using Postman$/;"	function	line:10
+Template Attributes	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/templates.md	/^## Template Attributes$/;"	function	line:16
+Content Attributes	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/templates.md	/^### Content Attributes$/;"	function	line:28
+Push Attributes	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/templates.md	/^#### Push Attributes$/;"	function	line:42
+Header Notes	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/templates.md	/^#### Header Notes$/;"	function	line:52
+email_rfc822 Notes	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/templates.md	/^#### email_rfc822 Notes$/;"	function	line:65
+Options Attributes	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/templates.md	/^### Options Attributes$/;"	function	line:75
+Error Attributes	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/templates.md	/^## Error Attributes$/;"	function	line:85
+Create and List [/templates]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/templates.md	/^## Create and List [\/templates]$/;"	function	line:97
+Create a Template [POST]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/templates.md	/^### Create a Template [POST]$/;"	function	line:99
+Create Parts	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/templates.md	/^#### Create Parts$/;"	function	line:108
+Create RFC822	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/templates.md	/^#### Create RFC822$/;"	function	line:122
+List all Templates [GET]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/templates.md	/^### List all Templates [GET]$/;"	function	line:261
+Retrieve [/templates/{id}{?draft}]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/templates.md	/^## Retrieve [\/templates\/{id}{?draft}]$/;"	function	line:296
+Retrieve a Template [GET]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/templates.md	/^### Retrieve a Template [GET]$/;"	function	line:298
+Update [/templates/{id}{?update_published}]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/templates.md	/^## Update [\/templates\/{id}{?update_published}]$/;"	function	line:357
+Update a Template [PUT]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/templates.md	/^### Update a Template [PUT]$/;"	function	line:359
+Preview [/templates/{id}/preview{?draft}]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/templates.md	/^## Preview [\/templates\/{id}\/preview{?draft}]$/;"	function	line:429
+Preview a Template [POST]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/templates.md	/^### Preview a Template [POST]$/;"	function	line:431
+Delete [/templates/{id}]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/templates.md	/^## Delete [\/templates\/{id}]$/;"	function	line:481
+Delete a Template [DELETE]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/templates.md	/^### Delete a Template [DELETE]$/;"	function	line:483
+Group Tracking Domains	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/tracking-domains.md	/^# Group Tracking Domains$/;"	function	line:4
+Using Postman	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/tracking-domains.md	/^## Using Postman$/;"	function	line:23
+Tracking Domains Attributes	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/tracking-domains.md	/^## Tracking Domains Attributes$/;"	function	line:29
+Port/Secure Attributes	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/tracking-domains.md	/^### Port\/Secure Attributes$/;"	function	line:39
+Status Attributes	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/tracking-domains.md	/^### Status Attributes$/;"	function	line:52
+Create and List [/tracking-domains]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/tracking-domains.md	/^## Create and List [\/tracking-domains]$/;"	function	line:63
+Create a Tracking Domain [POST]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/tracking-domains.md	/^### Create a Tracking Domain [POST]$/;"	function	line:65
+List all Tracking Domains [GET]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/tracking-domains.md	/^### List all Tracking Domains [GET]$/;"	function	line:210
+Retrieve, Update, and Delete [/tracking-domains/{domain}]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/tracking-domains.md	/^## Retrieve, Update, and Delete [\/tracking-domains\/{domain}]$/;"	function	line:255
+Retrieve a Tracking Domain [GET]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/tracking-domains.md	/^### Retrieve a Tracking Domain [GET]$/;"	function	line:257
+Update a Tracking Domain [PUT]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/tracking-domains.md	/^### Update a Tracking Domain [PUT]$/;"	function	line:307
+Delete a Tracking Domain [DELETE]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/tracking-domains.md	/^### Delete a Tracking Domain [DELETE]$/;"	function	line:375
+Verify [/tracking-domains/{domain}/verify]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/tracking-domains.md	/^## Verify [\/tracking-domains\/{domain}\/verify]$/;"	function	line:405
+Verify a Tracking Domain [POST]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/tracking-domains.md	/^### Verify a Tracking Domain [POST]$/;"	function	line:407
+Group Webhooks	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/webhooks.md	/^# Group Webhooks$/;"	function	line:4
+Using Postman	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/webhooks.md	/^## Using Postman$/;"	function	line:16
+Webhooks Object Properties	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/webhooks.md	/^## Webhooks Object Properties$/;"	function	line:22
+Events Documentation [/webhooks/events/documentation]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/webhooks.md	/^## Events Documentation [\/webhooks\/events\/documentation]$/;"	function	line:36
+Documentation [GET]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/webhooks.md	/^### Documentation [GET]$/;"	function	line:38
+Events Samples [/webhooks/events/samples{?events}]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/webhooks.md	/^## Events Samples [\/webhooks\/events\/samples{?events}]$/;"	function	line:76
+Samples [GET]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/webhooks.md	/^### Samples [GET]$/;"	function	line:78
+Create [/webhooks]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/webhooks.md	/^## Create [\/webhooks]$/;"	function	line:129
+Create a Webhook [POST]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/webhooks.md	/^### Create a Webhook [POST]$/;"	function	line:131
+Retrieve [/webhooks/{id}{?timezone}]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/webhooks.md	/^## Retrieve [\/webhooks\/{id}{?timezone}]$/;"	function	line:196
+Retrieve Webhook Details [GET]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/webhooks.md	/^### Retrieve Webhook Details [GET]$/;"	function	line:242
+List [/webhooks{?timezone}]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/webhooks.md	/^## List [\/webhooks{?timezone}]$/;"	function	line:261
+List all Webhooks [GET]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/webhooks.md	/^### List all Webhooks [GET]$/;"	function	line:354
+Update and Delete [/webhooks/{id}]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/webhooks.md	/^## Update and Delete [\/webhooks\/{id}]$/;"	function	line:373
+Update a Webhook [PUT]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/webhooks.md	/^### Update a Webhook [PUT]$/;"	function	line:375
+Delete a Webhook [DELETE]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/webhooks.md	/^### Delete a Webhook [DELETE]$/;"	function	line:424
+Validate [/webhooks/{id}/validate]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/webhooks.md	/^## Validate [\/webhooks\/{id}\/validate]$/;"	function	line:440
+Validate a Webhook [POST]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/webhooks.md	/^### Validate a Webhook [POST]$/;"	function	line:442
+Message Properties	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/webhooks.md	/^#### Message Properties$/;"	function	line:448
+Batch Status [/webhooks/{id}/batch-status{?limit}]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/webhooks.md	/^## Batch Status [\/webhooks\/{id}\/batch-status{?limit}]$/;"	function	line:490
+Retrieve Status Information [GET]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/webhooks.md	/^### Retrieve Status Information [GET]$/;"	function	line:492
+Group Transmissions	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/transmissions.md	/^# Group Transmissions$/;"	function	line:4
+Using Postman	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/transmissions.md	/^## Using Postman$/;"	function	line:11
+Transmission Attributes	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/transmissions.md	/^## Transmission Attributes$/;"	function	line:17
+Options Attributes	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/transmissions.md	/^### Options Attributes$/;"	function	line:37
+Inline Content Attributes	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/transmissions.md	/^### Inline Content Attributes$/;"	function	line:49
+Push Attributes	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/transmissions.md	/^#### Push Attributes$/;"	function	line:65
+Header Notes	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/transmissions.md	/^#### Header Notes$/;"	function	line:73
+email_rfc822 Notes	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/transmissions.md	/^#### email_rfc822 Notes$/;"	function	line:80
+Attachment Attributes	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/transmissions.md	/^### Attachment Attributes$/;"	function	line:96
+Inline Image Attributes	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/transmissions.md	/^### Inline Image Attributes$/;"	function	line:108
+Using a Stored Template	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/transmissions.md	/^### Using a Stored Template$/;"	function	line:118
+Using a Stored Recipient List	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/transmissions.md	/^### Using a Stored Recipient List$/;"	function	line:127
+Scheduled Transmissions	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/transmissions.md	/^### Scheduled Transmissions$/;"	function	line:135
+Create [/transmissions{?num_rcpt_errors}]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/transmissions.md	/^## Create [\/transmissions{?num_rcpt_errors}]$/;"	function	line:138
+Create a Transmission [POST]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/transmissions.md	/^### Create a Transmission [POST]$/;"	function	line:140
+Using Inline Email Part Content	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/transmissions.md	/^#### Using Inline Email Part Content$/;"	function	line:146
+Using Inline RFC822 Content	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/transmissions.md	/^#### Using Inline RFC822 Content$/;"	function	line:150
+Using a Stored Recipients List	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/transmissions.md	/^#### Using a Stored Recipients List$/;"	function	line:154
+Using a Stored Template	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/transmissions.md	/^#### Using a Stored Template$/;"	function	line:158
+Scheduling Transmissions	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/transmissions.md	/^#### Scheduling Transmissions$/;"	function	line:162
+Retrieve and Delete [/transmissions/{id}]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/transmissions.md	/^## Retrieve and Delete [\/transmissions\/{id}]$/;"	function	line:910
+Retrieve a Transmission [GET]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/transmissions.md	/^### Retrieve a Transmission [GET]$/;"	function	line:912
+Delete a Transmission [DELETE]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/transmissions.md	/^### Delete a Transmission [DELETE]$/;"	function	line:979
+List [/transmissions{?campaign_id,template_id}]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/transmissions.md	/^## List [\/transmissions{?campaign_id,template_id}]$/;"	function	line:1070
+List all Transmissions [GET]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/transmissions.md	/^### List all Transmissions [GET]$/;"	function	line:1072
+Group Recipient Lists	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/recipient-lists.md	/^# Group Recipient Lists$/;"	function	line:4
+Using Postman	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/recipient-lists.md	/^## Using Postman$/;"	function	line:13
+Recipient List Attributes	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/recipient-lists.md	/^## Recipient List Attributes$/;"	function	line:19
+Recipient Attributes	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/recipient-lists.md	/^### Recipient Attributes$/;"	function	line:28
+Address Attributes	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/recipient-lists.md	/^#### Address Attributes$/;"	function	line:41
+Multichannel Address attributes	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/recipient-lists.md	/^#### Multichannel Address attributes$/;"	function	line:51
+Notes on channel	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/recipient-lists.md	/^##### Notes on channel$/;"	function	line:62
+Push Specific Attributes (Only supported for inline recipient lists)	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/recipient-lists.md	/^#### Push Specific Attributes (Only supported for inline recipient lists)$/;"	function	line:98
+Create [/recipient-lists{?num_rcpt_errors}]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/recipient-lists.md	/^## Create [\/recipient-lists{?num_rcpt_errors}]$/;"	function	line:104
+Create a Recipient List [POST]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/recipient-lists.md	/^### Create a Recipient List [POST]$/;"	function	line:106
+Retrieve [/recipient-lists/{id}{?show_recipients}]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/recipient-lists.md	/^## Retrieve [\/recipient-lists\/{id}{?show_recipients}]$/;"	function	line:260
+Retrieve a Recipient List [GET]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/recipient-lists.md	/^### Retrieve a Recipient List [GET]$/;"	function	line:262
+List [/recipient-lists]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/recipient-lists.md	/^## List [\/recipient-lists]$/;"	function	line:374
+List all Recipient Lists [GET]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/recipient-lists.md	/^### List all Recipient Lists [GET]$/;"	function	line:376
+Update [/recipient-lists/{id}{?num_rcpt_errors}]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/recipient-lists.md	/^## Update [\/recipient-lists\/{id}{?num_rcpt_errors}]$/;"	function	line:419
+Update a Recipient List [PUT]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/recipient-lists.md	/^### Update a Recipient List [PUT]$/;"	function	line:421
+Delete [/recipient-lists/{id}]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/recipient-lists.md	/^## Delete [\/recipient-lists\/{id}]$/;"	function	line:620
+Delete a Recipient List [DELETE]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/recipient-lists.md	/^### Delete a Recipient List [DELETE]$/;"	function	line:622

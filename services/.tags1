@@ -1,0 +1,24 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	0	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+Group Recipient Lists	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/recipient-lists.md	/^# Group Recipient Lists$/;"	function	line:4
+Using Postman	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/recipient-lists.md	/^## Using Postman$/;"	function	line:13
+Recipient List Attributes	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/recipient-lists.md	/^## Recipient List Attributes$/;"	function	line:19
+Recipient Attributes	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/recipient-lists.md	/^### Recipient Attributes$/;"	function	line:28
+Address Attributes	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/recipient-lists.md	/^#### Address Attributes$/;"	function	line:41
+Multichannel Address attributes	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/recipient-lists.md	/^#### Multichannel Address attributes$/;"	function	line:51
+Notes on channel	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/recipient-lists.md	/^##### Notes on channel$/;"	function	line:62
+Push Specific Attributes (Only supported for inline recipient lists)	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/recipient-lists.md	/^#### Push Specific Attributes (Only supported for inline recipient lists)$/;"	function	line:98
+Create [/recipient-lists{?num_rcpt_errors}]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/recipient-lists.md	/^## Create [\/recipient-lists{?num_rcpt_errors}]$/;"	function	line:104
+Create a Recipient List [POST]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/recipient-lists.md	/^### Create a Recipient List [POST]$/;"	function	line:106
+Retrieve [/recipient-lists/{id}{?show_recipients}]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/recipient-lists.md	/^## Retrieve [\/recipient-lists\/{id}{?show_recipients}]$/;"	function	line:260
+Retrieve a Recipient List [GET]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/recipient-lists.md	/^### Retrieve a Recipient List [GET]$/;"	function	line:262
+List [/recipient-lists]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/recipient-lists.md	/^## List [\/recipient-lists]$/;"	function	line:374
+List all Recipient Lists [GET]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/recipient-lists.md	/^### List all Recipient Lists [GET]$/;"	function	line:376
+Update [/recipient-lists/{id}{?num_rcpt_errors}]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/recipient-lists.md	/^## Update [\/recipient-lists\/{id}{?num_rcpt_errors}]$/;"	function	line:419
+Update a Recipient List [PUT]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/recipient-lists.md	/^### Update a Recipient List [PUT]$/;"	function	line:421
+Delete [/recipient-lists/{id}]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/recipient-lists.md	/^## Delete [\/recipient-lists\/{id}]$/;"	function	line:620
+Delete a Recipient List [DELETE]	/Users/snixon/Repos/SparkPostRepo/sparkpost-api-documentation-DEV/services/recipient-lists.md	/^### Delete a Recipient List [DELETE]$/;"	function	line:622

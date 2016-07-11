@@ -1,8 +1,10 @@
-.env
-node_modules
-*.swp
-*.swo
 *.log
+*.swo
+*.swp
+.env
 .idea
-apiary-previews
 .node-version
+apiary-previews
+node_modules
+/devhub
+/static

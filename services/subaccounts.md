@@ -1,8 +1,42 @@
+title: Subaccounts
+description: Manage subaccounts, a way for service providers to provision and manage customers.
+
 # Group Subaccounts
-<a name="subaccounts-api"></a>
-API for retrieving and managing subaccounts associated with your Master Account.
 Subaccounts are a way for service providers to provision and manage their customers separately from each other and to provide assets and reporting data.
-For more general information pertaining to subaccounts, please see the [Subaccounts Introduction](#subaccounts-intro)
+
+## Introduction
+
+With the introduction of subaccounts, some of the APIs are now able to store and retrieve information at a more granular level.
+Subaccounts are a way for service providers to provision and manage their customers separately from each other and to provide assets and reporting data.
+
+The following APIs have subaccount support:
+
+* [Metrics](metrics.html) **(Note: Not available for Subaccount API keys)**
+* [Message Events](message-events.html)
+* [Sending Domains](sending-domains.html)
+* [Suppression List](suppression-list.html)
+* [SMTP API](smtp-api.html)
+* [Transmissions](transmissions.html)
+* [Tracking Domains](tracking-domains.html)
+
+**Please note that all subaccount-level transmissions must use _inline_ recipients and content. Recipient lists and stored templates do not support subaccounts.**
+
+### Terminology
+* Master Account - This refers to a Service Provider and their data
+* Subaccounts - This refers to a Service Provider's customer(s), and that customer's data
+
+### Managing subaccount data as a Service Provider
+* Master Accounts can set the `X-MSYS-SUBACCOUNT` HTTP header with the ID of their subaccount to manage subaccount data on their behalf
+  * For example, on a GET request to `/api/v1/sending-domains`, setting `X-MSYS-SUBACCOUNT` to `123` will only return sending domains which belong to Subaccount `123`
+  * The same applies to data management, setting `X-MSYS-SUBACCOUNT` to `123` on a POST request to `/api/v1/sending-domains` will create a sending domain belonging to Subaccount `123`
+* `X-MSYS-SUBACCOUNT` is not required, but if provided, must be a number
+
+### Managing master account data as a Service Provider
+* Setting `X-MSYS-SUBACCOUNT` to `0` will retrieve or manage Master Account data only
+* For POST/PUT/DELETE requests, omitting `X-MSYS-SUBACCOUNT` will result in the same behavior as setting `X-MSYS-SUBACCOUNT` to `0`
+* For GET requests, omitting `X-MSYS-SUBACCOUNT` will result in Master Account and Subaccount data in the response
+  * Subaccount data will have the key `subaccount_id` in the response object
+* Metrics and Message Events APIs do not use `X-MSYS-SUBACCOUNT`. Instead, setting the query parameter `subaccounts` to `0` will return only Master Account reporting data
 
 ## Subaccounts Collection [/subaccounts]
 
@@ -45,7 +79,7 @@ Endpoint for retrieving a list of your subaccounts. This endpoint only returns i
 
 ### Create new subaccount [POST]
 
-Provisions a new subaccount and an initial subaccount API key. Subaccount API keys are only allowed very specific grants, which are limited to: `smtp/inject`, `sending_domains/manage`, `message_events/view`, `suppression_lists/manage`, `transmissions/view`, and `transmissions/modify`.
+Provisions a new subaccount and an initial subaccount API key. Subaccount API keys are only allowed very specific grants, which are limited to: `smtp/inject`, `sending_domains/manage`, `tracking_domains/view`, `tracking_domains/manage`, `message_events/view`, `suppression_lists/manage`, `transmissions/view`, and `transmissions/modify`.
 
 Subaccounts are allowed to send mail using the SMTP protocol or Transmissions API, retrieve sending statistics via the Message Events API, manage their Sending Domains, manage their Suppression List.
 
@@ -57,9 +91,9 @@ Subaccounts are allowed to send mail using the SMTP protocol or Transmissions AP
 | ------------  | ---------- | ------- | --------------------------------------------------------------------------| ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | name          | yes        | string  | User friendly identifier for a specific subaccount                        |                                                                                                                                                               |
 | key_label     | yes        | string  | User friendly identifier for the initial subaccount api key               |                                                                                                                                                               |
-| key_grants    | yes        | Array   | List of grants to give to the initial subaccount api key                  | Valid values are `smtp/inject`, `sending_domains/manage`, `message_events/view`, `suppression_lists/manage`, `transmissions/view`, and `transmissions/modify` |
+| key_grants    | yes        | Array   | List of grants to give to the initial subaccount api key                  | Valid values are `smtp/inject`, `sending_domains/manage`, `tracking_domains/view`, `tracking_domains/manage`, `message_events/view`, `suppression_lists/manage`, `transmissions/view`, and `transmissions/modify` |
 | key_valid_ips | no         | Array   | List of IP's that the initial subaccount api key can be used from         | If the supplied `key_valid_ips` is an empty array, the api key is usable by any IP address                                                                    |
-| ip_pool       | no         | string  | The ID of the default IP Pool assigned to this subaccount's transmissions | If the supplied `ip_pool` is an empty string or not present, no default `ip_pool` will be assigned                                                            |
+| ip_pool       | no         | string  | The ID of the default IP Pool assigned to this subaccount's transmissions ( **Note:** SparkPost only ) | If the supplied `ip_pool` is an empty string or not present, no default `ip_pool` will be assigned                                                            |
 
 
 + Request (application/json)
@@ -73,7 +107,9 @@ Subaccounts are allowed to send mail using the SMTP protocol or Transmissions AP
             {
               "name": "Sparkle Ponies",
               "key_label": "API Key for Sparkle Ponies Subaccount",
-              "key_grants": ["smtp/inject", "sending_domains/manage", "message_events/view", "suppression_lists/manage"]
+              "key_grants": ["smtp/inject", "sending_domains/manage", "message_events/view", "suppression_lists/manage", "tracking_domains/view", "tracking_domains/manage"],
+              "key_valid_ips": [],
+              "ip_pool": ""
             }
 
 + Response 200 (application/json)
@@ -122,9 +158,14 @@ Subaccounts are allowed to send mail using the SMTP protocol or Transmissions AP
               "value": null
             },
             {
-              "message": "ip_pool parameter must not exceed 32 characters",
+              "message": "ip_pool must be 20 characters or less",
               "param": "ip_pool",
-              "value": "an ip pool name that is too long"
+              "value": "an_ip_pool_name_that_is_too_long"
+            },
+            {
+              "message": "ip_pool must be alphanumeric and underscore",
+              "param": "ip_pool",
+              "value": "$invalid chars"
             }
           ]
         }
@@ -179,7 +220,8 @@ Update an existing subaccount's information. You can update the following inform
 
             {
               "name": "Hey Joe! Garage and Parts",
-              "status": "suspended"
+              "status": "suspended",
+              "ip_pool": ""
             }
 
 + Parameters
@@ -199,10 +241,9 @@ Update an existing subaccount's information. You can update the following inform
         {
           "errors": [
             {
-              "message": "ip_pool parameter must not exceed 32 characters",
+              "message": "ip_pool must be 20 characters or less",
               "param": "ip_pool",
-              "value": "an ip pool name that is too long"
+              "value": "an_ip_pool_name_that_is_too_long"
             }
           ]
         }
-

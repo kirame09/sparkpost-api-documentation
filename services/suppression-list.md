@@ -1,3 +1,6 @@
+title: Suppression List
+description: Manage your suppression list - a list of recipient email addresses to which you do NOT want to send email.
+
 # Group Suppression List
 <a name="suppression-list-api"></a>
 
@@ -11,6 +14,8 @@ A suppression list - or exclusion list, as it is sometimes called - stores a rec
 Transactional messages are single recipient messages that are used operationally, e.g. to reset a password or confirm a purchase; while non-transactional messages are used to run email campaigns where a list of recipients are targeted, e.g. advertising a sales event.
 
 In addition to the customer-specific exclusion list, Message Systems maintains a global suppression list across all customers.
+
+**Note: SparkPost supports a suppression list of up to 1,000,000 entries. It is therefore a good idea to periodically update your own database with recent suppressions and then purge the list in SparkPost. If you use the [SparkPost recipient list capability](recipient-lists), your lists should also be maintained in a similar manner.**
 
 ## Using Postman
 
@@ -163,7 +168,7 @@ If the recipient is not in the customer-specific exclusion list, an HTTP status 
 In addition to the list entry attributes, the response body also includes "created" and "updated" timestamps.
 
 + Parameters
-  + recipient_email (required, string, `rcpt_1@example.com`) ... Recipient email address
+  + recipient_email (required, string, `rcpt@example.com`) ... Recipient email address
 
 
 + Request
@@ -191,10 +196,10 @@ In addition to the list entry attributes, the response body also includes "creat
                 "recipient" : "rcpt_1@example.com",
                 "transactional" : false,
                 "non_transactional" : true,
-                "source" : "Manually Added"
+                "source" : "Manually Added",
                 "description" : "User requested to not receive any non-transactional emails.",
-                "created" : "2015-01-01T12:00:00.000Z'
-                "updated" : "2015-01-01T12:00:00.000Z'
+                "created" : "2015-01-01T12:00:00.000Z",
+                "updated" : "2015-01-01T12:00:00.000Z"
               }
             ]
         }
@@ -206,7 +211,7 @@ Delete a recipient from the list by specifying the recipient's email address in 
 If the recipient is not in the customer-specific exclusion list, an HTTP status of 404 is returned. If the recipient is in the list, an HTTP status of 204 is returned indicating a successful deletion.
 
 + Parameters
-    + recipient_email (required, string, `rcpt_1@example.com`) ... Recipient email address
+    + recipient_email (required, string, `rcpt@example.com`) ... Recipient email address
 
 
 + Request

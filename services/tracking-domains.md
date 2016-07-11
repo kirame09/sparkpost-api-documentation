@@ -1,3 +1,6 @@
+title: Tracking Domains
+description: Manage tracking domains, which are used to wrap links in engagement tracking to report opens and clicks in your messages.
+
 # Group Tracking Domains
 <a name="tracking-domains-api"></a>
 
@@ -16,7 +19,6 @@ With a tracking domain you can replace the domain part of the link. So if your t
 ```
 
 **Note:** Use of a tracking domain requires modification of your DNS records to include a CNAME record.
-**Note:** Currently subaccounts can only use their master account's default tracking domain. Feature coming soon.
 
 ## Using Postman
 
@@ -55,7 +57,7 @@ Detailed status for this tracking domain is described in a JSON object with the 
 |------------------------|:-:       |---------------------------------------|-------------|--------|
 | verified | boolean | Whether domain has been verified | false | Read only. This field will return "true" if cname_status is "valid".|
 | cname_status | string | Verification status of CNAME configuration | unverified | Read only. Valid values are "unverified", "pending", "invalid" or "valid".|
-| compliance_status | string | Compliance status | | Valid values are "pending", "valid", or "blocked".|
+| compliance_status | string | Compliance status | | Read only. Valid values are "pending", "valid", or "blocked".|
 
 
 ## Create and List [/tracking-domains]
@@ -76,8 +78,9 @@ Create a tracking domain. A tracking domain cannot be set as the default until i
 
             {
               "domain": "example.domain.com",
-              "port": 8080,
-              "secure": true
+              "port": 80,
+              "secure": false,
+              "default": false
             }
 
 + Response 200

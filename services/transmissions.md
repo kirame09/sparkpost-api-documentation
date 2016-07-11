@@ -1,3 +1,6 @@
+title: Transmissions
+description: Use the transmissions API to send a batch of messages through SparkPost.
+
 # Group Transmissions
 <a name="transmissions-api"></a>
 
@@ -37,10 +40,10 @@ If you use [Postman](https://www.getpostman.com/) you can click the following bu
 |start_time | string | Delay generation of messages until this datetime.  For additional information, see Scheduled Transmissions. |no - defaults to immediate generation | Format YYYY-MM-DDTHH:MM:SS+-HH:MM or "now". Example: '2015-02-11T08:00:00-04:00'.|
 |open_tracking|boolean| Whether open tracking is enabled for this transmission| no |If not specified, the setting at template level is used, or defaults to true. |
 |click_tracking|boolean| Whether click tracking is enabled for this transmission| no |If not specified, the setting at template level is used, or defaults to true. |
-|transactional|boolean|Whether message is transactional or non-transactional for unsubscribe and suppression purposes | no |If not specified, the setting at template level is used, or defaults to false. |
+|transactional|boolean|Whether message is transactional or non-transactional for unsubscribe and suppression purposes (**Note:** no List-Unsubscribe header is included in transactional messages)| no |If not specified, the setting at template level is used, or defaults to false. |
 |sandbox|boolean|Whether or not to use the sandbox sending domain ( **Note:** SparkPost only )| no |Defaults to false. |
 |skip_suppression|boolean|Whether or not to ignore customer suppression rules, for this transmission only.  Only applicable if your configuration supports this parameter. ( **Note:** SparkPost Elite only )| no - Defaults to false |  Unlike most other options, this flag is omitted on a GET transmission response unless the flag's value is true. |
-| ip_pool | string | The name of a dedicated IP pool associated with your account.  If this field is not provided, the account's default dedicated IP pool is used (if such a pool exists).  To explicitly bypass the account's default dedicated IP pool and instead fallback to the shared pool, specify a value of "sp_shared".  Please note that this option does not apply to subaccounts. | no | For more information on dedicated IPs, see the [Support Center](https://support.sparkpost.com/customer/en/portal/articles/2002977-dedicated-ip-addresses)
+| ip_pool | string | The ID of a dedicated IP pool associated with your account ( **Note:** SparkPost only ).  If this field is not provided, the account's default dedicated IP pool is used (if there are IPs assigned to it).  To explicitly bypass the account's default dedicated IP pool and instead fallback to the shared pool, specify a value of "sp_shared".  Please note that this option does not apply to subaccounts. | no | For more information on dedicated IPs, see the [Support Center](https://support.sparkpost.com/customer/en/portal/articles/2002977-dedicated-ip-addresses)
 |inline_css|boolean|Whether or not to perform CSS inlining in HTML content | no - Defaults to false | |
 
 ### Inline Content Attributes
@@ -51,7 +54,7 @@ The following attributes are used when specifying inline content in the transmis
 |------------------------|:-:       |---------------------------------------|-------------|--------|
 |html    |string  |HTML content for the email's text/html MIME part|At a minimum, html, text, or push is required.  |Expected in the UTF-8 charset with no Content-Transfer-Encoding applied.  Substitution syntax is supported. |
 |text    |string  |Text content for the email's text/plain MIME part|At a minimum, html, text, or push is required. |Expected in the UTF-8 charset with no Content-Transfer-Encoding applied.  Substitution syntax is supported.|
-|push    |JSON object  |Content of push notifications|At a minimum, html, text, or push is required. |See Push Attributes.|
+|push    |JSON object  |Content of push notifications|At a minimum, html, text, or push is required. |See Push Attributes. ( **Note:** SparkPost Elite only )|
 |subject |string  |Email subject line   | required for email transmissions |Expected in the UTF-8 charset without RFC2047 encoding.  Substitution syntax is supported. |
 |from |string or JSON  | Address _"from" : "deals@company.com"_ or JSON object composed of the "name" and "email" fields _"from" : { "name" : "My Company", "email" : "deals@company.com" }_ used to compose the email's "From" header| required for email transmissions | Substitution syntax is supported. |
 |reply_to |string  |Email address used to compose the email's "Reply-To" header | no | Substitution syntax is supported. |
@@ -130,15 +133,13 @@ The following recipients attribute is used when specifying a stored recipient li
 |list_id | string  | Identifier of the stored recipient list to use | yes | Specify this field when using a stored recipient list. |
 
 ### Scheduled Transmissions
-Use the _options.start_time_ attribute to delay generation of messages.  The scheduled time cannot be greater than 1 year from the time of submission.  If the scheduled time does not pass validation, the transmission is not accepted.  Transmissions with a scheduled time in the past _are_ accepted and undergo immediate generation.
+Use the _options.start_time_ attribute to delay generation of messages.  The scheduled time cannot be greater than 31 days from the time of submission.  If the scheduled time does not pass validation, the transmission is not accepted.  Transmissions with a scheduled time in the past _are_ accepted and undergo immediate generation.
 
 ## Create [/transmissions{?num_rcpt_errors}]
 
 ### Create a Transmission [POST]
 
 You can create a transmission in a number of ways. In all cases, you can use the **num_rcpt_errors** parameter to limit the number of recipient errors returned.
-
-**Note:** The "return_path" in the POST request body applies to SparkPost Elite only.
 
 **Note:** Sending limits apply to SparkPost only. When a transmission is created in SparkPost, the number of messages in the transmission is compared to the sending limit of your account. If the transmission will cause you to exceed your sending limit, the entire transmission results in an error and no messages are sent.  Note that no messages will be sent for the given transmission, regardless of the number of messages that caused you to exceed your sending limit. In this case, the Transmission API will return an HTTP 420 error code with an error detailing whether you would exceed your hourly, daily, or sandbox sending limit.
 
@@ -220,7 +221,7 @@ Once message generation has been initiated, all messages in the transmission wil
                   "title" : "You have Android deals",
                   "body" : "Open your Android app to check out these awesome new deals",
                   "color" : "#fa6423",
-                  "icon" : "myicon" 
+                  "icon" : "myicon"
                 }
               }
             }
@@ -246,7 +247,7 @@ Once message generation has been initiated, all messages in the transmission wil
         }
         ```
 
-        
+
 + Request Create Transmission using Inline Email Part Content (application/json)
 
     + Headers
@@ -258,24 +259,29 @@ Once message generation has been initiated, all messages in the transmission wil
         ```
         {
           "options": {
+          	"start_time": "now",
             "open_tracking": true,
-            "click_tracking": true
+            "click_tracking": true,
+            "transactional": false,
+            "sandbox": false,
+            "ip_pool": "sp_shared",
+            "inline_css": false
           },
-
+		  "description": "Christmas Campaign Email",
           "campaign_id": "christmas_campaign",
-          "return_path": "bounces-christmas-campaign@flintstone.com",
 
           "metadata": {
-            "user_type": "students"
+            "user_type": "students",
+            "education_level": "college"
           },
 
           "substitution_data": {
-            "sender": "Big Store Team"
+            "sender": "Big Store Team",
+            "holiday_name": "Christmas"
           },
 
           "recipients": [
             {
-              "return_path": "123@bounces.flintstone.com",
               "address": {
                 "email": "wilma@flintstone.com",
                 "name": "Wilma Flintstone"
@@ -287,10 +293,12 @@ Once message generation has been initiated, all messages in the transmission wil
                 "flintstone"
               ],
               "metadata": {
+                "age": "24",
                 "place": "Bedrock"
               },
               "substitution_data": {
-                "customer_type": "Platinum"
+                "customer_type": "Platinum",
+                "year": "Freshman"
               }
             }
           ],
@@ -328,6 +336,20 @@ Once message generation has been initiated, all messages in the transmission wil
         }
         ```
 
++ Response 400 (application/json)
+
+        ```
+        {
+          "errors" : [
+            {
+              "description" : "Unconfigured or unverified sending domain.",
+              "code" : "7001",
+              "message" : "Invalid domain"
+            }
+          ]
+        }
+        ```
+
 + Request Create Transmission with Inline RFC822 Content (application/json)
 
   + Headers
@@ -335,63 +357,77 @@ Once message generation has been initiated, all messages in the transmission wil
             Authorization: 14ac5499cfdd2bb2859e4476d2e5b1d2bad079bf
 
   + Body
+		{
+          "options": {
+          	"start_time": "now",
+            "open_tracking": true,
+            "click_tracking": true,
+            "transactional": false,
+            "sandbox": false,
+            "ip_pool": "",
+            "inline_css": false
+          },
+		  "description": "Christmas Campaign Email",
+          "campaign_id": "christmas_campaign",
 
+          "metadata": {
+            "user_type": "students",
+            "education_level": "college"
+          },
+
+          "substitution_data": {
+            "sender": "Big Store Team",
+            "holiday_name": "Christmas"
+          },
+
+          "recipients": [
             {
-              "options": {
-                "open_tracking": true,
-                "click_tracking": true
+              "address": {
+                "email": "wilma@flintstone.com",
+                "name": "Wilma Flintstone"
               },
-              "campaign_id": "christmas_campaign",
-              "return_path": "bounces-christmas-campaign@flintstone.com",
+              "tags": [
+                "greeting",
+                "prehistoric",
+                "fred",
+                "flintstone"
+              ],
               "metadata": {
-                "user_type": "students"
+                "age": "24",
+                "place": "Bedrock"
               },
               "substitution_data": {
-                "sender": "Big Store Team"
+              	"first_name": "Wilma",
+                "customer_type": "Platinum",
+                "year": "Freshman"
+              }
+            },
+            {
+              "address": {
+                "email": "abc@flintstone.com",
+                "name": "Fred Flintstone"
               },
-              "recipients": [
-                {
-                  "return_path": "123@bounces.flintstone.com",
-                  "address": {
-                    "email": "wilma@flintstone.com",
-                    "name": "Wilma Flintstone"
-                  },
-                  "tags": [
-                    "greeting",
-                    "prehistoric",
-                    "fred",
-                    "flintstone"
-                  ],
-                  "metadata": {
-                    "place": "Bedrock"
-                  },
-                  "substitution_data": {
-                    "name": "Will Smith"
-                  }
-                },
-                {
-                  "address": {
-                    "email": "abc@flintstone.com",
-                    "name": "Fred Fintstone"
-                  },
-                  "tags": [
-                    "greeting",
-                    "prehistoric",
-                    "fred",
-                    "flintstone"
-                  ],
-                  "metadata": {
-                    "place": "MD"
-                  },
-                  "substitution_data": {
-                    "name": "Fred"
-                  }
-                }
+              "tags": [
+                "greeting",
+                "prehistoric",
+                "fred",
+                "flintstone"
               ],
-              "content": {
-                "email_rfc822": "Content-Type: text\/plain\r\nTo: \"{{address.name}}\" <{{address.email}}>\r\n\r\n Hi {{name}} \nSave big this Christmas in your area {{place}}! \nClick http://www.mysite.com and get huge discount\n Hurry, this offer is only to {{user_type}}\n {{sender}}\r\n"
+              "metadata": {
+                "age": "33",
+                "place": "NY"
+              },
+              "substitution_data": {
+              	"first_name": "Fred",
+                "customer_type": "Sliver",
+                "year": "Senior"
               }
             }
+          ],
+          "content": {
+            "email_rfc822": "Content-Type: text\/plain\r\nTo: \"{{address.name}}\" <{{address.email}}>\r\n\r\n Hi {{first_name}} \nSave big this Christmas in your area {{place}}! \nClick http://www.mysite.com and get huge discount\n Hurry, this offer is only to {{customer_type}}\n {{sender}}\r\n"
+          }
+        }
 
 + Response 200 (application/json)
 
@@ -417,6 +453,88 @@ Once message generation has been initiated, all messages in the transmission wil
           ]
         }
 
++ Request Create Transmission Using CC Header (application/json)
+
+    + Headers
+
+            Authorization: 14ac5499cfdd2bb2859e4476d2e5b1d2bad079bf
+
+    + Body
+
+        ```
+        {
+          "options": {
+          	"start_time": "now",
+            "open_tracking": true,
+            "click_tracking": true,
+            "transactional": false,
+            "sandbox": false,
+            "ip_pool": "sp_shared",
+            "inline_css": false
+          },
+		  "description": "Christmas Campaign Email",
+          "campaign_id": "christmas_campaign",
+
+          "recipients": [
+            {
+              "address": {
+                "email": "wilma@flintstone.com"
+              }
+            },
+            {
+              "address": {
+                "email": "pebbles@flintstone.com",
+                "header_to": "wilma@flintstone.com"
+              }
+            }
+          ],
+          "content": {
+            "from": {
+              "name": "Fred Flintstone",
+              "email": "fred@flintstone.com"
+            },
+            "subject": "Big Christmas savings!",
+            "reply_to": "Christmas Sales <sales@flintstone.com>",
+            "headers": {
+              "CC": "pebbles@flintstone.com"
+            },
+            "text": "Hi, \nSave big this Christmas in your area! \nClick http://www.mysite.com and get huge discount!",
+          }
+        }
+        ```
+
++ Response 200 (application/json)
+
+    + Headers
+
+            Authorization: 14ac5499cfdd2bb2859e4476d2e5b1d2bad079bf
+
+    + Body
+
+        ```
+        {
+          "results": {
+            "total_rejected_recipients": 0,
+            "total_accepted_recipients": 2,
+            "id": "11668787484950529"
+          }
+        }
+        ```
+
++ Response 400 (application/json)
+
+        ```
+        {
+          "errors" : [
+            {
+              "description" : "Unconfigured or unverified sending domain.",
+              "code" : "7001",
+              "message" : "Invalid domain"
+            }
+          ]
+        }
+        ```
+
 
 + Request Create Transmission with Stored Recipient List (application/json)
 
@@ -428,7 +546,6 @@ Once message generation has been initiated, all messages in the transmission wil
 
             {
                 "campaign_id": "christmas_campaign",
-                "return_path": "bounces-christmas-campaign@flintstone.com",
 
                 "recipients": {
                   "list_id": "christmas_sales_2013"
@@ -494,18 +611,17 @@ Once message generation has been initiated, all messages in the transmission wil
                 "use_draft_template": false
               },
 
-              "return_path": "bounces-christmas-campaign@flintstone.com",
-
               "metadata": {
-                "user_type": "students"
+                "user_type": "students",
+                "age_group": "18-35"
               },
               "substitution_data": {
-                "subkey": "subvalue"
+                "status": "shopping",
+                "holiday": "Thanksgiving"
               },
 
               "recipients": [
                 {
-                  "return_path": "123@bounces.flintstone.com",
                   "address": {
                     "email": "wilma@flintstone.com",
                     "name": "Wilma Flintstone"
@@ -517,14 +633,15 @@ Once message generation has been initiated, all messages in the transmission wil
                     "flintstone"
                   ],
                   "metadata": {
+                  	"age": "24",
                     "place": "Bedrock"
                   },
                   "substitution_data": {
-                    "subrcptkey": "subrcptvalue"
+                    "first_name": "Wilma",
+                    "last_name": "Flintstone"
                   }
                 },
                 {
-                  "return_path": "456@bounces.flintstone.com",
                   "address": {
                     "email": "abc@flintstone.com"
                   },
@@ -535,6 +652,7 @@ Once message generation has been initiated, all messages in the transmission wil
                     "flintstone"
                   ],
                   "metadata": {
+					"age": "33",
                     "place": "MD"
                   }
                 }
@@ -658,7 +776,6 @@ Once message generation has been initiated, all messages in the transmission wil
             {
                 "name" : "Fall Sale",
                 "campaign_id": "fall",
-                "return_path": "deals@company.com",
 
                 "options": {
                   "start_time" : "2015-10-11T08:00:00-04:00",
@@ -798,8 +915,6 @@ Retrieve the details about a transmission by specifying its ID in the URI path.
 
 The response for a transmission using an inline template will include "template_id":"inline".  Inline templates cannot be specifically queried.
 
-**Note:** The "return_path" is returned in the response for SparkPost Elite only.
-
 + Parameters
     + id (required, number, `11714265276872`) ... ID of the transmission
 
@@ -826,7 +941,6 @@ The response for a transmission using an inline template will include "template_
                 "template_id": "Bob's template",
                 "use_draft_template": false
               },
-              "return_path": "fred@flintstone.com",
               "rcpt_list_chunk_size": 100,
               "rcpt_list_total_chunks": 1,
               "num_rcpts": 10,
@@ -836,7 +950,7 @@ The response for a transmission using an inline template will include "template_
               "generation_end_time": "2014-05-22T15:13:00+00:00",
               "substitution_data": "",
               "metadata": {
-                "key1": "value1"
+                "is_snowing": "yes"
               },
               "options": {
                 "open_tracking": "",
@@ -973,7 +1087,7 @@ The example response shows a query on _campaign_id=thanksgiving_, with **templat
 
 + Parameters
   + campaign_id (optional, string,`thanksgiving`) ... ID of the campaign used by the transmissions
-  + template_id (optional, string,`thanksgiving_template`) ... ID of the template used by the transmissions
+  + template_id (optional, string, `thanksgiving-template`) ... ID of the template used by the transmissions
 
 + Request
 
@@ -1009,7 +1123,7 @@ The example response shows a query on _campaign_id=thanksgiving_, with **templat
             },
             {
               "content" : {
-                "template_id": "thanksgiving_template"
+                "template_id": "thanksgiving-template"
               },
               "id": "11713048079237202",
               "campaign_id": "thanksgiving",

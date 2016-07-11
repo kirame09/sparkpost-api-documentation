@@ -1,7 +1,9 @@
+title: Templates
+description: Manage reusable content templates that are run through the SparkPost substitution engine and can be used when sending messages.
+
 # Group Templates
 
-A template is a named collection of content stored on the server side.  Templates are used
-in a transmission by providing the id of the template at the time of transmission submission.  Each textual component of the
+A template is a named collection of content stored on the server side.  Templates are used in a transmission by providing the id of the template at the time of transmission submission.  Each textual component of the
 template (headers, text, and html) is run through the substitution engine
 to produce recipient specific email messages.  The Templates API provides the means to manage your templates.
 
@@ -190,12 +192,11 @@ Fully formed email_rfc822 content may be provided instead of the "text", "html",
           "id" : "summer_sale",
           "name" : "Summer Sale!",
           "published" : true,
-
+          "description": "Template for a Summer Sale!"
           "options": {
             "open_tracking" : false,
             "click_tracking" : true
           },
-
           "content": {
             "from": {
               "email": "marketing@bounces.company.example",
@@ -330,7 +331,8 @@ If the template was used for message generation, the result will also include a 
 
             "options": {
               "open_tracking" : false,
-              "click_tracking" : true
+              "click_tracking" : true,
+              "transactional" : false
             },
 
             "content": {
