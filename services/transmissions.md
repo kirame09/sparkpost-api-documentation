@@ -184,11 +184,15 @@ Once message generation has been initiated, all messages in the transmission wil
         {
           "recipients": [
             {
+              "channel" : "email",
+              "email" : "wilma@flintstone.com"
+            },
+            {
                 "multichannel_addresses": [
                     {
                         "channel": "apns",
-                        "token": "<DEVICE_TOKEN>",
-                        "app_id": "<Application_Identifier>"
+                        "token": "02c7830aae68d008a0616aed81a6bec40b5acf53fbca1ae46c734527ee0e885f",
+                        "app_id": "flintstone.apns.domain"
                     }
                 ]
             },
@@ -196,12 +200,8 @@ Once message generation has been initiated, all messages in the transmission wil
                 "multichannel_addresses" : [
                     {
                         "channel": "gcm",
-                        "token": "<DEVICE_TOKEN>",
-                        "app_id": "<Application_Identifier>",
-                    },
-                    {
-                        "email" : "fred@flinstone.com",
-                        "name" : "Fred"
+                        "token": "kNd8dnekej:KDSNDdnedik3n3kFDJfjwJDKndkd39MNiKnd9-Dk4NbkwnyMisosowb_GixnesleE38c1nglc9dTIXL56Djdhsn90nZjkDleEixlndiHk_Sntks54g1sZdnssY2s15f_SnektTkjwse",
+                        "app_id": "flintstone.gcm.domain",
                     }
                 ]
             }
@@ -239,10 +239,23 @@ Once message generation has been initiated, all messages in the transmission wil
 
         ```
         {
+          "errors": [
+            {
+              "message": "transmission created, but with validation errors",
+              "code": "2000"
+            }
+          ],
           "results": {
-            "total_rejected_recipients": 0,
+            "rcpt_to_errors": [
+              {
+                "message": "invalid data format/type",
+                "description": "Recpient address was for channel 'email' but template.content does not have required field",
+                "code": "1300"
+              }
+            ],
+            "total_rejected_recipients": 1,
             "total_accepted_recipients": 2,
-            "id": "11668787484950529"
+            "id": "84373374957884463"
           }
         }
         ```
