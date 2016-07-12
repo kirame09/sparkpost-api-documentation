@@ -174,7 +174,7 @@ Once message generation has been initiated, all messages in the transmission wil
         ```
         {
           "options": {
-          	"start_time": "now",
+            "start_time": "now",
             "open_tracking": true,
             "click_tracking": true,
             "transactional": false,
@@ -182,7 +182,7 @@ Once message generation has been initiated, all messages in the transmission wil
             "ip_pool": "sp_shared",
             "inline_css": false
           },
-		  "description": "Christmas Campaign Email",
+          "description": "Christmas Campaign Email",
           "campaign_id": "christmas_campaign",
 
           "metadata": {

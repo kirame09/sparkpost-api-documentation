@@ -165,7 +165,7 @@ returned.
                       "place": "NY"
                   },
                   "substitution_data": {
-                      "favorite_color": "Bright Green"
+                      "favorite_color": "Bright Green",
                       "job": "Firefighter"
                   }
               }
@@ -325,7 +325,7 @@ retrieve the recipients contained in a list, the list must be specified and the 
                             "place": "NY"
                         },
                         "substitution_data": {
-                            "favorite_color": "Bright Green"
+                            "favorite_color": "Bright Green",
                             "job": "Firefighter"
                         }
                     }

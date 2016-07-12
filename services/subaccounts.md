@@ -226,7 +226,7 @@ Update an existing subaccount's information. You can update the following inform
 
 + Parameters
 
-    + subaccountID (required, integer, `123`) ... Identifier of subaccount
+    + subaccount_id (required, integer, `123`) ... Identifier of subaccount
 
 + Response 200 (application/json)
 
