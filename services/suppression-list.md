@@ -15,7 +15,13 @@ Transactional messages are single recipient messages that are used operationally
 
 In addition to the customer-specific exclusion list, Message Systems maintains a global suppression list across all customers.
 
-**Note: SparkPost supports a suppression list of up to 1,000,000 entries. It is therefore a good idea to periodically update your own database with recent suppressions and then purge the list in SparkPost. If you use the [SparkPost recipient list capability](recipient-lists), your lists should also be maintained in a similar manner.**
+## Recipient Database Maintenance
+
+**When initially configuring your SparkPost account, we *strongly recommend* you import any suppression list you have from any previous service to avoid incorrectly sending mail to unsubscribed/invalid recipients.**
+
+**SparkPost supports bulk importing or manually adding up to 1,000,000 suppression list entries.**
+
+It is also good practice to maintain your own recipient database by unsubscribing or removing recipients based on the bounce, unsubscribe and spam complaint events provided by SparkPost. These events are available from [webhooks](webhooks), [message events](message-events) and your suppression list. A 24-hour time-windowed suppression list search [as outlined below](#suppression-list-search-get) is useful here.
 
 ## Using Postman
 
