@@ -171,96 +171,6 @@ Once message generation has been initiated, all messages in the transmission wil
 + Parameters
   + num_rcpt_errors (optional, number, `3`) ... Maximum number of recipient errors that this call can return, otherwise all validation errors are returned.
 
-
-+ Request Create Transmission for Mobile Push Using Inline Content (application/json)
-
-    + Headers
-
-            Authorization: 14ac5499cfdd2bb2859e4476d2e5b1d2bad079bf
-
-    + Body
-
-        ```
-        {
-          "recipients": [
-            {
-              "channel" : "email",
-              "email" : "wilma@flintstone.com"
-            },
-            {
-                "multichannel_addresses": [
-                    {
-                        "channel": "apns",
-                        "token": "02c7830aae68d008a0616aed81a6bec40b5acf53fbca1ae46c734527ee0e885f",
-                        "app_id": "flintstone.apns.domain"
-                    }
-                ]
-            },
-            {
-                "multichannel_addresses" : [
-                    {
-                        "channel": "gcm",
-                        "token": "kNd8dnekej:KDSNDdnedik3n3kFDJfjwJDKndkd39MNiKnd9-Dk4NbkwnyMisosowb_GixnesleE38c1nglc9dTIXL56Djdhsn90nZjkDleEixlndiHk_Sntks54g1sZdnssY2s15f_SnektTkjwse",
-                        "app_id": "flintstone.gcm.domain",
-                    }
-                ]
-            }
-          ],
-          "content": {
-            "push": {
-              "apns" : {
-                "aps" : {
-                  "alert" : {
-                    "title" : "You have IOS deals",
-                    "badge" : 1
-                  }
-                }
-              },
-              "gcm" : {
-                "notification" : {
-                  "title" : "You have Android deals",
-                  "body" : "Open your Android app to check out these awesome new deals",
-                  "color" : "#fa6423",
-                  "icon" : "myicon"
-                }
-              }
-            }
-          }
-        }
-        ```
-
-+ Response 200 (application/json)
-
-    + Headers
-
-            Authorization: 14ac5499cfdd2bb2859e4476d2e5b1d2bad079bf
-
-    + Body
-
-        ```
-        {
-          "errors": [
-            {
-              "message": "transmission created, but with validation errors",
-              "code": "2000"
-            }
-          ],
-          "results": {
-            "rcpt_to_errors": [
-              {
-                "message": "invalid data format/type",
-                "description": "Recpient address was for channel 'email' but template.content does not have required field",
-                "code": "1300"
-              }
-            ],
-            "total_rejected_recipients": 1,
-            "total_accepted_recipients": 2,
-            "id": "84373374957884463"
-          }
-        }
-        ```
-
-
 + Request Create Transmission using Inline Email Part Content (application/json)
 
     + Headers
@@ -269,10 +179,9 @@ Once message generation has been initiated, all messages in the transmission wil
 
     + Body
 
-        ```
         {
           "options": {
-          	"start_time": "now",
+            "start_time": "now",
             "open_tracking": true,
             "click_tracking": true,
             "transactional": false,
@@ -280,7 +189,7 @@ Once message generation has been initiated, all messages in the transmission wil
             "ip_pool": "sp_shared",
             "inline_css": false
           },
-		  "description": "Christmas Campaign Email",
+          "description": "Christmas Campaign Email",
           "campaign_id": "christmas_campaign",
 
           "metadata": {
@@ -329,7 +238,6 @@ Once message generation has been initiated, all messages in the transmission wil
             "html": "<p>Hi {{address.name}} \nSave big this Christmas in your area {{place}}! \nClick http://www.mysite.com and get huge discount\n</p><p>Hurry, this offer is only to {{user_type}}\n</p><p>{{sender}}</p>"
           }
         }
-        ```
 
 + Response 200 (application/json)
 
@@ -339,7 +247,6 @@ Once message generation has been initiated, all messages in the transmission wil
 
     + Body
 
-        ```
         {
           "results": {
             "total_rejected_recipients": 0,
@@ -347,11 +254,9 @@ Once message generation has been initiated, all messages in the transmission wil
             "id": "11668787484950529"
           }
         }
-        ```
 
 + Response 400 (application/json)
 
-        ```
         {
           "errors" : [
             {
@@ -361,7 +266,6 @@ Once message generation has been initiated, all messages in the transmission wil
             }
           ]
         }
-        ```
 
 + Request Create Transmission with Inline RFC822 Content (application/json)
 
@@ -370,9 +274,10 @@ Once message generation has been initiated, all messages in the transmission wil
             Authorization: 14ac5499cfdd2bb2859e4476d2e5b1d2bad079bf
 
   + Body
-		{
+
+        {
           "options": {
-          	"start_time": "now",
+            "start_time": "now",
             "open_tracking": true,
             "click_tracking": true,
             "transactional": false,
@@ -380,7 +285,7 @@ Once message generation has been initiated, all messages in the transmission wil
             "ip_pool": "",
             "inline_css": false
           },
-		  "description": "Christmas Campaign Email",
+          "description": "Christmas Campaign Email",
           "campaign_id": "christmas_campaign",
 
           "metadata": {
@@ -410,7 +315,7 @@ Once message generation has been initiated, all messages in the transmission wil
                 "place": "Bedrock"
               },
               "substitution_data": {
-              	"first_name": "Wilma",
+                "first_name": "Wilma",
                 "customer_type": "Platinum",
                 "year": "Freshman"
               }
@@ -431,7 +336,7 @@ Once message generation has been initiated, all messages in the transmission wil
                 "place": "NY"
               },
               "substitution_data": {
-              	"first_name": "Fred",
+                "first_name": "Fred",
                 "customer_type": "Sliver",
                 "year": "Senior"
               }
@@ -474,10 +379,9 @@ Once message generation has been initiated, all messages in the transmission wil
 
     + Body
 
-        ```
         {
           "options": {
-          	"start_time": "now",
+            "start_time": "now",
             "open_tracking": true,
             "click_tracking": true,
             "transactional": false,
@@ -485,9 +389,8 @@ Once message generation has been initiated, all messages in the transmission wil
             "ip_pool": "sp_shared",
             "inline_css": false
           },
-		  "description": "Christmas Campaign Email",
+          "description": "Christmas Campaign Email",
           "campaign_id": "christmas_campaign",
-
           "recipients": [
             {
               "address": {
@@ -511,10 +414,9 @@ Once message generation has been initiated, all messages in the transmission wil
             "headers": {
               "CC": "pebbles@flintstone.com"
             },
-            "text": "Hi, \nSave big this Christmas in your area! \nClick http://www.mysite.com and get huge discount!",
+            "text": "Hi, \nSave big this Christmas in your area! \nClick http://www.mysite.com and get huge discount!"
           }
         }
-        ```
 
 + Response 200 (application/json)
 
@@ -524,7 +426,6 @@ Once message generation has been initiated, all messages in the transmission wil
 
     + Body
 
-        ```
         {
           "results": {
             "total_rejected_recipients": 0,
@@ -532,11 +433,9 @@ Once message generation has been initiated, all messages in the transmission wil
             "id": "11668787484950529"
           }
         }
-        ```
 
 + Response 400 (application/json)
 
-        ```
         {
           "errors" : [
             {
@@ -546,7 +445,6 @@ Once message generation has been initiated, all messages in the transmission wil
             }
           ]
         }
-        ```
 
 
 + Request Create Transmission with Stored Recipient List (application/json)
@@ -646,7 +544,7 @@ Once message generation has been initiated, all messages in the transmission wil
                     "flintstone"
                   ],
                   "metadata": {
-                  	"age": "24",
+                    "age": "24",
                     "place": "Bedrock"
                   },
                   "substitution_data": {
@@ -665,7 +563,7 @@ Once message generation has been initiated, all messages in the transmission wil
                     "flintstone"
                   ],
                   "metadata": {
-					"age": "33",
+                    "age": "33",
                     "place": "MD"
                   }
                 }
@@ -825,7 +723,6 @@ Once message generation has been initiated, all messages in the transmission wil
 
     + Body
 
-        ```
         {
           "campaign_id" : "attachment_example",
           "recipients": [
@@ -855,13 +752,11 @@ Once message generation has been initiated, all messages in the transmission wil
             ]
           }
         }
-        ```
 
 + Response 200 (application/json)
 
     + Body
 
-        ```
         {
           "results": {
             "total_rejected_recipients": 0,
@@ -878,7 +773,6 @@ Once message generation has been initiated, all messages in the transmission wil
 
     + Body
 
-        ```
         {
           "campaign_id" : "inline_image_example",
           "recipients": [
@@ -903,13 +797,11 @@ Once message generation has been initiated, all messages in the transmission wil
             ]
           }
         }
-        ```
 
 + Response 200 (application/json)
 
     + Body
 
-        ```
         {
           "results": {
             "total_rejected_recipients": 0,
@@ -917,6 +809,73 @@ Once message generation has been initiated, all messages in the transmission wil
             "id": "11668787484950529"
           }
         }
+
+
++ Request Create Transmission for Mobile Push Using Inline Content (SparkPost Elite only) (application/json)
+
+    + Headers
+
+            Authorization: 14ac5499cfdd2bb2859e4476d2e5b1d2bad079bf
+
+    + Body
+
+        {
+          "recipients": [
+            {
+                "multichannel_addresses": [
+                    {
+                        "channel": "apns",
+                        "token": "02c7830aae68d008a0616aed81a6bec40b5acf53fbca1ae46c734527ee0e885f",
+                        "app_id": "flintstone.apns.domain"
+                    }
+                ]
+            },
+            {
+                "multichannel_addresses" : [
+                    {
+                        "channel": "gcm",
+                        "token": "kNd8dnekej:KDSNDdnedik3n3kFDJfjwJDKndkd39MNiKnd9-Dk4NbkwnyMisosowb_GixnesleE38c1nglc9dTIXL56Djdhsn90nZjkDleEixlndiHk_Sntks54g1sZdnssY2s15f_SnektTkjwse",
+                        "app_id": "flintstone.gcm.domain",
+                    }
+                ]
+            }
+          ],
+          "content": {
+            "push": {
+              "apns" : {
+                "aps" : {
+                  "alert" : {
+                    "title" : "You have IOS deals",
+                    "badge" : 1
+                  }
+                }
+              },
+              "gcm" : {
+                "notification" : {
+                  "title" : "You have Android deals",
+                  "body" : "Open your Android app to check out these awesome new deals",
+                  "color" : "#fa6423",
+                  "icon" : "myicon"
+                }
+              }
+            }
+          }
+        }
+
++ Response 200 (application/json)
+
+    + Body
+
+        {
+          "results": {
+            "total_rejected_recipients": 0,
+            "total_accepted_recipients": 2,
+            "id": "11668787493850529"
+          }
+        }
+
+
+
 
 
 
@@ -942,7 +901,6 @@ The response for a transmission using an inline template will include "template_
 
     + Body
 
-        ```
         {
           "results": {
             "transmission": {
@@ -972,7 +930,6 @@ The response for a transmission using an inline template will include "template_
             }
           }
         }
-        ```
 
 + Response 404 (application/json)
 
@@ -1012,16 +969,13 @@ Scheduled transmissions cannot be deleted if the transmission is within 10 minut
 
     +  Body
 
-        ```
         {
         }
-        ```
 
 + Response 404 (application/json)
 
   + Body
 
-          ```
           {
             "errors": [
               {
@@ -1031,13 +985,11 @@ Scheduled transmissions cannot be deleted if the transmission is within 10 minut
               }
             ]
           }
-          ```
 
 + Response 409 (application/json)
 
   + Body
 
-          ```
           {
             "errors": [
               {
@@ -1047,13 +999,11 @@ Scheduled transmissions cannot be deleted if the transmission is within 10 minut
               }
             ]
           }
-          ```
 
 + Response 409 (application/json)
 
   + Body
 
-          ```
           {
             "errors": [
               {
@@ -1063,13 +1013,11 @@ Scheduled transmissions cannot be deleted if the transmission is within 10 minut
               }
             ]
           }
-          ```
 
 + Response 409 (application/json)
 
   + Body
 
-          ```
           {
             "errors": [
               {
@@ -1079,7 +1027,7 @@ Scheduled transmissions cannot be deleted if the transmission is within 10 minut
               }
             ]
           }
-          ```
+
 ## List [/transmissions{?campaign_id,template_id}]
 
 ### List all Transmissions [GET]
@@ -1113,7 +1061,6 @@ The example response shows a query on _campaign_id=thanksgiving_, with **templat
 
     + Body
 
-        ```
         {
           "results": [
             {
@@ -1145,4 +1092,3 @@ The example response shows a query on _campaign_id=thanksgiving_, with **templat
             }
           ]
         }
-        ```
