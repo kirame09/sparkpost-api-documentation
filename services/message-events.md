@@ -162,39 +162,52 @@ List an example of the event data that will be included in a response from the M
 + Response 200 (application/json)
   ```js
     {
-        "results": [
-            {
-                "bounce_class": "1",
-                "campaign_id": "Example Campaign Name",
-                "customer_id": "1",
-                "delv_method": "esmtp",
-                "device_token": "45c19189783f867973f6e6a5cca60061ffe4fa77c547150563a1192fa9847f8a",
-                "error_code": "554",
-                "ip_address": "127.0.0.1",
-                "message_id": "0e0d94b7-9085-4e3c-ab30-e3f2cd9c273e",
-                "msg_from": "sender@example.com",
-                "msg_size": "1337",
-                "num_retries": "2",
-                "raw_reason": "MAIL REFUSED - IP (17.99.99.99) is in black list",
-                "rcpt_meta": {
-                    "customKey": "customValue"
-                },
-                "rcpt_tags": [
-                    "male",
-                    "US"
-                ],
-                "rcpt_to": "recipient@example.com",
-                "rcpt_type": "cc",
-                "reason": "MAIL REFUSED - IP (a.b.c.d) is in black list",
-                "routing_domain": "example.com",
-                "subject": "Summer deals are here!",
-                "template_id": "templ-1234",
-                "template_version": "1",
-                "timestamp": "2015-11-24T16:15:54.000+00:00",
-                "transmission_id": "65832150921904138",
-                "type": "bounce"
-            }
-        ]
+      "results": [
+        {
+          "type": "bounce",
+          "bounce_class": "1",
+          "campaign_id": "Example Campaign Name",
+          "customer_id": "1",
+          "delv_method": "esmtp",
+          "device_token": "45c19189783f867973f6e6a5cca60061ffe4fa77c547150563a1192fa9847f8a",
+          "error_code": "554",
+          "event_id": "92356927693813856",
+          "friendly_from": "sender@example.com",
+          "ip_address": "127.0.0.1",
+          "ip_pool": "Example-Ip-Pool",
+          "message_id": "000443ee14578172be22",
+          "msg_from": "sender@example.com",
+          "msg_size": "1337",
+          "num_retries": "2",
+          "rcpt_meta": {
+            "customKey": "customValue"
+          },
+          "rcpt_tags": [
+            "male",
+            "US"
+          ],
+          "rcpt_to": "recipient@example.com",
+          "raw_rcpt_to": "recipient@example.com",
+          "rcpt_type": "cc",
+          "raw_reason": "MAIL REFUSED - IP (17.99.99.99) is in black list",
+          "reason": "MAIL REFUSED - IP (a.b.c.d) is in black list",
+          "routing_domain": "example.com",
+          "sending_ip": "127.0.0.1",
+          "sms_coding": "ASCII",
+          "sms_dst": "7876712656",
+          "sms_dst_npi": "E164",
+          "sms_dst_ton": "International",
+          "sms_src": "1234",
+          "sms_src_npi": "E164",
+          "sms_src_ton": "Unknown",
+          "subaccount_id": "101",
+          "subject": "Summer deals are here!",
+          "template_id": "templ-1234",
+          "template_version": "1",
+          "timestamp": "2016-02-02T19:50:00.000+00:00",
+          "transmission_id": "65832150921904138"
+        }
+      ]
     }
   ```
 
