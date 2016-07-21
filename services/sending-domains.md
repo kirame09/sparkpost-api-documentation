@@ -32,7 +32,7 @@ DKIM uses a pair of public and private keys to authenticate your emails. The DKI
 |------------------------|:-:       |---------------------------------------|-------------|--------|
 |signing_domain| string | Signing Domain Identifier (SDID) | no | This will be used in the d= field of the DKIM Signature. If signing_domain is not specified, or is set to the empty string (""), then the Sending Domain will be used as the signing domain. ( **Note**: signing_domain is only available in SparkPost Elite. In SparkPost.com, the Sending Domain is always used as the signing domain. ) |
 |private | string | DKIM private key | yes | The private key will be used to create the DKIM Signature.|
-|public | string |DKIM public key  | yes | The public key will be retrieved from DNS of the sending domain.|
+|public | string |DKIM public key  | yes | The public key will be retrieved from DNS of the sending domain. ( **Note**: Only PKCS#1 format is supported at this point. ) |
 |selector | string |DomainKey selector | yes | The DomainKey selector will be used to indicate the DKIM public key location.|
 |headers | string| Header fields to be included in the DKIM signature |no | **This field is currently ignored.** |
 
