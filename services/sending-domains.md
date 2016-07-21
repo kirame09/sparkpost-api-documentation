@@ -26,7 +26,7 @@ If you use [Postman](https://www.getpostman.com/) you can click the following bu
 
 ### DKIM Attributes
 
-DKIM uses a pair of public and private keys to authenticate your emails. The DKIM key configuration is described in a JSON object with the following fields:
+DKIM uses a pair of public and private keys to authenticate your emails. ( **Note**: Only PKCS#1 format is supported at this time. ) The DKIM key configuration is described in a JSON object with the following fields:
 
 | Field         | Type     | Description                           | Required   | Notes   |
 |------------------------|:-:       |---------------------------------------|-------------|--------|
