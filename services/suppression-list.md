@@ -113,8 +113,8 @@ If an email address is duplicated in a single request, only the first instance w
 Perform a filtered search for entries in your customer-specific exclusion list.
 
 + Parameters
-    + to = `now` (optional, datetime, `2014-07-20T09:00:00%2B0000`) ... Datetime the entries were last updated, in the format of YYYY-MM-DDTHH:mm:ssZ
-    + from (optional, datetime, `2014-07-20T09:00:00%2B0000`) ... Datetime the entries were last updated, in the format YYYY-MM-DDTHH:mm:ssZ
+    + to = `now` (optional, datetime, `2014-07-20T09:00:00-0400`) ... Datetime the entries were last updated, in the format of YYYY-MM-DDTHH:mm:ssZ
+    + from (optional, datetime, `2014-07-20T09:00:00-0400`) ... Datetime the entries were last updated, in the format YYYY-MM-DDTHH:mm:ssZ
     + types (optional, list) ... Types of entries to include in the search, i.e. entries with "transactional" and/or "non_transactional" keys set to true
     + sources (optional, list) ... Sources of the entries to include in the search, i.e. entries that were added by this source
     + limit (optional, int, `5`) ... Maximum number of results to return.  Must be between 1 and 100000. Default value is 100000.
@@ -204,8 +204,8 @@ In addition to the list entry attributes, the response body also includes "creat
                 "non_transactional" : true,
                 "source" : "Manually Added",
                 "description" : "User requested to not receive any non-transactional emails.",
-                "created" : "2015-01-01T12:00:00.000Z",
-                "updated" : "2015-01-01T12:00:00.000Z"
+                "created" : "2015-01-01T12:00:00+00:00",
+                "updated" : "2015-01-01T12:00:00+00:00"
               }
             ]
         }
