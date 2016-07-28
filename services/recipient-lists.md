@@ -31,21 +31,36 @@ Recipients are described in a JSON array with the following fields:
 
 | Field         | Type     | Description                           | Required   | Notes   |
 |------------------------|:-:       |---------------------------------------|-------------|--------|
-|address | JSON object or string | Address information for a recipient  | yes | See the Address Attributes. |
+|address | JSON object or string | Address information for a recipient  | At a minimum, address or multichannel_addresses is required| If both address and multichannel_addresses are specified only multichannel_addresses will be used. See the Address Attributes. |
+|multichannel_addresses | JSON array |Array of Multichannel Address objects for a recipient | At a minimum, address or multichannel_addresses is required |If both address and multichannel_addresses are specified only multichannel_addresses will be used.  See Multichannel Address attributes. |
 |return_path | string |Email to use for envelope FROM ( **Note:** SparkPost Elite only )| no | To support Variable Envelope Return Path (VERP), this field provides a specific recipient a unique envelope MAIL FROM. |
 |tags | JSON array |Array of text labels associated with a recipient | no | Tags are available in Webhook events.  Maximum number of tags - 10 per recipient, 100 system wide.  Any tags over the limits are ignored.|
 |metadata | JSON object| Key/value pairs associated with a recipient |no | Metadata is available during events through the Webhooks and is provided to the substitution engine.  A maximum of 1000 bytes of merged metadata (transmission level + recipient level) is available with recipient metadata taking precedence over transmission metadata when there are conflicts.  |
 |substitution_data | JSON object | Key/value pairs associated with a recipient that are provided to the substitution engine |no | Recipient substitution data takes precedence over transmission substitution data.  Unlike metadata, substitution data is not included in Webhook events.|
 
 #### Address Attributes
-If the "address" field is a string type, it is interpreted as the email address.  If it is a JSON
+If the "address" field is a string type, it is interpreted as the email address. If it is a JSON
 object, it is described with the following fields:  
 
-| Field         | Type     | Description                           | Required   |
+| Field         | Type     | Description                           | Required  |
 |------------------------|:-:       |---------------------------------------|-------------|
-|email    |string       |Valid email address   |yes  |
+|email    |string       |Valid email address   |yes |
 |name |string |User-friendly name for the email address |no |
 |header_to|string       |Email address to display in the "To" header instead of _address.email_ ([for CC and BCC](https://support.sparkpost.com/customer/en/portal/articles/2432290-using-cc-and-bcc-with-the-rest-api))|no|
+
+#### Multichannel Address attributes
+In anticipation of upcoming multichannel support we have added the _multichannel_addresses_ array. Each of its elements must be a JSON object described with the following fields. Currently, *only the first entry* in the array will be used.
+
+| Field         | Type     | Description                           | Required  |Notes|
+|------------------------|:-:       |---------------------------------------|-------------|--------|
+|channel|string|The communication channel used to reach recipient|yes|Valid values are "email", "gcm", "apns". See Notes on channel below|
+|email    |string       |Valid email address   |required if channel is "email" | |
+|name |string |User-friendly name for the email address |no |Used when channel is "email"|
+|header_to|string       |Email address to display in the "To" header instead of _address.email_ (for BCC)|no|Used when channel is "email"|
+|token|string|See Push Specific Attributes ( **Note:** SparkPost Elite only )|required if channel is "gcm" or "apns"||
+|app_id|string|See Push Specific Attributes ( **Note:** SparkPost Elite only )|required if channel is "gcm" or "apns"| ||
+##### Notes on channel
+Communication channels other than email are currently only supported for inline recipient lists. Fields unrelated to the value of _channel_ are ignored. A field is considered unrelated if it is not required for that value of _channel_ unless mentioned otherwise in Notes
 
 **Constructing Headers using the Address Attributes**
 
@@ -79,6 +94,12 @@ or:
 `To: "address.name" <address.header_to>`
 
 The "To" header is only constructed for messages built from email part content.  The "To" header is not built for email_rfc822 content.
+
+#### Push Specific Attributes (Only supported for inline recipient lists)
+| Field         | Type     | Description                           | Notes |
+|------------------------|:-:       |---------------------------------------|-------------| ------------|
+|token    |string       |Token used to uniquely identify a device   |Device token in APNs, Registration token in GCM |
+|app_id |string |GCM or APNs identifier for your application| |
 
 ## Create [/recipient-lists{?num_rcpt_errors}]
 
@@ -127,7 +148,7 @@ returned.
                       "place": "Bedrock"
                   },
                   "substitution_data": {
-                      "favorite_color": "SparkPost Orange", 
+                      "favorite_color": "SparkPost Orange",
                       "job": "Software Engineer"
                   }
               },
@@ -145,7 +166,7 @@ returned.
                       "place": "MD"
                   },
                   "substitution_data": {
-                      "favorite_color": "Sky Blue", 
+                      "favorite_color": "Sky Blue",
                       "job": "Driver"
                   }
               },
@@ -287,7 +308,7 @@ retrieve the recipients contained in a list, the list must be specified and the 
                             "place": "Bedrock"
                         },
                         "substitution_data": {
-                            "favorite_color": "SparkPost Orange", 
+                            "favorite_color": "SparkPost Orange",
                             "job": "Software Engineer"
                         }
                     },
@@ -305,7 +326,7 @@ retrieve the recipients contained in a list, the list must be specified and the 
                             "place": "MD"
                         },
                         "substitution_data": {
-                            "favorite_color": "Sky Blue", 
+                            "favorite_color": "Sky Blue",
                             "job": "Driver"
                         }
                     },
@@ -459,7 +480,7 @@ number of rejected recipients will only be returned if a "recipients" array is p
                           "place": "Bedrock"
                       },
                       "substitution_data": {
-                          "favorite_color": "SparkPost Orange", 
+                          "favorite_color": "SparkPost Orange",
                           "job": "Software Engineer"
                       }
                   },
@@ -477,7 +498,7 @@ number of rejected recipients will only be returned if a "recipients" array is p
                           "place": "MD"
                       },
                       "substitution_data": {
-                          "favorite_color": "Sky Blue", 
+                          "favorite_color": "Sky Blue",
                           "job": "Driver"
                       }
                   }

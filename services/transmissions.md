@@ -26,7 +26,7 @@ If you use [Postman](https://www.getpostman.com/) you can click the following bu
 |description | string |Description of the transmission|no | Maximum length - 1024 bytes|
 |metadata|JSON object|Transmission level metadata containing key/value pairs |no| Metadata is available during events through the Webhooks and is provided to the substitution engine.  A maximum of 1000 bytes of merged metadata (transmission level + recipient level) is available with recipient metadata taking precedence over transmission metadata when there are conflicts.  |
 |substitution_data|JSON object|Key/value pairs that are provided to the substitution engine| no | Recipient substitution data takes precedence over transmission substitution data. Unlike metadata, substitution data is not included in Webhook events. |
-|return_path | string |Email to use for envelope FROM ( **Note:** SparkPost Elite only )| yes | To support Variable Envelope Return Path (VERP), this field can also optionally be specified inside of the address object of a specific recipient in order to give the recipient a unique envelope MAIL FROM. |
+|return_path | string |Email to use for envelope FROM ( **Note:** SparkPost Elite only )| required for email transmissions | To support Variable Envelope Return Path (VERP), this field can also optionally be specified inside of the address object of a specific recipient in order to give the recipient a unique envelope MAIL FROM. |
 |content| JSON object | Content that will be used to construct a message | yes | Specify a stored template or specify inline template content. When using a stored template, specify the "template_id" as described in Using a Stored Template.  Otherwise, provide the inline content using the fields described in Inline Content Attributes.  Maximum size - 20MBs|
 |total_recipients | number | Computed total recipients | no | Read only|
 |num_generated | number | Computed total number of messages generated | no |Read only|
@@ -52,14 +52,23 @@ The following attributes are used when specifying inline content in the transmis
 
 | Field         | Type     | Description                           | Required   | Notes   |
 |------------------------|:-:       |---------------------------------------|-------------|--------|
-|html    |string  |HTML content for the email's text/html MIME part|At a minimum, html or text is required.  |Expected in the UTF-8 charset with no Content-Transfer-Encoding applied.  Substitution syntax is supported. |
-|text    |string  |Text content for the email's text/plain MIME part|At a minimum, html or text is required. |Expected in the UTF-8 charset with no Content-Transfer-Encoding applied.  Substitution syntax is supported.|
-|subject |string  |Email subject line   | yes |Expected in the UTF-8 charset without RFC2047 encoding.  Substitution syntax is supported. |
-|from |string or JSON  | Address _"from" : "deals@company.com"_ or JSON object composed of the "name" and "email" fields _"from" : { "name" : "My Company", "email" : "deals@company.com" }_ used to compose the email's "From" header| yes | Substitution syntax is supported. |
+|html    |string  |HTML content for the email's text/html MIME part|At a minimum, html, text, or push is required.  |Expected in the UTF-8 charset with no Content-Transfer-Encoding applied.  Substitution syntax is supported. |
+|text    |string  |Text content for the email's text/plain MIME part|At a minimum, html, text, or push is required. |Expected in the UTF-8 charset with no Content-Transfer-Encoding applied.  Substitution syntax is supported.|
+|push    |JSON object  |Content of push notifications|At a minimum, html, text, or push is required. |See Push Attributes. ( **Note:** SparkPost Elite only )|
+|subject |string  |Email subject line   | required for email transmissions |Expected in the UTF-8 charset without RFC2047 encoding.  Substitution syntax is supported. |
+|from |string or JSON  | Address _"from" : "deals@company.com"_ or JSON object composed of the "name" and "email" fields _"from" : { "name" : "My Company", "email" : "deals@company.com" }_ used to compose the email's "From" header| required for email transmissions | Substitution syntax is supported. |
 |reply_to |string  |Email address used to compose the email's "Reply-To" header | no | Substitution syntax is supported. |
 |headers| JSON | JSON dictionary containing headers other than "Subject", "From", "To", and "Reply-To"  | no |See the Header Notes. |
 |attachments| JSON | JSON array of attachments. | no | For a full description, see Attachment Attributes. |
 |inline_images| JSON | JSON array of inline images. | no | For a full description, see Inline Image Attributes. |
+
+#### Push Attributes
+The following attributes control the contents of push notifications:
+
+| Field         | Type     | Description                           | Required   | Notes   |
+|------------------------|:-:       |---------------------------------------|-------------|--------|
+|apns |JSON object |payload for APNs messages |At a minimum, apns or gcm is required | Used for any push notifications sent to apns devices (See Multichannel Address attributes). This payload is delivered as is. See Apple's [APNs documentation](https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/TheNotificationPayload.html) for details |
+|gcm |JSON object | payload for GCM messages |At a minimum, apns or gcm is required| Used for any push notifications sent to gcm devices (See Multichannel Address attributes). This payload is delivered as is. See Google's [Notification Payload Support](https://developers.google.com/cloud-messaging/http-server-ref#notification-payload-support)
 
 #### Header Notes
 
@@ -162,8 +171,7 @@ Once message generation has been initiated, all messages in the transmission wil
 + Parameters
   + num_rcpt_errors (optional, number, `3`) ... Maximum number of recipient errors that this call can return, otherwise all validation errors are returned.
 
-
-+ Request Create Transmission Using Inline Email Part Content (application/json)
++ Request Create Transmission using Inline Email Part Content (application/json)
 
     + Headers
 
@@ -248,7 +256,7 @@ Once message generation has been initiated, all messages in the transmission wil
         }
 
 + Response 400 (application/json)
-    
+
         {
           "errors" : [
             {
@@ -362,7 +370,7 @@ Once message generation has been initiated, all messages in the transmission wil
             }
           ]
         }
-        
+
 + Request Create Transmission Using CC Header (application/json)
 
     + Headers
@@ -427,7 +435,7 @@ Once message generation has been initiated, all messages in the transmission wil
         }
 
 + Response 400 (application/json)
-    
+
         {
           "errors" : [
             {
@@ -801,6 +809,73 @@ Once message generation has been initiated, all messages in the transmission wil
             "id": "11668787484950529"
           }
         }
+
+
++ Request Create Transmission for Mobile Push Using Inline Content (SparkPost Elite only) (application/json)
+
+    + Headers
+
+            Authorization: 14ac5499cfdd2bb2859e4476d2e5b1d2bad079bf
+
+    + Body
+
+        {
+          "recipients": [
+            {
+                "multichannel_addresses": [
+                    {
+                        "channel": "apns",
+                        "token": "02c7830aae68d008a0616aed81a6bec40b5acf53fbca1ae46c734527ee0e885f",
+                        "app_id": "flintstone.apns.domain"
+                    }
+                ]
+            },
+            {
+                "multichannel_addresses" : [
+                    {
+                        "channel": "gcm",
+                        "token": "kNd8dnekej:KDSNDdnedik3n3kFDJfjwJDKndkd39MNiKnd9-Dk4NbkwnyMisosowb_GixnesleE38c1nglc9dTIXL56Djdhsn90nZjkDleEixlndiHk_Sntks54g1sZdnssY2s15f_SnektTkjwse",
+                        "app_id": "flintstone.gcm.domain",
+                    }
+                ]
+            }
+          ],
+          "content": {
+            "push": {
+              "apns" : {
+                "aps" : {
+                  "alert" : {
+                    "title" : "You have IOS deals",
+                    "badge" : 1
+                  }
+                }
+              },
+              "gcm" : {
+                "notification" : {
+                  "title" : "You have Android deals",
+                  "body" : "Open your Android app to check out these awesome new deals",
+                  "color" : "#fa6423",
+                  "icon" : "myicon"
+                }
+              }
+            }
+          }
+        }
+
++ Response 200 (application/json)
+
+    + Body
+
+        {
+          "results": {
+            "total_rejected_recipients": 0,
+            "total_accepted_recipients": 2,
+            "id": "11668787493850529"
+          }
+        }
+
+
+
 
 
 
