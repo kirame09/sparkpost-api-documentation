@@ -97,16 +97,17 @@ Once registered, your relay webhook HTTP endpoint will receive inbound emails in
             }
           ],
           "html": "<p>Hi there <strong>SparkPostians</strong>.</p>",
+          "subject": "We come in peace",
           "text": "Hi there SparkPostians.",
           "to": [
             "your@yourdomain.com"
-          ],
-          "customer_id": "1337",
-          "friendly_from": "me@here.com",
-          "msg_from": "me@here.com",
-          "rcpt_to": "you@there.com",
-          "webhook_id": "4839201967643219"
-        }
+          ]
+        },
+        "customer_id": "1337",
+        "friendly_from": "me@here.com",
+        "msg_from": "me@here.com",
+        "rcpt_to": "you@there.com",
+        "webhook_id": "4839201967643219"
       }
     }
   }
