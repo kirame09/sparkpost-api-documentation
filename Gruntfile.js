@@ -8,6 +8,7 @@ var matchdep = require('matchdep')
     , services = [
         'introduction.md',
         'substitutions-reference.md',
+        'smtp-api.md',
         'account.md',
         'bounce-domains.md',
         'inbound-domains.md',
@@ -23,8 +24,7 @@ var matchdep = require('matchdep')
         'templates.md',
         'tracking-domains.md',
         'transmissions.md',
-        'webhooks.md',
-        'smtp-api.md'
+        'webhooks.md'
     ]
     , staticTempDir = 'static/';
 

@@ -811,7 +811,7 @@ Once message generation has been initiated, all messages in the transmission wil
         }
 
 
-+ Request Create Transmission for Mobile Push Using Inline Content (SparkPost Elite only) (application/json)
++ Request Create Transmission for Mobile Push Using Inline Content - SparkPost Elite only (application/json)
 
     + Headers
 
@@ -835,7 +835,7 @@ Once message generation has been initiated, all messages in the transmission wil
                     {
                         "channel": "gcm",
                         "token": "kNd8dnekej:KDSNDdnedik3n3kFDJfjwJDKndkd39MNiKnd9-Dk4NbkwnyMisosowb_GixnesleE38c1nglc9dTIXL56Djdhsn90nZjkDleEixlndiHk_Sntks54g1sZdnssY2s15f_SnektTkjwse",
-                        "app_id": "flintstone.gcm.domain",
+                        "app_id": "flintstone.gcm.domain"
                     }
                 ]
             }
@@ -1031,20 +1031,13 @@ Scheduled transmissions cannot be deleted if the transmission is within 10 minut
 ## List [/transmissions{?campaign_id,template_id}]
 
 ### List all Transmissions [GET]
-List an array of transmission summary objects.  A transmission summary object contains the "template_id", "id", "campaign_id", "description", and "state".  The following lists are supported:
+List an array of live transmission summary objects.  A transmission summary object contains _id_, _state_, _template_id_, _campaign_id_ and _description_ fields. The list contains only multi-recipient transmissions in "submitted" or "generating" state or that have "completed" within the last 24 hours.
 
-* All multi-recipient transmissions
-* Multi-recipient transmissions using a specific template
-* Multi-recipient transmissions for a campaign
-* Multi-recipient transmissions for a campaign that use a specific template
+By default, the list includes transmissions for all campaigns and templates.  Use the _template_id_ parameter to filter by template and _campaign_id_ to filter by campaign. The summary for transmissions using an inline template will include `"template_id": "inline"`.  Transmissions using inline templates cannot be filtered with _template_id_.
 
-Note that single recipient transmissions are not returned.
+**Note: single recipient transmissions are not listed.**
 
-By default, the list includes all transmissions for all campaigns.  Use the **template_id** parameter to specify a template and the **campaign_id** parameter to specify a campaign.
-
-The response for transmissions using an inline template will include "template_id":"inline".  Inline templates cannot be specifically queried.
-
-The example response shows a query on _campaign_id=thanksgiving_, with **template_id** not specified as part of the query.
+**Note: transmissions in "completed" state are removed from the list after 24 hours.**
 
 + Parameters
   + campaign_id (optional, string,`thanksgiving`) ... ID of the campaign used by the transmissions
