@@ -64,7 +64,7 @@ The fields supported in the X-MSYS-API header are as follows:
 ## Options Attributes
 
 | Field | Type | Description | Required | Notes |
-|-------|------|-------------|----------|--------------------|
+|-------|------|-------------|----------|-------|
 | open_tracking | boolean | Whether open tracking is enabled for this SMTP message | no | [See notes](#header-open-and-click-tracking) for defaults. |
 | click_tracking | boolean | Whether click tracking is enabled for this SMTP message | no | [See notes](#header-open-and-click-tracking) for defaults. |
 | transactional | boolean | Whether message is transactional or non-transactional for unsubscribe and suppression purposes (**Note:** no List-Unsubscribe header is included in transactional messages)| no | Defaults to false. |
