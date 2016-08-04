@@ -373,7 +373,7 @@ aggregate data, which can be used as "group by" qualifiers.
     + domains (optional, list, `gmail.com,yahoo.com,hotmail.com`) ... delimited list of domains to include
     + campaigns (optional, list, `Black Friday`) ... delimited list of campaigns to include
     + templates (optional, list, `summer-sale`) ... delimited list of template IDs to include
-    + sending_ips (optional, list, `Confirmation`) ... delimited list of sending IPs to include
+    + sending_ips (optional, list, `123.456.789.123,123.456.789.124`) ... delimited list of sending IPs to include
     + ip_pools (optional, list, `Transaction`) ... delimited list of IP pools to include
     + sending_domains (optional, list, `sales.sender.com,company.net`) ... delimited list of sending domains to include
     + subaccounts (optional, list, `123,125,127`) ... delimited list of subaccount ids to include (**Note:** providing ?subaccounts=0 will filter out all subaccount data, and only return master account data)
@@ -611,7 +611,7 @@ Provides aggregate metrics grouped by domain over the time window specified.
   + domains (optional, list, `gmail.com,yahoo.com,hotmail.com`) ... delimited list of domains to include
   + campaigns (optional, list, `Black Friday`) ... delimited list of campaigns to include
   + templates (optional, list, `summer-sale`) ... delimited list of template IDs to include
-  + sending_ips (optional, list, `Confirmation`) ... delimited list of sending IPs to include
+  + sending_ips (optional, list, `123.456.789.123,123.456.789.124`) ... delimited list of sending IPs to include
   + ip_pools (optional, list, `Transaction`) ... delimited list of IP pools to include
   + sending_domains (optional, list, `sales.sender.com,company.net`) ... delimited list of sending domains to include
   + subaccounts (optional, list, `123,125,127`) ... delimited list of subaccount ids to include (**Note:** providing ?subaccounts=0 will filter out all subaccount data, and only return master account data)
@@ -865,7 +865,7 @@ Provides aggregate metrics grouped by sending IP over the time window specified.
   + domains (optional, list, `gmail.com,yahoo.com,hotmail.com`) ... delimited list of domains to include
   + campaigns (optional, list, `Black Friday`) ... delimited list of campaigns to include
   + templates (optional, list, `summer-sale`) ... delimited list of template IDs to include
-  + sending_ips (optional, list, `Confirmation`) ... delimited list of sending IPs to include
+  + sending_ips (optional, list, `123.456.789.123,123.456.789.124`) ... delimited list of sending IPs to include
   + ip_pools (optional, list, `Transaction`) ... delimited list of IP pools to include
   + sending_domains (optional, list, `sales.sender.com,company.net`) ... delimited list of sending domains to include
   + subaccounts (optional, list, `123,125,127`) ... delimited list of subaccount ids to include (**Note:** providing ?subaccounts=0 will filter out all subaccount data, and only return master account data)
@@ -1100,7 +1100,7 @@ Provides aggregate metrics grouped by IP pool over the time window specified.
   + domains (optional, list, `gmail.com,yahoo.com,hotmail.com`) ... delimited list of domains to include
   + campaigns (optional, list, `Black Friday`) ... delimited list of campaigns to include
   + templates (optional, list, `summer-sale`) ... delimited list of template IDs to include
-  + sending_ips (optional, list, `Confirmation`) ... delimited list of sending IPs to include
+  + sending_ips (optional, list, `123.456.789.123,123.456.789.124`) ... delimited list of sending IPs to include
   + ip_pools (optional, list, `Transaction`) ... delimited list of IP pools to include
   + sending_domains (optional, list, `sales.sender.com,company.net`) ... delimited list of sending domains to include
   + subaccounts (optional, list, `123,125,127`) ... delimited list of subaccount ids to include (**Note:** providing ?subaccounts=0 will filter out all subaccount data, and only return master account data)
@@ -1351,7 +1351,7 @@ Provides aggregate metrics grouped by sending domain over the time window specif
   + domains (optional, list, `gmail.com,yahoo.com,hotmail.com`) ... delimited list of domains to include
   + campaigns (optional, list, `Black Friday`) ... delimited list of campaigns to include
   + templates (optional, list, `summer-sale`) ... delimited list of template IDs to include
-  + sending_ips (optional, list, `Confirmation`) ... delimited list of sending IPs to include
+  + sending_ips (optional, list, `123.456.789.123,123.456.789.124`) ... delimited list of sending IPs to include
   + ip_pools (optional, list, `Transaction`) ... delimited list of IP pools to include
   + sending_domains (optional, list, `sales.sender.com,company.net`) ... delimited list of sending domains to include
   + subaccounts (optional, list, `123,125,127`) ... delimited list of subaccount ids to include (**Note:** providing ?subaccounts=0 will filter out all subaccount data, and only return master account data)
@@ -1601,7 +1601,7 @@ Provides aggregate metrics grouped by subaccount over the time window specified.
   + domains (optional, list, `gmail.com,yahoo.com,hotmail.com`) ... delimited list of domains to include
   + campaigns (optional, list, `Black Friday`) ... delimited list of campaigns to include
   + templates (optional, list, `summer-sale`) ... delimited list of template IDs to include
-  + sending_ips (optional, list, `Confirmation`) ... delimited list of sending IPs to include
+  + sending_ips (optional, list, `123.456.789.123,123.456.789.124`) ... delimited list of sending IPs to include
   + ip_pools (optional, list, `Transaction`) ... delimited list of IP pools to include
   + sending_domains (optional, list, `sales.sender.com,company.net`) ... delimited list of sending domains to include
   + subaccounts (optional, list, `123,125,127`) ... delimited list of subaccount ids to include (**Note:** providing ?subaccounts=0 will filter out all subaccount data, and only return master account data)
@@ -1837,7 +1837,7 @@ Provides aggregate metrics grouped by campaign over the time window specified.
     + domains (optional, list, `gmail.com,yahoo.com,hotmail.com`) ... delimited list of domains to include
     + campaigns (optional, list, `Black Friday`) ... delimited list of campaigns to include
     + templates (optional, list, `summer-sale`) ... delimited list of template IDs to include
-    + sending_ips (optional, list, `Confirmation`) ... delimited list of sending IPs to include
+    + sending_ips (optional, list, `123.456.789.123,123.456.789.124`) ... delimited list of sending IPs to include
     + ip_pools (optional, list, `Transaction`) ... delimited list of IP pools to include
     + sending_domains (optional, list, `sales.sender.com,company.net`) ... delimited list of sending domains to include
     + subaccounts (optional, list, `123,125,127`) ... delimited list of subaccount ids to include (**Note:** providing ?subaccounts=0 will filter out all subaccount data, and only return master account data)
@@ -2076,7 +2076,7 @@ Provides aggregate metrics grouped by template over the time window specified.
     + domains (optional, list, `gmail.com,yahoo.com,hotmail.com`) ... delimited list of domains to include
     + campaigns (optional, list, `Black Friday`) ... delimited list of campaigns to include
     + templates (optional, list, `summer-sale`) ... delimited list of template IDs to include
-    + sending_ips (optional, list, `Confirmation`) ... delimited list of sending IPs to include
+    + sending_ips (optional, list, `123.456.789.123,123.456.789.124`) ... delimited list of sending IPs to include
     + ip_pools (optional, list, `Transaction`) ... delimited list of IP pools to include
     + sending_domains (optional, list, `sales.sender.com,company.net`) ... delimited list of sending domains to include
     + subaccounts (optional, list, `123,125,127`) ... delimited list of subaccount ids to include (**Note:** providing ?subaccounts=0 will filter out all subaccount data, and only return master account data)
@@ -2317,7 +2317,7 @@ in the world.
     + domains (optional, list, `gmail.com,yahoo.com,hotmail.com`) ... delimited list of domains to include
     + campaigns (optional, list, `Black Friday`) ... delimited list of campaigns to include
     + templates (optional, list, `summer-sale`) ... delimited list of template IDs to include
-    + sending_ips (optional, list, `Confirmation`) ... delimited list of sending IPs to include
+    + sending_ips (optional, list, `123.456.789.123,123.456.789.124`) ... delimited list of sending IPs to include
     + ip_pools (optional, list, `Transaction`) ... delimited list of IP pools to include
     + subaccounts (optional, list, `123,125,127`) ... delimited list of subaccount ids to include (**Note:** providing ?subaccounts=0 will filter out all subaccount data, and only return master account data)
     + sending_domains (optional, list, `sales.sender.com,company.net`) ... delimited list of sending domains to include
@@ -2609,7 +2609,7 @@ The following table describes the validation for the **precision** parameter:
     + domains (optional, list `gmail.com,yahoo.com,hotmail.com`) ... delimited list of domains for filtering
     + campaigns (optional, list, `summerSale,promotionX`) ... delimited list of campaigns for filtering
     + templates (optional, list, `summer-sale`) ... delimited list of template IDs to include
-    + sending_ips (optional, list, `sending-ip-A,sending-ip-B,sending-ip-C`) ... delimited list of sending IPs to include
+    + sending_ips (optional, list, `123.456.789.123,123.456.789.124`) ... delimited list of sending IPs to include
     + ip_pools (optional, list, `ip-pool-1,ip-pool-2,ip-pool-3`) ... delimited list of IP pools to include
     + sending_domains (optional, list, `sales.sender.com,company.net`) ... delimited list of sending domains to include
     + subaccounts (optional, list, `123,125,127`) ... delimited list of subaccount ids to include (**Note:** providing ?subaccounts=0 will filter out all subaccount data, and only return master account data)
@@ -2774,7 +2774,7 @@ Provides deliverability metrics, specific to bounce events, grouped by the bounc
     + domains (optional, list, `gmail.com,yahoo.com,hotmail.com`) ... delimited list of domains to include
     + campaigns (optional, list, `Black Friday`) ... delimited list of campaigns to include
     + templates (optional, list, `summer-sale`) ... delimited list of template IDs to include
-    + sending_ips (optional, list, `Confirmation`) ... delimited list of sending IPs to include
+    + sending_ips (optional, list, `123.456.789.123,123.456.789.124`) ... delimited list of sending IPs to include
     + ip_pools (optional, list, `Transaction`) ... delimited list of IP pools to include
     + sending_domains (optional, list, `sales.sender.com,company.net`) ... delimited list of sending domains to include
     + subaccounts (optional, list, `123,125,127`) ... delimited list of subaccount ids to include (**Note:** providing ?subaccounts=0 will filter out all subaccount data, and only return master account data)
@@ -2907,7 +2907,7 @@ Provides deliverability metrics, specific to bounce events, grouped by the domai
     + domains (optional, list, `gmail.com,yahoo.com,hotmail.com`) ... delimited list of domains to include
     + campaigns (optional, list, `Black Friday`) ... delimited list of campaigns to include
     + templates (optional, list, `summer-sale`) ... delimited list of template IDs to include
-    + sending_ips (optional, list, `Confirmation`) ... delimited list of sending IPs to include
+    + sending_ips (optional, list, `123.456.789.123,123.456.789.124`) ... delimited list of sending IPs to include
     + ip_pools (optional, list, `Transaction`) ... delimited list of IP pools to include
     + sending_domains (optional, list, `sales.sender.com,company.net`) ... delimited list of sending domains to include
     + subaccounts (optional, list, `123,125,127`) ... delimited list of subaccount ids to include (**Note:** providing ?subaccounts=0 will filter out all subaccount data, and only return master account data)
@@ -3026,7 +3026,7 @@ Provides deliverability metrics, specific to bounce events, grouped by the bounc
     + domains (optional, list, `gmail.com,yahoo.com,hotmail.com`) ... delimited list of domains to include
     + campaigns (optional, list, `Black Friday`) ... delimited list of campaigns to include
     + templates (optional, list, `summer-sale`) ... delimited list of template IDs to include
-    + sending_ips (optional, list, `Confirmation`) ... delimited list of sending IPs to include
+    + sending_ips (optional, list, `123.456.789.123,123.456.789.124`) ... delimited list of sending IPs to include
     + ip_pools (optional, list, `Transaction`) ... delimited list of IP pools to include
     + sending_domains (optional, list, `sales.sender.com,company.net`) ... delimited list of sending domains to include
     + subaccounts (optional, list, `123,125,127`) ... delimited list of subaccount ids to include (**Note:** providing ?subaccounts=0 will filter out all subaccount data, and only return master account data)
@@ -3127,7 +3127,7 @@ Provides deliverability metrics, specific to rejection events, grouped by the re
   + domains (optional, list, `gmail.com,yahoo.com,hotmail.com`) ... delimited list of domains to include
   + campaigns (optional, list, `Black Friday`) ... delimited list of campaigns to include
   + templates (optional, list, `summer-sale`) ... delimited list of template IDs to include
-  + sending_ips (optional, list, `Confirmation`) ... delimited list of sending IPs to include
+  + sending_ips (optional, list, `123.456.789.123,123.456.789.124`) ... delimited list of sending IPs to include
   + ip_pools (optional, list, `Transaction`) ... delimited list of IP pools to include
   + sending_domains (optional, list, `sales.sender.com,company.net`) ... delimited list of sending domains to include
   + subaccounts (optional, list, `123,125,127`) ... delimited list of subaccount ids to include (**Note:** providing ?subaccounts=0 will filter out all subaccount data, and only return master account data)
@@ -3220,7 +3220,7 @@ Provides deliverability metrics, specific to rejection events, grouped by the do
   + domains (optional, list, `gmail.com,yahoo.com,hotmail.com`) ... delimited list of domains to include
   + campaigns (optional, list, `Black Friday`) ... delimited list of campaigns to include
   + templates (optional, list, `summer-sale`) ... delimited list of template IDs to include
-  + sending_ips (optional, list, `Confirmation`) ... delimited list of sending IPs to include
+  + sending_ips (optional, list, `123.456.789.123,123.456.789.124`) ... delimited list of sending IPs to include
   + ip_pools (optional, list, `Transaction`) ... delimited list of IP pools to include
   + sending_domains (optional, list, `sales.sender.com,company.net`) ... delimited list of sending domains to include
   + subaccounts (optional, list, `123,125,127`) ... delimited list of subaccount ids to include (**Note:** providing ?subaccounts=0 will filter out all subaccount data, and only return master account data)
@@ -3301,7 +3301,7 @@ Provides deliverability metrics, specific to delay events, grouped by the delay 
   + domains (optional, list, `gmail.com,yahoo.com,hotmail.com`) ... delimited list of domains to include
   + campaigns (optional, list, `Black Friday`) ... delimited list of campaigns to include
   + templates (optional, list, `summer-sale`) ... delimited list of template IDs to include
-  + sending_ips (optional, list, `Confirmation`) ... delimited list of sending IPs to include
+  + sending_ips (optional, list, `123.456.789.123,123.456.789.124`) ... delimited list of sending IPs to include
   + ip_pools (optional, list, `Transaction`) ... delimited list of IP pools to include
   + sending_domains (optional, list, `sales.sender.com,company.net`) ... delimited list of sending domains to include
   + subaccounts (optional, list, `123,125,127`) ... delimited list of subaccount ids to include (**Note:** providing ?subaccounts=0 will filter out all subaccount data, and only return master account data)
@@ -3395,7 +3395,7 @@ Provides deliverability metrics, specific to delay events, grouped by the domain
   + domains (optional, list, `gmail.com,yahoo.com,hotmail.com`) ... delimited list of domains to include
   + campaigns (optional, list, `Black Friday`) ... delimited list of campaigns to include
   + templates (optional, list, `summer-sale`) ... delimited list of template IDs to include
-  + sending_ips (optional, list, `Confirmation`) ... delimited list of sending IPs to include
+  + sending_ips (optional, list, `123.456.789.123,123.456.789.124`) ... delimited list of sending IPs to include
   + ip_pools (optional, list, `Transaction`) ... delimited list of IP pools to include
   + sending_domains (optional, list, `sales.sender.com,company.net`) ... delimited list of sending domains to include
   + subaccounts (optional, list, `123,125,127`) ... delimited list of subaccount ids to include (**Note:** providing ?subaccounts=0 will filter out all subaccount data, and only return master account data)
@@ -3568,7 +3568,7 @@ Provides aggregate count of deliveries grouped by the attempt number.
   + domains (optional, list, `gmail.com,yahoo.com,hotmail.com`) ... delimited list of domains to include
   + campaigns (optional, list, `Black Friday`) ... delimited list of campaigns to include
   + templates (optional, list, `summer-sale`) ... delimited list of template IDs to include
-  + sending_ips (optional, list, `Confirmation`) ... delimited list of sending IPs to include
+  + sending_ips (optional, list, `123.456.789.123,123.456.789.124`) ... delimited list of sending IPs to include
   + ip_pools (optional, list, `Transaction`) ... delimited list of IP pools to include
   + sending_domains (optional, list, `sales.sender.com,company.net`) ... delimited list of sending domains to include
   + bindings (optional, list, `Confirmation`) ... delimited list of bindings to include ( **Note:** SparkPost Elite only )
