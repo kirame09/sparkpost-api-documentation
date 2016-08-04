@@ -96,8 +96,9 @@ or:
 The "To" header is only constructed for messages built from email part content.  The "To" header is not built for email_rfc822 content.
 
 #### Push Specific Attributes (Only supported for inline recipient lists)
+
 | Field         | Type     | Description                           | Notes |
-|------------------------|:-:       |---------------------------------------|-------------| ------------|
+|------------------------|:-:       |---------------------------------------|-------------|
 |token    |string       |Token used to uniquely identify a device   |Device token in APNs, Registration token in GCM |
 |app_id |string |GCM or APNs identifier for your application| |
 

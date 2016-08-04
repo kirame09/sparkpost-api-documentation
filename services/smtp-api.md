@@ -6,9 +6,7 @@ description: Use the X-MSYS-API header to customize options for messages sent vi
 
 **Note**: See [SMTP Relay Endpoints](index.html#header-smtp-relay-endpoints) for the SMTP client configuration needed to use SparkPost or SparkPost Elite as an SMTP relay.
 
-Through use of the X-MSYS-API header in a message sent to SparkPost and SparkPost Elite through SMTP,
-you can now specify a campaign id, metadata,
-tags, IP pool, Cc, Bcc, and archive recipient lists and disable open and/or click tracking.
+You can use the `X-MSYS-API` header in your SMTP messages to specify a campaign id, metadata, tags, IP pool, CC, BCC, and archive recipient lists and disable open and/or click tracking.
 
 **Note**: To use this option you should be familiar with how to encode
 options as JSON strings, as the value of the header field is a JSON object that specifies the relevant options:
@@ -48,13 +46,16 @@ X-MSYS-API: {
 }
 ```
 
-Click and open tracking are disabled by default in SMTP messages sent through SparkPost.  To enable click and open tracking in SMTP messages, add the X-MSYS-API header as follows:
+In new *SparkPost Elite* environments, click and open tracking are **enabled** by default. Please check with your TAM if you are unsure of the setting in your own environment.
+
+In *SparkPost*, SMTP click and open tracking are **disabled** by default.
+
+To enable click and open tracking in SMTP messages, add the X-MSYS-API header as follows:
 ```
 X-MSYS-API: { "options" : { "open_tracking" : true, "click_tracking" : true } }
 ```
 
-**Note**: Key-Value [Substitutions](substitutions-reference.html) are not supported in SMTP API.
-substitution_data provided in the X-MSYS-API header will be ignored.
+**Note**: Key-value [substitutions](substitutions-reference.html) are not supported in SMTP API. Any substitution_data field provided in the X-MSYS-API header will be ignored.
 
 The fields supported in the X-MSYS-API header are as follows:
 
@@ -80,7 +81,7 @@ The fields supported in the X-MSYS-API header are as follows:
 | ip_pool | string | The ID of a dedicated IP pool associated with your account ( **Note:** SparkPost only ).  If this field is not provided, the account's default dedicated IP pool is used (if there are IPs assigned to it).  To explicitly bypass the account's default dedicated IP pool and instead fallback to the shared pool, specify a value of "sp_shared". | no | For more information on dedicated IPs, see the [Support Center](https://support.sparkpost.com/customer/en/portal/articles/2002977-dedicated-ip-addresses)
 | inline_css| boolean| Whether or not to perform CSS inlining in HTML content | no | Defaults to false. |
 
-**Note:** The `open_tracking` and `click_tracking` variables may also be set account-wide in your [SMTP relay account settings](https://app.sparkpost.com/account/smtp). 
+**SparkPost only note:** the `open_tracking` and `click_tracking` variables may also be set account-wide in your [SMTP relay account settings](https://app.sparkpost.com/account/smtp). 
 
 ## Sending Messages with cc, bcc, and archive Recipients
 
