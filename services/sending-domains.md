@@ -77,6 +77,8 @@ These are the valid request options for verifying a Sending Domain:
 
 Create a sending domain by providing a **sending domain object** as the POST request body.
 
+We allow any given domain (including its subdomains) to only be used by a single customer account.  Please see our [support article](https://support.sparkpost.com/customer/en/portal/articles/1933318-creating-sending-domains) for additional reasons a domain might not be approved for sending.
+
 To use a DKIM Signing Domain Identifier different to the Sending Domain, set the dkim.signing_domain field. ( **Note**: dkim.signing_domain is only available in SparkPost Elite. )
 
 **Note**: For some SparkPost Elite customers, Sending Domains will be set to verified automatically when they are created, and can be used to send messages immediately. For these customers, there is no need to use the "verify" endpoint to verify Sending Domains. To find out if this applies in your SparkPost Elite environment, please contact support <support@sparkpostelite.com>, or contact your TAM.
