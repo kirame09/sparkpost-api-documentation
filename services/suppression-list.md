@@ -34,7 +34,7 @@ If you use [Postman](https://www.getpostman.com/) you can click the following bu
 |------------------------|:-:       |---------------------------------------|-------------|--------|
 |transactional | boolean | Whether the recipient requested to not receive any transactional messages | At a minimum, transactional or non_transactional is required upon creation of the entry. | |
 |non_transactional | boolean | Whether the recipient requested to not receive any non-transactional messages | At a minimum, transactional or non_transactional is required upon creation of the entry. |  |
-|source | string | Source responsible for inserting the list entry. Valid values include: `FBL`, `List Unsubscribe`, `Bounce Rule`, `Unsubscribe Link`, `Manually Added`, `Compliance`| no - defaults to `Manually Added` on create | Field is read-only  |
+|source | string | Source responsible for inserting the list entry. Valid values include: `Spam Complaint`, `List Unsubscribe`, `Bounce Rule`, `Unsubscribe Link`, `Manually Added`, `Compliance`| no - entries created by the user are marked as `Manually Added` | Field is read-only  |
 |description | string | Short explanation of the suppression | no | |
 
 

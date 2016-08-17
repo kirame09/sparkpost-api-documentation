@@ -3,6 +3,8 @@ description: Manage the sending IPs for your account and assign them to IP pools
 
 # Group Sending IPs
 
+**Note: This endpoint is available in SparkPost only**
+
 ## Using Postman
 
 If you use [Postman](https://www.getpostman.com/) you can click the following button to import the SparkPost API as a collection:
