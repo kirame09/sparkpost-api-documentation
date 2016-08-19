@@ -84,6 +84,12 @@ X-MSYS-API: { "options" : { "open_tracking" : true, "click_tracking" : true } }
 ```
 **SparkPost only note:** the `open_tracking` and `click_tracking` variables may also be set account-wide in your [SMTP relay account settings](https://app.sparkpost.com/account/smtp). 
 
+## The Sandbox Domain
+
+**Note: SparkPost only**
+
+The sandbox domain `sparkpostbox.com` is available to allow each account to send test messages in advance of configuring a real sending domain. Each SparkPost account has a lifetime allowance of 50 sandbox domain messages. That means one may send up to 50 test messages using `From: something@sparkpostbox.com`. Note that you can set the 'local part' (the part before the @) to any valid email local part.
+
 ## Sending Messages with cc, bcc, and archive Recipients
 
 When submitting an email via SMTP that includes the X-MSYS-API header, you may specify a JSON array for cc, bcc, and archive lists.  For each address in each of these arrays, a message will be generated. Messages will be generated with the following headers: 
