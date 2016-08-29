@@ -29,7 +29,8 @@ If you use [Postman](https://www.getpostman.com/) you can click the following bu
 | Property  | Type   | Description                                                 | Required               | Notes
 |-----------|--------|-----------------------------------------------------------------------|--------------|----------------------|
 | protocol  | string | Inbound messaging protocol associated with this webhook | no - defaults to "SMTP" |                      |
-| domain    | string | Inbound domain associated with this webhook             | yes | To create an inbound domain for your account, please use the Inbound Domains API. |
+| domain    | string | Inbound domain associated with this webhook             | yes, when protocol is "SMTP" | To create an inbound domain for your account, please use the Inbound Domains API. |
+| esme_address | string | ESME address binding associated with this webhook    | yes, when protocol is "SMPP" | **Note:** Relay Webhooks for SMPP messages are available for SparkPost Elite only.  Please speak with your account manager to create an ESME address. |
 
 ## Field Definitions
 
@@ -116,7 +117,7 @@ Once registered, your relay webhook HTTP endpoint will receive inbound emails in
 
 ## Create and List [/relay-webhooks]
 
-### Create a Relay Webhook [POST]
+### Create an SMTP Relay Webhook [POST]
 
 Create a relay webhook by providing a **relay webhooks object** as the POST request body.
 
@@ -226,6 +227,54 @@ Create a relay webhook by providing a **relay webhooks object** as the POST requ
             }
           ```
 
+### Create an SMPP Relay Webhook [POST]
+
+**Note:** Relay Webhooks for SMPP messages are available for SparkPost Elite only.
+
++ Request (application/json)
+
+  + Headers
+
+            Authorization: 14ac5499cfdd2bb2859e4476d2e5b1d2bad079bf
+
+  + Body
+
+            {
+              "name": "Replies Webhook",
+              "target": "https://webhooks.customer.example/replies",
+              "auth_token": "5ebe2294ecd0e0f08eab7690d2a6ee69",
+              "match":
+                {
+                  "protocol": "SMPP",
+                  "esme_address": "12345"
+                }
+            }
+
++ Response 200 (application/json)
+
+  + Body
+
+            {
+              "results":
+                {
+                  "id": "12013026328707075"
+                }
+            }
+
++ Response 400 (application/json)
+
+  + Body
+
+            { "errors": [
+                {
+                  "message": "invalid params",
+                  "description": "esme address not configured",
+                  "code": "9000"
+                }
+              ]
+            }
+
+    
 ### List all Relay Webhooks [GET]
 
 List all your relay webhooks.
@@ -388,6 +437,22 @@ Update a relay webhook by specifying the webhook ID in the URI path.
               {
                 "message": "invalid params",
                 "description": "Domain ('domain') is not a registered inbound domain",
+                "code": "1200"
+              }
+            ]
+          }
+        ```
+
++ Response 400 (application/json)
+
+  + Body
+
+        ```
+          {
+            "errors": [
+              {
+                "message": "invalid params",
+                "description": "esme address not configured",
                 "code": "1200"
               }
             ]
