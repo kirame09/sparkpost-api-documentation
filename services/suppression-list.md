@@ -106,18 +106,22 @@ If an email address is duplicated in a single request, only the first instance w
         }
 
 
-## Search [/suppression-list{?to,from,types,sources,limit}]
+## Search [/suppression-list{?to,from,domain,cursor,per_page,page,sources,types,description}]
 
 ### Search for List Entries [GET]
 
 Perform a filtered search for entries in your customer-specific exclusion list.
 
 + Parameters
-    + to = `now` (optional, datetime, `2014-07-20T09:00:00-0400`) ... Datetime the entries were last updated, in the format of YYYY-MM-DDTHH:mm:ssZ
+    + to = `now` (optional, datetime, `2014-07-21T09:00:00-0400`) ... Datetime the entries were last updated, in the format of YYYY-MM-DDTHH:mm:ssZ
     + from (optional, datetime, `2014-07-20T09:00:00-0400`) ... Datetime the entries were last updated, in the format YYYY-MM-DDTHH:mm:ssZ
-    + types (optional, list) ... Types of entries to include in the search, i.e. entries with "transactional" and/or "non_transactional" keys set to true
-    + sources (optional, list) ... Sources of the entries to include in the search, i.e. entries that were added by this source
-    + limit (optional, int, `5`) ... Maximum number of results to return.  Must be between 1 and 100000. Default value is 100000.
+    + domain (optional, string, `yahoo.com`) ... Domain of entries to include in the search.
+    + cursor (optional, string, `initial`) ... The results cursor location to return. When cursor is provided the `page` parameter is ignored.
+    + per_page (optional, int, `5`) ... Maximum number of results to return per page.  Must be between 1 and 10000. Default value is 1000.
+    + page (optional, int, `5`) ... The results page number to return. Used with per_page for paging through results.
+    + sources (optional, list, `Bounce%20Rule,Manually%20Added`) ... Sources of the entries to include in the search, i.e. entries that were added by this source
+    + types (optional, list, `transactional`) ... Types of entries to include in the search, i.e. entries with "transactional" and/or "non_transactional" keys set to true
+    + description (optional, string, `Invalid%20Recipient`) ... Description of the entries to include in the search, i.e descriptions that include the text submitted.
 
 + Request
 
@@ -152,18 +156,38 @@ Perform a filtered search for entries in your customer-specific exclusion list.
             "results": [
                 {
                     "recipient": "test@example.com",
-                    "transactional": false,
-                    "non_transactional": true,
-                    "source": "Bounce Rule",
                     "description": "550: this email address does not exist #55",
+                    "source": "Bounce Rule",
+                    "type": "transactional",
                     "created": "2015-01-01T01:01:01+00:00",
-                    "updated": "2015-01-01T01:01:01+00:00"
+                    "updated": "2015-01-01T01:01:01+00:00",
+                    "transactional": true
+                },
+                {
+                    "recipient": "test@example.com",
+                    "description": "550: this email address does not exist #55",
+                    "source": "Bounce Rule",
+                    "type": "non_transactional",
+                    "created": "2015-01-01T01:01:01+00:00",
+                    "updated": "2015-01-01T01:01:01+00:00",
+                    "non_transactional": true
+                },
+                {
+                    "recipient": "test2@example.com",
+                    "description": "550: this email address does not exist #55",
+                    "source": "Manually Added",
+                    "type": "transactional",
+                    "created": "2015-01-01T01:01:01+00:00",
+                    "updated": "2015-01-01T01:01:01+00:00",
+                    "transactional": true
                 }
-            ]
+            ],
+            "links": [],
+            "total_count": 3
         }
 
 
-## Retrieve, Delete [/suppression-list/{recipient_email}]
+## Retrieve, Delete, Insert or Update [/suppression-list/{recipient_email}]
 
 ### Retrieve a Recipient Suppression Status [GET]
 
@@ -200,14 +224,25 @@ In addition to the list entry attributes, the response body also includes "creat
             "results" : [
               {
                 "recipient" : "rcpt_1@example.com",
-                "transactional" : false,
                 "non_transactional" : true,
                 "source" : "Manually Added",
+                "type" : "non_transactional",
+                "description" : "User requested to not receive any non-transactional emails.",
+                "created" : "2015-01-01T12:00:00+00:00",
+                "updated" : "2015-01-01T12:00:00+00:00"
+              },
+              {
+                "recipient" : "rcpt_1@example.com",
+                "transactional" : true,
+                "source" : "Manually Added",
+                "type" : "transactional",
                 "description" : "User requested to not receive any non-transactional emails.",
                 "created" : "2015-01-01T12:00:00+00:00",
                 "updated" : "2015-01-01T12:00:00+00:00"
               }
-            ]
+            ],
+            "links": [],
+            "total_count": 2
         }
 
 ### Delete a List Entry [DELETE]
@@ -251,14 +286,41 @@ If the recipient is not in the customer-specific exclusion list, an HTTP status 
 
 ### Insert or Update a List Entry [PUT]
 
-The PUT method on this endpoint has been removed in favor of the Bulk Insert/Update method.
+Insert or update a single entry in the customer-specific exclusion list by providing a JSON object. At a minimum, the JSON object should include at least one of the following keys: "transactional" or "non_transactional". The optional "description" key can be used to include an explanation of what type of message should be suppressed.
 
-+ Response 405 (application/json; charset=utf-8)
+If the recipient entry was added to the list by Compliance, it cannot be updated.
+
++ Parameters
+    + recipient_email (required, string, `rcpt@example.com`) ... Recipient email address
+    
++ Request (application/json)
+
+    + Headers
+
+            Authorization: 14ac5499cfdd2bb2859e4476d2e5b1d2bad079bf
+    + Body
+
+        ```
+        {
+	        "transactional": true,
+	        "non_transactional": true,
+	        "descirption" : "User requested to not receive any transactional emails."
+        }
+        ```
+
++ Response 200 (application/json; charset=utf-8)
+
+        {
+              "results": {
+                "message": "Suppression list successfully updated"
+              }
+        }
++ Response 400 (application/json; charset=utf-8)
 
         {
             "errors": [
                 {
-                    "message": "Method Not Allowed"
+                    "message": "Must supply at least one of: transactional, non_transactional"
                 }
             ]
         }
