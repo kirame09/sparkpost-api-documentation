@@ -78,10 +78,7 @@ If an email address is duplicated in a single request, only the first instance w
         {
             "errors": [
                 {
-                    "message": "transactional must be a boolean if present"
-                },
-                {
-                    "message": "Invalid email address: example.com"
+                    "message": "PUT body contains 2 invalid or malformed recipient(s): rcpt_1@example.com, rcpt_2@example.com"
                 }
             ]
         }
@@ -286,7 +283,7 @@ If the recipient is not in the customer-specific exclusion list, an HTTP status 
 
 ### Insert or Update a List Entry [PUT]
 
-Insert or update a single entry in the customer-specific exclusion list by providing a JSON object. At a minimum, the JSON object should include at least one of the following keys: "transactional" or "non_transactional". The optional "description" key can be used to include an explanation of what type of message should be suppressed.
+Insert or update a single entry in the customer-specific exclusion list by providing a JSON object. At a minimum, the JSON object should include at least one of the following keys: "transactional" or "non_transactional". The optional "description" key can be used to include an explanation of what type of message should be suppressed. The optional "source" key can set the source, if this is omitted the source is set to "Manually Added".
 
 If the recipient entry was added to the list by Compliance, it cannot be updated.
 
@@ -304,6 +301,7 @@ If the recipient entry was added to the list by Compliance, it cannot be updated
         {
 	        "transactional": true,
 	        "non_transactional": true,
+	        "source": "Spam Complaint"
 	        "descirption" : "User requested to not receive any transactional emails."
         }
         ```
