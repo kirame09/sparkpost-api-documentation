@@ -34,7 +34,9 @@ If you use [Postman](https://www.getpostman.com/) you can click the following bu
 
 ## Field Definitions
 
-The following fields will be included in the JSON object posted to the relay webhooks target:
+### SMTP
+
+The following fields will be included in the JSON object posted to the SMTP relay webhooks target:
 
 | Field     | Type   | Description                                                 | Notes
 |-----------|--------|-----------------------------------------------------------------------|--------------|
@@ -43,10 +45,24 @@ The following fields will be included in the JSON object posted to the relay web
 | msg_from | string | SMTP envelope from |
 | rcpt_to | string | SMTP envelope to |
 | webhook_id | string | ID of the relay webhook which triggered this relay message |
+| protocol | string | Protocol of the originating inbound message | For smtp payloads, this string will be "smtp" |
 
-### Content Attributes
+### SMPP
 
-Content for a relay webhook is described in a JSON object with the following fields:
+The following fields will be included in the JSON object posted to the SMPP relay webhooks target:
+
+| Field     | Type   | Description                                                           | Notes
+|-----------|--------|-----------------------------------------------------------------------|--------------|
+| text      | string | Contents of the first text/plain part of the message                  | For a full description, see the Content Attributes. |
+| to        | string | SMPP message recipient                                                |              |
+| from      | string | SMPP message sender                                                   |              |
+| date      | string | Date that Sparkpost recieved the SMPP message                         |              |
+| webhook_id| string | ID of the relay webhook which triggered this relay message            |              |
+| protocol  | string | Protocol of the originating inbound message                           | For smpp payloads, this string will be "smpp" |
+
+## Content Attributes
+
+Content for an SMTP relay webhook is described in a JSON object with the following fields:
 
 | Field     | Type   | Description                                                 | Notes
 |-----------|--------|-------------------------------------------------------------|----------------|
@@ -59,7 +75,9 @@ Content for a relay webhook is described in a JSON object with the following fie
 | email_rfc822 | string | Raw MIME content for an email | If the Raw MIME content contains at least one non UTF-8 encoded character, the entire "email_rfc822" JSON value will be base64 encoded and the "email_rfc822_is_base64" JSON boolean value will be set to true |
 | email_rfc822_is_base64 | boolean | Whether or not the "email_rfc822" value is base64 encoded |
 
-### Example Payload
+## Example Payloads
+
+### SMTP
 
 Once registered, your relay webhook HTTP endpoint will receive inbound emails in the JSON form described above. Here is an example of the payload which your endpoint can expect to receive:
 
@@ -114,6 +132,29 @@ Once registered, your relay webhook HTTP endpoint will receive inbound emails in
   }
 ]
 ```
+
+### SMPP
+
+Once registered, your relay webhook HTTP endpoint will receive inbound SMPP messages in the JSON form described above. Here is an example of the payload which your endpoint can expect to receive:
+
+```json
+[
+  {
+    "msys": {
+      "relay_message": {
+        "protocol": "smpp",
+        "to": "555 555 5555",
+        "date": "Wed, 14 Sep 2016 15:41:13 -0400",
+        "from": "555 555 5556",
+        "text": "Hi, I'm a text message",
+        "customer_id": "1337",
+        "webhook_id": "12363818881515528"
+      }
+    }
+  }
+]
+```
+
 
 ## Create and List [/relay-webhooks]
 
