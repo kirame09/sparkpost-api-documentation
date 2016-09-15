@@ -143,9 +143,9 @@ Once registered, your relay webhook HTTP endpoint will receive inbound SMPP mess
     "msys": {
       "relay_message": {
         "protocol": "smpp",
-        "to": "555 555 5555",
+        "to": "12345",
         "date": "Wed, 14 Sep 2016 15:41:13 -0400",
-        "from": "555 555 5556",
+        "from": "54321",
         "text": "Hi, I'm a text message",
         "customer_id": "1337",
         "webhook_id": "12363818881515528"
