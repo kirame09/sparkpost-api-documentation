@@ -162,6 +162,37 @@ Perform a filtered search for entries in your customer-specific exclusion list.
             ]
         }
 
++ Response 200 (application/json; charset=utf-8)
+    *** Coming Soon! ***
+    Please note that this is an upcoming breaking change to this endpoint's response body. This new response style replaces the HTTP 200 response
+    described above. If a recipient is suppressed at both a transactional and non-transaction level, two objects will be returned in the response
+    body instead of one. Also, there will be a new key of "type", which will inform which suppression type (transactional or non-transactional)
+    the object is referencing.
+
+    + Body
+
+            {
+                "results": [
+                    {
+                        "recipient": "test@example.com",
+                        "non_transactional": true,
+                        "type": "non_transactional",
+                        "source": "Bounce Rule",
+                        "description": "550: this email address does not exist #55",
+                        "created": "2015-01-01T01:01:01+00:00",
+                        "updated": "2015-01-01T01:01:01+00:00"
+                    },
+                    {
+                        "recipient": "test@example.com",
+                        "transactional": true,
+                        "type": "transactional",
+                        "source": "Bounce Rule",
+                        "description": "550: this email address does not exist #55",
+                        "created": "2015-01-01T01:01:01+00:00",
+                        "updated": "2015-01-01T01:01:01+00:00"
+                    }
+                ]
+            }
 
 ## Retrieve, Delete [/suppression-list/{recipient_email}]
 
@@ -209,6 +240,40 @@ In addition to the list entry attributes, the response body also includes "creat
               }
             ]
         }
+
++ Response 200 (application/json; charset=utf-8)
+    *** Coming Soon! ***
+    Please note that this is an upcoming breaking change to this endpoint's response body. This new response style replaces the HTTP 200 response
+    described above. If a recipient is suppressed at both a transactional and non-transaction level, two objects will be returned in the response
+    body instead of one. Also, there will be a new key of "type", which will inform which suppression type (transactional or non-transactional)
+    the object is referencing.
+
+    + Body
+
+        {
+            "results" : [
+              {
+                "recipient" : "rcpt_1@example.com",
+                "non_transactional" : true,
+                "type": "non_transactional",
+                "source" : "Manually Added",
+                "description" : "User requested to not receive any non-transactional emails.",
+                "created" : "2015-01-01T12:00:00+00:00",
+                "updated" : "2015-01-01T12:00:00+00:00"
+              },
+              {
+                "recipient" : "rcpt_1@example.com",
+                "transactional" : true,
+                "type": "transactional",
+                "source" : "Manually Added",
+                "description" : "User requested to not receive any transactional emails.",
+                "created" : "2015-01-01T12:00:00+00:00",
+                "updated" : "2015-01-01T12:00:00+00:00"
+              }
+            ]
+        }
+
+
 
 ### Delete a List Entry [DELETE]
 
