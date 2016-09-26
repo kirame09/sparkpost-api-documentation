@@ -163,11 +163,13 @@ Perform a filtered search for entries in your customer-specific exclusion list.
         }
 
 + Response 200 (application/json; charset=utf-8)
-    *** Coming Soon! ***
-    Please note that this is an upcoming breaking change to this endpoint's response body. This new response style replaces the HTTP 200 response
-    described above. If a recipient is suppressed at both a transactional and non-transaction level, two objects will be returned in the response
-    body instead of one. Also, there will be a new key of "type", which will inform which suppression type (transactional or non-transactional)
-    the object is referencing.
+    <div class="alert alert-warning">
+      <strong>Coming Soon!</strong>
+      <p>Please note that this is an upcoming breaking change to this endpoint's response body. This new response style replaces the HTTP 200 response
+      described above. If a recipient is suppressed at both a transactional and non-transaction level, two objects will be returned in the response
+      body instead of one. Also, there will be a new key of "type", which will inform which suppression type (transactional or non-transactional)
+      the object is referencing.</p>
+    </div>
 
     + Body
 
@@ -242,11 +244,13 @@ In addition to the list entry attributes, the response body also includes "creat
         }
 
 + Response 200 (application/json; charset=utf-8)
-    *** Coming Soon! ***
-    Please note that this is an upcoming breaking change to this endpoint's response body. This new response style replaces the HTTP 200 response
-    described above. If a recipient is suppressed at both a transactional and non-transaction level, two objects will be returned in the response
-    body instead of one. Also, there will be a new key of "type", which will inform which suppression type (transactional or non-transactional)
-    the object is referencing.
+    <div class="alert alert-warning">
+      <strong>Coming Soon!</strong>
+      <p>Please note that this is an upcoming breaking change to this endpoint's response body. This new response style replaces the HTTP 200 response
+      described above. If a recipient is suppressed at both a transactional and non-transaction level, two objects will be returned in the response
+      body instead of one. Also, there will be a new key of "type", which will inform which suppression type (transactional or non-transactional)
+      the object is referencing.</p>
+    </div>
 
     + Body
 
