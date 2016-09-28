@@ -152,7 +152,7 @@ Perform a filtered search for entries in your customer-specific exclusion list.
             "results": [
                 {
                     "recipient": "test@example.com",
-                    "transactional": false,
+                    "transactional": true,
                     "non_transactional": true,
                     "source": "Bounce Rule",
                     "description": "550: this email address does not exist #55",
@@ -233,10 +233,10 @@ In addition to the list entry attributes, the response body also includes "creat
             "results" : [
               {
                 "recipient" : "rcpt_1@example.com",
-                "transactional" : false,
+                "transactional" : true,
                 "non_transactional" : true,
                 "source" : "Manually Added",
-                "description" : "User requested to not receive any non-transactional emails.",
+                "description" : "User requested to not receive any further emails.",
                 "created" : "2015-01-01T12:00:00+00:00",
                 "updated" : "2015-01-01T12:00:00+00:00"
               }
@@ -261,7 +261,7 @@ In addition to the list entry attributes, the response body also includes "creat
                 "non_transactional" : true,
                 "type": "non_transactional",
                 "source" : "Manually Added",
-                "description" : "User requested to not receive any non-transactional emails.",
+                "description" : "User requested to not receive any further emails.",
                 "created" : "2015-01-01T12:00:00+00:00",
                 "updated" : "2015-01-01T12:00:00+00:00"
               },
@@ -270,7 +270,7 @@ In addition to the list entry attributes, the response body also includes "creat
                 "transactional" : true,
                 "type": "transactional",
                 "source" : "Manually Added",
-                "description" : "User requested to not receive any transactional emails.",
+                "description" : "User requested to not receive any further emails.",
                 "created" : "2015-01-01T12:00:00+00:00",
                 "updated" : "2015-01-01T12:00:00+00:00"
               }
