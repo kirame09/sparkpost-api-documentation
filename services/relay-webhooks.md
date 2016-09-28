@@ -24,17 +24,17 @@ If you use [Postman](https://www.getpostman.com/) you can click the following bu
 | auth_token | string | Authentication token to present in the X-MessageSystems-Webhook-Token header of POST requests to target | no | Use this token in your target application to confirm that data is coming from the Relay Webhooks API. example: `5ebe2294ecd0e0f08eab7690d2a6ee69` |
 | match     | object | Restrict which inbound messages will be relayed to the target | yes | See Match Object Properties. example: `"match": { "protocol": "SMTP", "domain": "replies.customer.example" }` |
 
-### Match Object Properties
+## Match Object Properties
 
 | Property  | Type   | Description                                                 | Required               | Notes
 |-----------|--------|-----------------------------------------------------------------------|--------------|----------------------|
 | protocol  | string | Inbound messaging protocol associated with this webhook | no - defaults to "SMTP" |                      |
 | domain    | string | Inbound domain associated with this webhook             | yes, when protocol is "SMTP" | To create an inbound domain for your account, please use the Inbound Domains API. |
-| esme_address | string | ESME address binding associated with this webhook    | yes, when protocol is "SMPP" | **Note:** Relay Webhooks for SMPP messages are available for SparkPost Elite only.  Please speak with your account manager to create an ESME address. |
+| esme_address | string | ESME address binding associated with this webhook    | yes, when protocol is "SMPP" | **Coming Soon:** Relay Webhooks for SMPP messages will be available for SparkPost Elite only.  Please speak with your account manager to create an ESME address. |
 
 ## Field Definitions
 
-### SMTP
+**SMTP**
 
 The following fields will be included in the JSON object posted to the SMTP relay webhooks target:
 
@@ -47,7 +47,7 @@ The following fields will be included in the JSON object posted to the SMTP rela
 | webhook_id | string | ID of the relay webhook which triggered this relay message |
 | protocol | string | Protocol of the originating inbound message | For smtp payloads, this string will be "smtp" |
 
-### SMPP
+**SMPP - Coming Soon**
 
 The following fields will be included in the JSON object posted to the SMPP relay webhooks target:
 
@@ -78,7 +78,7 @@ Content for an SMTP relay webhook is described in a JSON object with the followi
 
 ## Example Payloads
 
-### SMTP
+**SMTP**
 
 Once registered, your relay webhook HTTP endpoint will receive inbound emails in the JSON form described above. Here is an example of the payload which your endpoint can expect to receive:
 
@@ -134,7 +134,7 @@ Once registered, your relay webhook HTTP endpoint will receive inbound emails in
 ]
 ```
 
-### SMPP
+**SMPP - Coming Soon**
 
 Once registered, your relay webhook HTTP endpoint will receive inbound SMPP messages in the JSON form described above. Here is an example of the payload which your endpoint can expect to receive:
 
@@ -269,7 +269,7 @@ Create a relay webhook by providing a **relay webhooks object** as the POST requ
             }
           ```
 
-### Create an SMPP Relay Webhook [POST]
+### Create an SMPP Relay Webhook - Coming Soon [POST]
 
 **Note:** Relay Webhooks for SMPP messages are available for SparkPost Elite only.
 
