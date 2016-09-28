@@ -51,14 +51,15 @@ The following fields will be included in the JSON object posted to the SMTP rela
 
 The following fields will be included in the JSON object posted to the SMPP relay webhooks target:
 
-| Field     | Type   | Description                                                           | Notes
-|-----------|--------|-----------------------------------------------------------------------|--------------|
-| text      | string | Contents of the first text/plain part of the message                  | For a full description, see the Content Attributes. |
-| to        | string | SMPP message recipient                                                |              |
-| from      | string | SMPP message sender                                                   |              |
-| date      | string | Date that Sparkpost recieved the SMPP message                         |              |
-| webhook_id| string | ID of the relay webhook which triggered this relay message            |              |
-| protocol  | string | Protocol of the originating inbound message                           | For smpp payloads, this string will be "smpp" |
+| Field       | Type   | Description                                                           | Notes
+|-------------|--------|-----------------------------------------------------------------------|--------------|
+| text        | string | Contents of the first text/plain part of the message                  | For a full description, see the Content Attributes. |
+| to          | string | SMPP message recipient                                                |              |
+| from        | string | SMPP message sender                                                   |              |
+| date        | string | Date that Sparkpost recieved the SMPP message                         |              |
+| webhook_id  | string | ID of the relay webhook which triggered this relay message            |              |
+| protocol    | string | Protocol of the originating inbound message                           | For smpp payloads, this string will be "smpp" |
+| customer_id | string Customer ID of the customer that created the relay webhook            |              |
 
 ## Content Attributes
 
