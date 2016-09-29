@@ -24,16 +24,19 @@ If you use [Postman](https://www.getpostman.com/) you can click the following bu
 | auth_token | string | Authentication token to present in the X-MessageSystems-Webhook-Token header of POST requests to target | no | Use this token in your target application to confirm that data is coming from the Relay Webhooks API. example: `5ebe2294ecd0e0f08eab7690d2a6ee69` |
 | match     | object | Restrict which inbound messages will be relayed to the target | yes | See Match Object Properties. example: `"match": { "protocol": "SMTP", "domain": "replies.customer.example" }` |
 
-### Match Object Properties
+## Match Object Properties
 
 | Property  | Type   | Description                                                 | Required               | Notes
 |-----------|--------|-----------------------------------------------------------------------|--------------|----------------------|
 | protocol  | string | Inbound messaging protocol associated with this webhook | no - defaults to "SMTP" |                      |
-| domain    | string | Inbound domain associated with this webhook             | yes | To create an inbound domain for your account, please use the Inbound Domains API. |
+| domain    | string | Inbound domain associated with this webhook             | yes, when protocol is "SMTP" | To create an inbound domain for your account, please use the Inbound Domains API. |
+| esme_address | string | ESME address binding associated with this webhook    | yes, when protocol is "SMPP" | **Coming Soon:** Relay Webhooks for SMPP messages will be available for SparkPost Elite only.  Please speak with your account manager to create an ESME address. |
 
 ## Field Definitions
 
-The following fields will be included in the JSON object posted to the relay webhooks target:
+**SMTP**
+
+The following fields will be included in the JSON object posted to the SMTP relay webhooks target:
 
 | Field     | Type   | Description                                                 | Notes
 |-----------|--------|-----------------------------------------------------------------------|--------------|
@@ -42,10 +45,25 @@ The following fields will be included in the JSON object posted to the relay web
 | msg_from | string | SMTP envelope from |
 | rcpt_to | string | SMTP envelope to |
 | webhook_id | string | ID of the relay webhook which triggered this relay message |
+| protocol | string | Protocol of the originating inbound message | For smtp payloads, this string will be "smtp" |
 
-### Content Attributes
+**SMPP - Coming Soon**
 
-Content for a relay webhook is described in a JSON object with the following fields:
+The following fields will be included in the JSON object posted to the SMPP relay webhooks target:
+
+| Field       | Type   | Description                                                           | Notes
+|-------------|--------|-----------------------------------------------------------------------|--------------|
+| text        | string | Contents of the first text/plain part of the message                  | For a full description, see the Content Attributes. |
+| to          | string | SMPP message recipient                                                |              |
+| from        | string | SMPP message sender                                                   |              |
+| date        | string | Date that Sparkpost recieved the SMPP message                         |              |
+| webhook_id  | string | ID of the relay webhook which triggered this relay message            |              |
+| protocol    | string | Protocol of the originating inbound message                           | For smpp payloads, this string will be "smpp" |
+| customer_id | string Customer ID of the customer that created the relay webhook            |              |
+
+## Content Attributes
+
+Content for an SMTP relay webhook is described in a JSON object with the following fields:
 
 | Field     | Type   | Description                                                 | Notes
 |-----------|--------|-------------------------------------------------------------|----------------|
@@ -58,7 +76,9 @@ Content for a relay webhook is described in a JSON object with the following fie
 | email_rfc822 | string | Raw MIME content for an email | If the Raw MIME content contains at least one non UTF-8 encoded character, the entire "email_rfc822" JSON value will be base64 encoded and the "email_rfc822_is_base64" JSON boolean value will be set to true |
 | email_rfc822_is_base64 | boolean | Whether or not the "email_rfc822" value is base64 encoded |
 
-### Example Payload
+## Example Payloads
+
+**SMTP**
 
 Once registered, your relay webhook HTTP endpoint will receive inbound emails in the JSON form described above. Here is an example of the payload which your endpoint can expect to receive:
 
@@ -114,9 +134,32 @@ Once registered, your relay webhook HTTP endpoint will receive inbound emails in
 ]
 ```
 
+**SMPP - Coming Soon**
+
+Once registered, your relay webhook HTTP endpoint will receive inbound SMPP messages in the JSON form described above. Here is an example of the payload which your endpoint can expect to receive:
+
+```json
+[
+  {
+    "msys": {
+      "relay_message": {
+        "protocol": "smpp",
+        "to": "12345",
+        "date": "Wed, 14 Sep 2016 15:41:13 -0400",
+        "from": "54321",
+        "text": "Hi, I'm a text message",
+        "customer_id": "1337",
+        "webhook_id": "12363818881515528"
+      }
+    }
+  }
+]
+```
+
+
 ## Create and List [/relay-webhooks]
 
-### Create a Relay Webhook [POST]
+### Create an SMTP Relay Webhook [POST]
 
 Create a relay webhook by providing a **relay webhooks object** as the POST request body.
 
@@ -226,6 +269,54 @@ Create a relay webhook by providing a **relay webhooks object** as the POST requ
             }
           ```
 
+### Create an SMPP Relay Webhook - Coming Soon [POST]
+
+**Note:** Relay Webhooks for SMPP messages are available for SparkPost Elite only.
+
++ Request (application/json)
+
+  + Headers
+
+            Authorization: 14ac5499cfdd2bb2859e4476d2e5b1d2bad079bf
+
+  + Body
+
+            {
+              "name": "Replies Webhook",
+              "target": "https://webhooks.customer.example/replies",
+              "auth_token": "5ebe2294ecd0e0f08eab7690d2a6ee69",
+              "match":
+                {
+                  "protocol": "SMPP",
+                  "esme_address": "12345"
+                }
+            }
+
++ Response 200 (application/json)
+
+  + Body
+
+            {
+              "results":
+                {
+                  "id": "12013026328707075"
+                }
+            }
+
++ Response 400 (application/json)
+
+  + Body
+
+            { "errors": [
+                {
+                  "message": "invalid params",
+                  "description": "esme address not configured",
+                  "code": "9000"
+                }
+              ]
+            }
+
+    
 ### List all Relay Webhooks [GET]
 
 List all your relay webhooks.
@@ -388,6 +479,22 @@ Update a relay webhook by specifying the webhook ID in the URI path.
               {
                 "message": "invalid params",
                 "description": "Domain ('domain') is not a registered inbound domain",
+                "code": "1200"
+              }
+            ]
+          }
+        ```
+
++ Response 400 (application/json)
+
+  + Body
+
+        ```
+          {
+            "errors": [
+              {
+                "message": "invalid params",
+                "description": "esme address not configured",
                 "code": "1200"
               }
             ]
