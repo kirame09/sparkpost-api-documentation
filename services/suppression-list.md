@@ -114,6 +114,21 @@ If an email address is duplicated in a single request, only the first instance w
                 }
         }
 
++ Response 207 (application/json; charset=utf-8)
+
+        {
+            "results" :
+                {
+                    "errors": "Unprocessed items after 5 retries",
+                    "unprocessed_items": [
+                        {
+                            "description": "User requested to not receive any transactional emails.",
+                            "recipient": "rcpt_1@example.com",   
+                            "transaction_type": "t"
+                        }
+                    ]
+                }
+        }
 
 ## Search [/suppression-list{?to,from,domain,cursor,per_page,page,sources,types,description}]
 
