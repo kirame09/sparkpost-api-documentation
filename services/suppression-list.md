@@ -48,6 +48,9 @@ If the recipient entry was added to the list by Compliance, it cannot be updated
 
 If an email address is duplicated in a single request, only the first instance will be processed.
 
+Please note that in the unlikely scenario where your receive a HTTP 5xx level error response while bulk loading, that some of your suppression entries may have been
+successfully inserted or updated. If this occurs, please re-submit your original request again for processing.
+
 *Note:* `email`, which is an alias of `recipient`, attribute is supported but deprecated.
 *Note:* `transactional` and `non_transactional`, attributes are supported but deprecated. Please use type instead.
 
@@ -111,22 +114,6 @@ If an email address is duplicated in a single request, only the first instance w
             "results" :
                 {
                     "message": "Suppression List successfully updated"
-                }
-        }
-
-+ Response 207 (application/json; charset=utf-8)
-
-        {
-            "results" :
-                {
-                    "errors": "Unprocessed items after 5 retries",
-                    "unprocessed_items": [
-                        {
-                            "description": "User requested to not receive any transactional emails.",
-                            "recipient": "rcpt_1@example.com",   
-                            "transaction_type": "t"
-                        }
-                    ]
                 }
         }
 
