@@ -232,7 +232,7 @@ Perform a filtered search for message event data. The response is sorted by desc
     + subaccounts (optional, list, `101`) ... delimited list of subaccount ID's to search.
 
     + template_ids (optional, list, `templ-1234`) ... delimited list of template ID's to search.
-    + timezone =`UTC` (optional, string, `UTC`) ... Standard timezone identification string.
+    + timezone =`UTC` (optional, string, `America/New_York`) ... Standard timezone identification string.
     + to = `now` (optional, datetime, `2014-07-20T09:00`) ... Datetime in format of YYYY-MM-DDTHH:MM.
     + transmission_ids (optional, list, `65832150921904138`) ... delimited list of transmission ID's to search (i.e. id generated during creation of a transmission).
 
