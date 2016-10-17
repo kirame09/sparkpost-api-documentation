@@ -42,8 +42,8 @@ The following fields will be included in the JSON object posted to the SMTP rela
 |-----------|--------|-----------------------------------------------------------------------|--------------|
 | content   | object | Content that will be used to construct a relay message           | For a full description, see the Content Attributes. |
 | friendly_from | string | Email address used to compose the "From" header |
-| msg_from | string | SMTP envelope from |
-| rcpt_to | string | SMTP envelope to |
+| msg_from | string | [SMTP envelope](http://www.rfcreader.com/#rfc5321_line817) "MAIL FROM", matches "Return-Path" header address |
+| rcpt_to | string | [SMTP envelope](http://www.rfcreader.com/#rfc5321_line817) "RCPT TO" |
 | webhook_id | string | ID of the relay webhook which triggered this relay message |
 | protocol | string | Protocol of the originating inbound message | For smtp payloads, this string will be "smtp" |
 
