@@ -117,7 +117,7 @@ successfully inserted or updated. If this occurs, please re-submit your original
                 }
         }
 
-## Search [/suppression-list{?to,from,domain,cursor,per_page,page,sources,types,description}]
+## Search [/suppression-list{?to,from,domain,cursor,limit,per_page,page,sources,types,description}]
 
 ### Search for List Entries [GET]
 
@@ -128,11 +128,14 @@ Perform a filtered search for entries in your suppression list.
     + from (optional, datetime, `2014-07-20T09:00:00-0400`) ... Datetime the entries were last updated, in the format YYYY-MM-DDTHH:mm:ssZ
     + domain (optional, string, `yahoo.com`) ... Domain of entries to include in the search.
     + cursor (optional, string, `initial`) ... The results cursor location to return. When cursor is provided the `page` parameter is ignored.
+    + limit (optional, int, `5`) ... Maximum number of results to return per page.  Must be between 1 and 10000.
     + per_page (optional, int, `5`) ... Maximum number of results to return per page.  Must be between 1 and 10000. Default value is 1000.
     + page (optional, int, `5`) ... The results page number to return. Used with per_page for paging through results. The page parameter works up to 10,000 results. In order to paginate results past 10,000 use cursor based paging.
     + sources (optional, list, `Bounce%20Rule,Manually%20Added`) ... Sources of the entries to include in the search, i.e. entries that were added by this source
     + types (optional, list, `transactional`) ... Types of entries to include in the search, i.e. entries that are "transactional" or "non_transactional"
     + description (optional, string, `Invalid%20Recipient`) ... Description of the entries to include in the search, i.e descriptions that include the text submitted.
+
+    *Note:* `limit` parameter is supported up to 10000, but deprecated. Please use `per_page` instead.
 
 + Request
 
@@ -313,7 +316,7 @@ If the recipient entry was added to the list by Compliance, it cannot be updated
         ```
         {
 	        "type": "transactional",
-	        "descirption" : "Unsubscribe from newsletter"
+	        "description" : "Unsubscribe from newsletter"
         }
         ```
 
