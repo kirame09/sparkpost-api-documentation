@@ -74,7 +74,7 @@ The fields supported in the X-MSYS-API header are as follows:
 | inline_css| boolean| Whether or not to perform CSS inlining in HTML content | no | Defaults to false. |
 
 ### Open And Click Tracking
-**[SparkPost Enterprise API only](https://www.sparkpost.com/enterprise-email/):** With the *SparkPost Enterprise API*, click and open tracking are **enabled** by default. Please check with your TAM if you are unsure of the setting in your own environment.
+**[SparkPost Enterprise API only](https://www.sparkpost.com/enterprise-email/):** With the *SparkPost Enterprise API*, SMTP click and open tracking are **enabled** by default. Please check with your TAM if you are unsure of the setting in your own environment.
 
 **SparkPost API only: ** In *SparkPost*, SMTP click and open tracking are **disabled** by default.
 
