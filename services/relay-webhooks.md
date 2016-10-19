@@ -3,8 +3,6 @@ description: Manage relay webhooks, a way to instruct SparkPost to accept inboun
 
 # Group Relay Webhooks
 
-**Note:** The Relay Webhooks API is available for SparkPost only.
-
 Relay Webhooks are a way to instruct SparkPost to accept inbound email on your behalf and forward it to you over HTTP for your own consumption.
 
 By configuring a relay webhook for a specified inbound domain, those inbound messages can be forwarded to a specified target over HTTP.  Before you create a relay webhook, be sure to first create an inbound domain that is properly configured. To create an inbound domain for your account, please use our Inbound Domains API. The Relay Webhooks API provides the means to create, list, retrieve, update, and delete a relay webhook.
@@ -30,7 +28,7 @@ If you use [Postman](https://www.getpostman.com/) you can click the following bu
 |-----------|--------|-----------------------------------------------------------------------|--------------|----------------------|
 | protocol  | string | Inbound messaging protocol associated with this webhook | no - defaults to "SMTP" |                      |
 | domain    | string | Inbound domain associated with this webhook             | yes, when protocol is "SMTP" | To create an inbound domain for your account, please use the Inbound Domains API. |
-| esme_address | string | ESME address binding associated with this webhook    | yes, when protocol is "SMPP" | **Coming Soon:** Relay Webhooks for SMPP messages will be available for SparkPost Elite only.  Please speak with your account manager to create an ESME address. |
+| esme_address | string | ESME address binding associated with this webhook    | yes, when protocol is "SMPP" | **[SparkPost Enterprise API only](https://www.sparkpost.com/enterprise-email/)**: *Coming Soon*: Relay Webhooks for SMPP messages will be available for SparkPost Enterprise customers.  Please speak with your account manager to create an ESME address. |
 
 ## Field Definitions
 
@@ -271,7 +269,7 @@ Create a relay webhook by providing a **relay webhooks object** as the POST requ
 
 ### Create an SMPP Relay Webhook - Coming Soon [POST]
 
-**Note:** Relay Webhooks for SMPP messages are available for SparkPost Elite only.
+**[SparkPost Enterprise API only](https://www.sparkpost.com/enterprise-email/).**
 
 + Request (application/json)
 

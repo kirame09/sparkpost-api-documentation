@@ -4,7 +4,7 @@ description: Query real-time data about message processing, message disposition,
 # Group Metrics
 <a name="metrics-api"></a>
 
-SparkPost and SparkPost Elite log copious amounts of statistical, real-time data about message processing, message
+SparkPost logs copious amounts of statistical, real-time data about message processing, message
 disposition, and campaign performance.  This reporting data is available in the UI or through the Metrics API.  The Metrics API provides a variety of endpoints enabling you to retrieve a summary of the data, data grouped by a specific qualifier, or data by event type.  Within each endpoint, you can also apply various filters to drill down to the data for your specific reporting needs.
 
 **Deprecation Notice:** The `bindings` and `binding_groups` query parmeters have been deprecated. Please use the `sending_ips` and `ip_pools` query parameters instead.
@@ -25,9 +25,9 @@ Definitions for terms found in Metrics API
 
 | Term     | Definition    |
 |---------:|:--------------|
-|`count_targeted` | Messages successfully injected into SparkPost and SparkPost Elite as well as rejected by it|
-|`count_injected` | Messages injected to or received by SparkPost and SparkPost Elite|
-|`count_sent` | Messages that SparkPost and SparkPost Elite attempted to deliver, which includes both Deliveries and In-Band Bounces|
+|`count_targeted` | Messages successfully injected into SparkPost as well as rejected by it|
+|`count_injected` | Messages injected to or received by SparkPost|
+|`count_sent` | Messages that SparkPost attempted to deliver, which includes both Deliveries and In-Band Bounces|
 |`count_accepted` | Messages an ISP or other remote domain accepted (less Out-of-Band Bounces)|
 |`count_delivered` | Messages delivered
 |`count_delivered_first` | Messages delivered on the first attempt|
@@ -44,9 +44,9 @@ Definitions for terms found in Metrics API
 |`count_admin_bounce` | Total number of Bounced messages due to admin bounce classification reasons, also includes Rejected|
 |`count_undetermined_bounce` | Total number of Bounced messages due to undetermined bounce reasons|
 |`count_rejected` | Messages rejected due to policy or that failed to generate|
-|`count_policy_rejection` | Messages rejected by SparkPost and SparkPost Elite due to policy|
+|`count_policy_rejection` | Messages rejected by SparkPost due to policy|
 |`count_generation_failed` | Message generation failed for an intended recipient|
-|`count_generation_rejection` | Messages rejected by SparkPost and SparkPost Elite due to policy|
+|`count_generation_rejection` | Messages rejected by SparkPost due to policy|
 |`count_inband_bounce` | Messages that bounced on delivery attempt during the SMTP session|
 |`count_outofband_bounce` | Messages that the ISP bounced subsequent to a successful delivery|
 |`count_delayed` | Total number of delays due to any temporary failure|
@@ -154,7 +154,7 @@ list of URIs that exists within the Metrics API.
 
 Provides links to all child URIs within the Metrics API.
 
-**Note:** Links in the response for binding-groups, bindings apply to SparkPost Elite only.
+**[SparkPost Enterprise API only](https://www.sparkpost.com/enterprise-email/):** Metric discoverability links for binding-groups and bindings apply to the SparkPost Enterprise API only.
 
 + Request
 
@@ -3571,8 +3571,8 @@ Provides aggregate count of deliveries grouped by the attempt number.
   + sending_ips (optional, list, `123.456.789.123,123.456.789.124`) ... delimited list of sending IPs to include
   + ip_pools (optional, list, `Transaction`) ... delimited list of IP pools to include
   + sending_domains (optional, list, `sales.sender.com,company.net`) ... delimited list of sending domains to include
-  + bindings (optional, list, `Confirmation`) ... delimited list of bindings to include ( **Note:** SparkPost Elite only )
-  + binding_groups (optional, list, `Transaction`) ... delimited list of binding groups to include ( **Note:** SparkPost Elite only )
+  + bindings (optional, list, `Confirmation`) ... **[SparkPost Enterprise API only](https://www.sparkpost.com/enterprise-email/)**: delimited list of bindings to include
+  + binding_groups (optional, list, `Transaction`) ... **[SparkPost Enterprise API only](https://www.sparkpost.com/enterprise-email/)**: delimited list of binding groups to include
   + subaccounts (optional, list, `123,125,127`) ... delimited list of subaccount ids to include (**Note:** providing ?subaccounts=0 will filter out all subaccount data, and only return master account data)
   + timezone =`UTC` (optional, string, `America/New_York`) ... Standard timezone identification string, defaults to `UTC`
 
