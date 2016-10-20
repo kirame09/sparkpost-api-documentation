@@ -28,7 +28,8 @@ If you use [Postman](https://www.getpostman.com/) you can click the following bu
 |-----------|--------|-----------------------------------------------------------------------|--------------|----------------------|
 | protocol  | string | Inbound messaging protocol associated with this webhook | no - defaults to "SMTP" |                      |
 | domain    | string | Inbound domain associated with this webhook             | yes, when protocol is "SMTP" | To create an inbound domain for your account, please use the Inbound Domains API. |
-| esme_address | string | ESME address binding associated with this webhook    | yes, when protocol is "SMPP" | **[SparkPost Enterprise API only](https://www.sparkpost.com/enterprise-email/)**: *Coming Soon*: Relay Webhooks for SMPP messages will be available for SparkPost Enterprise customers.  Please speak with your account manager to create an ESME address. |
+| esme_address | string | ESME address binding associated with this webhook    | yes, when protocol is "SMPP" | **[SparkPost Enterprise API only](https://www.sparkpost.com/enterprise-email/)**: *Note*: Relay Webhooks for SMPP messages is available for SparkPost Enterprise customers.  Please speak with your account manager to create an ESME address. |
+
 
 ## Field Definitions
 
@@ -45,7 +46,7 @@ The following fields will be included in the JSON object posted to the SMTP rela
 | webhook_id | string | ID of the relay webhook which triggered this relay message |
 | protocol | string | Protocol of the originating inbound message | For smtp payloads, this string will be "smtp" |
 
-**SMPP - Coming Soon**
+**SMPP**
 
 The following fields will be included in the JSON object posted to the SMPP relay webhooks target:
 
@@ -132,7 +133,7 @@ Once registered, your relay webhook HTTP endpoint will receive inbound emails in
 ]
 ```
 
-**SMPP - Coming Soon**
+**SMPP**
 
 Once registered, your relay webhook HTTP endpoint will receive inbound SMPP messages in the JSON form described above. Here is an example of the payload which your endpoint can expect to receive:
 
@@ -267,7 +268,7 @@ Create a relay webhook by providing a **relay webhooks object** as the POST requ
             }
           ```
 
-### Create an SMPP Relay Webhook - Coming Soon [POST]
+### Create an SMPP Relay Webhook [POST]
 
 **[SparkPost Enterprise API only](https://www.sparkpost.com/enterprise-email/).**
 
