@@ -95,7 +95,7 @@ module.exports = function(grunt) {
                         $('nav a[href^=#]').each(
                           function(idx, elt) {
                             var obj = $(elt);
-                            var filename = (file.split('/'))[1].replace('.html', '');
+                            var filename = file.split('/')[1];
                             var href;
 
                             if (obj.parent().attr('class') == 'heading') {
@@ -156,7 +156,7 @@ module.exports = function(grunt) {
                         $ = cheerio.load(allnav);
                         var file = (srcpath.split('/'))[1];
                         // css selector for current nav
-                        var curNav = 'div.heading a[href^="'+ file.replace('.html', '') +'"]';
+                        var curNav = 'div.heading a[href^="'+ file +'"]';
 
                         // indicate current page w/in nav
                         $(curNav).parent().addClass('current');
