@@ -91,7 +91,7 @@ Note: To prevent abuse, our servers enforce request rate limiting, which may tri
 
 ## Errors
 
-If your account has been suspended due to concern about a possible violation of our [Messaging Policy](https://www.sparkpost.com/policies) please contact us at [abuse@sparkpost.com](mailto:abuse@sparkpost.com).
+If your account has been suspended due to concern about a possible violation of our [Messaging Policy](https://www.sparkpost.com/policies) please contact us at [compliance@sparkpost.com](mailto:compliance@sparkpost.com).
 
 When you make an API call you may receive an error message in response. Either there is something wrong with your request or something went wrong on our end. Errors respond with an error code and JSON that contains a more precise message, description and API code.
 ### Example Error
