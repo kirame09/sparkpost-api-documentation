@@ -852,7 +852,7 @@ Once message generation has been initiated, all messages in the transmission wil
                     "title" : "Badge adjust alert message",
                     "body" : "Hello Irina. I am resetting your badge to zero"
                   },
-                  "badge" : 1
+                  "badge" : 0
                 }
               },
               "gcm" : {
