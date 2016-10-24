@@ -849,10 +849,10 @@ Once message generation has been initiated, all messages in the transmission wil
               "apns" : {
                 "aps" : {
                   "alert" : {
-                    "title":"Badge adjust alert message",
-                    "body":"Hello Irina. I am resetting your badge to zero",
-                    "badge" : 1
-                  }
+                    "title" : "Badge adjust alert message",
+                    "body" : "Hello Irina. I am resetting your badge to zero"
+                  },
+                  "badge" : 1
                 }
               },
               "gcm" : {
