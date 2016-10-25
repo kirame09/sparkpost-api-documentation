@@ -826,22 +826,22 @@ Once message generation has been initiated, all messages in the transmission wil
         {
           "recipients": [
             {
-                "multichannel_addresses": [
-                    {
-                        "channel": "apns",
-                        "token": "02c7830aae68d008a0616aed81a6bec40b5acf53fbca1ae46c734527ee0e885f",
-                        "app_id": "flintstone.apns.domain"
-                    }
-                ]
+              "multichannel_addresses": [
+                {
+                  "channel": "apns",
+                  "token": "02c7830aae68d008a0616aed81a6bec40b5acf53fbca1ae46c734527ee0e885f",
+                  "app_id": "flintstone.apns.domain"
+                }
+              ]
             },
             {
-                "multichannel_addresses" : [
-                    {
-                        "channel": "gcm",
-                        "token": "kNd8dnekej:KDSNDdnedik3n3kFDJfjwJDKndkd39MNiKnd9-Dk4NbkwnyMisosowb_GixnesleE38c1nglc9dTIXL56Djdhsn90nZjkDleEixlndiHk_Sntks54g1sZdnssY2s15f_SnektTkjwse",
-                        "app_id": "flintstone.gcm.domain"
-                    }
-                ]
+              "multichannel_addresses" : [
+                {
+                  "channel": "gcm",
+                  "token": "kNd8dnekej:KDSNDdnedik3n3kFDJfjwJDKndkd39MNiKnd9-Dk4NbkwnyMisosowb_GixnesleE38c1nglc9dTIXL56Djdhsn90nZjkDleEixlndiHk_Sntks54g1sZdnssY2s15f_SnektTkjwse",
+                  "app_id": "flintstone.gcm.domain"
+                }
+              ]
             }
           ],
           "content": {
