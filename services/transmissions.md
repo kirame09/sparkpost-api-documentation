@@ -850,7 +850,7 @@ Once message generation has been initiated, all messages in the transmission wil
                 "aps" : {
                   "alert" : {
                     "title" : "Badge adjust alert message",
-                    "body" : "Hello Irina. I am resetting your badge to zero"
+                    "body" : "Hello John. I am resetting your badge to zero"
                   },
                   "badge" : 0
                 }
