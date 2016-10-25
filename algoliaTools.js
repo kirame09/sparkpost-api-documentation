@@ -248,8 +248,8 @@ module.exports = {
         let searchableObjects = asts.map(function (ast, idx) {
           let path = mdToHtml(services[idx]);
 
-          if (path == 'introduction') {
-            path = 'index';
+          if (path == 'introduction.html') {
+            path = 'index.html';
           }
 
           enrichAST(ast, path, idx+1);
