@@ -3,6 +3,8 @@ description: Get your SparkPost account information, including subscription stat
 
 # Group Account
 
+**Note: This endpoint is available on SparkPost only.**
+
 ## Using Postman
 
 If you use [Postman](https://www.getpostman.com/) you can click the following button to import the SparkPost API as a collection:
