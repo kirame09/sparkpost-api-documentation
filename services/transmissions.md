@@ -101,7 +101,7 @@ necessary.
 
 ### Attachment Attributes
 
-**Sending attachments with malicious contents is strictly prohibited by SparkPost. This includes (and is not limited to) files with bat and exe extensions.**
+**Sending attachments with malicious content is strictly prohibited by SparkPost. This includes (and is not limited to) files with bat and exe extensions.**
 
 Attachments for a transmission are specified in the content.attachments JSON array where each JSON object in the array is described by the following fields:
 
