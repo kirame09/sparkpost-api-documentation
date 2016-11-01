@@ -45,33 +45,6 @@ List descriptions of the events, event types, and event fields that could be inc
 
             Accept: application/json
 
-+ Response 200 (application/json)
-  ```js
-  {
-    "results": {
-      "message_event": {
-        "description": "Message events describe the life cycle of a message including injection, delivery, and disposition.",
-        "display_name": "Message Events",
-        "events": {
-          "bounce": {
-            "description": "Remote MTA has permanently rejected a message.",
-            "display_name": "Bounce",
-            "event": {
-              "campaign_id": {
-                "description": "Campaign of which this message was a part",
-                "sampleValue": "Example Campaign Name"
-              },
-              "timestamp": {
-                "description": "Event date and time, in Unix timestamp format (integer seconds since 00:00:00 GMT 1970-01-01)",
-                "sampleValue": 1427736822
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-  ```
 
 ## Events Samples [/webhooks/events/samples{?events}]
 
@@ -80,6 +53,8 @@ List descriptions of the events, event types, and event fields that could be inc
 List an example of the event data that will be posted by a Webhook for the specified events.
 
 **Note:** the data that will arrive at your target URL will **not** contain the top level ``results`` key shown in the example response.
+
+**Hint!** Use the 'delv_method' key to differentiate between Email, Push, and SMS type events.
 
 + Parameters
   + events (optional, string, `bounce`) ... Event types for which to get a sample payload, use the Webhooks Events endpoint to list the available event types, defaults to all event types.
@@ -90,41 +65,6 @@ List an example of the event data that will be posted by a Webhook for the speci
 
             Accept: application/json
 
-+ Response 200 (application/json)
-  ```js
-  {
-    "results": [
-      {
-        "msys": {
-          "message_event": {
-            "type": "bounce",
-            "bounce_class": "1",
-            "campaign_id": "Example Campaign Name",
-            "customer_id": "1",
-            "error_code": "554",
-            "ip_address": "127.0.0.1",
-            "message_id": "0e0d94b7-9085-4e3c-ab30-e3f2cd9c273e",
-            "msg_from": "sender@example.com",
-            "msg_size": "1337",
-            "num_retries": "2",
-            "rcpt_meta": {},
-            "rcpt_tags": [
-              "male",
-              "US"
-            ],
-            "rcpt_to": "recipient@example.com",
-            "reason": "000 Example Remote MTA Bounce Message",
-            "routing_domain": "example.com",
-            "template_id": "templ-1234",
-            "template_version": "1",
-            "timestamp": 1427736822,
-            "transmission_id": "65832150921904138"
-          }
-        }
-      }
-    ]
-  }
-  ```
 
 ## Create [/webhooks]
 
