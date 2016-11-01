@@ -369,7 +369,7 @@ aggregate data, which can be used as "group by" qualifiers.
 + Parameters
     + from (required, datetime, `2014-07-11T08:00`) ... Datetime in format of YYYY-MM-DDTHH:MM
     + to = `now` (optional, datetime, `2014-07-20T09:00`) ... Datetime in format of YYYY-MM-DDTHH:MM
-    + delimiter = `,` (optional, string, `:`) ... Specifies the delimiter for query parameter lists
+    + delimiter = `,` (optional, string) ... Specifies an alternate delimiter for all included query parameter lists
     + domains (optional, list, `gmail.com,yahoo.com,hotmail.com`) ... delimited list of domains to include
     + campaigns (optional, list, `Black Friday`) ... delimited list of campaigns to include
     + templates (optional, list, `summer-sale`) ... delimited list of template IDs to include
@@ -377,7 +377,7 @@ aggregate data, which can be used as "group by" qualifiers.
     + ip_pools (optional, list, `Transaction`) ... delimited list of IP pools to include
     + sending_domains (optional, list, `sales.sender.com,company.net`) ... delimited list of sending domains to include
     + subaccounts (optional, list, `123,125,127`) ... delimited list of subaccount ids to include (**Note:** providing ?subaccounts=0 will filter out all subaccount data, and only return master account data)
-    + metrics (required, list) ... delimited list of metrics for filtering
+    + metrics (required, list, `count_targeted,count_injected,count_rejected,count_sent`) ... delimited list of metrics for filtering
 
         + Values
             + `count_injected`
