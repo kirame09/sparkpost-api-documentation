@@ -26,7 +26,7 @@ if you are unsure of the setting in your own environment.
 
 | Name                     | Type | Data                  | Priority |
 |--------------------------|------|-----------------------|----------|
-| `inbounddomain.test.com` | MX   | inbound.<main-bounce-domain> | 10       |
+| `inbounddomain.test.com` | MX   | `inbound.<main-bounce-domain>` | 10       |
 
 
 #### Inbound Domains Attributes
