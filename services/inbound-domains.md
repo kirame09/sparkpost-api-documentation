@@ -17,7 +17,7 @@ The following DNS settings are for all plans *except* SparkPost Enterprise:
 | `inbounddomain.test.com` | MX   | rx2.sparkpostmail.com | 10       |
 | `inbounddomain.test.com` | MX   | rx3.sparkpostmail.com | 10       |
 
-For SparkPost Elite, you will need to use MX records
+For SparkPost Enterprise, you will need to use MX records
 similar to your existing domains.  In many cases
 the MX records for existing domains point at `inbound.<main-bounce-domain>`.
 The following DNS settings assume that your existing domains point
