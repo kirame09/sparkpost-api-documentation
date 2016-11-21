@@ -126,14 +126,14 @@ Perform a filtered search for entries in your suppression list.
 + Parameters
     + to = `now` (optional, datetime, `2014-07-21T09:00:00-0400`) ... Datetime the entries were last updated, in the format of YYYY-MM-DDTHH:mm:ssZ
     + from (optional, datetime, `2014-07-20T09:00:00-0400`) ... Datetime the entries were last updated, in the format YYYY-MM-DDTHH:mm:ssZ
-    + domain (optional, string, `yahoo.com`) ... Domain of entries to include in the search.
-    + cursor (optional, string, `initial`) ... The results cursor location to return. When cursor is provided the `page` parameter is ignored.
-    + limit (optional, int, `5`) ... Maximum number of results to return per page.  Must be between 1 and 10000.
-    + per_page (optional, int, `5`) ... Maximum number of results to return per page.  Must be between 1 and 10000. Default value is 1000.
-    + page (optional, int, `5`) ... The results page number to return. Used with per_page for paging through results. The page parameter works up to 10,000 results. In order to paginate results past 10,000 use cursor based paging.
+    + domain (optional, string, `yahoo.com`) ... Domain of entries to include in the search. ( **Note:** SparkPost only)
+    + cursor (optional, string, `initial`) ... The results cursor location to return, to start paging with cursor, use the value of 'initial'. When cursor is provided the `page` parameter is ignored. ( **Note:** SparkPost only)
+    + limit (optional, int, `5`) ... Maximum number of results to return per page.  Must be between 1 and 10,000. ( **Note:** SparkPost only)
+    + per_page (optional, int, `5`) ... Maximum number of results to return per page.  Must be between 1 and 10,000. Default value is 1000. ( **Note:** SparkPost only)
+    + page (optional, int, `5`) ... The results page number to return. Used with per_page for paging through results. The page parameter works up to 10,000 results. You must use the cursor parameter and start with cursor=initial to page result sets larger than 10,000 ( **Note:** SparkPost only)
     + sources (optional, list, `Bounce%20Rule,Manually%20Added`) ... Sources of the entries to include in the search, i.e. entries that were added by this source
     + types (optional, list, `transactional`) ... Types of entries to include in the search, i.e. entries that are "transactional" or "non_transactional"
-    + description (optional, string, `Invalid%20Recipient`) ... Description of the entries to include in the search, i.e descriptions that include the text submitted.
+    + description (optional, string, `Invalid%20Recipient`) ... Description of the entries to include in the search, i.e descriptions that include the text submitted. ( **Note:** SparkPost only)
 
     *Note:* `limit` parameter is supported up to 10000, but deprecated. Please use `per_page` instead.
 
@@ -200,14 +200,6 @@ Perform a filtered search for entries in your suppression list.
         }
 
 + Response 200 (application/json; charset=utf-8)
-    <div class="alert alert-warning">
-      <strong>Coming Soon!</strong>
-      <p>Please note that this is an upcoming breaking change to this endpoint's response body. This new response style replaces the HTTP 200 response
-      described above. If a recipient is suppressed at both a transactional and non-transaction level, two objects will be returned in the response
-      body instead of one. Also, there will be a new key of "type", which will inform which suppression type (transactional or non-transactional)
-      the object is referencing.</p>
-    </div>
-
     + Body
 
             {
@@ -281,13 +273,6 @@ In addition to the list entry attributes, the response body also includes "creat
         }
 
 + Response 200 (application/json; charset=utf-8)
-    <div class="alert alert-warning">
-      <strong>Coming Soon!</strong>
-      <p>Please note that this is an upcoming breaking change to this endpoint's response body. This new response style replaces the HTTP 200 response
-      described above. If a recipient is suppressed at both a transactional and non-transaction level, two objects will be returned in the response
-      body instead of one. Also, there will be a new key of "type", which will inform which suppression type (transactional or non-transactional)
-      the object is referencing.</p>
-    </div>
 
     + Body
 
@@ -357,6 +342,8 @@ If the recipient is not in the suppression list, an HTTP status of 404 is return
 + Response 204 (application/json; charset=utf-8)
 
 ### Insert or Update a List Entry [PUT]
+
+**Note:** SparkPost only
 
 Insert or update a single entry in the suppression list by providing a JSON object. At a minimum, the JSON object should include a suppression type: "transactional" or "non_transactional". The optional "description" key can be used to include an explanation of what type of message should be suppressed.
 
