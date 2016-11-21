@@ -67,12 +67,15 @@ successfully inserted or updated. If this occurs, please re-submit your original
             "recipients": [
                 {
                     "recipient": "rcpt_1@example.com",
+                    "transactional": true,
                     "type": "transactional",
                     "description": "User requested to not receive any transactional emails."
                 },
                 {
                     "recipient": "rcpt_2@example.com",
-                    "type": "non_transactional"
+                    "non_transactional": true,
+                    "type": "non_transactional",
+                    "description": "User requested to not receive any non-transactional emails."
                 }
             ]
         }
