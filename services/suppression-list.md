@@ -170,7 +170,6 @@ Perform a filtered search for entries in your suppression list.
             "results": [
                 {
                     "recipient": "test@example.com",
-                    "description": "550: this email address does not exist #55",
                     "source": "Bounce Rule",
                     "type": "transactional",
                     "created": "2015-01-01T01:01:01+00:00",
@@ -200,6 +199,39 @@ Perform a filtered search for entries in your suppression list.
             "total_count": 3
         }
 
++ Response 200 (application/json; charset=utf-8)
+    <div class="alert alert-warning">
+      <strong>Coming Soon!</strong>
+      <p>Please note that this is an upcoming breaking change to this endpoint's response body. This new response style replaces the HTTP 200 response
+      described above. If a recipient is suppressed at both a transactional and non-transaction level, two objects will be returned in the response
+      body instead of one. Also, there will be a new key of "type", which will inform which suppression type (transactional or non-transactional)
+      the object is referencing.</p>
+    </div>
+
+    + Body
+
+            {
+                "results": [
+                    {
+                        "recipient": "test@example.com",
+                        "non_transactional": true,
+                        "type": "non_transactional",
+                        "source": "Bounce Rule",
+                        "description": "550: this email address does not exist #55",
+                        "created": "2015-01-01T01:01:01+00:00",
+                        "updated": "2015-01-01T01:01:01+00:00"
+                    },
+                    {
+                        "recipient": "test@example.com",
+                        "transactional": true,
+                        "type": "transactional",
+                        "source": "Bounce Rule",
+                        "description": "550: this email address does not exist #55",
+                        "created": "2015-01-01T01:01:01+00:00",
+                        "updated": "2015-01-01T01:01:01+00:00"
+                    }
+                ]
+            }
 
 ## Retrieve, Delete, Insert or Update [/suppression-list/{recipient_email}]
 
@@ -238,9 +270,34 @@ In addition to the list entry attributes, the response body also includes "creat
             "results" : [
               {
                 "recipient" : "rcpt_1@example.com",
+                "transactional" : true,
                 "non_transactional" : true,
                 "source" : "Manually Added",
-                "type" : "non_transactional",
+                "description" : "User requested to not receive any further emails.",
+                "created" : "2015-01-01T12:00:00+00:00",
+                "updated" : "2015-01-01T12:00:00+00:00"
+              }
+            ]
+        }
+
++ Response 200 (application/json; charset=utf-8)
+    <div class="alert alert-warning">
+      <strong>Coming Soon!</strong>
+      <p>Please note that this is an upcoming breaking change to this endpoint's response body. This new response style replaces the HTTP 200 response
+      described above. If a recipient is suppressed at both a transactional and non-transaction level, two objects will be returned in the response
+      body instead of one. Also, there will be a new key of "type", which will inform which suppression type (transactional or non-transactional)
+      the object is referencing.</p>
+    </div>
+
+    + Body
+
+        {
+            "results" : [
+              {
+                "recipient" : "rcpt_1@example.com",
+                "non_transactional" : true,
+                "type": "non_transactional",
+                "source" : "Manually Added",
                 "description" : "User requested to not receive any non-transactional emails.",
                 "created" : "2015-01-01T12:00:00+00:00",
                 "updated" : "2015-01-01T12:00:00+00:00"
@@ -248,9 +305,9 @@ In addition to the list entry attributes, the response body also includes "creat
               {
                 "recipient" : "rcpt_1@example.com",
                 "transactional" : true,
+                "type": "transactional",
                 "source" : "Manually Added",
-                "type" : "transactional",
-                "description" : "User requested to not receive any non-transactional emails.",
+                "description" : "User requested to not receive any further emails.",
                 "created" : "2015-01-01T12:00:00+00:00",
                 "updated" : "2015-01-01T12:00:00+00:00"
               }
@@ -258,6 +315,8 @@ In addition to the list entry attributes, the response body also includes "creat
             "links": [],
             "total_count": 2
         }
+
+
 
 ### Delete a List Entry [DELETE]
 

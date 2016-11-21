@@ -32,7 +32,7 @@ The sandbox domain `sparkpostbox.com` is available to allow each account to send
 |description | string |Description of the transmission|no | Maximum length - 1024 bytes|
 |metadata|JSON object|Transmission level metadata containing key/value pairs |no| Metadata is available during events through the Webhooks and is provided to the substitution engine.  A maximum of 1000 bytes of merged metadata (transmission level + recipient level) is available with recipient metadata taking precedence over transmission metadata when there are conflicts.  |
 |substitution_data|JSON object|Key/value pairs that are provided to the substitution engine| no | Recipient substitution data takes precedence over transmission substitution data. Unlike metadata, substitution data is not included in Webhook events. |
-|return_path | string |Email to use for envelope FROM ( **Note:** SparkPost Elite only )| required for email transmissions | To support Variable Envelope Return Path (VERP), this field can also optionally be specified inside of the address object of a specific recipient in order to give the recipient a unique envelope MAIL FROM. |
+|return_path | string | **[SparkPost Enterprise API only](https://www.sparkpost.com/enterprise-email/)**: email to use for envelope FROM | required for email transmissions | To support Variable Envelope Return Path (VERP), this field can also optionally be specified inside of the address object of a specific recipient in order to give the recipient a unique envelope MAIL FROM. |
 |content| JSON object | Content that will be used to construct a message | yes | Specify a stored template or specify inline template content. When using a stored template, specify the "template_id" as described in Using a Stored Template.  Otherwise, provide the inline content using the fields described in Inline Content Attributes.  Maximum size - 20MBs|
 |total_recipients | number | Computed total recipients | no | Read only|
 |num_generated | number | Computed total number of messages generated | no |Read only|
@@ -48,7 +48,7 @@ The sandbox domain `sparkpostbox.com` is available to allow each account to send
 |click_tracking|boolean| Whether click tracking is enabled for this transmission| no |If not specified, the setting at template level is used, or defaults to true. |
 |transactional|boolean|Whether message is transactional or non-transactional for unsubscribe and suppression purposes (**Note:** no List-Unsubscribe header is included in transactional messages)| no |If not specified, the setting at template level is used, or defaults to false. |
 |sandbox|boolean|Whether or not to use the sandbox sending domain ( **Note:** SparkPost only )| no |Defaults to false. |
-|skip_suppression|boolean|Whether or not to ignore customer suppression rules, for this transmission only.  Only applicable if your configuration supports this parameter. ( **Note:** SparkPost Elite only )| no - Defaults to false |  Unlike most other options, this flag is omitted on a GET transmission response unless the flag's value is true. |
+|skip_suppression|boolean| **[SparkPost Enterprise API only](https://www.sparkpost.com/enterprise-email/)**: Whether or not to ignore customer suppression rules, for this transmission only.  Only applicable if your configuration supports this parameter. | no - Defaults to false |  Unlike most other options, this flag is omitted on a GET transmission response unless the flag's value is true. |
 | ip_pool | string | The ID of a dedicated IP pool associated with your account ( **Note:** SparkPost only ).  If this field is not provided, the account's default dedicated IP pool is used (if there are IPs assigned to it).  To explicitly bypass the account's default dedicated IP pool and instead fallback to the shared pool, specify a value of "sp_shared". | no | For more information on dedicated IPs, see the [Support Center](https://support.sparkpost.com/customer/en/portal/articles/2002977-dedicated-ip-addresses)
 |inline_css|boolean|Whether or not to perform CSS inlining in HTML content | no - Defaults to false | |
 
@@ -60,7 +60,7 @@ The following attributes are used when specifying inline content in the transmis
 |------------------------|:-:       |---------------------------------------|-------------|--------|
 |html    |string  |HTML content for the email's text/html MIME part|At a minimum, html, text, or push is required.  |Expected in the UTF-8 charset with no Content-Transfer-Encoding applied.  Substitution syntax is supported. |
 |text    |string  |Text content for the email's text/plain MIME part|At a minimum, html, text, or push is required. |Expected in the UTF-8 charset with no Content-Transfer-Encoding applied.  Substitution syntax is supported.|
-|push    |JSON object  |Content of push notifications|At a minimum, html, text, or push is required. |See Push Attributes. ( **Note:** SparkPost Elite only )|
+|push    |JSON object  |Content of push notifications|At a minimum, html, text, or push is required. | **[SparkPost Enterprise API only](https://www.sparkpost.com/enterprise-email/)**: See Push Attributes. |
 |subject |string  |Email subject line   | required for email transmissions |Expected in the UTF-8 charset without RFC2047 encoding.  Substitution syntax is supported. |
 |from |string or JSON  | Address _"from" : "deals@company.com"_ or JSON object composed of the "name" and "email" fields _"from" : { "name" : "My Company", "email" : "deals@company.com" }_ used to compose the email's "From" header| required for email transmissions | Substitution syntax is supported. |
 |reply_to |string  |Email address used to compose the email's "Reply-To" header | no | Substitution syntax is supported. |
@@ -97,11 +97,11 @@ first non-attachment text/html MIME parts only.
 necessary.
 * The provided email_rfc822 should NOT be dot stuffed.  The system dot stuffs before sending the outgoing message.
 * The provided email_rfc822 should NOT contain the SMTP terminator `\r\n.\r\n`.  The system always adds this terminator.
-* The provided email_rfc822 in MIME format will be rejected if SparkPost and SparkPost Elite cannot parse the contents into a MIME tree.
+* The provided email_rfc822 in MIME format will be rejected if SparkPost cannot parse the contents into a MIME tree.
 
 ### Attachment Attributes
 
-**Note: we do not allow attachments that have been known to contain malicious content including, but not limited to, bat, doc, docx, exe, xls, xlsx, and zip files.**
+**Sending attachments with malicious content is strictly prohibited by SparkPost. This includes (and is not limited to) files with bat and exe extensions.**
 
 Attachments for a transmission are specified in the content.attachments JSON array where each JSON object in the array is described by the following fields:
 
@@ -817,7 +817,7 @@ Once message generation has been initiated, all messages in the transmission wil
         }
 
 
-+ Request Create Transmission for Mobile Push Using Inline Content - SparkPost Elite only (application/json)
++ Request Create Transmission for Mobile Push Using Inline Content - **[SparkPost Enterprise API only](https://www.sparkpost.com/enterprise-email/)** (application/json)
 
     + Headers
 
@@ -828,22 +828,22 @@ Once message generation has been initiated, all messages in the transmission wil
         {
           "recipients": [
             {
-                "multichannel_addresses": [
-                    {
-                        "channel": "apns",
-                        "token": "02c7830aae68d008a0616aed81a6bec40b5acf53fbca1ae46c734527ee0e885f",
-                        "app_id": "flintstone.apns.domain"
-                    }
-                ]
+              "multichannel_addresses": [
+                {
+                  "channel": "apns",
+                  "token": "02c7830aae68d008a0616aed81a6bec40b5acf53fbca1ae46c734527ee0e885f",
+                  "app_id": "flintstone.apns.domain"
+                }
+              ]
             },
             {
-                "multichannel_addresses" : [
-                    {
-                        "channel": "gcm",
-                        "token": "kNd8dnekej:KDSNDdnedik3n3kFDJfjwJDKndkd39MNiKnd9-Dk4NbkwnyMisosowb_GixnesleE38c1nglc9dTIXL56Djdhsn90nZjkDleEixlndiHk_Sntks54g1sZdnssY2s15f_SnektTkjwse",
-                        "app_id": "flintstone.gcm.domain"
-                    }
-                ]
+              "multichannel_addresses" : [
+                {
+                  "channel": "gcm",
+                  "token": "kNd8dnekej:KDSNDdnedik3n3kFDJfjwJDKndkd39MNiKnd9-Dk4NbkwnyMisosowb_GixnesleE38c1nglc9dTIXL56Djdhsn90nZjkDleEixlndiHk_Sntks54g1sZdnssY2s15f_SnektTkjwse",
+                  "app_id": "flintstone.gcm.domain"
+                }
+              ]
             }
           ],
           "content": {
@@ -851,9 +851,10 @@ Once message generation has been initiated, all messages in the transmission wil
               "apns" : {
                 "aps" : {
                   "alert" : {
-                    "title" : "You have IOS deals",
-                    "badge" : 1
-                  }
+                    "title" : "Badge adjust alert message",
+                    "body" : "Hello John. I am resetting your badge to zero"
+                  },
+                  "badge" : 0
                 }
               },
               "gcm" : {

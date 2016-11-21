@@ -85,6 +85,9 @@ mixin Response(response, action)
         .panel-heading
             h4.panel-title Response (HTTP status code: #{response.name})
         .panel-body
+          if response.description
+              .markdown
+                  .description!= self.markdown(response.description)
             if response.body
                 +Headers('Response Headers', response)
                 +Code(response.body)

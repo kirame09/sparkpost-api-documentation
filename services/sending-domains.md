@@ -26,11 +26,11 @@ If you use [Postman](https://www.getpostman.com/) you can click the following bu
 
 ### DKIM Attributes
 
-DKIM uses a pair of public and private keys to authenticate your emails. ( **Note**: Only PKCS#1 format is supported at this time. ) The DKIM key configuration is described in a JSON object with the following fields:
+DKIM uses a pair of public and private keys to authenticate your emails. PKCS #1 and PKCS #8 formats are supported. We do not support password-protected keys. ( **Note**: The public/private key pair must match a single format as the API will reject mismatching pairs. ) The DKIM key configuration is described in a JSON object with the following fields:
 
 | Field         | Type     | Description                           | Required   | Notes   |
 |------------------------|:-:       |---------------------------------------|-------------|--------|
-|signing_domain| string | Signing Domain Identifier (SDID) | no | This will be used in the d= field of the DKIM Signature. If signing_domain is not specified, or is set to the empty string (""), then the Sending Domain will be used as the signing domain. ( **Note**: signing_domain is only available in SparkPost Elite. In SparkPost.com, the Sending Domain is always used as the signing domain. ) |
+|signing_domain| string | Signing Domain Identifier (SDID) | no | **[SparkPost Enterprise API only](https://www.sparkpost.com/enterprise-email/)**: This will be used in the d= field of the DKIM Signature. If signing_domain is not specified, or is set to the empty string (""), then the Sending Domain will be used as the signing domain.<br>By default, SparkPost uses the Sending Domain as the signing domain. |
 |private | string | DKIM private key | yes | The private key will be used to create the DKIM Signature.|
 |public | string |DKIM public key  | yes | The public key will be retrieved from DNS of the sending domain.|
 |selector | string |DomainKey selector | yes | The DomainKey selector will be used to indicate the DKIM public key location.|
@@ -79,9 +79,9 @@ Create a sending domain by providing a **sending domain object** as the POST req
 
 We allow any given domain (including its subdomains) to only be used by a single customer account.  Please see our [support article](https://support.sparkpost.com/customer/en/portal/articles/1933318-creating-sending-domains) for additional reasons a domain might not be approved for sending.
 
-To use a DKIM Signing Domain Identifier different to the Sending Domain, set the dkim.signing_domain field. ( **Note**: dkim.signing_domain is only available in SparkPost Elite. )
+**[SparkPost Enterprise API only](https://www.sparkpost.com/enterprise-email/):** To use a DKIM Signing Domain Identifier different to the Sending Domain, set the dkim.signing_domain field.
 
-**Note**: For some SparkPost Elite customers, Sending Domains will be set to verified automatically when they are created, and can be used to send messages immediately. For these customers, there is no need to use the "verify" endpoint to verify Sending Domains. To find out if this applies in your SparkPost Elite environment, please contact support <support@sparkpostelite.com>, or contact your TAM.
+**[SparkPost Enterprise API only](https://www.sparkpost.com/enterprise-email/):** For some SparkPost Enterprise customers, Sending Domains will be set to verified automatically when they are created, and can be used to send messages immediately. For these customers, there is no need to use the "verify" endpoint to verify Sending Domains. To find out if this applies to your SparkPost Enterprise service, please contact support <support@sparkpostelite.com>, or contact your TAM.
 
 + Request Create New Sending Domain with Auto-Generated DKIM Keypair (application/json)
 
@@ -282,7 +282,7 @@ If a tracking domain is specified, it will replace any currently specified track
 
 If a dkim object is provided in the update request, it must contain all relevant fields whether they are being changed or not.  The new dkim object will completely overwrite the existing one.
 
-To remove the DKIM Signing Domain Identifier for a Sending Domain, use the empty string for the value of the dkim.signing_domain field. ( **Note**: dkim.signing_domain is only available in SparkPost Elite. )
+**[SparkPost Enterprise API only](https://www.sparkpost.com/enterprise-email/):** To remove the DKIM Signing Domain Identifier for a Sending Domain, use the empty string for the value of the dkim.signing_domain field. 
 
 + Parameters
     + domain (required, string, `example1.com`) ... Name of the domain

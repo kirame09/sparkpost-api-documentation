@@ -344,7 +344,7 @@ The tracked link generated will look like this:
 http://<hostname>/f/custom_path/<encoded target url>
 ```
 
-An example of how to use **data-msys-sublink** to support iOS Universal Links in SparkPost Elite can be found [here](https://support.sparkpostelite.com/customer/en/portal/articles/2231112-ios9-universal-links-support?b_id=8730#Creating%20Universal%20Links%20in%20Templates%20&%20Sub-Pathing).
+**[SparkPost Enterprise API only](https://www.sparkpost.com/enterprise-email/):** An example of how to use **data-msys-sublink** to support iOS Universal Links can be found [here](https://support.sparkpostelite.com/customer/en/portal/articles/2231112-ios9-universal-links-support?b_id=8730#Creating%20Universal%20Links%20in%20Templates%20&%20Sub-Pathing).
 
 ## Link Attributes in Text Parts
 
@@ -735,16 +735,16 @@ The following substitution variables are reserved and automatically available fo
 
 * `address.name`: Recipient's name from the _address.name_ recipient json field
 * `email` and `address.email`: Recipient's email address from the _address_ or _address.email_ recipient json field
-* `return_path`: Return path from the transmission or recipients json field ( **Note:** SparkPost Elite only )
+* `return_path`: **[SparkPost Enterprise API only](https://www.sparkpost.com/enterprise-email/):** return path from the transmission or recipients json field
 
-**Note:** The following example applies to SparkPost only.
+The following example works for all SparkPost users.
 
 ```
 Hello {{address.name}}
 Your email is {{address.email}}
 ```
 
-**Note:** The following example applies to SparkPost Elite only.
+**[SparkPost Enterprise API only](https://www.sparkpost.com/enterprise-email/)**: The `return_path` substitution variable is available to SparkPost Enterprise users:
 
 ```
 Hello {{address.name}}

@@ -1,17 +1,19 @@
 description: Documentation for sending via SMTP or HTTP with the SparkPost API.
 
 # SparkPost API
-There are two service types available:  [SparkPost](http://sparkpost.com/), our self-service product, and [SparkPost Elite](https://www.sparkpost.com/products/sparkpost-elite), a managed service with guaranteed burst rates and white-glove support. These services have shared and unique aspects, with those unique aspects indicated in our consolidated API documentation as follows:
-* Features specific to **SparkPost** are indicated as "SparkPost only".
-* Features specific to **SparkPost Elite** products are indicated by "SparkPost Elite only".
+
+SparkPost presents a unified core API to all customers with a few noted exceptions.
+
+* Features available only to the SparkPost API are marked **SparkPost API only**
+* Features available only to the SparkPost Enterprise API are marked **SparkPost Enterprise API only**.
 
 ## API Endpoints
 
 | Endpoint   | Use for |
 |------------|---------|
 | `https://api.sparkpost.com/api/v1` | SparkPost |
-| `https://yourdomain.sparkpostelite.com/api/v1` | SparkPost Elite |
-| `https://yourdomain.msyscloud.com/api/v1` | SparkPost Elite (prior to June 2015) |
+| `https://yourdomain.sparkpostelite.com/api/v1` | SparkPost Enterprise API |
+| `https://yourdomain.msyscloud.com/api/v1` | SparkPost Enterprise API (formerly 'SparkPost Elite' - prior to June 2015) |
 
 ## API Conventions
 * API versioning is handled using a major version number in the URL, e.g. /api/v1/endpoint.
@@ -76,7 +78,7 @@ To use SparkPost as an SMTP relay you need to point your SMTP client (or local M
 
 **Note**: Port 2525 is provided as an alternate port for cases where port 587 is blocked (such as a Google Compute Engine environment).
 
-### SparkPost Elite SMTP Endpoint
+### SparkPost Enterprise SMTP Endpoint
 
 * Please contact your Technical Account Manager for details on your SMTP endpoint.
 
@@ -89,7 +91,7 @@ Note: To prevent abuse, our servers enforce request rate limiting, which may tri
 
 ## Errors
 
-If your account has been suspended due to concern about a possible violation of our [Messaging Policy](https://www.sparkpost.com/policies) please contact us at [abuse@sparkpost.com](mailto:abuse@sparkpost.com).
+If your account has been suspended due to concern about a possible violation of our [Messaging Policy](https://www.sparkpost.com/policies) please contact us at [compliance@sparkpost.com](mailto:compliance@sparkpost.com).
 
 When you make an API call you may receive an error message in response. Either there is something wrong with your request or something went wrong on our end. Errors respond with an error code and JSON that contains a more precise message, description and API code.
 ### Example Error

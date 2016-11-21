@@ -59,7 +59,7 @@ first non-attachment text/html MIME parts only.
 necessary.
 * The provided email_rfc822 should NOT be dot stuffed.  The system dot stuffs before sending the outgoing message.
 * The provided email_rfc822 should NOT contain the SMTP terminator `\r\n.\r\n`.  The system always adds this terminator.
-* The provided email_rfc822 in MIME format will be rejected if SparkPost and SparkPost Elite cannot parse the contents into a MIME tree.
+* The provided email_rfc822 in MIME format will be rejected if SparkPost cannot parse the contents into a MIME tree.
 
 ### Options Attributes
 

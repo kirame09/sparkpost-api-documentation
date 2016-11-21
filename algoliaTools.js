@@ -29,7 +29,7 @@ function parseBlueprint(content) {
 
 // Parse markdown content into sections: headings and body content
 function parseDescriptions(ast) {
-  // Walk raw content line by line building a list of sections indexed by heading 
+  // Walk raw content line by line building a list of sections indexed by heading
   ast.sections = chunkMarkdown(ast.description);
   ast.resourceGroups.forEach((resGroup, rgidx) => {
     resGroup.sections = chunkMarkdown(resGroup.description);
@@ -98,9 +98,9 @@ function visitAST(ast, visitor, userVal) {
 
 // -------------------------------------------------------------------------------------------
 
-// blah.ext -> blah
-function stripExt(s) {
-  return s.substr(0, s.lastIndexOf('.'));
+// blah.md -> blah.html
+function mdToHtml(s) {
+  return s.replace('.md', '.html');
 }
 
 // Convert a title to an HTML anchor
@@ -246,10 +246,10 @@ module.exports = {
       .then(files => q.all(files.map(parseBlueprint)))
       .then(asts => {
         let searchableObjects = asts.map(function (ast, idx) {
-          let path = stripExt(services[idx]);
+          let path = mdToHtml(services[idx]);
 
-          if (path == 'introduction') {
-            path = 'index';
+          if (path == 'introduction.html') {
+            path = 'index.html';
           }
 
           enrichAST(ast, path, idx+1);
