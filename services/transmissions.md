@@ -1049,46 +1049,46 @@ Tenant and Subaccount ID are required for this operation.
 
   + Headers
 
-      Authorization: 14ac5499cfdd2bb2859e4476d2e5b1d2bad079bf
-      Accept: application/json
-      Tenant: tenant
-      CustomerID: 81
-      SubaccountID: 15
+            Authorization: 14ac5499cfdd2bb2859e4476d2e5b1d2bad079bf
+            Accept: application/json
+            Tenant: tenant
+            Customer ID: 81
+            Subaccount ID: 15
 
 + Response 200 (application/json)
 
-  + Body
+  +  Body
 
-    {
-    }
+        {
+        }
 
 + Response 401 (application/json)
 
   + Body
 
-    {
-       "errors" : [
           {
-             "description" : "x-msys-customer header is required",
-             "code" : "1303",
-             "message" : "Unauthorized Tenant"
+            "errors": [
+              {
+                "message": "x-msys-customer header is required",
+                "code": "1303",
+                "description": "Unauthorized Tenant"
+              }
+            ]
           }
-       ]
-    }
 
 + Response 422 (application/json)
 
   + Body
 
-    {
-       "errors" : [
           {
-             "description" : "customer, tenant, and subaccount id are required",
-             "code" : "1400",
-             "message" : "required field is missing"
+            "errors": [
+              {
+                "description": "customer, tenant, and subaccount id are required",
+                "code": "1400",
+                "description": "required field is missing"
+              }
+            ]
           }
-       ]
-    }
 
 ## List [/transmissions{?campaign_id,template_id}]
 
