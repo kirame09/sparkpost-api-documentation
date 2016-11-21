@@ -131,7 +131,7 @@ Perform a filtered search for entries in your suppression list.
     + from (optional, datetime, `2014-07-20T09:00:00-0400`) ... Datetime the entries were last updated, in the format YYYY-MM-DDTHH:mm:ssZ
     + domain (optional, string, `yahoo.com`) ... Domain of entries to include in the search. ( **Note:** SparkPost only)
     + cursor (optional, string, `initial`) ... The results cursor location to return, to start paging with cursor, use the value of 'initial'. When cursor is provided the `page` parameter is ignored. ( **Note:** SparkPost only)
-    + limit (optional, int, `5`) ... Maximum number of results to return per page.  Must be between 1 and 10,000. ( **Note:** SparkPost only)
+    + limit (optional, int, `5`) ... Maximum number of results to return per page.  Must be between 1 and 10,000.
     + per_page (optional, int, `5`) ... Maximum number of results to return per page.  Must be between 1 and 10,000. Default value is 1000. ( **Note:** SparkPost only)
     + page (optional, int, `5`) ... The results page number to return. Used with per_page for paging through results. The page parameter works up to 10,000 results. You must use the cursor parameter and start with cursor=initial to page result sets larger than 10,000 ( **Note:** SparkPost only)
     + sources (optional, list, `Bounce%20Rule,Manually%20Added`) ... Sources of the entries to include in the search, i.e. entries that were added by this source
