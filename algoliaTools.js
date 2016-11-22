@@ -23,7 +23,7 @@ let writefilep = q.nfbind(fs.writeFile);
 // Parse Apiary Blueprint content into AST
 // Returns: promise of AST
 function parseBlueprint(content) {
-  return q.nfcall(protagonist.parse, content, {'type': 'ast'})
+  return q.nfcall(protagonist.parse, content.replace(/\t/g, '  '), {'type': 'ast'})
     .then(result => parseDescriptions(result.ast));
 }
 
