@@ -364,8 +364,8 @@ If the recipient entry was added to the list by Compliance, it cannot be updated
 
         ```
         {
-	        "type": "transactional",
-	        "description" : "Unsubscribe from newsletter"
+          "type": "transactional",
+          "description" : "Unsubscribe from newsletter"
         }
         ```
 
