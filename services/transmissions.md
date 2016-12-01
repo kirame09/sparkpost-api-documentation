@@ -955,7 +955,7 @@ The response for a transmission using an inline template will include "template_
 
 ## Delete a Transmission [DELETE]
 
-### Delete a transmission by specifying its ID in the URI path.
+Delete a transmission by specifying its ID in the URI path.
 
 Only transmissions which are scheduled for future generation may be deleted.
 
@@ -1039,11 +1039,8 @@ Scheduled transmissions cannot be deleted if the transmission is within 10 minut
 
 ### Delete all transmissions of a campaign by specifying Campaign ID in the URI path.
 
-Tenant and Subaccount ID are required for this operation.
-
-
 + Parameters
-  + id (required, string, 'white christmas') ... Campaign ID
+  + campaign_id (required, string, 'white christmas') ... Campaign ID
 
 + Request
 
@@ -1051,9 +1048,6 @@ Tenant and Subaccount ID are required for this operation.
 
             Authorization: 14ac5499cfdd2bb2859e4476d2e5b1d2bad079bf
             Accept: application/json
-            Tenant: tenant
-            Customer ID: 81
-            Subaccount ID: 15
 
 + Response 200 (application/json)
 
@@ -1062,33 +1056,6 @@ Tenant and Subaccount ID are required for this operation.
         {
         }
 
-+ Response 401 (application/json)
-
-  + Body
-
-          {
-            "errors": [
-              {
-                "message": "x-msys-customer header is required",
-                "code": "1303",
-                "description": "Unauthorized Tenant"
-              }
-            ]
-          }
-
-+ Response 422 (application/json)
-
-  + Body
-
-          {
-            "errors": [
-              {
-                "description": "customer, tenant, and subaccount id are required",
-                "code": "1400",
-                "description": "required field is missing"
-              }
-            ]
-          }
 
 ## List [/transmissions{?campaign_id,template_id}]
 
