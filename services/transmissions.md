@@ -890,9 +890,11 @@ Once message generation has been initiated, all messages in the transmission wil
 
 ### Retrieve a Transmission [GET]
 
-Retrieve the details about a transmission by specifying its ID in the URI path.
+Retrieve the details about a scheduled transmission by specifying its ID in the URI path.
 
 The response for a transmission using an inline template will include "template_id":"inline".  Inline templates cannot be specifically queried.
+
+**Note: only a scheduled transmission will be returned via this endpoint.  Please use the Metrics API to retrieve immediate transmission information.**
 
 + Parameters
     + id (required, number, `11714265276872`) ... ID of the transmission
@@ -1038,13 +1040,15 @@ Scheduled transmissions cannot be deleted if the transmission is within 10 minut
 ## List [/transmissions{?campaign_id,template_id}]
 
 ### List all Transmissions [GET]
-List an array of live transmission summary objects.  A transmission summary object contains _id_, _state_, _template_id_, _campaign_id_ and _description_ fields. The list contains only multi-recipient transmissions in "submitted" or "generating" state or that have "completed" within the last 24 hours.
+List an array of live scheduled transmission summary objects.  A transmission summary object contains _id_, _state_, _template_id_, _campaign_id_ and _description_ fields. The list contains only multi-recipient transmissions in "submitted" or "generating" state or that have "completed" within the last 24 hours.
 
-By default, the list includes transmissions for all campaigns and templates.  Use the _template_id_ parameter to filter by template and _campaign_id_ to filter by campaign. The summary for transmissions using an inline template will include `"template_id": "inline"`.  Transmissions using inline templates cannot be filtered with _template_id_.
+By default, the list includes any upcoming, in-progress, or recently completed scheduled transmissions for all campaigns and templates.  Use the _template_id_ parameter to filter by template and _campaign_id_ to filter by campaign. The summary for transmissions using an inline template will include `"template_id": "inline"`.  Transmissions using inline templates cannot be filtered with _template_id_.
 
 **Note: single recipient transmissions are not listed.**
 
 **Note: transmissions in "completed" state are removed from the list after 24 hours.**
+
+**Note: only scheduled transmissions will be returned via this endpoint.  Please use the Metrics API to retrieve immediate transmission information.**
 
 + Parameters
   + campaign_id (optional, string,`thanksgiving`) ... ID of the campaign used by the transmissions
