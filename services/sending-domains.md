@@ -56,7 +56,7 @@ These are the valid request options for verifying a Sending Domain:
 | Field         | Type     | Description                           | Required  | Notes   |
 |------------------------|:-:       |---------------------------------------|-------------|--------|
 |dkim_verify | boolean | Request verification of DKIM record | no | |
-|spf_verify | boolean | Request verification of SPF record | no | |
+|spf_verify | boolean | Request verification of SPF record | no | **Deprecated.** |
 |postmaster_at_verify | boolean | Request an email with a verification link to be sent to the sending domain's postmaster@ mailbox. | no | SparkPost.com only |
 |abuse_at_verify | boolean | Request an email with a verification link to be sent to the sending domain's abuse@ mailbox. | no | SparkPost.com only |
 |postmaster_at_token | string | A token retrieved from the verification link contained in the postmaster@ verification email. | no | SparkPost.com only |
@@ -385,11 +385,13 @@ DKIM public key verification requires the following:
   * If a k= tag is defined, it must be set to "rsa".
   * If an h= tag is defined, it must be set to "sha256".
 
-SPF verification requires the following:
+SPF verification requires the following: 
   * A valid SPF record must be in the DNS for the sending domain being verified.
   * The record must contain "v=spf1".
   * The record must contain "include:sparkpostmail.com".
   * The record must use either "~all" or "-all".
+
+**Note: SPF sending domain verification is deprecated. You can use DKIM and/or email to verify your sending domain. We recommend using DKIM since it has authentication benefits.**
 
 The domain's "status" object is returned on success.
 
