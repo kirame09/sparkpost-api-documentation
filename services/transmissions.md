@@ -953,7 +953,7 @@ The response for a transmission using an inline template will include "template_
             }
 
 
-### Delete a Transmission [DELETE]
+## Delete a Transmission [DELETE]
 
 Delete a transmission by specifying its ID in the URI path.
 
@@ -1034,6 +1034,28 @@ Scheduled transmissions cannot be deleted if the transmission is within 10 minut
               }
             ]
           }
+
+## Delete [/transmissions?campaign_id={campaign_id}]
+
+### Delete all transmissions of a campaign by specifying Campaign ID in the URI path.
+
++ Parameters
+  + campaign_id (required, string, 'white christmas') ... Campaign ID
+
++ Request
+
+  + Headers
+
+            Authorization: 14ac5499cfdd2bb2859e4476d2e5b1d2bad079bf
+            Accept: application/json
+
++ Response 200 (application/json)
+
+  +  Body
+
+        {
+        }
+
 
 ## List [/transmissions{?campaign_id,template_id}]
 
