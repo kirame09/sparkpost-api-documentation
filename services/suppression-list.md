@@ -44,9 +44,7 @@ If you use [Postman](https://www.getpostman.com/) you can click the following bu
 
 Bulk insert or update entries in the suppression list by providing a JSON object, with a "recipients" key containing an array of recipients to insert or update, as the PUT request body. Maximum size of the JSON object is 50mb. Maximum recipients at a time is 10,000. At a minimum, each recipient must have a valid email address and a suppression type: "transactional" or "non_transactional". The optional "description" key can be used to include an explanation of what type of message should be suppressed.
 
-If the recipient entry was added to the list by Compliance, it cannot be updated.
-
-If an email address is duplicated in a single request, only the first instance will be processed.
+If the recipient was added to the list by Compliance, it cannot be updated.
 
 Please note that in the unlikely scenario where your receive a HTTP 5xx level error response while bulk loading, that some of your suppression entries may have been successfully inserted or updated. If this occurs, please re-submit your original request again for processing.
 
