@@ -48,9 +48,9 @@ If the recipient was added to the list by Compliance, it cannot be updated.
 
 Please note that in the unlikely scenario where your receive a HTTP 5xx level error response while bulk loading, that some of your suppression entries may have been successfully inserted or updated. If this occurs, please re-submit your original request again for processing.
 
-*Note:* `email`, which is an alias of `recipient`, attribute is supported but deprecated.
+*Note:* The `email` attribute is deprecated. Use `recipient` instead.
 
-*Note:* `transactional` and `non_transactional`, attributes are supported but deprecated. Please use type instead.
+*Note:* The attributes `transactional` and `non_transactional` are deprecated. Use `type` instead.
 
 
 + Request (application/json)
