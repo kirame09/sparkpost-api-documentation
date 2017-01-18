@@ -17,7 +17,7 @@ In addition to your suppression list, SparkPost maintains a global suppression l
 
 **When initially configuring your SparkPost account, we *strongly recommend* you import any suppression list you have from any previous service to avoid incorrectly sending mail to unsubscribed/invalid recipients.**
 
-**SparkPost supports bulk importing or manually adding up to 1,000,000 suppression list entries.**
+**SparkPost supports bulk importing or manually adding up to 1,000,000 suppression list entries total.**
 
 It is also good practice to maintain your own recipient database by unsubscribing or removing recipients based on the bounce, unsubscribe and spam complaint events provided by SparkPost. These events are available from [webhooks](webhooks), [message events](message-events) and your suppression list. A 24-hour time-windowed suppression list search [as outlined below](#suppression-list-search-get) is useful here.
 
@@ -42,16 +42,16 @@ If you use [Postman](https://www.getpostman.com/) you can click the following bu
 
 ### Insert or Update List Entries [PUT]
 
-Bulk insert or update entries in the suppression list by providing a JSON object, with a "recipients" key containing an array of recipients to insert or update, as the PUT request body. Maximum size of the JSON object is 50mb. At a minimum, each recipient must have a valid email address and a suppression type: "transactional" or "non_transactional". The optional "description" key can be used to include an explanation of what type of message should be suppressed.
+Bulk insert or update entries in the suppression list by providing a JSON object, with a "recipients" key containing an array of recipients to insert or update, as the PUT request body. Maximum size of the JSON object is 50mb. Maximum recipients at a time is 10,000. At a minimum, each recipient must have a valid email address and a suppression type: "transactional" or "non_transactional". The optional "description" key can be used to include an explanation of what type of message should be suppressed.
 
 If the recipient entry was added to the list by Compliance, it cannot be updated.
 
 If an email address is duplicated in a single request, only the first instance will be processed.
 
-Please note that in the unlikely scenario where your receive a HTTP 5xx level error response while bulk loading, that some of your suppression entries may have been
-successfully inserted or updated. If this occurs, please re-submit your original request again for processing.
+Please note that in the unlikely scenario where your receive a HTTP 5xx level error response while bulk loading, that some of your suppression entries may have been successfully inserted or updated. If this occurs, please re-submit your original request again for processing.
 
 *Note:* `email`, which is an alias of `recipient`, attribute is supported but deprecated.
+
 *Note:* `transactional` and `non_transactional`, attributes are supported but deprecated. Please use type instead.
 
 
@@ -67,13 +67,11 @@ successfully inserted or updated. If this occurs, please re-submit your original
             "recipients": [
                 {
                     "recipient": "rcpt_1@example.com",
-                    "transactional": true,
                     "type": "transactional",
                     "description": "User requested to not receive any transactional emails."
                 },
                 {
                     "recipient": "rcpt_2@example.com",
-                    "non_transactional": true,
                     "type": "non_transactional",
                     "description": "User requested to not receive any non-transactional emails."
                 }
