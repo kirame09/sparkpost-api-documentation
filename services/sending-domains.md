@@ -385,13 +385,13 @@ DKIM public key verification requires the following:
   * If a k= tag is defined, it must be set to "rsa".
   * If an h= tag is defined, it must be set to "sha256".
 
+**Note: SPF sending domain verification is deprecated. You can use DKIM and/or email to verify your sending domain. We recommend using DKIM since it has authentication benefits.**
+
 SPF verification requires the following: 
   * A valid SPF record must be in the DNS for the sending domain being verified.
   * The record must contain "v=spf1".
   * The record must contain "include:sparkpostmail.com".
   * The record must use either "~all" or "-all".
-
-**Note: SPF sending domain verification is deprecated. You can use DKIM and/or email to verify your sending domain. We recommend using DKIM since it has authentication benefits.**
 
 The domain's "status" object is returned on success.
 
