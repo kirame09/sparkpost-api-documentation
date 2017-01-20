@@ -126,10 +126,21 @@ As described in "Webhooks Object Properties", webhook creation entails a test PO
 
     ```js
     {
-      "errors": {
-        "code": 400,
-        "message": "POST to webhook tokens URL failed"
-      }
+      "errors": [
+          {
+              "code": 400,
+              "message": "POST to webhook tokens URL failed",
+              "response": {
+                  "body": "response body",
+                  "headers": {
+                      "connection": "close",
+                      "content-length": "536",
+                      "content-type": "text/html; charset=iso-8859-1"
+                  },
+                  "status": 502
+              }
+          }
+      ]
     }
     ```
 

@@ -817,8 +817,8 @@ Once message generation has been initiated, all messages in the transmission wil
         }
 
 
-+ Request Create Transmission for Mobile Push Using Inline Content - **[SparkPost Enterprise API only](https://www.sparkpost.com/enterprise-email/)** (application/json)
-
++ Request Create Transmission for Mobile Push Using Inline Content (application/json)
+**[SparkPost Enterprise API only](https://www.sparkpost.com/enterprise-email/)**
     + Headers
 
             Authorization: 14ac5499cfdd2bb2859e4476d2e5b1d2bad079bf
@@ -880,11 +880,6 @@ Once message generation has been initiated, all messages in the transmission wil
             "id": "11668787493850529"
           }
         }
-
-
-
-
-
 
 ## Delete [/transmissions/{id}]
 
@@ -969,4 +964,30 @@ Scheduled transmissions cannot be deleted if the transmission is within 10 minut
               }
             ]
           }
+
+## Delete Transmissions By Campaign [/transmissions?campaign_id={campaign_id}]
+
+Delete all transmissions of a campaign by specifying Campaign ID in the URI path. 
+
+  + Parameters
+
+    + campaign_id (required, string, `white-christmas`)
+
+### Delete By Campaign ID [DELETE]
+
+
++ Request Delete all transmissions for a campaign
+
+
+  + Headers
+
+            Authorization: 14ac5499cfdd2bb2859e4476d2e5b1d2bad079bf
+            Accept: application/json
+
++ Response 200 (application/json)
+
+  +  Body
+
+        {
+        }
 
