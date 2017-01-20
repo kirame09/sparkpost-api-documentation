@@ -818,7 +818,7 @@ Once message generation has been initiated, all messages in the transmission wil
 
 
 + Request Create Transmission for Mobile Push Using Inline Content (application/json)
-**[SparkPost Enterprise API only](https://www.sparkpost.com/enterprise-email/)**
+<div class="alert alert-info">The following request is valid for the <a href="https://www.sparkpost.com/enterprise-email/">SparkPost Enterprise API</a> only.</div>
     + Headers
 
             Authorization: 14ac5499cfdd2bb2859e4476d2e5b1d2bad079bf
