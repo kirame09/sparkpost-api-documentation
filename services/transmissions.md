@@ -48,7 +48,7 @@ The sandbox domain `sparkpostbox.com` is available to allow each account to send
 |click_tracking|boolean| Whether click tracking is enabled for this transmission| no |If not specified, the setting at template level is used, or defaults to true. |
 |transactional|boolean|Whether message is transactional or non-transactional for unsubscribe and suppression purposes (**Note:** no List-Unsubscribe header is included in transactional messages)| no |If not specified, the setting at template level is used, or defaults to false. |
 |sandbox|boolean|Whether or not to use the sandbox sending domain ( **Note:** SparkPost only )| no |Defaults to false. |
-|skip_suppression|boolean| **[SparkPost Enterprise API only](https://www.sparkpost.com/enterprise-email/)**: Whether or not to ignore customer suppression rules, for this transmission only.  Only applicable if your configuration supports this parameter. | no - Defaults to false |  Unlike most other options, this flag is omitted on a GET transmission response unless the flag's value is true. |
+|skip_suppression|boolean| **[SparkPost Enterprise API only](https://www.sparkpost.com/enterprise-email/)**: Whether or not to ignore customer suppression rules, for this transmission only.  Only applicable if your configuration supports this parameter. | no - Defaults to false | |
 | ip_pool | string | The ID of a dedicated IP pool associated with your account ( **Note:** SparkPost only ).  If this field is not provided, the account's default dedicated IP pool is used (if there are IPs assigned to it).  To explicitly bypass the account's default dedicated IP pool and instead fallback to the shared pool, specify a value of "sp_shared". | no | For more information on dedicated IPs, see the [Support Center](https://support.sparkpost.com/customer/en/portal/articles/2002977-dedicated-ip-addresses)
 |inline_css|boolean|Whether or not to perform CSS inlining in HTML content | no - Defaults to false | |
 
@@ -881,7 +881,73 @@ Once message generation has been initiated, all messages in the transmission wil
           }
         }
 
-## Delete [/transmissions/{id}]
+## Retrieve and Delete [/transmissions/{id}]
+
+### Retrieve a Transmission [GET]
+
+**This endpoint is deprecated and will be removed in due course. For alternatives, [see this article](https://www.sparkpost.com/blog/...).**
+
+Retrieve the details about a transmission by specifying its ID in the URI path.
+
+The response for a transmission using an inline template will include "template_id":"inline".  Inline templates cannot be specifically queried.
+
++ Parameters
+    + id (required, number, `11714265276872`) ... ID of the transmission
+
++ Request
+
+    + Headers
+
+            Authorization: 14ac5499cfdd2bb2859e4476d2e5b1d2bad079bf
+            Accept: application/json
+
++ Response 200 (application/json)
+
+    + Body
+
+        {
+          "results": {
+            "transmission": {
+              "id": "11750520427380741",
+              "description": "",
+              "state": "Success",
+              "campaign_id": "white_christmas",
+              "content": {
+                "template_id": "Bob's template",
+                "use_draft_template": false
+              },
+              "rcpt_list_chunk_size": 100,
+              "rcpt_list_total_chunks": 1,
+              "num_rcpts": 10,
+              "num_generated": 10,
+              "num_failed_gen": 0,
+              "generation_start_time": "2014-05-22T15:12:59+00:00",
+              "generation_end_time": "2014-05-22T15:13:00+00:00",
+              "substitution_data": "",
+              "metadata": {
+                "is_snowing": "yes"
+              },
+              "options": {
+                "open_tracking": "",
+                "click_tracking": ""
+              }
+            }
+          }
+        }
+
++ Response 404 (application/json)
+
+    + Body
+
+            {
+              "errors": [
+                {
+                  "message": "resource not found",
+                  "description": "Resource not found:transmission id 123",
+                  "code": "1600"
+                }
+              ]
+            }
 
 ### Delete a Transmission [DELETE]
 
@@ -991,3 +1057,63 @@ Delete all transmissions of a campaign by specifying Campaign ID in the URI path
         {
         }
 
+## List [/transmissions{?campaign_id,template_id}]
+
+### List all Transmissions [GET]
+
+**This endpoint is deprecated and will be removed in due course. For alternatives, [see this article](https://www.sparkpost.com/blog/...).**
+
+List an array of live transmission summary objects.  A transmission summary object contains _id_, _state_, _template_id_, _campaign_id_ and _description_ fields. The list contains only multi-recipient transmissions in "submitted" or "generating" state or that have "completed" within the last 24 hours.
+
+By default, the list includes transmissions for all campaigns and templates.  Use the _template_id_ parameter to filter by template and _campaign_id_ to filter by campaign. The summary for transmissions using an inline template will include `"template_id": "inline"`.  Transmissions using inline templates cannot be filtered with _template_id_.
+
+**Note: single recipient transmissions are not listed.**
+
+**Note: transmissions in "completed" state are removed from the list after 24 hours.**
+
++ Parameters
+  + campaign_id (optional, string,`thanksgiving`) ... ID of the campaign used by the transmissions
+  + template_id (optional, string, `thanksgiving-template`) ... ID of the template used by the transmissions
+
++ Request
+
+    + Headers
+
+            Authorization: 14ac5499cfdd2bb2859e4476d2e5b1d2bad079bf
+            Accept: application/json
+
++ Response 200 (application/json)
+
+    + Body
+
+        {
+          "results": [
+            {
+              "content" : {
+                "template_id": "winter_sale"
+              },
+              "id": "11713562166689858",
+              "campaign_id": "thanksgiving",
+              "description": "",
+              "state": "submitted"
+            },
+            {
+              "content" : {
+                "template_id": "inline"
+              },
+              "id": "11713562166689979",
+              "campaign_id": "thanksgiving",
+              "description": "",
+              "state": "submitted"
+            },
+            {
+              "content" : {
+                "template_id": "thanksgiving-template"
+              },
+              "id": "11713048079237202",
+              "campaign_id": "thanksgiving",
+              "description": "",
+              "state": "submitted"
+            }
+          ]
+        }
