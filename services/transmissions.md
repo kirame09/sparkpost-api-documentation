@@ -968,12 +968,7 @@ Scheduled transmissions cannot be deleted if the transmission is within 10 minut
             Authorization: 14ac5499cfdd2bb2859e4476d2e5b1d2bad079bf
             Accept: application/json
 
-+ Response 200 (application/json)
-
-    +  Body
-
-        {
-        }
++ Response 204
 
 + Response 404 (application/json)
 
@@ -1050,12 +1045,7 @@ Delete all transmissions of a campaign by specifying Campaign ID in the URI path
             Authorization: 14ac5499cfdd2bb2859e4476d2e5b1d2bad079bf
             Accept: application/json
 
-+ Response 200 (application/json)
-
-  +  Body
-
-        {
-        }
++ Response 204
 
 ## List [/transmissions{?campaign_id,template_id}]
 
