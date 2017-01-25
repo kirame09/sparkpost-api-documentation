@@ -4,7 +4,7 @@ description: Manage custom bounce domains, which are used for bounce reporting.
 # Group Bounce Domains
 <a name="bounce-domains-api"></a>
 
-**Note:** The Bounce Domains API is available for SparkPost only.
+**Note: The Bounce Domains API is not available on SparkPost Enterprise.**
 
 **Note:** Only one custom bounce domain is permitted per account at this time.
 

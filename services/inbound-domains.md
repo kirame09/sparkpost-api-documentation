@@ -9,7 +9,7 @@ You can have multiple inbound domains but each domain must be globally unique.
 
 Before you can use your inbound domain (e.g. `inbounddomain.test.com`),
 you will need to add MX records to your DNS settings.
-The following DNS settings are for all plans *except* SparkPost Enterprise:
+The following DNS settings are for all plans **except SparkPost Enterprise:**
 
 | Name                     | Type | Data                  | Priority |
 |--------------------------|------|-----------------------|----------|
@@ -17,7 +17,7 @@ The following DNS settings are for all plans *except* SparkPost Enterprise:
 | `inbounddomain.test.com` | MX   | rx2.sparkpostmail.com | 10       |
 | `inbounddomain.test.com` | MX   | rx3.sparkpostmail.com | 10       |
 
-For SparkPost Enterprise, you will need to use MX records
+**For SparkPost Enterprise**, you will need to use MX records
 similar to your existing domains.  In many cases
 the MX records for existing domains point at `inbound.<main-bounce-domain>`.
 The following DNS settings assume that your existing domains point

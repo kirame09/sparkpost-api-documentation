@@ -4,14 +4,14 @@ description: Documentation for sending via SMTP or HTTP with the SparkPost API.
 
 SparkPost presents a unified core API to all customers with a few noted exceptions.
 
-* Features available only to the SparkPost API are marked **SparkPost API only**
+* Features not available on SparkPost Enterprise API are marked **Not available on SparkPost Enterprise**
 * Features available only to the SparkPost Enterprise API are marked **SparkPost Enterprise API only**.
 
 ## API Endpoints
 
 | Endpoint   | Use for |
 |------------|---------|
-| `https://api.sparkpost.com/api/v1` | SparkPost |
+| `https://api.sparkpost.com/api/v1` | SparkPost and SparkPost Premium |
 | `https://yourdomain.sparkpostelite.com/api/v1` | SparkPost Enterprise API |
 | `https://yourdomain.msyscloud.com/api/v1` | SparkPost Enterprise API (formerly 'SparkPost Elite' - prior to June 2015) |
 
@@ -32,11 +32,16 @@ SparkPost presents a unified core API to all customers with a few noted exceptio
 * Administrators can [generate an API key](https://app.sparkpost.com/account/credentials). Please take care to record and safeguard your API keys at all times. You cannot retrieve an API key after it has been created.
 * For examples of supplying the Authorization header, refer to the cURL example below or any of the individual API request examples.
 
+## API examples
+SparkPost Enterprise customers should note to change the API endpoint in all the example calls to their specific environment
+
 ## Using Postman
 
 If you use [Postman](https://www.getpostman.com/) you can click the following button to import the SparkPost API as a collection:
 
 [![Run in Postman](https://s3.amazonaws.com/postman-static/run-button.png)](https://www.getpostman.com/run-collection/81ee1dd2790d7952b76a)
+
+**SparkPost Enterprise customers will need to change the endpoint in the URL field for each call**
 
 ## Using cURL
 If you are using cURL to call the API, you must include the resource URI in quotes when you pass in multiple query parameters separated by an `&`.
@@ -63,9 +68,9 @@ curl -v \
 <a name="smtp-relay-endpoints"></a>
 
 ### SparkPost SMTP Endpoint
-To use SparkPost as an SMTP relay you need to point your SMTP client (or local MTA) to the following endpoint:
+To use SparkPost as an SMTP relay you need to point your SMTP client (or local MTA) to the following endpoint **(See below for SparkPost Enterprise)**:
 
-* Host: smtp.sparkpostmail.com
+* Host: smtp.sparkpostmail.com 
 * Port: 587 or 2525
 * Encryption: STARTTLS
 * Authentication: AUTH LOGIN
