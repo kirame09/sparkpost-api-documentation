@@ -8,8 +8,6 @@ A sending domain is a domain that is used to indicate who an email is from via t
 
 **Note:** When adding a sending domain to your account, the domain must be verified within two weeks or the domain is removed from your account.
 
-
-
 ## Using Postman
 
 If you use [Postman](https://www.getpostman.com/) you can click the following button to import the SparkPost API as a collection:
