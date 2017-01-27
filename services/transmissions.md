@@ -48,7 +48,7 @@ The sandbox domain `sparkpostbox.com` is available to allow each account to send
 |click_tracking|boolean| Whether click tracking is enabled for this transmission| no |If not specified, the setting at template level is used, or defaults to true. |
 |transactional|boolean|Whether message is transactional or non-transactional for unsubscribe and suppression purposes (**Note:** no List-Unsubscribe header is included in transactional messages)| no |If not specified, the setting at template level is used, or defaults to false. |
 |sandbox|boolean|Whether or not to use the sandbox sending domain ( **Note:** SparkPost only )| no |Defaults to false. |
-|skip_suppression|boolean| **[SparkPost Enterprise API only](https://www.sparkpost.com/enterprise-email/)**: Whether or not to ignore customer suppression rules, for this transmission only.  Only applicable if your configuration supports this parameter. | no - Defaults to false |  Unlike most other options, this flag is omitted on a GET transmission response unless the flag's value is true. |
+|skip_suppression|boolean| **[SparkPost Enterprise API only](https://www.sparkpost.com/enterprise-email/)**: Whether or not to ignore customer suppression rules, for this transmission only.  Only applicable if your configuration supports this parameter. | no - Defaults to false | |
 | ip_pool | string | The ID of a dedicated IP pool associated with your account ( **Note:** SparkPost only ).  If this field is not provided, the account's default dedicated IP pool is used (if there are IPs assigned to it).  To explicitly bypass the account's default dedicated IP pool and instead fallback to the shared pool, specify a value of "sp_shared". | no | For more information on dedicated IPs, see the [Support Center](https://support.sparkpost.com/customer/en/portal/articles/2002977-dedicated-ip-addresses)
 |inline_css|boolean|Whether or not to perform CSS inlining in HTML content | no - Defaults to false | |
 
@@ -817,8 +817,8 @@ Once message generation has been initiated, all messages in the transmission wil
         }
 
 
-+ Request Create Transmission for Mobile Push Using Inline Content - **[SparkPost Enterprise API only](https://www.sparkpost.com/enterprise-email/)** (application/json)
-
++ Request Create Transmission for Mobile Push Using Inline Content (application/json)
+<div class="alert alert-info">The following request is valid for the <a href="https://www.sparkpost.com/enterprise-email/">SparkPost Enterprise API</a> only.</div>
     + Headers
 
             Authorization: 14ac5499cfdd2bb2859e4476d2e5b1d2bad079bf
@@ -881,14 +881,11 @@ Once message generation has been initiated, all messages in the transmission wil
           }
         }
 
-
-
-
-
-
 ## Retrieve and Delete [/transmissions/{id}]
 
 ### Retrieve a Transmission [GET]
+
+**This endpoint is deprecated and will be removed in due course. For alternatives, [see this article](https://www.sparkpost.com/blog/upcoming-api-transmission-endpoint-changes/).**
 
 Retrieve the details about a transmission by specifying its ID in the URI path.
 
@@ -952,8 +949,7 @@ The response for a transmission using an inline template will include "template_
               ]
             }
 
-
-## Delete a Transmission [DELETE]
+### Delete a Transmission [DELETE]
 
 Delete a transmission by specifying its ID in the URI path.
 
@@ -972,12 +968,7 @@ Scheduled transmissions cannot be deleted if the transmission is within 10 minut
             Authorization: 14ac5499cfdd2bb2859e4476d2e5b1d2bad079bf
             Accept: application/json
 
-+ Response 200 (application/json)
-
-    +  Body
-
-        {
-        }
++ Response 204
 
 + Response 404 (application/json)
 
@@ -1035,31 +1026,33 @@ Scheduled transmissions cannot be deleted if the transmission is within 10 minut
             ]
           }
 
-## Delete [/transmissions?campaign_id={campaign_id}]
+## Delete Transmissions By Campaign [/transmissions?campaign_id={campaign_id}]
 
-### Delete all transmissions of a campaign by specifying Campaign ID in the URI path.
+Delete all transmissions of a campaign by specifying Campaign ID in the URI path. 
 
-+ Parameters
-  + campaign_id (required, string, 'white christmas') ... Campaign ID
+  + Parameters
 
-+ Request
+    + campaign_id (required, string, `white-christmas`)
+
+### Delete By Campaign ID [DELETE]
+
+
++ Request Delete all transmissions for a campaign
+
 
   + Headers
 
             Authorization: 14ac5499cfdd2bb2859e4476d2e5b1d2bad079bf
             Accept: application/json
 
-+ Response 200 (application/json)
-
-  +  Body
-
-        {
-        }
-
++ Response 204
 
 ## List [/transmissions{?campaign_id,template_id}]
 
 ### List all Transmissions [GET]
+
+**This endpoint is deprecated and will be removed in due course. For alternatives, [see this article](https://www.sparkpost.com/blog/upcoming-api-transmission-endpoint-changes/).**
+
 List an array of live transmission summary objects.  A transmission summary object contains _id_, _state_, _template_id_, _campaign_id_ and _description_ fields. The list contains only multi-recipient transmissions in "submitted" or "generating" state or that have "completed" within the last 24 hours.
 
 By default, the list includes transmissions for all campaigns and templates.  Use the _template_id_ parameter to filter by template and _campaign_id_ to filter by campaign. The summary for transmissions using an inline template will include `"template_id": "inline"`.  Transmissions using inline templates cannot be filtered with _template_id_.
