@@ -3,7 +3,8 @@ description: Get your SparkPost account information, including subscription stat
 
 # Group Account
 
-**Note: This endpoint is available on SparkPost only.**
+**Note: This endpoint is not available on SparkPost Enterprise.**
+
 
 ## Using Postman
 
