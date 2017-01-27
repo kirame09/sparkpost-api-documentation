@@ -6,7 +6,7 @@ description: Manage sending domains, which are used to indicate who an email is 
 
 A sending domain is a domain that is used to indicate who an email is from via the "From:" header. Using a custom sending domain enables you to control what recipients see as the From value in their email clients. DNS records can be configured for a sending domain, which allows recipient mail servers to authenticate your messages. The Sending Domains API provides the means to create, list, retrieve, update, and verify a custom sending domain.
 
-**Note:** When adding a sending domain to your account, the domain must be verified within two weeks or the domain is removed from your account.
+**Note:** When adding a sending domain to your account, the domain must be verified within two weeks or it will be removed from your account.
 
 ## Using Postman
 
