@@ -7,8 +7,10 @@ var matchdep = require('matchdep')
     , algoliaTools = require('./algoliaTools')
     , services = [
         'introduction.md',
+        'labs-introduction.md',
         'substitutions-reference.md',
         'smtp-api.md',
+        'ab-testing.md',
         'account.md',
         'bounce-domains.md',
         'inbound-domains.md',
