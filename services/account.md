@@ -124,12 +124,14 @@ Get your SparkPost account information, including subscription status and quota 
 
 ### Update account information [PUT]
 
+Update your SparkPost account information and account-level options.
+
 #### Request Body Attributes
 
 | Field | Type | Description | Required |
 |-------|------|-------------|----------|
 | company_name | string | company name | no |
-| options | object | account-level options | (see *Options Properties* section) |
+| options | object | account-level options (see *Options Properties* section) | no |
 
 #### Options Properties
 
@@ -150,7 +152,10 @@ Get your SparkPost account information, including subscription status and quota 
     + Body
 
             {
-                "company_name": "Message Systems"
+                "company_name": "SparkPost",
+                "options": {
+                  "smtp_tracking_default": true
+                }
             }
 
 + Response 200 (application/json)
