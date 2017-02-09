@@ -3,7 +3,7 @@ description: Get your SparkPost account information, including subscription stat
 
 # Group Account
 
-**Note: This endpoint is not available on SparkPost Enterprise.**
+<div class="alert alert-info"><strong>Note:</strong> This endpoint is not available on SparkPost Enterprise.</div>
 
 
 ## Using Postman
@@ -12,9 +12,9 @@ If you use [Postman](https://www.getpostman.com/) you can click the following bu
 
 [![Run in Postman](https://s3.amazonaws.com/postman-static/run-button.png)](https://www.getpostman.com/run-collection/81ee1dd2790d7952b76a)
 
-## Account [/account{?include}]
+## Retrieve [/account{?include}]
 
-## Get your account information [GET]
+### Retrieve account information [GET]
 
 Get your SparkPost account information, including subscription status and quota usage.
 
@@ -119,3 +119,72 @@ Get your SparkPost account information, including subscription status and quota 
                 }
             }
         }
+
+## Update [/account]
+
+### Update account information [PUT]
+
+Update your SparkPost account information and account-level options.
+
+#### Request Body Attributes
+
+| Field | Type | Description | Required |
+|-------|------|-------------|----------|
+| company_name | string | company name | no |
+| options | object | account-level options (see *Options Properties* section) | no |
+
+#### Options Properties
+
+| Property   | Type    | Description |
+|------------|---------|-------------|
+| smtp_tracking_default | boolean  | set to true to turn on SMTP engagement tracking by default |
+| rest_tracking_default | boolean  | set to true to turn on REST API engagement tracking by default |
+| transactional_unsub   | boolean  | set to true to include List-Unsubscribe header for all transactional messages by default |
+| transactional_default | boolean  | set to true to send messages as transactional by default |
+
++ Request
+
+    + Headers
+
+            Authorization: 14ac5499cfdd2bb2859e4476d2e5b1d2bad079bf
+            Accept: application/json
+
+    + Body
+
+            {
+                "company_name": "SparkPost",
+                "options": {
+                  "smtp_tracking_default": true
+                }
+            }
+
++ Response 200 (application/json)
+
+        {
+            "results": {
+                "message": "Account has been updated"
+            }
+        }
+
++ Response 400 (application/json)
+
+        {
+          "errors": [
+            {
+              "message": "Incorrect type, expected boolean",
+              "param": "smtp_tracking_default",
+              "value": "bad value"
+            }
+          ]
+        }
+
++ Response 500 (application/json)
+
+        {
+            "errors" : [
+                {
+                    "message" : "Cannot update Account"
+                }
+            ]
+        }
+
