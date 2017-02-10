@@ -26,6 +26,7 @@ If you use [Postman](https://www.getpostman.com/) you can click the following bu
 | name              | string | User-friendly name for webhook | yes | example: `Example webhook` |
 | target            | string | URL of the target to which to POST event batches | yes |  When a webhook is created or updated with a change to this property, a test POST request is sent to the given URL. The target URL must accept the connection and respond with HTTP 200; otherwise, your request to the Webhook API will fail with HTTP 400, and the requested change will not be applied.<br />example: `http://client.example.com/example-webhook` |
 | events            | array  | Array of event types this webhook will receive | yes | Use the Webhooks Events endpoint to list the available event types.<br />example: `["delivery", "injection", "open", "click"]`|
+| inactive          | boolean | Flag indicating whether this webhook will recieve event batches | no | This value defaults to false. It is unavailable in the create POST call. |
 | auth_type         | string | Type of authentication to be used during POST requests to target | no | examples: `none`, `basic`, `oauth2` |
 | auth_request_details | JSON | Object containing details needed to request authorization credentials, as necessary | no | example: `{ "url": "https://oauth.myurl.com/tokens", "body": { "client_id": "<oauth client id>", "client_secret": "<oauth client secret>" }}`|
 | auth_credentials         | JSON | Object containing credentials needed to make authorized POST requests to target | no | examples: `{ "access_token": "<oauth token>", expires_in: 3600 }`, `{ "username": "basicauthuser", "password": "mypassword" }` |
@@ -174,6 +175,7 @@ As described in "Webhooks Object Properties", webhook creation entails a test PO
                 "expires_in": 3600
               },
               "auth_token": "",
+              "inactive": false,
               "links": [
                 {
                   "href": "http://www.messagesystems-api-url.com/api/v1/webhooks/12affc24-f183-11e3-9234-3c15c2c818c2/validate",
@@ -237,6 +239,7 @@ Retrieve details about a webhook by specifying its id in the URI path.
               "auth_token": "",
               "last_successful": "2014-08-01 16:09:15",
               "last_failure": "2014-06-01 15:15:45",
+              "inactive": false,
               "links": [
                 {
                   "href": "http://www.messagesystems-api-url.com/api/v1/webhooks/a2b83490-10df-11e4-b670-c1ffa86371ff",
@@ -270,6 +273,7 @@ Retrieve details about a webhook by specifying its id in the URI path.
               "auth_token": "",
               "last_successful": "2014-07-01 16:09:15",
               "last_failure": "2014-08-01 15:15:45",
+              "inactive": true,
               "links": [
                 {
                   "href": "http://www.messagesystems-api-url.com/api/v1/webhooks/12affc24-f183-11e3-9234-3c15c2c818c2",
@@ -290,6 +294,7 @@ Retrieve details about a webhook by specifying its id in the URI path.
               "auth_request_details": {},
               "auth_credentials": {},
               "auth_token": "5ebe2294ecd0e0f08eab7690d2a6ee69",
+              "inactive": false,
               "links": [
                 {
                   "href": "http://www.messagesystems-api-url.com/api/v1/webhooks/123456-abcd-efgh-7890-123445566778",
