@@ -4,7 +4,7 @@ description: Query detailed message event data for further analysis and processi
 # Group Message Events
 <a name="message-events-api"></a>
 
-The Message Events API allows searching for recent events, and supports various types of result filtering. Available events include message status - injection, delivery, bounce - as well as recipient engagement - clicks and opens. Message Events is an on-demand (pull) interface to the same underlying event data that gets delivered in a near-real-time (push) fashion via [Webhooks](/webhooks).
+The Message Events API allows searching for recent events, and supports various types of result filtering. Available events include message status - injection, delivery, bounce - as well as recipient engagement - clicks and opens. Message Events is an on-demand (pull) interface to the same underlying event data that gets delivered in a near-real-time (push) fashion via [Webhooks](/api/webhooks).
 
 You can get all event types or only specific ones, such as bounces, deliveries, or clicks. You can filter by date range, campaign, or just about any other field. Event data is retained for 10 days and is generally available within 1 minute. Of course, aggregate reporting data is available via our metrics endpoint or the UI reports for much longer.
 
