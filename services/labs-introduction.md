@@ -3,15 +3,17 @@ description: Documentation for the capabilities of SparkPost Labs.
 
 # Group Sparkpost Labs
 
+We love to experiment with new ideas at SparkPost!
+Through SparkPost Labs we make available to users new API and App functionality and other helpful tools.
+Here are some helpful tips to keep in mind when you try out anything marked as “Labs”:
 
-## Key Features
 
-* Substitutions applied in top-level headers, text/plain, and text/html parts of REST API injected messages (SMTP message substitutions currently not supported)
-* Key/value substitutions using substitution data provided in an arbitrary JSON object format
-* Conditional statements such as if, then, else, elseif
-* Looping over JSON arrays using each
-* Execution of built-in macros
-* Support for default values provided as a backup for substitution data that does not exist
-* Automatic HTML escaping of substitution values appearing in HTML parts of content
-* Automatic encoding of UTF-8 substitution values appearing in email headers
+* API functionality is generally not versioned and available under the /api/labs/ path rather than /api/v1/ path.
+* There are no guarantees that Labs functionality will remain the exact same without any customer facing change - we may decide to change the behavior or discontinue it at any time. We also may decide to incorporate Labs functionality into the core supported product.
+* Normal Support channels or SLAs are not available for SparkPost Labs.  Please refer to the Community Slack channel of #sparkpostlabs to ask questions or provide feedback. We will do our best to route your questions to the appropriate engineering team or Product Manager. Alternatively, you may provide feedback via this Google form:
 
+## API Endpoints
+
+| Endpoint   | Use for |
+|------------|---------|
+| `https://api.sparkpost.com/api/labs` | SparkPost Labs |

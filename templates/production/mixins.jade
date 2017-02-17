@@ -13,7 +13,11 @@ mixin Nav()
         each resourceGroup in self.api.resourceGroups || []
             .resource-group
                 .heading
-                    a(href=resourceGroup.elementLink, class='text-uppercase')!= resourceGroup.name || 'Resource Group'
+                    if (resourceGroup.name === 'AB Testing')
+                        a(href=resourceGroup.elementLink, class='text-uppercase')!= resourceGroup.name + '&nbsp'
+                        code(class='alert-info text-uppercase')!= 'Labs'
+                    else
+                        a(href=resourceGroup.elementLink, class='text-uppercase')!= resourceGroup.name || 'Resource Group'
                 .collapse-content
                     ul(class="list-unstyled")
                         each item in resourceGroup.navItems || []
@@ -76,7 +80,10 @@ mixin Request(request, action)
             p.uri 
                 code
                     != action.method + '&nbsp;'
-                    != self.baseURI + action.colorizedUriTemplate
+                    if action.colorizedUriTemplate.startsWith('/labs/')
+                        != self.baseURI + action.colorizedUriTemplate
+                    else
+                        != self.baseURI + self.baseURIVersion + action.colorizedUriTemplate
             +Headers('Request Headers', request)
             +Code(request.body)
 
@@ -173,7 +180,10 @@ mixin Content()
                                 h4.action-heading(id=action.elementId)
                                     .name!= action.name
                                 .method!=action.method
-                                  code.uri= self.baseURI + self.urldec(action.uriTemplate)
+                                    if action.uriTemplate.startsWith('/labs/')
+                                        code.uri= self.baseURI + self.urldec(action.uriTemplate)
+                                    else
+                                        code.uri= self.baseURI + self.baseURIVersion + self.urldec(action.uriTemplate)
                                 if action.parameters.length
                                     +Parameters(action.parameters)
                                 if action.description

@@ -83,7 +83,8 @@ module.exports = function(grunt) {
             themeEmoji: false,
             locals: {
               _: require('lodash'),
-              baseURI: '/api/v1'
+              baseURI: '/api',
+              baseURIVersion: '/v1'
             }
           }
         },
