@@ -14,7 +14,7 @@ description: AB Testing of templates.
 | created_time | integer | Unix Timestamp of AB Test Creation | |
 | expiration_time | integer | Unix Timestamp of AB Test Expiration when the test will complete and send to the remaining recipients with the winning template | |
 | completed_time | integer | Unix Timestamp of when the test was completed | |
-| duration_hours | integer | Number of hours the test should gather metrics for before selecting a winning template | Maximum time limit is 1 week (168 hours) |
+| duration_hours | integer | Number of hours the test should gather metrics for before selecting a winning template | Maximum duration is 1 week (168 hours) |
 | recipient_list | string | Unique id of the recipient list to be used for the test |  |
 | groups | JSON Array | Array of JSON Objects each containing a unique template_id and number of recipients to send to (size) |  example: `{"size": 1, "template_id": "my-first-email"}` |
 | template_id | string | Unique id of a template to be used for the test |  |
@@ -140,7 +140,6 @@ description: AB Testing of templates.
 
 ## List AB Tests [GET]
 
-Gets all IP addresses.
 
 + Request
 

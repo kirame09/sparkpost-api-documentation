@@ -8,12 +8,6 @@ Through SparkPost Labs we make available to users new API and App functionality 
 Here are some helpful tips to keep in mind when you try out anything marked as “Labs”:
 
 
-* API functionality is generally not versioned and available under the /api/labs/ path rather than /api/v1/ path.
-* There are no guarantees that Labs functionality will remain the exact same without any customer facing change - we may decide to change the behavior or discontinue it at any time. We also may decide to incorporate Labs functionality into the core supported product.
-* Normal Support channels or SLAs are not available for SparkPost Labs.  Please refer to the Community Slack channel of #sparkpostlabs to ask questions or provide feedback. We will do our best to route your questions to the appropriate engineering team or Product Manager. Alternatively, you may provide feedback via this Google form:
-
-## API Endpoints
-
-| Endpoint   | Use for |
-|------------|---------|
-| `https://api.sparkpost.com/api/labs` | SparkPost Labs |
+* API functionality is available under the `/api/labs/` path rather than `/api/v1/` path.
+* There is no guarantee that Labs functionality will be backwards compatible - we may need to change the API behavior or discontinue it without notice. Some labs functionality may eventually be incorporated into our core supported product.
+* Normal Support channels and SLAs are not available for SparkPost Labs APIs. Please refer to the Community Slack channel of #sparkpostlabs to ask questions or provide feedback. Your questions and feedback are very important to us, and we encourage comments on our Labs APIs. You can also provide feedback via this Google form:
