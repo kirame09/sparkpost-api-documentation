@@ -95,7 +95,7 @@ Note: To prevent abuse, our servers enforce request rate limiting, which may tri
 - `/api/v1/message-events`
 - `/api/v1/metrics/*`
 
-The limits imposed here are dynamic but as a general rule, polling these endpoints more than once in 10 minutes may encounter rate limiting and a 429 status code.
+The limits imposed here are dynamic but as a general rule, polling these endpoints more than once in 2 minutes may encounter rate limiting and a 429 status code.
 
 **Alternatives To Polling:** For some common use cases, the SparkPost API offers more efficient alternatives to polling, especially of the message events endpoint. For instance, A single call to the [metrics deliverability summary](api/metrics.html#metrics-deliverability-metrics-get) endpoint offers a summary of deliveries, bounces, opens, clicks and more for some time period. If your application requires low latency access to each message event, using a [webhook-based](/api/webhooks.html) process will be more efficient than polling message events and will avoid rate limiting.
 
