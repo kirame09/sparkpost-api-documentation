@@ -43,7 +43,7 @@ The sandbox domain `sparkpostbox.com` is available to allow each account to send
 ### Options Attributes
 | Field         | Type     | Description                           | Required   | Notes   |
 |------------------------|:-:       |---------------------------------------|-------------|--------|
-|start_time | string | Delay generation of messages until this datetime.  For additional information, see Scheduled Transmissions. |no - defaults to immediate generation | Format YYYY-MM-DDTHH:MM:SS+-HH:MM or "now". Example: '2015-02-11T08:00:00-04:00'.|
+|start_time | string | Delay generation of messages until this datetime.  For additional information, see Scheduled Transmissions. |no - defaults to immediate generation | Format YYYY-MM-DDTHH:MM:SS+-HH:MM. Example: '2017-02-11T08:00:00-04:00'.|
 |open_tracking|boolean| Whether open tracking is enabled for this transmission| no |If not specified, the setting at template level is used, or defaults to true. |
 |click_tracking|boolean| Whether click tracking is enabled for this transmission| no |If not specified, the setting at template level is used, or defaults to true. |
 |transactional|boolean|Whether message is transactional or non-transactional for unsubscribe and suppression purposes (**Note:** no List-Unsubscribe header is included in transactional messages)| no |If not specified, the setting at template level is used, or defaults to false. |
@@ -187,7 +187,6 @@ Once message generation has been initiated, all messages in the transmission wil
 
         {
           "options": {
-            "start_time": "now",
             "open_tracking": true,
             "click_tracking": true,
             "transactional": false,
@@ -283,7 +282,6 @@ Once message generation has been initiated, all messages in the transmission wil
 
         {
           "options": {
-            "start_time": "now",
             "open_tracking": true,
             "click_tracking": true,
             "transactional": false,
@@ -387,7 +385,6 @@ Once message generation has been initiated, all messages in the transmission wil
 
         {
           "options": {
-            "start_time": "now",
             "open_tracking": true,
             "click_tracking": true,
             "transactional": false,
@@ -695,7 +692,7 @@ Once message generation has been initiated, all messages in the transmission wil
                 "campaign_id": "fall",
 
                 "options": {
-                  "start_time" : "2015-10-11T08:00:00-04:00",
+                  "start_time" : "2017-02-11T08:00:00-04:00",
                   "open_tracking": true,
                   "click_tracking": true
                 },
