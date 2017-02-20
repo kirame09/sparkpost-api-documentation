@@ -18,7 +18,9 @@ If you use [Postman](https://www.getpostman.com/) you can click the following bu
 
 **Note: SparkPost only**
 
-The sandbox domain `sparkpostbox.com` is available to allow each account to send test messages in advance of configuring a real sending domain. Each SparkPost account has a lifetime allowance of 50 sandbox domain messages. To send a test message from the sandbox domain, set `content.from.email` field to `localpart@sparkpostbox.com`.  Note: you can set the 'local part' (the part before the @) to any valid email local part. [See below](#transmissions-create-post) for more details on sending mail.
+The sandbox domain `sparkpostbox.com` is available to allow each account to send test messages in advance of configuring a real sending domain. Each SparkPost account has a lifetime allowance of 50 sandbox domain messages. To send a test message from the sandbox domain, set `content.from.email` field to `localpart@sparkpostbox.com` and ensure `options.sandbox` is set to `true`.
+
+**Note:** you can set the 'local part' (the part before the @) to any valid email local part. [See below](#transmissions-create-post) for more details on sending mail.
 
 ## Transmission Attributes
 

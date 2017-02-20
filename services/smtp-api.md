@@ -103,6 +103,8 @@ The following are key points about reporting and tracking for cc, bcc, and archi
 * A "rcpt_type" field is available during events through the Webhooks, which designates if the message was a Cc, Bcc, or archive copy.
 * A "transmission_id" field is available during events through the Webhooks, which can be used to correlate the Cc, Bcc, and archive versions of the messages to one another.
 
+**Note:** each recipient will only receive a single instance of each message, even if they appear on more than one of the CC, BCC or archive recipient lists.
+
 **What is an archive recipient?**
 
 Recipients in the "archive" list will receive an exact replica of the message that was sent to the RCPT TO address. In particular, any encoded links intended for the RCPT TO recipient will appear _as is_ in the archive messages.  In contrast, recipients in the "bcc" list will have links encoded specific to their address. (There will be some differences in headers such as X-MSFBL or List-Unsubscribe headers.)

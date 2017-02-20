@@ -9,16 +9,18 @@ Tracking domains are used in engagement tracking to report opens and clicks in y
 For example, in SparkPost.com, the system tracking domain is spgo.io. Your message contains a link to http://www.some-website.com/some-article. That link gets wrapped and the resulting HTML would look something like this:
 
 ```html
-<a href="https://spgo.io/e/nInKCLCf9wnO2brop7RTsg...">Check out this excellent article</a>
+<a href="http://spgo.io/e/nInKCLCf9wnO2brop7RTsg...">Check out this excellent article</a>
 ```
 
 With a tracking domain you can replace the domain part of the link. So if your tracking domain was example.domain.com, your HTML would look like this:
 
 ```html
-<a href="https://example.domain.com/e/nInKCLCf9wnO2brop7RTsg...">Check out this excellent article</a>
+<a href="http://example.domain.com/e/nInKCLCf9wnO2brop7RTsg...">Check out this excellent article</a>
 ```
 
 **Note:** Use of a tracking domain requires modification of your DNS records to include a CNAME record.
+
+**Note:** For SparkPost, only HTTP is supported on tracking domains since SparkPost does not issue SSL certificates for customer domains. As a result, `port` should be set to `80` and `secure` to `false` when creating your tracking domain.
 
 ## Using Postman
 
