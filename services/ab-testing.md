@@ -1,29 +1,33 @@
-title: AB Testing
-description: AB Testing of templates.
+title: A/B Testing
+description: A/B Testing of templates.
 
-# Group AB Testing
+# Group A/B Testing
 
 **Note: This endpoint is available in SparkPost only**
 
-#### AB Test Properties
+<a name="ab-testing-api"></a>
+
+An a/b test is a method of comparing templates to see which one performs better.  You provide a range of templates (2-10), a recipient list (less than 2,000 entries), a sample size, and a test duration to begin. When the test time has expired, the template with the best conversion rate wins. All remaining recipients will be sent the winning template. The A/B Testing API provides the means to create new tests, and view completed results. 
+
+#### A/B Test Properties
 
 | Property   | Type    | Description | Notes |
 |------------|---------|-------------|-------|
-| completed | boolean | Whether the AB Test has completed| |
-| id | string | AB Test ID | |
-| created_time | integer | Unix Timestamp of AB Test Creation | |
-| expiration_time | integer | Unix Timestamp of AB Test Expiration when the test will complete and send to the remaining recipients with the winning template | |
+| completed | boolean | Whether the A/B Test has completed| |
+| id | string | A/B Test ID | |
+| created_time | integer | Unix Timestamp of A/B Test Creation | |
+| expiration_time | integer | Unix Timestamp of A/B Test Expiration when the test will complete and send to the remaining recipients with the winning template | |
 | completed_time | integer | Unix Timestamp of when the test was completed | |
 | duration_hours | integer | Number of hours the test should gather metrics for before selecting a winning template | Maximum duration is 1 week (168 hours) |
-| recipient_list | string | Unique id of the recipient list to be used for the test |  |
+| recipient_list | string | Unique id of the recipient list to be used for the test | Recipient list must contain less than 2,000 entries |
 | groups | JSON Array | Array of JSON Objects each containing a unique template_id and number of recipients to send to (size) |  example: `{"size": 1, "template_id": "my-first-email"}` |
-| template_id | string | Unique id of a template to be used for the test |  |
 | number_remaining_recipients | integer | Number of remaining recipients that will be sent to once the winning template has been determined | |
+| remaining_recipients | array of strings | List of recipients that will be sent to once the winning template has been determined | |
 
 
-## AB Tests [/labs/ab-testing{?completed}]
+## A/B Tests [/labs/ab-testing{?completed}]
 
-## Create an AB Test [POST]
+## Create an A/B Test [POST]
 
 + Request
 
@@ -138,20 +142,19 @@ description: AB Testing of templates.
     }
     ```
 
-## List AB Tests [GET]
+## List A/B Tests [GET]
 
 
 + Request
 
     + Headers
 
-            Authorization: aHR0cDovL2kuaW1ndXIuY29tL293UndTR3AucG5n
+            Authorization: 14ac5499cfdd2bb2859e4476d2e5b1d2bad079bf
             Accept: application/json
 + Parameters
 
-  + id (required, string, `23250830-efd9-11e6-98a7-000000000000`) ... AB Test ID
-  + completed (optional, boolean, `true`) ... If set to true, return only completed AB Tests. If set to false, return only uncompleted AB Tests.
-                                                If not specified, return all AB Tests.
+  + completed (optional, boolean, `true`) ... If set to true, return only completed A/B Tests. If set to false, return only uncompleted A/B Tests.
+                                                If not specified, return all A/B Tests.
                                                 
 + Response 200 (application/json)
 
@@ -173,22 +176,22 @@ description: AB Testing of templates.
     }
     ```
 
-## AB Tests Resource [/labs/ab-testing/{id}]
+## A/B Tests Resource [/labs/ab-testing/{id}]
 
-## Get an AB Test [GET]
+## Get an A/B Test [GET]
 
-Retrieves a specific AB Test.
+Retrieves a specific A/B Test.
 
 + Request
 
     + Headers
 
-            AUTHORIZATION: aHR0cDovL2kuaW1ndXIuY29tL293UndTR3AucG5n
+            AUTHORIZATION: 14ac5499cfdd2bb2859e4476d2e5b1d2bad079bf
             Accept: application/json
 
 + Parameters
 
-  + id (required, string, `23250830-efd9-11e6-98a7-000000000000`) ... AB Test ID
+  + id (required, string, `23250830-efd9-11e6-98a7-000000000000`) ... A/B Test ID
 
 
 + Response 200 (application/json)
