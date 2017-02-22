@@ -50,6 +50,7 @@ Detailed status for this sending domain is described in a JSON object with the f
 |abuse_at_status | string | Verification status of abuse@ mailbox |unverified |Read only. Valid values are "unverified", "pending", "invalid" or "valid".|
 |postmaster_at_status | string | Verification status of postmaster@ mailbox |unverified |Read only. Valid values are "unverified", "pending", "invalid" or "valid".|
 |compliance_status | string | Compliance status | | Valid values are "pending", "valid", or "blocked".|
+|verification_mailbox_status | string | reserved | unverified | Read only. This field is unused. |
 
 ### Verify Attributes
 

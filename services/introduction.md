@@ -67,7 +67,9 @@ curl -v \
 ## SMTP Relay Endpoints
 <a name="smtp-relay-endpoints"></a>
 
-### SparkPost SMTP Endpoint
+<a name="header-sparkpost-smtp-endpoint"></a>
+**SparkPost SMTP Endpoint**
+
 To use SparkPost as an SMTP relay you need to point your SMTP client (or local MTA) to the following endpoint **(See below for SparkPost Enterprise)**:
 
 * Host: smtp.sparkpostmail.com 
@@ -83,11 +85,18 @@ To use SparkPost as an SMTP relay you need to point your SMTP client (or local M
 
 **Note**: Port 2525 is provided as an alternate port for cases where port 587 is blocked (such as a Google Compute Engine environment).
 
-### SparkPost Enterprise SMTP Endpoint
+<a name="header-sparkpost-enterprise-smtp-endpoint"></a>
+**SparkPost Enterprise SMTP Endpoint**
 
-* Please contact your Technical Account Manager for details on your SMTP endpoint.
+Please contact your Technical Account Manager for details on your SMTP endpoint.
 
 The SMTP relay optionally supports advanced API features using the [SMTP API](smtp-api.html).  To create an API key, login to your SparkPost [Account Credentials](https://app.sparkpost.com/account/credentials) page.
+
+## SMTP Security
+
+SparkPost strongly recommends using TLS with SMTP to protect your message content, recipient information and API keys in transmission. **Disabling TLS will cause all data sent through SparkPost to be sent over the public internet ununcrypted**. This includes API keys and any details such as recipient email addresses and message content.
+
+If TLS is not supported by your application, SparkPost recommends using API keys with _only_ the "Send via SMTP" privilege enabled. It is also good practice to regularly cycle your API keys to limit exposure of keys sent in the clear.
 
 ## Rate Limiting
 Note: To prevent abuse, our servers enforce request rate limiting, which may trigger responses with HTTP status code 429. SparkPost implements rate limiting on the following API endpoints:
