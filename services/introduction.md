@@ -12,6 +12,7 @@ SparkPost presents a unified core API to all customers with a few noted exceptio
 | Endpoint   | Use for |
 |------------|---------|
 | `https://api.sparkpost.com/api/v1` | SparkPost and SparkPost Premium |
+| `https://api.sparkpost.com/api/labs` | SparkPost Labs |
 | `https://yourdomain.sparkpostelite.com/api/v1` | SparkPost Enterprise API |
 | `https://yourdomain.msyscloud.com/api/v1` | SparkPost Enterprise API (formerly 'SparkPost Elite' - prior to June 2015) |
 

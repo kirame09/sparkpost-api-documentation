@@ -7,8 +7,10 @@ var matchdep = require('matchdep')
     , algoliaTools = require('./algoliaTools')
     , services = [
         'introduction.md',
+        'labs-introduction.md',
         'substitutions-reference.md',
         'smtp-api.md',
+        'ab-testing.md',
         'account.md',
         'bounce-domains.md',
         'inbound-domains.md',
@@ -81,7 +83,8 @@ module.exports = function(grunt) {
             themeEmoji: false,
             locals: {
               _: require('lodash'),
-              baseURI: '/api/v1'
+              baseURI: '/api',
+              baseURIVersion: '/v1'
             }
           }
         },
