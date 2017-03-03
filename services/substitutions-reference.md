@@ -142,6 +142,16 @@ Price is {{loop_var}}
 {{ end }}
 ```
 
+## Default Values
+
+To create default values, use `or` syntax.  In the following example,
+if `name` does not exist as a substitution key, then the expression `null or 'Customer'`
+will evaluate as `Customer`.
+
+```
+Hello {{ name or 'Customer' }}
+```
+
 ## Statements on Their Own Line
 
 Substitution statements that exist on their own line of the template will **not**
@@ -195,31 +205,37 @@ Here is a curly: {{
 
 The substitution engine automatically HTML escapes substitution values before they are
 inserted into the HTML part of the content.  Substitution values inserted into
-plain text portions of content are not HTML escaped.  In order to prevent
-HTML escaping, use triple curly braces.
+plain text portions of content are not HTML escaped.
 
-## Escaping Links
-
-A URL can be inserted into the template with triple curlies:
+Using the following substitution data: 
 
 ```
-<a href="https://{{{link}}}">click me</a>
+{ "custom_html": "<p>Hello</p>" }
 ```
-Note: The protocol ("https://") needs to be included before the variable.
+
+And this example template HTML part (note the double curlies `{{...}}`):
+
+```
+<body>
+{{ custom_html }}
+</body>
+```
+
+This would be the result:
+
+```
+<body>
+&lt;p&gt;Hello&lt;/p&gt;
+</body>
+```
 
 ## Preventing HTML Escaping
 
 The substitution engine supports triple curly braces to signify that HTML escaping should not occur.
 
-Example substitution data: 
+<div class="alert alert-danger"><strong>Danger</strong>: If your messages contain user-generated content, disabling URL encoding may expose recipients of your messages to various types of attacks such as <a href="https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)">CSRF</a> or <a href="https://www.owasp.org/index.php/Cross-site_Scripting_(XSS)">XSS</a>.</div>
 
-```
-{
-  "custom_html": "<p>Hello</p>"
-}
-```
-
-Example template HTML part:
+Using the same substitution data as above, and a slightly modified template HTML part (`{{{...}}}`):
 
 ```
 <body>
@@ -227,19 +243,11 @@ Example template HTML part:
 </body>
 ```
 
-Example of the resulting rendered HTML:
+Here's what the resulting rendered HTML would look like:
 
 ```
 <body>
 <p>Hello</p>
-</body>
-```
-
-Example of using double curly braces renders angle brackets incorrectly:
-
-```
-<body>
-&lt;p&gt;Hello&lt;/p&gt;
 </body>
 ```
 
@@ -264,15 +272,24 @@ inserted into URLs.  For example, if 'user' and 'offercode' are defined in the s
 }
 ```
 
-Then the above URL will be correctly rendered as
+Then the above URL will be rendered as
 ```
 <a href="https://company.com/dailydeals?user=Spark%20Post&offercode=ABC%2FZYZ">Go!</a>
 ```
 
-In order to disable URL encoding, use triple curly braces.  This is useful if you
-have an entire URL suffix which needs to be substituted.  For example:
+<a name="header-escaping-links"></a>
+## Disabling URL Encoding
+
+<div class="alert alert-info"><strong>Note</strong>: The protocol ("https://") must be included before any variables.</div>
+<div class="alert alert-warning"><strong>Warning</strong>: Disabling URL encoding of substitution variables requires care to avoid broken links.</div>
+<div class="alert alert-danger"><strong>Danger</strong>: If your messages contain user-generated content, disabling URL encoding may expose recipients of your messages to various types of attacks such as <a href="https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)">CSRF</a> or <a href="https://www.owasp.org/index.php/Cross-site_Scripting_(XSS)">XSS</a>.</div>
+
+In order to disable URL encoding, use triple curly braces.
+This is useful when you have multiple pieces of the URL in one variable.
+For example:
 
 ```
+<a href="https://{{{link}}}">click me</a>
 <a href="http://www.company.com/{{{the_entire_suffix}}}">Go</a>
 ```
 
@@ -280,14 +297,16 @@ where the substitution_data looks like:
 
 ```
 {
+  "link" : "www.company.com/groups",
   "the_entire_suffix" : "groups/join?user=clark"
 }
 ```
 
 Since triple curlies are used, the substitution value will *not* be URL encoded
-and the URL will render as expected:
+and the URLs will render like so:
 
 ```
+<a href="https://www.company.com/groups">click me</a>
 <a href="http://www.company.com/groups/join?user=clark">Go</a>
 ```
 
@@ -298,6 +317,8 @@ Triple curlies are also necessary if the entire URL resides in substitution data
   "the_entire_url" : "http://www.company.com/dailydeals?user=foo&offercode=bar"
 }
 ```
+
+<div class="alert alert-warning"><strong>Warning</strong>: Including the protocol in a substitution variable (as above) will prevent click tracking</div>
 
 ## Link Names
 
@@ -323,7 +344,7 @@ More information can be found [here](https://support.sparkpost.com/customer/port
 
 ## Per-link Disabling of Click Tracking
 
-When click-tracking is enabled for a transmission individual links can be skipped using the **data-msys-clicktrack** custom attribute. For example:
+When click-tracking is enabled for a transmission, individual links can be skipped using the **data-msys-clicktrack** custom attribute. For example:
 
 ```
 <a href="http://www.example.com/" data-msys-clicktrack="0">Click</a>
@@ -344,7 +365,7 @@ The tracked link generated will look like this:
 http://<hostname>/f/custom_path/<encoded target url>
 ```
 
-**[SparkPost Enterprise API only](https://www.sparkpost.com/enterprise-email/):** An example of how to use **data-msys-sublink** to support iOS Universal Links can be found [here](https://support.sparkpostelite.com/customer/en/portal/articles/2231112-ios9-universal-links-support?b_id=8730#Creating%20Universal%20Links%20in%20Templates%20&%20Sub-Pathing).
+<div class="alert alert-info"><strong><a href="https://www.sparkpost.com/enterprise-email/">SparkPost Enterprise API only</a>:</strong> An example of how to use <strong>data-msys-sublink</strong> to support iOS Universal Links can be found <a href="https://support.sparkpostelite.com/customer/en/portal/articles/2231112-ios9-universal-links-support?b_id=8730#Creating%20Universal%20Links%20in%20Templates%20&%20Sub-Pathing" style="text-decoration: underline;">here</a>.</div>
 
 ## Link Attributes in Text Parts
 
@@ -677,16 +698,6 @@ Finally, as a more realistic example, render_dynamic_content can also be used in
 }
 ```
 
-## Default Values
-
-To create default values, use `or` syntax.  In the following example,
-if `name` does not exist as a substitution key, then the expression `null or 'Customer'`
-will evaluate as `Customer`.
-
-```
-Hello {{ name or 'Customer' }}
-```
-
 ## Macros
 
 Macros are function calls that may or may not take arguments.  The currently available macros are:
@@ -735,7 +746,6 @@ The following substitution variables are reserved and automatically available fo
 
 * `address.name`: Recipient's name from the _address.name_ recipient json field
 * `email` and `address.email`: Recipient's email address from the _address_ or _address.email_ recipient json field
-* `return_path`: **[SparkPost Enterprise API only](https://www.sparkpost.com/enterprise-email/):** return path from the transmission or recipients json field
 
 The following example works for all SparkPost users.
 
@@ -744,7 +754,7 @@ Hello {{address.name}}
 Your email is {{address.email}}
 ```
 
-**[SparkPost Enterprise API only](https://www.sparkpost.com/enterprise-email/)**: The `return_path` substitution variable is available to SparkPost Enterprise users:
+<div class="alert alert-info"><a href="https://www.sparkpost.com/enterprise-email/"><strong>SparkPost Enterprise API only</strong></a>: The <tt>return_path</tt> substitution variable is available to SparkPost Enterprise users:</a></div>
 
 ```
 Hello {{address.name}}
