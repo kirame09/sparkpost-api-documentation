@@ -29,7 +29,7 @@ If you use [Postman](https://www.getpostman.com/) you can click the following bu
 | auth_type         | string | Type of authentication to be used during POST requests to target | no | examples: `none`, `basic`, `oauth2` |
 | auth_request_details | JSON | Object containing details needed to request authorization credentials, as necessary | no | example: `{ "url": "https://oauth.myurl.com/tokens", "body": { "client_id": "<oauth client id>", "client_secret": "<oauth client secret>" }}`|
 | auth_credentials         | JSON | Object containing credentials needed to make authorized POST requests to target | no | examples: `{ "access_token": "<oauth token>", expires_in: 3600 }`, `{ "username": "basicauthuser", "password": "mypassword" }` |
-| auth_token        | string | Authentication token to present in the X-MessageSystems-Webhook-Token header of POST requests to target | no | Use this token in your target application to confirm that data is coming from the Webhooks API. <br />example: `5ebe2294ecd0e0f08eab7690d2a6ee69`<br /><br />_Note: This field is deprecated, you should use the auth_type field instead._ |
+| auth_token        | string | Authentication token to present in the X-MessageSystems-Webhook-Token header of POST requests to target | no | Use this token in your target application to confirm that data is coming from the Webhooks API. <br />example: `5ebe2294ecd0e0f08eab7690d2a6ee69`<br /><br /><span class="label label-danger"><strong>Deprecated</strong></span> in favor of the `auth_type` field. |
 
 __**The SparkPost webhooks API uses MaxMind software [MaxMind License](https://www.maxmind.com/download/geoip/database/LICENSE.txt)**__
 
@@ -52,9 +52,9 @@ List descriptions of the events, event types, and event fields that could be inc
 
 List an example of the event data that will be posted by a Webhook for the specified events.
 
-**Note:** the data that will arrive at your target URL will **not** contain the top level ``results`` key shown in the example response.
+<div class="alert alert-warning"><strong>Note</strong>: the data that will arrive at your target URL during normal operation (as opposed to calls to this endpoint) will <strong>not</strong> contain the top level <tt>results</tt> key shown in the example response.</div>
 
-**Hint!** Use the 'delv_method' key to differentiate between Email, Push, and SMS type events.
+<div class="alert alert-info"><a href="https://www.sparkpost.com/enterprise-email/"><strong>SparkPost Enterprise</strong></a> customers may find the `delv_method` key useful to differentiate between Email, Push, and SMS type events.</div>
 
 + Parameters
   + events (optional, string, `bounce`) ... Event types for which to get a sample payload, use the Webhooks Events endpoint to list the available event types, defaults to all event types.
@@ -304,7 +304,7 @@ Retrieve details about a webhook by specifying its id in the URI path.
 
 ### List all Webhooks [GET]
 
-List currently extant webhooks.
+List all currently existing webhooks.
 
 + Parameters
   + timezone =`UTC` (optional, string, `America/New_York`) ... Standard timezone identification string, defaults to `UTC`
@@ -328,10 +328,10 @@ List currently extant webhooks.
 Update a webhook's properties by specifying its id in the URI path and use a **webhooks object** as
 the PUT request body.
 
-Note that batches currently queued for delivery to this webhook will not be affected by these
-modifications.  For example, if you change the webhook's target URL, batches already queued for delivery will still be POSTed to the previous URL.
+<div class="alert alert-info"><strong>Note</strong>: batches already queued for delivery to this webhook will not be affected.
+For example, if you change the webhook's target URL, batches already queued for delivery will still be POSTed to the previous URL.</div>
 
-As described in "Webhooks Object Properties", a change to the _target_ value entails a test POST request to the URL given. If this request does not receive an HTTP 200 response, your request to the Webhooks API will fail with HTTP 400, and the webhook will not be modified.
+As described in "Webhooks Object Properties", a change to the `target` value entails a test POST request to the URL given. If this request does not receive an HTTP 200 response, your request to the Webhooks API will fail with HTTP 400, and the webhook will not be modified.
 
 + Parameters
   + id (required, uuid, `12affc24-f183-11e3-9234-3c15c2c818c2`) ... UUID identifying a webhook
@@ -374,8 +374,8 @@ As described in "Webhooks Object Properties", a change to the _target_ value ent
 
 ### Delete a Webhook [DELETE]
 
-Delete a webhook from the system by specifying its id in the URI path.  The system will stop pushing data to the target URL after the batches currently queued to be
-delivered are drained.
+Delete a webhook from the system by specifying its id in the URI path.
+<div class="alert alert-info">The system will stop pushing data to the target URL after the batches currently queued to be delivered are drained.</div>
 
 + Parameters
   + id (required, uuid, `12affc24-f183-11e3-9234-3c15c2c818c2`) ... UUID identifying a webhook

@@ -3,7 +3,7 @@ description: Manage IP pools, which allow you to group and assign dedicated IPs 
 
 # Group IP Pools
 
-**Note: This endpoint is not available on SparkPost Enterprise.**
+<div class="alert alert-info"><strong>Note</strong>: This endpoint is available in the SparkPost API only.</div>
 
 ## Using Postman
 

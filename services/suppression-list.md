@@ -15,9 +15,9 @@ In addition to your suppression list, SparkPost maintains a global suppression l
 
 ## Recipient Database Maintenance
 
-**When initially configuring your SparkPost account, we *strongly recommend* you import any suppression list you have from any previous service to avoid incorrectly sending mail to unsubscribed/invalid recipients.**
+<div class="alert alert-danger">When initially configuring your SparkPost account, we <strong>strongly recommend</strong> you import any suppression list you have from any previous service to avoid incorrectly sending mail to unsubscribed/invalid recipients.</div>
 
-**SparkPost supports bulk importing or manually adding up to 1,000,000 suppression list entries total.**
+<div class="alert alert-info">SparkPost supports bulk importing or manually adding up to 1,000,000 suppression list entries total.</div>
 
 It is also good practice to maintain your own recipient database by unsubscribing or removing recipients based on the bounce, unsubscribe and spam complaint events provided by SparkPost. These events are available from [webhooks](webhooks), [message events](message-events) and your suppression list. A 24-hour time-windowed suppression list search [as outlined below](#suppression-list-search-get) is useful here.
 
@@ -48,9 +48,9 @@ If the recipient was added to the list by Compliance, it cannot be updated.
 
 Please note that in the unlikely scenario where your receive a HTTP 5xx level error response while bulk loading, that some of your suppression entries may have been successfully inserted or updated. If this occurs, please re-submit your original request again for processing.
 
-*Note:* The `email` attribute is deprecated. Use `recipient` instead.
+<div class="alert alert-warning"><strong>Deprecation Notice</strong>: The <tt>email</tt> attribute is deprecated. Use <tt>recipient</tt> instead.</div>
 
-*Note:* The attributes `transactional` and `non_transactional` are deprecated. Use `type` instead.
+<div class="alert alert-warning"><strong>Deprecation Notice</strong>: The attributes <tt>transactional</tt> and <tt>non_transactional</tt> are deprecated. Use <tt>type</tt> instead.</div>
 
 
 + Request (application/json)
@@ -122,6 +122,8 @@ Please note that in the unlikely scenario where your receive a HTTP 5xx level er
 
 Perform a filtered search for entries in your suppression list.
 
+<div class="alert alert-warning"><strong>Deprecation Notice</strong>: <tt>limit</tt> parameter is supported up to 10000, but deprecated. Please use <tt>per_page</tt> instead.</div>
+
 + Parameters
     + to = `now` (optional, datetime, `2014-07-21T09:00:00-0400`) ... Datetime the entries were last updated, in the format of YYYY-MM-DDTHH:mm:ssZ
     + from (optional, datetime, `2014-07-20T09:00:00-0400`) ... Datetime the entries were last updated, in the format YYYY-MM-DDTHH:mm:ssZ
@@ -133,8 +135,6 @@ Perform a filtered search for entries in your suppression list.
     + sources (optional, list, `Bounce%20Rule,Manually%20Added`) ... Sources of the entries to include in the search, i.e. entries that were added by this source
     + types (optional, list, `transactional`) ... Types of entries to include in the search, i.e. entries that are "transactional" or "non_transactional"
     + description (optional, string, `Invalid%20Recipient`) ... Description of the entries to include in the search, i.e descriptions that include the text submitted. ( **Note:** SparkPost only)
-
-    *Note:* `limit` parameter is supported up to 10000, but deprecated. Please use `per_page` instead.
 
 + Request
 

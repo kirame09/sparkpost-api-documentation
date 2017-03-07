@@ -93,9 +93,10 @@ The SMTP relay optionally supports advanced API features using the [SMTP API](sm
 
 ## SMTP Security
 
-SparkPost strongly recommends using TLS with SMTP to protect your message content, recipient information and API keys in transmission. **Disabling TLS will cause all data sent through SparkPost to be sent over the public internet ununcrypted**. This includes API keys and any details such as recipient email addresses and message content.
+<div class="alert alert-danger">Disabling TLS will cause all data sent through SparkPost to be sent over the public internet ununcrypted.</div>
+SparkPost strongly recommends using TLS with SMTP to protect your message content, recipient information and API keys in transmission. This includes API keys and any details such as recipient email addresses and message content.
 
-If TLS is not supported by your application, SparkPost recommends using API keys with _only_ the "Send via SMTP" privilege enabled. It is also good practice to regularly cycle your API keys to limit exposure of keys sent in the clear.
+If TLS is not supported by your application, SparkPost recommends using API keys with _only_ the `Send via SMTP` privilege enabled. It is also good practice to regularly cycle your API keys to limit exposure of keys sent in the clear.
 
 ## Rate Limiting
 <div class="alert alert-info"><strong>Note</strong>: To prevent abuse, our servers enforce request rate limiting, which may trigger responses with HTTP status code 429.</div>

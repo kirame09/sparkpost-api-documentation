@@ -233,7 +233,7 @@ This would be the result:
 
 The substitution engine supports triple curly braces to signify that HTML escaping should not occur.
 
-<div class="alert alert-danger"><strong>Danger</strong>: If your messages contain user-generated content, disabling URL encoding may expose recipients of your messages to various types of attacks such as <a href="https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)">CSRF</a> or <a href="https://www.owasp.org/index.php/Cross-site_Scripting_(XSS)">XSS</a>.</div>
+<div class="alert alert-danger"><strong>Danger</strong>: If your messages contain user-generated content, disabling HTML escaping (without handling escaping in your application) may expose recipients of your messages to various types of attacks such as <a href="https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)">CSRF</a> or <a href="https://www.owasp.org/index.php/Cross-site_Scripting_(XSS)">XSS</a>.</div>
 
 Using the same substitution data as above, and a slightly modified template HTML part (`{{{...}}}`):
 
@@ -280,9 +280,9 @@ Then the above URL will be rendered as
 <a name="header-escaping-links"></a>
 ## Disabling URL Encoding
 
-<div class="alert alert-info"><strong>Note</strong>: The protocol ("https://") must be included before any variables.</div>
+<div class="alert alert-info"><strong>Note</strong>: The protocol ("https://") must be included before any substitution variables.</div>
 <div class="alert alert-warning"><strong>Warning</strong>: Disabling URL encoding of substitution variables requires care to avoid broken links.</div>
-<div class="alert alert-danger"><strong>Danger</strong>: If your messages contain user-generated content, disabling URL encoding may expose recipients of your messages to various types of attacks such as <a href="https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)">CSRF</a> or <a href="https://www.owasp.org/index.php/Cross-site_Scripting_(XSS)">XSS</a>.</div>
+<div class="alert alert-danger"><strong>Danger</strong>: If your messages contain user-generated content, disabling URL encoding (without handling encoding in your application) may expose recipients of your messages to various types of attacks such as <a href="https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)">CSRF</a> or <a href="https://www.owasp.org/index.php/Cross-site_Scripting_(XSS)">XSS</a>.</div>
 
 In order to disable URL encoding, use triple curly braces.
 This is useful when you have multiple pieces of the URL in one variable.
@@ -318,7 +318,7 @@ Triple curlies are also necessary if the entire URL resides in substitution data
 }
 ```
 
-<div class="alert alert-warning"><strong>Warning</strong>: Including the protocol in a substitution variable (as above) will prevent click tracking</div>
+<div class="alert alert-warning"><strong>Warning</strong>: Including the protocol in a substitution variable (as above) will disable click tracking for that link</div>
 
 ## Link Names
 
@@ -365,7 +365,7 @@ The tracked link generated will look like this:
 http://<hostname>/f/custom_path/<encoded target url>
 ```
 
-<div class="alert alert-info"><strong><a href="https://www.sparkpost.com/enterprise-email/">SparkPost Enterprise API only</a>:</strong> An example of how to use <strong>data-msys-sublink</strong> to support iOS Universal Links can be found <a href="https://support.sparkpostelite.com/customer/en/portal/articles/2231112-ios9-universal-links-support?b_id=8730#Creating%20Universal%20Links%20in%20Templates%20&%20Sub-Pathing" style="text-decoration: underline;">here</a>.</div>
+<div class="alert alert-info"><strong><a href="https://www.sparkpost.com/enterprise-email/">SparkPost Enterprise only</a>:</strong> An example of how to use <strong>data-msys-sublink</strong> to support iOS Universal Links can be found <a href="https://support.sparkpostelite.com/customer/en/portal/articles/2231112-ios9-universal-links-support?b_id=8730#Creating%20Universal%20Links%20in%20Templates%20&%20Sub-Pathing" style="text-decoration: underline;">here</a>.</div>
 
 ## Link Attributes in Text Parts
 
@@ -577,7 +577,7 @@ By default, this will not work. In general, the rules are as follows:
 * Links within substitution values are *not* automatically converted to click trackable links.
 * Substitution expressions within substitution values are *not* automatically executed.
 
-Using the above substitution_data and the following template:
+Using the above `substitution_data` and the following template:
 
 ```
 <body>
@@ -602,7 +602,7 @@ In order to correct this problem, the system must be informed of the need to per
 substitutions and link tracking.  This can be accomplished with two steps:
 
 1) The html chunk must be specified in the transmission level substitution data underneath a special
-`dynamic_html` json object.  All key value pairs underneath dynamic_html will undergo substitutions as well
+`dynamic_html` json object.  All key value pairs underneath `dynamic_html` will undergo substitutions as well
 as link tracking.
 
 In the above example, the transmission level substitution data would need to be structured as:
@@ -617,9 +617,8 @@ In the above example, the transmission level substitution data would need to be 
 }
 ```
 
-2) The render_dynamic_content() macro must be used to wrap all uses of dynamic_html variables.
-Continuing with the example above, the template would
-need to be structured as:
+2) The `render_dynamic_content()` macro must be used to wrap all uses of dynamic_html variables.
+Continuing with the example above, the template would need to be structured as:
 
 ```
 <body>
@@ -632,7 +631,7 @@ The dynamic content will be correctly inserted *without* html escaping,
 regardless of whether double or triple curly braces are used.  There is no need to use triple curly braces in this case.
 
 
-To insert dynamic content into the text/plain part of a message, one must place the dynamic content into the transmission
+To insert dynamic content into the `text/plain` part of a message, one must place the dynamic content into the transmission
 level substitution variable `dynamic_plain`.  For example:
 
 ```
@@ -645,7 +644,7 @@ level substitution variable `dynamic_plain`.  For example:
 }
 ```
 
-As with dynamic_html, dynamic_plain variables must be wrapped in the render_dynamic_content() macro when used
+As with `dynamic_html`, `dynamic_plain` variables must be wrapped in the `render_dynamic_content()` macro when used
 in the template:
 
 ```
@@ -653,7 +652,7 @@ Attempting to insert a chunk of plain text:
 {{ render_dynamic_content(dynamic_plain.my_plain_text_chunk) }}
 ```
 
-Finally, as a more realistic example, render_dynamic_content can also be used inside an 'each' loop. Full transmission json examples follow.
+Finally, as a more realistic example, `render_dynamic_content()` can also be used inside an `each` loop. Full transmission json examples follow.
 
 ```
 {
@@ -740,7 +739,7 @@ The four macros for outputting braces are listed below followed by their output:
 
 
 
-##  Reserved Recipient Substitution Variables
+## Reserved Recipient Substitution Variables
 
 The following substitution variables are reserved and automatically available for each recipient:
 
@@ -754,7 +753,7 @@ Hello {{address.name}}
 Your email is {{address.email}}
 ```
 
-<div class="alert alert-info"><a href="https://www.sparkpost.com/enterprise-email/"><strong>SparkPost Enterprise API only</strong></a>: The <tt>return_path</tt> substitution variable is available to SparkPost Enterprise users:</a></div>
+<div class="alert alert-info"><a href="https://www.sparkpost.com/enterprise-email/"><strong>SparkPost Enterprise only</strong></a>: The <tt>return_path</tt> substitution variable is available to SparkPost Enterprise users</a></div>
 
 ```
 Hello {{address.name}}

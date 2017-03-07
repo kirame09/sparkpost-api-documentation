@@ -3,7 +3,7 @@ description: A/B Testing of templates.
 
 # Group A/B Testing
 
-**Note: This endpoint is available in SparkPost only**
+<div class="alert alert-info"><strong>Note</strong>: This endpoint is available in SparkPost only</div>
 
 <a name="ab-testing-api"></a>
 

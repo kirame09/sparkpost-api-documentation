@@ -3,7 +3,7 @@ description: Manage the sending IPs for your account and assign them to IP pools
 
 # Group Sending IPs
 
-**Note: This endpoint is available in SparkPost only**
+<div class="alert alert-info"><strong>Note</strong>: This endpoint is available in SparkPost only</div>
 
 ## Using Postman
 
@@ -37,11 +37,11 @@ Gets all IP addresses.
     ```json
     {
         "results": [{
-          "external_ip": "123.456.789.123",
+          "external_ip": "123.45.67.89",
           "hostname": "mta472a.sparkpostmail.com",
           "ip_pool": "marketing"
         }, {
-          "external_ip": "123.456.789.124",
+          "external_ip": "123.45.67.80",
           "hostname": "mta474a.sparkpostmail.com",
           "ip_pool": "default"
         }]
@@ -63,7 +63,7 @@ Retrieves a specific sending IP.
 
 + Parameters
 
-  + external_ip (required, string, `123.456.789.012`) ... The external IP of the sending IP
+  + external_ip (required, string, `123.45.67.89`) ... The external IP of the sending IP
 
 
 + Response 200 (application/json)
@@ -71,7 +71,7 @@ Retrieves a specific sending IP.
     ```json
     {
         "results": {
-          "external_ip": "123.456.789.012",
+          "external_ip": "123.45.67.89",
           "hostname": "mta472a.sparkpostmail.com",
           "ip_pool": "cool_kids"
         }
@@ -121,7 +121,7 @@ Updates the IP Pool of a sending IP.
 
 + Parameters
 
-  + external_ip (required, string, `123.456.789.012`) ... The external IP of the sending IP to update
+  + external_ip (required, string, `123.45.67.89`) ... The external IP of the sending IP to update
 
 
 + Response 200 (application/json)

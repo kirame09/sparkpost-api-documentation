@@ -7,7 +7,7 @@ description: Query real-time data about message processing, message disposition,
 SparkPost logs copious amounts of statistical, real-time data about message processing, message
 disposition, and campaign performance.  This reporting data is available in the UI or through the Metrics API.  The Metrics API provides a variety of endpoints enabling you to retrieve a summary of the data, data grouped by a specific qualifier, or data by event type.  Within each endpoint, you can also apply various filters to drill down to the data for your specific reporting needs.
 
-**Deprecation Notice:** The `bindings` and `binding_groups` query parmeters have been deprecated. Please use the `sending_ips` and `ip_pools` query parameters instead.
+<div class="alert alert-warning"><strong>Deprecation Notice</strong>: The <tt>bindings</tt> and <tt>binding_groups</tt> query parmeters have been deprecated. Please use the <tt>sending_ips</tt> and <tt>ip_pools</tt> query parameters instead.</div>
 
 ## Data retention
 
@@ -56,7 +56,7 @@ Definitions for terms found in Metrics API
 |`total_delivery_time_first` | Total time taken to deliver messages on first attempt (milliseconds)|
 |`total_delivery_time_subsequent` | Total time taken to delivery messages on subsequent attempts (milliseconds) |
 
-Note: For a given request, average first attempt delivery latency can be calculated as `total_delivery_time_first / count_delivered`. A similar calculation holds for `total_delivery_time_subsequent`.
+<div class="alert alert-info"><strong>Note</strong>: For a given request, average first attempt delivery latency can be calculated as <tt>total_delivery_time_first / count_delivered</tt>. A similar calculation holds for <tt>total_delivery_time_subsequent</tt>.</div>
 
 ## Discoverability Links [/metrics/]
 
@@ -158,7 +158,7 @@ list of URIs that exists within the Metrics API.
 
 Provides links to all child URIs within the Metrics API.
 
-**[SparkPost Enterprise API only](https://www.sparkpost.com/enterprise-email/):** Metric discoverability links for binding-groups and bindings apply to the SparkPost Enterprise API only.
+<div class="alert alert-info"><strong><a href="https://www.sparkpost.com/enterprise-email/">SparkPost Enterprise API only</a></strong>: Metric discoverability links for binding-groups and bindings apply to the SparkPost Enterprise API only.</div>
 
 + Request
 

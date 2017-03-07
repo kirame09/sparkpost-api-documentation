@@ -6,7 +6,7 @@ description: Manage sending domains, which are used to indicate who an email is 
 
 A sending domain is a domain that is used to indicate who an email is from via the "From:" header. Using a custom sending domain enables you to control what recipients see as the From value in their email clients. DNS records can be configured for a sending domain, which allows recipient mail servers to authenticate your messages. The Sending Domains API provides the means to create, list, retrieve, update, and verify a custom sending domain.
 
-**Note:** When adding a sending domain to your account, the domain must be verified within two weeks or it will be removed from your account.
+<div class="alert alert-info"><strong>Note</strong>: When adding a sending domain to your account, the domain must be verified within two weeks or it will be removed from your account.</div>
 
 ## Using Postman
 
@@ -19,11 +19,11 @@ If you use [Postman](https://www.getpostman.com/) you can click the following bu
 | Field         | Type     | Description                           | Required   | Notes   |
 |------------------------|:-:       |---------------------------------------|-------------|--------|
 |domain    | string | Name of the sending domain | yes |The domain name will be used as the "From:" header address in the email.|
-|tracking_domain | string | Associated tracking domain | no | example: "click.example1.com". **Note**: tracking domain and sending domain must belong to the same subaccount to be linked together.|
+|tracking_domain | string | Associated tracking domain | no | example: "click.example1.com". <span class="label label-info"><strong>Note:</strong></span> tracking domain and sending domain must belong to the same subaccount to be linked together.|
 |status | JSON object | JSON object containing status details, including whether this domain's ownership has been verified  | no | Read only. For a full description, see the Status Attributes.|
 |dkim | JSON object | JSON object in which DKIM key configuration is defined | no | For a full description, see the DKIM Attributes.|
 |generate_dkim | boolean | Whether to generate a DKIM keypair on creation | no | defaults to true |
-|dkim_key_length | number | Size, in bits, of the DKIM private key to be generated.  | no | This option only applies if generate_dkim is 'true'. Private key size defaults to 1024. Note that public keys for private keys longer than 1024 bits will be longer that 255 characters.  Because of this, the public key TXT record in DNS will need to contain multiple strings, see [RFC 7208, section 3.3](https://tools.ietf.org/html/rfc7208#section-3.3) for an example of how the SPF spec addresses this|
+|dkim_key_length | number | Size, in bits, of the DKIM private key to be generated.  | no | This option only applies if generate_dkim is 'true'. Private key size defaults to 1024. <span class="label label-info"><strong>Note:</strong></span> public keys for private keys longer than 1024 bits will be longer that 255 characters.  Because of this, the public key `TXT` record in DNS will need to contain multiple strings, see [RFC 7208, section 3.3](https://tools.ietf.org/html/rfc7208#section-3.3) for an example of how the SPF spec addresses this|
 |shared_with_subaccounts | boolean | Setting to true allows this domain to be used by subaccounts | no | Defaults to false, only available to domains belonging to a master account.|
 
 ### DKIM Attributes
@@ -82,9 +82,9 @@ Create a sending domain by providing a **sending domain object** as the POST req
 
 We allow any given domain (including its subdomains) to only be used by a single customer account.  Please see our [support article](https://support.sparkpost.com/customer/en/portal/articles/1933318-creating-sending-domains) for additional reasons a domain might not be approved for sending.
 
-**[SparkPost Enterprise API only](https://www.sparkpost.com/enterprise-email/):** To use a DKIM Signing Domain Identifier different to the Sending Domain, set the dkim.signing_domain field.
+<div class="alert alert-info"><strong><a href="https://www.sparkpost.com/enterprise-email/">SparkPost Enterprise API</a></strong> only: To use a DKIM Signing Domain Identifier different to the Sending Domain, set the <tt>dkim.signing_domain</tt> field.</div>
 
-**[SparkPost Enterprise API only](https://www.sparkpost.com/enterprise-email/):** For some SparkPost Enterprise customers, Sending Domains will be set to verified automatically when they are created, and can be used to send messages immediately. For these customers, there is no need to use the "verify" endpoint to verify Sending Domains. To find out if this applies to your SparkPost Enterprise service, please contact support <support@sparkpostelite.com>, or contact your TAM.
+<div class="alert alert-info"><strong><a href="https://www.sparkpost.com/enterprise-email/">SparkPost Enterprise API</a></strong> only: For some SparkPost Enterprise customers, Sending Domains will be set to verified automatically when they are created, and can be used to send messages immediately. For these customers, there is no need to use the <tt>verify</tt> endpoint to verify Sending Domains. To find out if this applies to your SparkPost Enterprise service, please contact support <a href="mailto:support@sparkpostelite.com">support@sparkpostelite.com</a>, or contact your TAM.</div>
 
 + Request Create New Sending Domain with Auto-Generated DKIM Keypair (application/json)
 
@@ -285,7 +285,7 @@ If a tracking domain is specified, it will replace any currently specified track
 
 If a dkim object is provided in the update request, it must contain all relevant fields whether they are being changed or not.  The new dkim object will completely overwrite the existing one.
 
-**[SparkPost Enterprise API only](https://www.sparkpost.com/enterprise-email/):** To remove the DKIM Signing Domain Identifier for a Sending Domain, use the empty string for the value of the dkim.signing_domain field. 
+<div class="alert alert-info"><strong><a href="https://www.sparkpost.com/enterprise-email/">SparkPost Enterprise API</a></strong> only: To remove the DKIM Signing Domain Identifier for a Sending Domain, use the empty string for the value of the <tt>dkim.signing_domain</tt> field.</div>
 
 + Parameters
     + domain (required, string, `example1.com`) ... Name of the domain
@@ -345,7 +345,7 @@ If a dkim object is provided in the update request, it must contain all relevant
 
 Delete an existing sending domain.
 
-**Warning:** Before deleting a sending domain please ensure you are no longer using it. After deleting a sending domain, any new transmissions that use it will result in a rejection. This includes any transmissions that are in progress, scheduled for the future, or use a stored template referencing the sending domain.
+<div class="alert alert-danger"><strong>Warning</strong>: Before deleting a sending domain please ensure you are no longer using it. After deleting a sending domain, any new transmissions that use it will result in a rejection. This includes any transmissions that are in progress, scheduled for the future, or use a stored template referencing the sending domain.</div>
 
 + Parameters
   + domain (required, string, `example1.com`) ... Name of the domain
@@ -378,25 +378,25 @@ Delete an existing sending domain.
 ### Verify a Sending Domain [POST]
 
 The verify resource operates differently depending on the provided request fields:
-  * Including the fields "dkim_verify" and/or "spf_verify" in the request initiates a check against the associated DNS record type for the specified sending domain.
-  * Including the fields "postmaster_at_verify" and/or "abuse_at_verify" in the request results in an email sent to the specified sending domain's postmaster@ and/or abuse@ mailbox where a verification link can be clicked.
-  * Including the fields "postmaster_at_token" and/or "abuse_at_token" in the request initiates a check of the provided token(s) against the stored token(s) for the specified sending domain.
+  * Including the fields `dkim_verify` and/or `spf_verify` in the request initiates a check against the associated DNS record type for the specified sending domain.
+  * Including the fields `postmaster_at_verify` and/or `abuse_at_verify` in the request results in an email sent to the specified sending domain's postmaster@ and/or abuse@ mailbox where a verification link can be clicked.
+  * Including the fields `postmaster_at_token` and/or `abuse_at_token` in the request initiates a check of the provided token(s) against the stored token(s) for the specified sending domain.
 
 DKIM public key verification requires the following:
   * A valid DKIM record must be in the DNS for the sending domain being verified.
-  * The record must use the sending domain's public key in the "p=" tag.
-  * If a k= tag is defined, it must be set to "rsa".
-  * If an h= tag is defined, it must be set to "sha256".
+  * The record must use the sending domain's public key in the `p=` tag.
+  * If a k= tag is defined, it must be set to `rsa`.
+  * If an h= tag is defined, it must be set to `sha256`.
 
-**Note: SPF sending domain verification is deprecated. You can use DKIM and/or email to verify your sending domain. We recommend using DKIM since it has authentication benefits.**
+<div class="alert alert-warning"><strong>Note</strong>: SPF sending domain verification is deprecated. You can use DKIM and/or email to verify your sending domain. We recommend using DKIM since it has authentication benefits.</div>
 
 SPF verification requires the following: 
   * A valid SPF record must be in the DNS for the sending domain being verified.
-  * The record must contain "v=spf1".
-  * The record must contain "include:sparkpostmail.com".
-  * The record must use either "~all" or "-all".
+  * The record must contain `v=spf1`.
+  * The record must contain `include:sparkpostmail.com`.
+  * The record must use either `~all` or `-all`.
 
-The domain's "status" object is returned on success.
+The domain's `status` object is returned on success.
 
 + Parameters
   + domain (required, string, `example1.com`) ... Name of the domain
