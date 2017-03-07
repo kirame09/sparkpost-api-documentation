@@ -3575,9 +3575,9 @@ Provides aggregate count of deliveries grouped by the attempt number.
   + sending_ips (optional, list, `123.456.789.123,123.456.789.124`) ... delimited list of sending IPs to include
   + ip_pools (optional, list, `Transaction`) ... delimited list of IP pools to include
   + sending_domains (optional, list, `sales.sender.com,company.net`) ... delimited list of sending domains to include
-  + bindings (optional, list, `Confirmation`) ... **[SparkPost Enterprise API only](https://www.sparkpost.com/enterprise-email/)**: delimited list of bindings to include
-  + binding_groups (optional, list, `Transaction`) ... **[SparkPost Enterprise API only](https://www.sparkpost.com/enterprise-email/)**: delimited list of binding groups to include
-  + subaccounts (optional, list, `123,125,127`) ... delimited list of subaccount ids to include (**Note:** providing ?subaccounts=0 will filter out all subaccount data, and only return master account data)
+  + bindings (optional, list, `Confirmation`) ... <a href="https://www.sparkpost.com/enterprise-email/"><span class="label label-warning">Enterprise</span></a> delimited list of bindings to include
+  + binding_groups (optional, list, `Transaction`) ... <a href="https://www.sparkpost.com/enterprise-email/"><span class="label label-warning">Enterprise</span></a> delimited list of binding groups to include
+  + subaccounts (optional, list, `123,125,127`) ... delimited list of subaccount ids to include <span class="label label-info"><strong>Note</strong></span> providing `?subaccounts=0` will filter out all subaccount data, and only return master account data)
   + timezone =`UTC` (optional, string, `America/New_York`) ... Standard timezone identification string, defaults to `UTC`
 
 + Request
@@ -3593,14 +3593,14 @@ Provides aggregate count of deliveries grouped by the attempt number.
 
 ## Binding Groups List [/metrics/binding-groups{?from,to,timezone,match,limit}]
 
-**Deprecation Notice:** This endpoint has been deprecated. Please use the IP Pools listing endpoint instead.
+<div class="alert alert-warning"><strong>Deprecation Notice</strong>: This endpoint has been deprecated. Please use the <a href="metrics.html#metrics-deliverability-metrics-by-ip-pool-get">IP Pools listing endpoint</a> instead.</div>
 
 ### Bindings Groups List [GET]
 
 
 ## Binding Groups List [/metrics/bindings{?from,to,timezone,match,limit}]
 
-**Deprecation Notice:** This endpoint has been deprecated. Please use the Sending IPs listing endpoint instead.
+<div class="alert alert-warning"><strong>Deprecation Notice</strong>: This endpoint has been deprecated. Please use the <a href="metrics.html#metrics-deliverability-metrics-by-sending-ip-get">Sending IPs listing endpoint instead.</div>
 
 ### Bindings List [GET]
 

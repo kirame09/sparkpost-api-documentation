@@ -11,7 +11,7 @@ Subaccounts are a way for service providers to provision and manage their custom
 
 The following APIs have subaccount support:
 
-* [Metrics](metrics.html) <span class="label label-info"><strong>Note:</strong></span> Not available for Subaccount API keys
+* [Metrics](metrics.html) <span class="label label-info"><strong>Note</strong></span> Not available for Subaccount API keys
 * [Message Events](message-events.html)
 * [Sending Domains](sending-domains.html)
 * [Suppression List](suppression-list.html)
@@ -93,7 +93,7 @@ Subaccounts are allowed to send mail using the SMTP protocol or Transmissions AP
 | key_label     | yes        | string  | User friendly identifier for the initial subaccount api key               |                                                                                                                                                               |
 | key_grants    | yes        | Array   | List of grants to give to the initial subaccount api key                  | Valid values are `smtp/inject`, `sending_domains/manage`, `tracking_domains/view`, `tracking_domains/manage`, `message_events/view`, `suppression_lists/manage`, `transmissions/view`, and `transmissions/modify` |
 | key_valid_ips | no         | Array   | List of IP's that the initial subaccount api key can be used from         | If the supplied `key_valid_ips` is an empty array, the api key is usable by any IP address                                                                    |
-| ip_pool       | no         | string  | The ID of the default IP Pool assigned to this subaccount's transmissions | <span class="label label-primary"><strong>SparkPost</strong></span> IP Pools are available for SparkPost customers. If the supplied `ip_pool` is an empty string or not present, no default `ip_pool` will be assigned                                                            |
+| ip_pool       | no         | string  | The ID of the default IP Pool assigned to this subaccount's transmissions | If the supplied `ip_pool` is an empty string or not present, no default `ip_pool` will be assigned<br/> <span class="label label-warning"><strong>Enterprise</strong></span> <strong><a href="https://www.sparkpost.com/enterprise-email/">SparkPost Enterprise</a></strong> customers: IPs are managed through your TAM, please contact them directly for details.                                                            |
 
 
 + Request (application/json)

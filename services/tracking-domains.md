@@ -6,7 +6,7 @@ description: Manage tracking domains, which are used to wrap links in engagement
 
 Tracking domains are used in engagement tracking to report opens and clicks in your messages. When open and click tracking is enabled, you can set up a tracking domain which wraps the tracking pixel and all links in your messages.
 
-For example, in SparkPost.com, the system tracking domain is spgo.io. Your message contains a link to http://www.some-website.com/some-article. That link gets wrapped and the resulting HTML would look something like this:
+As an example, for SparkPost.com, the tracking domain is spgo.io. Your message contains a link to http://www.some-website.com/some-article. That link gets wrapped and the resulting HTML would look something like this:
 
 ```html
 <a href="http://spgo.io/e/nInKCLCf9wnO2brop7RTsg...">Check out this excellent article</a>
@@ -18,9 +18,9 @@ With a tracking domain you can replace the domain part of the link. So if your t
 <a href="http://example.domain.com/e/nInKCLCf9wnO2brop7RTsg...">Check out this excellent article</a>
 ```
 
-**Note:** Use of a tracking domain requires modification of your DNS records to include a CNAME record.
+<div class="alert alert-info"><strong>Note</strong>: Use of a tracking domain requires modification of your DNS records to include a CNAME record.</div>
 
-**Note:** For SparkPost, only HTTP is supported on tracking domains since SparkPost does not issue SSL certificates for customer domains. As a result, `port` should be set to `80` and `secure` to `false` when creating your tracking domain.
+<div class="alert alert-info"><strong>Note</strong>: For SparkPost, only HTTP is supported on tracking domains since SparkPost does not issue SSL certificates for customer domains. As a result, <tt>port</tt> should be set to <tt>80</tt> and <tt>secure</tt> to <tt>false</tt> when creating your tracking domain.</div>
 
 ## Using Postman
 
@@ -34,8 +34,8 @@ If you use [Postman](https://www.getpostman.com/) you can click the following bu
 |------------|--------|-------------|----------|-------|
 | domain | string | Name of the tracking domain | yes | Example: `example.domain.com` |
 | port | integer | Determines the port to be used when constructing the tracking URL | no | Example: `8080` |
-| secure | boolean | Determines whether the tracking URL should use http or https | no | If true, https will be used. If false, http will be used. |
-| default | boolean | Determines whether the tracking domain should be the default used when not explicitly set | no | There can only be one default domain. Defaults to `false`. |
+| secure | boolean | Should the tracking URL should use https? | no | If `false` (the default), http will be used.<br/> <span class="label label-warning"><strong>Enterprise</strong></span> <strong><a href="https://www.sparkpost.com/enterprise-email/">SparkPost Enterprise</a></strong> customers may set `"secure": true` to use https |
+| default | boolean | Should the default tracking domain be used when not explicitly set | no | There can only be one default domain. Defaults to `false`. |
 | status | JSON object| JSON object containing status details, including whether this domain's ownership has been verified  | no | Read only. For a full description, see the Status Attributes.|
 
 ### Port/Secure Attributes
@@ -57,9 +57,9 @@ Detailed status for this tracking domain is described in a JSON object with the 
 
 | Field         | Type     | Description                           | Default   | Notes   |
 |------------------------|:-:       |---------------------------------------|-------------|--------|
-| verified | boolean | Whether domain has been verified | false | Read only. This field will return "true" if cname_status is "valid".|
-| cname_status | string | Verification status of CNAME configuration | unverified | Read only. Valid values are "unverified", "pending", "invalid" or "valid".|
-| compliance_status | string | Compliance status | | Read only. Valid values are "pending", "valid", or "blocked".|
+| verified | boolean | Whether domain has been verified | false | Read only. This field will return `true` if cname_status is `valid`.|
+| cname_status | string | Verification status of CNAME configuration | unverified | Read only. Valid values are `unverified`, `pending`, `invalid` or `valid`.|
+| compliance_status | string | Compliance status | | Read only. Valid values are `pending`, `valid`, or `blocked`.|
 
 
 ## Create and List [/tracking-domains]
@@ -68,7 +68,7 @@ Detailed status for this tracking domain is described in a JSON object with the 
 
 Create a tracking domain. A tracking domain cannot be set as the default until it is verified.
 
-**NOTE:** For SparkPost, only domain is required in the POST request body. The values for port (80) and secure (false) are not configurable.
+<div class="alert alert-info"><strong>Note</strong>: For SparkPost customers, only the domain is required in the POST request body. The values for <tt>port</tt> (80) and <tt>secure</tt> (false) are not configurable.</div>
 
 + Request (application/json)
 
@@ -213,7 +213,7 @@ Create a tracking domain. A tracking domain cannot be set as the default until i
 
 Retrieve a list of all tracking domains.
 
-**NOTE:** For SparkPost, port and secure are not returned since they are hard coded values.
+<div class="alert alert-info"><strong>Note</strong>: For SparkPost customers, <tt>port</tt> (80) and <tt>secure</tt> (false) are not returned since they are not configurable.</div>
 
 + Request
 
@@ -260,7 +260,7 @@ Retrieve a list of all tracking domains.
 
 Retrieve an existing tracking domain.
 
-**NOTE:** For SparkPost, port and secure are not returned since they are hard coded values.
+<div class="alert alert-info"><strong>Note</strong>: For SparkPost customers, <tt>port</tt> (80) and <tt>secure</tt> (false) are not returned since they are not configurable.</div>
 
 + Parameters
   + domain (required, string, `example.domain.com`) ... domain name
@@ -312,7 +312,7 @@ Update the attributes of an existing tracking domain.  A tracking domain cannot 
 set as the default until it is verified.  If a tracking domain is set to the default,
 and there is already a default domain, the default is changed.
 
-**NOTE:** For SparkPost, port and secure cannot be updated.
+<div class="alert alert-info"><strong>Note</strong>: For SparkPost customers, <tt>port</tt> (80) and <tt>secure</tt> (false) cannot be updated since they are not configurable.</div>
 
 + Parameters
   + domain (required, string, `example.domain.com`) ... domain name

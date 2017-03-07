@@ -3,7 +3,7 @@ description: Manage the sending IPs for your account and assign them to IP pools
 
 # Group Sending IPs
 
-<div class="alert alert-info"><strong>Note</strong>: This endpoint is available in SparkPost only</div>
+<div class="alert alert-info"><strong><a href="https://www.sparkpost.com/enterprise-email/">SparkPost Enterprise</a></strong> customers: IPs are managed through your TAM, please contact them directly for assistance.</div>
 
 ## Using Postman
 

@@ -28,7 +28,7 @@ If you use [Postman](https://www.getpostman.com/) you can click the following bu
 |-----------|--------|-----------------------------------------------------------------------|--------------|----------------------|
 | protocol  | string | Inbound messaging protocol associated with this webhook | no - defaults to "SMTP" |                      |
 | domain    | string | Inbound domain associated with this webhook             | yes, when protocol is "SMTP" | To create an inbound domain for your account, please use the Inbound Domains API. |
-| esme_address | string | ESME address binding associated with this webhook    | yes, when protocol is "SMPP" | <span class="label label-warning"><strong>Enterprise</strong></span> Relay Webhooks for SMPP messages is available for <a href="https://www.sparkpost.com/enterprise-email/">SparkPost Enterprise</a> customers.  Please speak with your account manager to create an ESME address. |
+| esme_address | string | ESME address binding associated with this webhook    | yes, when protocol is "SMPP" | <span class="label label-warning"><strong>Enterprise</strong></span> <a href="https://www.sparkpost.com/enterprise-email/">SparkPost Enterprise</a> customers may use this property.  Please speak with your account manager to create an ESME address. |
 
 
 ## Field Definitions
@@ -48,6 +48,7 @@ The following fields will be included in the JSON object posted to the SMTP rela
 
 **SMPP**
 
+<div class="alert alert-info">SMPP is available to <a href="https://www.sparkpost.com/enterprise-email/">SparkPost Enterprise</a> customers.</div>
 The following fields will be included in the JSON object posted to the SMPP relay webhooks target:
 
 | Field       | Type   | Description                                                           | Notes
@@ -270,7 +271,7 @@ Create a relay webhook by providing a **relay webhooks object** as the POST requ
 
 ### Create an SMPP Relay Webhook [POST]
 
-<div class="alert alert-info">SMPP relay webhooks are available to the <strong><a href="https://www.sparkpost.com/enterprise-email/">SparkPost Enterprise API</a></strong> only.</div>
+<div class="alert alert-info">SMPP relay webhooks are available to <strong><a href="https://www.sparkpost.com/enterprise-email/">SparkPost Enterprise</a></strong> customers.</div>
 
 + Request (application/json)
 

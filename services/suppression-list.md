@@ -31,7 +31,7 @@ If you use [Postman](https://www.getpostman.com/) you can click the following bu
 | Field         | Type     | Description                           | Required   | Notes   |
 |------------------------|:-:       |---------------------------------------|-------------|--------|
 | recipient | string | Email address to be suppressed | yes | |
-| type | string | Type of suppression record: "transactional" or "non_transactional" |  |
+| type | string | Type of suppression record: `transactional` or `non_transactional` |  |
 |transactional | boolean | Whether the recipient requested to not receive any transactional messages | Not required if a valid `type` is passed | Available, but deprecated in favor of `type`|
 |non_transactional | boolean | Whether the recipient requested to not receive any non-transactional messages | Not required if a valid `type` is passed | Available, but deprecated in favor of `type` |
 |source | string | Source responsible for inserting the list entry. Valid values include: `Spam Complaint`, `List Unsubscribe`, `Bounce Rule`, `Unsubscribe Link`, `Manually Added`, `Compliance`| no - entries created by the user are marked as `Manually Added` | Field is read-only  |
@@ -42,7 +42,7 @@ If you use [Postman](https://www.getpostman.com/) you can click the following bu
 
 ### Insert or Update List Entries [PUT]
 
-Bulk insert or update entries in the suppression list by providing a JSON object, with a "recipients" key containing an array of recipients to insert or update, as the PUT request body. Maximum size of the JSON object is 50mb. Maximum recipients at a time is 10,000. At a minimum, each recipient must have a valid email address and a suppression type: "transactional" or "non_transactional". The optional "description" key can be used to include an explanation of what type of message should be suppressed.
+Bulk insert or update entries in the suppression list by providing a JSON object, with a `recipients` key containing an array of recipients to insert or update, as the PUT request body. Maximum size of the JSON object is 50mb. Maximum recipients at a time is 10,000. At a minimum, each recipient must have a valid email address and a suppression type: `transactional` or `non_transactional`. The optional `description` key can be used to include an explanation of what type of message should be suppressed.
 
 If the recipient was added to the list by Compliance, it cannot be updated.
 
@@ -133,7 +133,7 @@ Perform a filtered search for entries in your suppression list.
     + per_page (optional, int, `5`) ... Maximum number of results to return per page.  Must be between 1 and 10,000. Default value is 1000. ( **Note:** SparkPost only)
     + page (optional, int, `5`) ... The results page number to return. Used with per_page for paging through results. The page parameter works up to 10,000 results. You must use the cursor parameter and start with cursor=initial to page result sets larger than 10,000 ( **Note:** SparkPost only)
     + sources (optional, list, `Bounce%20Rule,Manually%20Added`) ... Sources of the entries to include in the search, i.e. entries that were added by this source
-    + types (optional, list, `transactional`) ... Types of entries to include in the search, i.e. entries that are "transactional" or "non_transactional"
+    + types (optional, list, `transactional`) ... Types of entries to include in the search, i.e. entries that are `transactional` or `non_transactional`
     + description (optional, string, `Invalid%20Recipient`) ... Description of the entries to include in the search, i.e descriptions that include the text submitted. ( **Note:** SparkPost only)
 
 + Request
@@ -230,9 +230,9 @@ Perform a filtered search for entries in your suppression list.
 
 Retrieve the suppression status for a specific recipient by specifying the recipient’s email address in the URI path.
 
-If the recipient is not in the suppression list, an HTTP status of 404 is returned. If the recipient is in the list, an HTTP status of 200 is returned with the suppression records in the response body. Specifying the "type" key in the request body allows for retrieving only the "transactional" or "non_transactional" record. If type is specified and the recipient isn't suppressed for that type, an HTTP status of 404 is returned.
+If the recipient is not in the suppression list, an HTTP status of 404 is returned. If the recipient is in the list, an HTTP status of 200 is returned with the suppression records in the response body. Specifying the `type` key in the request body allows for retrieving only the `transactional` or `non_transactional` record. If type is specified and the recipient isn't suppressed for that type, an HTTP status of 404 is returned.
 
-In addition to the list entry attributes, the response body also includes "created" and "updated" timestamps.
+In addition to the list entry attributes, the response body also includes `created` and `updated` timestamps.
 
 + Parameters
   + recipient_email (required, string, `rcpt@example.com`) ... Recipient email address
@@ -306,7 +306,7 @@ In addition to the list entry attributes, the response body also includes "creat
 
 Delete a recipient from the list by specifying the recipient's email address in the URI path.
 
-If the recipient is not in the suppression list, an HTTP status of 404 is returned. If the recipient is in the list, an HTTP status of 204 is returned indicating a successful deletion. Suppression "type" can be specified in the request body. If a type isn't provided, the suppression will be deleted for both transactional and non-transactional.
+If the recipient is not in the suppression list, an HTTP status of 404 is returned. If the recipient is in the list, an HTTP status of 204 is returned indicating a successful deletion. Suppression `type` can be specified in the request body. If a type isn't provided, the suppression will be deleted for both transactional and non-transactional.
 
 + Parameters
     + recipient_email (required, string, `rcpt@example.com`) ... Recipient email address
@@ -344,7 +344,7 @@ If the recipient is not in the suppression list, an HTTP status of 404 is return
 
 **Note:** SparkPost only
 
-Insert or update a single entry in the suppression list by providing a JSON object. At a minimum, the JSON object should include a suppression type: "transactional" or "non_transactional". The optional "description" key can be used to include an explanation of what type of message should be suppressed.
+Insert or update a single entry in the suppression list by providing a JSON object. At a minimum, the JSON object should include a suppression type: `transactional` or `non_transactional`. The optional `description` key can be used to include an explanation of what type of message should be suppressed.
 
 If the recipient entry was added to the list by Compliance, it cannot be updated.
 
