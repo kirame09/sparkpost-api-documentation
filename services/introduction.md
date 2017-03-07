@@ -4,8 +4,8 @@ description: Documentation for sending via SMTP or HTTP with the SparkPost API.
 
 SparkPost presents a unified core API to all customers with a few noted exceptions.
 
-* Features not available on SparkPost Enterprise API are marked **Not available on SparkPost Enterprise**
-* Features available only to the SparkPost Enterprise API are marked **SparkPost Enterprise API only**.
+* Features not available to SparkPost Enterprise customers are marked **Not available on SparkPost Enterprise**
+* Features available only to SparkPost Enterprise customers are marked **SparkPost Enterprise customers only**.
 
 ## API Endpoints
 
@@ -34,7 +34,7 @@ SparkPost presents a unified core API to all customers with a few noted exceptio
 * For examples of supplying the Authorization header, refer to the cURL example below or any of the individual API request examples.
 
 ## API examples
-SparkPost Enterprise customers should note to change the API endpoint domain in all the example calls to their specific environment
+SparkPost Enterprise customers should make sure to change the API endpoint domain in all the example calls to the domain for their specific environment.
 
 ## Using Postman
 
@@ -93,10 +93,12 @@ The SMTP relay optionally supports advanced API features using the [SMTP API](sm
 
 ## SMTP Security
 
-<div class="alert alert-danger">Disabling TLS will cause all data sent through SparkPost to be sent over the public internet ununcrypted.</div>
+<div class="alert alert-danger">Disabling TLS will cause all data sent through SparkPost to be sent over the public internet unencrypted.</div>
 SparkPost strongly recommends using TLS with SMTP to protect your message content, recipient information and API keys in transmission. This includes API keys and any details such as recipient email addresses and message content.
 
 If TLS is not supported by your application, SparkPost recommends using API keys with _only_ the `Send via SMTP` privilege enabled. It is also good practice to regularly cycle your API keys to limit exposure of keys sent in the clear.
+
+<div class="alert alert-danger"><strong>Note</strong>: API keys should be treated like passwords, and as stated in <a href="https://www.sparkpost.com/policies/tou/">our Terms of Use</a>, you "are solely responsible for all use of [your account]." That includes use of your account by someone who sniffed your API key on the unsecured wifi at your favorite coffee shop because you weren't using TLS.</div>
 
 ## Rate Limiting
 <div class="alert alert-info"><strong>Note</strong>: To prevent abuse, our servers enforce request rate limiting, which may trigger responses with HTTP status code 429.</div>
@@ -114,7 +116,7 @@ The limits imposed here are dynamic but as a general rule, polling these endpoin
 
 ## Account Suspension
 
-If your account has been suspended due to concern about a possible violation of our [Messaging Policy](https://www.sparkpost.com/policies) please reply to the email you should have received from [compliance@sparkpost.com](mailto:compliance@sparkpost.com). If you have not received such an email, please write to [compliance@sparkpost.com](mailto:compliance@sparkpost.com) (ideally from the email address you used to sign up), including your Account ID, Company Name, and Username which you can find under `Account > Profile` in our app UI.
+If your account has been suspended due to concern about a possible violation of our [Messaging Policy](https://www.sparkpost.com/policies) please reply to the email you should have received from [compliance@sparkpost.com](mailto:compliance@sparkpost.com). If you have not received an email, please write to [compliance@sparkpost.com](mailto:compliance@sparkpost.com), ideally from the email address you used to sign up, including your Account ID, Company Name (if you set one), and Username which you can find under `Account > Profile` in our app UI.
 
 ## Errors
 

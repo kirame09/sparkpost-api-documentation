@@ -158,7 +158,7 @@ list of URIs that exists within the Metrics API.
 
 Provides links to all child URIs within the Metrics API.
 
-<div class="alert alert-info"><strong><a href="https://www.sparkpost.com/enterprise-email/">SparkPost Enterprise API only</a></strong>: Metric discoverability links for binding-groups and bindings apply to the SparkPost Enterprise API only.</div>
+<div class="alert alert-info"><strong><a href="https://www.sparkpost.com/enterprise-email/">SparkPost Enterprise customers only</a></strong>: Metric discoverability links for binding-groups and bindings apply to SparkPost Enterprise customers only.</div>
 
 + Request
 
