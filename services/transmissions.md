@@ -1027,6 +1027,9 @@ Scheduled transmissions cannot be deleted if the transmission is within 10 minut
 
 ## Delete Transmissions By Campaign [/transmissions?campaign_id={campaign_id}]
 
+<div class="alert alert-info"><strong>Note:</strong> SparkPost Enterprise only, customer-specific configuration option.</div>
+
+
 Delete all transmissions of a campaign by specifying Campaign ID in the URI path. 
 
   + Parameters
