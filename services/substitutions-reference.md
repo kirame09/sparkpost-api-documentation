@@ -533,7 +533,23 @@ The following example uses `shopping_cart` and `a_nested_array`:
 ```
 
 The preceding example uses indentation for ease of reading.
-The indentation will appear in the rendered content, so it is not advisable to indent a production template. 
+The indentation will appear in the rendered content, so it is not advisable to indent a production template.
+
+## Array Indexing
+
+<div class="alert alert-info"><strong>Note</strong>: array indexes start at 1. i.e. The first value in an array named `items` is `items[1]`.</div>
+
+It is possible to access specific items within an array, using traditional square brackets syntax:
+
+```
+You have children named {{ children[1] }} and {{ children[2] }}.
+```
+
+Array indexing and dot notation may also be used together:
+
+```
+The first item in your shopping cart is {{ shopping_cart[1].item_name }}.
+```
 
 ## Links and Substitution Expressions Within Substitution Values
 
