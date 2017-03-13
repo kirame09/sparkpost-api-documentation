@@ -537,7 +537,7 @@ The indentation will appear in the rendered content, so it is not advisable to i
 
 ## Array Indexing
 
-<div class="alert alert-info"><strong>Note</strong>: array indexes start at 1. i.e. The first value in an array named `items` is `items[1]`.</div>
+<div class="alert alert-info"><strong>Note</strong>: array indexes start at <code>1</code>. i.e. The first value in an array named <code>items</code> is <code>items[1]</code>.</div>
 
 It is possible to access specific items within an array, using traditional square brackets syntax:
 
