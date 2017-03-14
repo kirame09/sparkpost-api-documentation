@@ -137,10 +137,10 @@ Update your SparkPost account information and account-level options.
 
 | Property   | Type    | Description |
 |------------|---------|-------------|
-| smtp_tracking_default | boolean  | set to true to turn on SMTP engagement tracking by default |
-| rest_tracking_default | boolean  | set to false to turn off REST API engagement tracking by default |
-| transactional_unsub   | boolean  | set to true to include List-Unsubscribe header for all transactional messages by default |
-| transactional_default | boolean  | set to true to send messages as transactional by default |
+| smtp_tracking_default | boolean  | set to `true` to turn on SMTP engagement tracking by default |
+| rest_tracking_default | boolean  | set to `false` to turn off REST API engagement tracking by default |
+| transactional_unsub   | boolean  | set to `true` to include `List-Unsubscribe` header for all transactional messages by default |
+| transactional_default | boolean  | set to `true` to send messages as transactional by default |
 
 + Request
 

@@ -60,7 +60,7 @@ List an example of the event data that will be included in a response from the M
 
 Perform a filtered search for message event data. The response is sorted by descending timestamp.
 
-**Hint!** Use the 'delv_method' key to differentiate between Email, Push, and SMS type events.
+<div class="alert alert-info"><strong>Hint!</strong> Use the <tt>delv_method</tt> key to differentiate between Email, Push, and SMS type events.</div>
 
 + Parameters
     + bounce_classes (optional, number, `1`) ... delimited list of bounce classification codes to search. (See [Bounce Classification Codes.](https://support.sparkpost.com/customer/portal/articles/1929896))

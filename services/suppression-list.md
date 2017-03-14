@@ -15,9 +15,9 @@ In addition to your suppression list, SparkPost maintains a global suppression l
 
 ## Recipient Database Maintenance
 
-**When initially configuring your SparkPost account, we *strongly recommend* you import any suppression list you have from any previous service to avoid incorrectly sending mail to unsubscribed/invalid recipients.**
+<div class="alert alert-danger">When initially configuring your SparkPost account, we <strong>strongly recommend</strong> you import any suppression list you have from any previous service to avoid incorrectly sending mail to unsubscribed/invalid recipients.</div>
 
-**SparkPost supports bulk importing or manually adding up to 1,000,000 suppression list entries total.**
+<div class="alert alert-info">SparkPost supports bulk importing or manually adding up to 1,000,000 suppression list entries total.</div>
 
 It is also good practice to maintain your own recipient database by unsubscribing or removing recipients based on the bounce, unsubscribe and spam complaint events provided by SparkPost. These events are available from [webhooks](webhooks), [message events](message-events) and your suppression list. A 24-hour time-windowed suppression list search [as outlined below](#suppression-list-search-get) is useful here.
 
@@ -31,7 +31,7 @@ If you use [Postman](https://www.getpostman.com/) you can click the following bu
 | Field         | Type     | Description                           | Required   | Notes   |
 |------------------------|:-:       |---------------------------------------|-------------|--------|
 | recipient | string | Email address to be suppressed | yes | |
-| type | string | Type of suppression record: "transactional" or "non_transactional" |  |
+| type | string | Type of suppression record: `transactional` or `non_transactional` |  |
 |transactional | boolean | Whether the recipient requested to not receive any transactional messages | Not required if a valid `type` is passed | Available, but deprecated in favor of `type`|
 |non_transactional | boolean | Whether the recipient requested to not receive any non-transactional messages | Not required if a valid `type` is passed | Available, but deprecated in favor of `type` |
 |source | string | Source responsible for inserting the list entry. Valid values include: `Spam Complaint`, `List Unsubscribe`, `Bounce Rule`, `Unsubscribe Link`, `Manually Added`, `Compliance`| no - entries created by the user are marked as `Manually Added` | Field is read-only  |
@@ -42,15 +42,15 @@ If you use [Postman](https://www.getpostman.com/) you can click the following bu
 
 ### Insert or Update List Entries [PUT]
 
-Bulk insert or update entries in the suppression list by providing a JSON object, with a "recipients" key containing an array of recipients to insert or update, as the PUT request body. Maximum size of the JSON object is 50mb. Maximum recipients at a time is 10,000. At a minimum, each recipient must have a valid email address and a suppression type: "transactional" or "non_transactional". The optional "description" key can be used to include an explanation of what type of message should be suppressed.
+Bulk insert or update entries in the suppression list by providing a JSON object, with a `recipients` key containing an array of recipients to insert or update, as the PUT request body. Maximum size of the JSON object is 50mb. Maximum recipients at a time is 10,000. At a minimum, each recipient must have a valid email address and a suppression type: `transactional` or `non_transactional`. The optional `description` key can be used to include an explanation of what type of message should be suppressed.
 
 If the recipient was added to the list by Compliance, it cannot be updated.
 
 Please note that in the unlikely scenario where your receive a HTTP 5xx level error response while bulk loading, that some of your suppression entries may have been successfully inserted or updated. If this occurs, please re-submit your original request again for processing.
 
-*Note:* The `email` attribute is deprecated. Use `recipient` instead.
+<div class="alert alert-warning"><strong>Deprecation Notice</strong>: The <tt>email</tt> attribute is deprecated. Use <tt>recipient</tt> instead.</div>
 
-*Note:* The attributes `transactional` and `non_transactional` are deprecated. Use `type` instead.
+<div class="alert alert-warning"><strong>Deprecation Notice</strong>: The attributes <tt>transactional</tt> and <tt>non_transactional</tt> are deprecated. Use <tt>type</tt> instead.</div>
 
 
 + Request (application/json)
@@ -122,6 +122,8 @@ Please note that in the unlikely scenario where your receive a HTTP 5xx level er
 
 Perform a filtered search for entries in your suppression list.
 
+<div class="alert alert-warning"><strong>Deprecation Notice</strong>: <tt>limit</tt> parameter is supported up to 10000, but deprecated. Please use <tt>per_page</tt> instead.</div>
+
 + Parameters
     + to = `now` (optional, datetime, `2014-07-21T09:00:00-0400`) ... Datetime the entries were last updated, in the format of YYYY-MM-DDTHH:mm:ssZ
     + from (optional, datetime, `2014-07-20T09:00:00-0400`) ... Datetime the entries were last updated, in the format YYYY-MM-DDTHH:mm:ssZ
@@ -131,10 +133,8 @@ Perform a filtered search for entries in your suppression list.
     + per_page (optional, int, `5`) ... Maximum number of results to return per page.  Must be between 1 and 10,000. Default value is 1000. ( **Note:** SparkPost only)
     + page (optional, int, `5`) ... The results page number to return. Used with per_page for paging through results. The page parameter works up to 10,000 results. You must use the cursor parameter and start with cursor=initial to page result sets larger than 10,000 ( **Note:** SparkPost only)
     + sources (optional, list, `Bounce%20Rule,Manually%20Added`) ... Sources of the entries to include in the search, i.e. entries that were added by this source
-    + types (optional, list, `transactional`) ... Types of entries to include in the search, i.e. entries that are "transactional" or "non_transactional"
+    + types (optional, list, `transactional`) ... Types of entries to include in the search, i.e. entries that are `transactional` or `non_transactional`
     + description (optional, string, `Invalid%20Recipient`) ... Description of the entries to include in the search, i.e descriptions that include the text submitted. ( **Note:** SparkPost only)
-
-    *Note:* `limit` parameter is supported up to 10000, but deprecated. Please use `per_page` instead.
 
 + Request
 
@@ -230,9 +230,9 @@ Perform a filtered search for entries in your suppression list.
 
 Retrieve the suppression status for a specific recipient by specifying the recipient’s email address in the URI path.
 
-If the recipient is not in the suppression list, an HTTP status of 404 is returned. If the recipient is in the list, an HTTP status of 200 is returned with the suppression records in the response body. Specifying the "type" key in the request body allows for retrieving only the "transactional" or "non_transactional" record. If type is specified and the recipient isn't suppressed for that type, an HTTP status of 404 is returned.
+If the recipient is not in the suppression list, an HTTP status of 404 is returned. If the recipient is in the list, an HTTP status of 200 is returned with the suppression records in the response body. Specifying the `type` key in the request body allows for retrieving only the `transactional` or `non_transactional` record. If type is specified and the recipient isn't suppressed for that type, an HTTP status of 404 is returned.
 
-In addition to the list entry attributes, the response body also includes "created" and "updated" timestamps.
+In addition to the list entry attributes, the response body also includes `created` and `updated` timestamps.
 
 + Parameters
   + recipient_email (required, string, `rcpt@example.com`) ... Recipient email address
@@ -306,7 +306,7 @@ In addition to the list entry attributes, the response body also includes "creat
 
 Delete a recipient from the list by specifying the recipient's email address in the URI path.
 
-If the recipient is not in the suppression list, an HTTP status of 404 is returned. If the recipient is in the list, an HTTP status of 204 is returned indicating a successful deletion. Suppression "type" can be specified in the request body. If a type isn't provided, the suppression will be deleted for both transactional and non-transactional.
+If the recipient is not in the suppression list, an HTTP status of 404 is returned. If the recipient is in the list, an HTTP status of 204 is returned indicating a successful deletion. Suppression `type` can be specified in the request body. If a type isn't provided, the suppression will be deleted for both transactional and non-transactional.
 
 + Parameters
     + recipient_email (required, string, `rcpt@example.com`) ... Recipient email address
@@ -344,7 +344,7 @@ If the recipient is not in the suppression list, an HTTP status of 404 is return
 
 **Note:** SparkPost only
 
-Insert or update a single entry in the suppression list by providing a JSON object. At a minimum, the JSON object should include a suppression type: "transactional" or "non_transactional". The optional "description" key can be used to include an explanation of what type of message should be suppressed.
+Insert or update a single entry in the suppression list by providing a JSON object. At a minimum, the JSON object should include a suppression type: `transactional` or `non_transactional`. The optional `description` key can be used to include an explanation of what type of message should be suppressed.
 
 If the recipient entry was added to the list by Compliance, it cannot be updated.
 

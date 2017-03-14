@@ -28,7 +28,7 @@ If you use [Postman](https://www.getpostman.com/) you can click the following bu
 |-----------|--------|-----------------------------------------------------------------------|--------------|----------------------|
 | protocol  | string | Inbound messaging protocol associated with this webhook | no - defaults to "SMTP" |                      |
 | domain    | string | Inbound domain associated with this webhook             | yes, when protocol is "SMTP" | To create an inbound domain for your account, please use the Inbound Domains API. |
-| esme_address | string | ESME address binding associated with this webhook    | yes, when protocol is "SMPP" | **[SparkPost Enterprise API only](https://www.sparkpost.com/enterprise-email/)**: *Note*: Relay Webhooks for SMPP messages is available for SparkPost Enterprise customers.  Please speak with your account manager to create an ESME address. |
+| esme_address | string | ESME address binding associated with this webhook    | yes, when protocol is "SMPP" | <a href="https://www.sparkpost.com/enterprise-email/"><span class="label label-warning"><strong>Enterprise</strong></span></a> Please speak with your TAM to create an ESME address. |
 
 
 ## Field Definitions
@@ -48,6 +48,7 @@ The following fields will be included in the JSON object posted to the SMTP rela
 
 **SMPP**
 
+<div class="alert alert-info">SMPP is available to <a href="https://www.sparkpost.com/enterprise-email/">SparkPost Enterprise</a> customers.</div>
 The following fields will be included in the JSON object posted to the SMPP relay webhooks target:
 
 | Field       | Type   | Description                                                           | Notes
@@ -73,7 +74,7 @@ Content for an SMTP relay webhook is described in a JSON object with the followi
 | cc        | array of strings | "CC" header value (decoded from email), RFC2822 address list |
 | headers   | array of objects | Ordered array of email top-level headers | This array preserves ordering and allows for multiple occurrences of a header (e.g.: to support trace headers such as "Received"). |
 | email_rfc822 | string | Raw MIME content for an email | If the Raw MIME content contains at least one non UTF-8 encoded character, the entire "email_rfc822" JSON value will be base64 encoded and the "email_rfc822_is_base64" JSON boolean value will be set to true |
-| email_rfc822_is_base64 | boolean | Whether or not the "email_rfc822" value is base64 encoded |
+| email_rfc822_is_base64 | boolean | Whether the "email_rfc822" value is base64 encoded |
 
 ## Example Payloads
 
@@ -270,7 +271,7 @@ Create a relay webhook by providing a **relay webhooks object** as the POST requ
 
 ### Create an SMPP Relay Webhook [POST]
 
-**[SparkPost Enterprise API only](https://www.sparkpost.com/enterprise-email/).**
+<div class="alert alert-info">SMPP relay webhooks are available to <strong><a href="https://www.sparkpost.com/enterprise-email/">SparkPost Enterprise</a></strong> customers.</div>
 
 + Request (application/json)
 

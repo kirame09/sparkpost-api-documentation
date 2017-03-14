@@ -16,26 +16,26 @@ If you use [Postman](https://www.getpostman.com/) you can click the following bu
 
 ## The Sandbox Domain
 
-**Note: SparkPost only**
-
 The sandbox domain `sparkpostbox.com` is available to allow each account to send test messages in advance of configuring a real sending domain. Each SparkPost account has a lifetime allowance of 50 sandbox domain messages. To send a test message from the sandbox domain, set `content.from.email` field to `localpart@sparkpostbox.com` and ensure `options.sandbox` is set to `true`.
 
-**Note:** you can set the 'local part' (the part before the @) to any valid email local part. [See below](#transmissions-create-post) for more details on sending mail.
+<div class="alert alert-info"><strong>Note</strong>: you can set the 'local part' (the part before the <tt>@</tt>) to any valid email local part. <a href="#transmissions-create-post">See below</a> for more details on sending mail.</div>
+
+<div class="alert alert-info"><strong>Note</strong>: SparkPost customers only. <strong><a href="https://www.sparkpost.com/enterprise-email/">SparkPost Enterprise</a></strong> customers should consider using the <a href="https://support.sparkpost.com/customer/portal/articles/2560839">SparkPost Sink Server</a>.</div>
 
 ## Transmission Attributes
 
 | Field         | Type     | Description                           | Required         | Notes   |
 |--------------------|----------------      |---------------------------------------|--------------------------|--------|
 |id |string |ID of the transmission |no |Read only.  A unique ID is generated for each transmission on submission. |
-|state |string  |State of the transmission  | no | Read only.  Valid responses are "submitted", "Generating", "Success", or "Canceled". |
+|state |string  |State of the transmission  | no | Read only.  Valid responses are `submitted`, `Generating`, `Success`, or `Canceled`. |
 |options | JSON object | JSON object in which transmission options are defined | no | For a full description, see the Options Attributes.
-|recipients | JSON array or JSON object | Inline recipient objects or object containing stored recipient list ID |yes | Specify a stored recipient list or specify recipients inline.  When using a stored recipient list, specify the "list_id" as described in Using a Stored Recipient List.  Otherwise, provide the recipients inline using the fields described in the Recipient List API documentation for Recipient Attributes. |
+|recipients | JSON array or JSON object | Inline recipient objects or object containing stored recipient list ID |yes | Specify a stored recipient list or specify recipients inline.  When using a stored recipient list, specify the `list_id` as described in Using a Stored Recipient List.  Otherwise, provide the recipients inline using the fields described in the Recipient List API documentation for Recipient Attributes. |
 |campaign_id | string |Name of the campaign|no|Maximum length - 64 bytes|
 |description | string |Description of the transmission|no | Maximum length - 1024 bytes|
 |metadata|JSON object|Transmission level metadata containing key/value pairs |no| Metadata is available during events through the Webhooks and is provided to the substitution engine.  A maximum of 1000 bytes of merged metadata (transmission level + recipient level) is available with recipient metadata taking precedence over transmission metadata when there are conflicts.  |
 |substitution_data|JSON object|Key/value pairs that are provided to the substitution engine| no | Recipient substitution data takes precedence over transmission substitution data. Unlike metadata, substitution data is not included in Webhook events. |
-|return_path | string | **[SparkPost Enterprise API only](https://www.sparkpost.com/enterprise-email/)**: email to use for envelope FROM | required for email transmissions | To support Variable Envelope Return Path (VERP), this field can also optionally be specified inside of the address object of a specific recipient in order to give the recipient a unique envelope MAIL FROM. |
-|content| JSON object | Content that will be used to construct a message | yes | Specify a stored template or specify inline template content. When using a stored template, specify the "template_id" as described in Using a Stored Template.  Otherwise, provide the inline content using the fields described in Inline Content Attributes.  Maximum size - 20MBs|
+|return_path | string | Email to use for envelope FROM | no | <a href="https://www.sparkpost.com/enterprise-email/"><span class="label label-warning"><strong>Enterprise</strong></span></a> To support Variable Envelope Return Path (VERP), this field can also optionally be specified inside of the address object of a specific recipient in order to give the recipient a unique envelope MAIL FROM. |
+|content| JSON object | Content that will be used to construct a message | yes | Specify a stored template or specify inline template content. When using a stored template, specify the `template_id` as described in Using a Stored Template.  Otherwise, provide the inline content using the fields described in Inline Content Attributes.  Maximum size - 20MBs|
 |total_recipients | number | Computed total recipients | no | Read only|
 |num_generated | number | Computed total number of messages generated | no |Read only|
 |num_failed_generation| number| Computed total number of failed messages | no | Read only|
@@ -45,33 +45,38 @@ The sandbox domain `sparkpostbox.com` is available to allow each account to send
 ### Options Attributes
 | Field         | Type     | Description                           | Required   | Notes   |
 |------------------------|:-:       |---------------------------------------|-------------|--------|
-|start_time | string | Delay generation of messages until this datetime.  For additional information, see Scheduled Transmissions. |no - defaults to immediate generation | Format YYYY-MM-DDTHH:MM:SS+-HH:MM. Example: '2017-02-11T08:00:00-04:00'.|
+|start_time | string | Delay generation of messages until this datetime.  For additional information, see Scheduled Transmissions. |no - defaults to immediate generation | Format YYYY-MM-DDTHH:MM:SS+-HH:MM. Example: `2017-02-11T08:00:00-04:00`.|
 |open_tracking|boolean| Whether open tracking is enabled for this transmission| no |If not specified, the setting at template level is used, or defaults to true. |
 |click_tracking|boolean| Whether click tracking is enabled for this transmission| no |If not specified, the setting at template level is used, or defaults to true. |
-|transactional|boolean|Whether message is transactional or non-transactional for unsubscribe and suppression purposes (**Note:** no List-Unsubscribe header is included in transactional messages)| no |If not specified, the setting at template level is used, or defaults to false. |
-|sandbox|boolean|Whether or not to use the sandbox sending domain ( **Note:** SparkPost only )| no |Defaults to false. |
-|skip_suppression|boolean| **[SparkPost Enterprise API only](https://www.sparkpost.com/enterprise-email/)**: Whether or not to ignore customer suppression rules, for this transmission only.  Only applicable if your configuration supports this parameter. | no - Defaults to false | |
-| ip_pool | string | The ID of a dedicated IP pool associated with your account ( **Note:** SparkPost only ).  If this field is not provided, the account's default dedicated IP pool is used (if there are IPs assigned to it).  To explicitly bypass the account's default dedicated IP pool and instead fallback to the shared pool, specify a value of "sp_shared". | no | For more information on dedicated IPs, see the [Support Center](https://support.sparkpost.com/customer/en/portal/articles/2002977-dedicated-ip-addresses)
-|inline_css|boolean|Whether or not to perform CSS inlining in HTML content | no - Defaults to false | |
+|transactional|boolean|Whether message is transactional or non-transactional for unsubscribe and suppression purposes )| no | If not specified, the setting at template level is used, or defaults to false. <span class="label label-info"><strong>Note</strong></span> no `List-Unsubscribe` header is included in transactional messages. |
+|sandbox|boolean|Whether to use the sandbox sending domain | no |Defaults to false. <span class="label label-primary"><strong>SparkPost</strong></span> customers may use the sandbox |
+|skip_suppression|boolean| Whether to ignore customer suppression rules, for this transmission only. | no | <a href="https://www.sparkpost.com/enterprise-email/"><span class="label label-warning"><strong>Enterprise</strong></span></a> Defaults to false. |
+| ip_pool | string | The ID of a dedicated IP pool associated with your account. If this field is not provided, the account's default dedicated IP pool is used (if there are IPs assigned to it).  To explicitly bypass the account's default dedicated IP pool and instead fallback to the shared pool, specify a value of `sp_shared`. | no | <span class="label label-primary"><strong>SparkPost</strong></span> customers may use IP pools. For more information on dedicated IPs, see the [Support Center](https://support.sparkpost.com/customer/en/portal/articles/2002977-dedicated-ip-addresses)
+|inline_css|boolean|Whether to perform CSS inlining in HTML content | no - Defaults to false | |
 
 ### Inline Content Attributes
 
-The following attributes are used when specifying inline content in the transmission's "content" JSON object. Note that these attributes should not be present if using a stored template.
+The following attributes are used when specifying inline content in the transmission's `content` JSON object.
+
+<div class="alert alert-warning"><strong>Note</strong>: the following attributes should not be present when using a stored template.</div>
+<div class="alert alert-info"><strong>Note</strong>: one of <tt>html</tt>, <tt>text</tt>, or <tt>push</tt> is required. Email transmissions have additional required fields.</div>
 
 | Field         | Type     | Description                           | Required   | Notes   |
 |------------------------|:-:       |---------------------------------------|-------------|--------|
-|html    |string  |HTML content for the email's text/html MIME part|At a minimum, html, text, or push is required.  |Expected in the UTF-8 charset with no Content-Transfer-Encoding applied.  Substitution syntax is supported. |
-|text    |string  |Text content for the email's text/plain MIME part|At a minimum, html, text, or push is required. |Expected in the UTF-8 charset with no Content-Transfer-Encoding applied.  Substitution syntax is supported.|
-|push    |JSON object  |Content of push notifications|At a minimum, html, text, or push is required. | **[SparkPost Enterprise API only](https://www.sparkpost.com/enterprise-email/)**: See Push Attributes. |
-|subject |string  |Email subject line   | required for email transmissions |Expected in the UTF-8 charset without RFC2047 encoding.  Substitution syntax is supported. |
-|from |string or JSON  | Address _"from" : "deals@company.com"_ or JSON object composed of the "name" and "email" fields _"from" : { "name" : "My Company", "email" : "deals@company.com" }_ used to compose the email's "From" header| required for email transmissions | Substitution syntax is supported. |
+|html    |string  |HTML content for the email's text/html MIME part| yes, for email |Expected in the UTF-8 charset with no Content-Transfer-Encoding applied.  Substitution syntax is supported. |
+|text    |string  |Text content for the email's text/plain MIME part| yes, for email |Expected in the UTF-8 charset with no Content-Transfer-Encoding applied.  Substitution syntax is supported.|
+|push    |JSON object  |Content of push notifications| yes, for push | <a href="https://www.sparkpost.com/enterprise-email/"><span class="label label-warning"><strong>Enterprise</strong></span></a> See Push Attributes. |
+|subject |string  |Email subject line   | yes, for email |Expected in the UTF-8 charset without RFC2047 encoding.  Substitution syntax is supported. |
+|from |string or JSON  | Address `"from" : "deals@company.com"` or JSON object composed of the `name` and `email` fields `"from" : { "name" : "My Company", "email" : "deals@company.com" }` used to compose the email's `From` header| yes, for email | Substitution syntax is supported. |
 |reply_to |string  |Email address used to compose the email's "Reply-To" header | no | Substitution syntax is supported. |
-|headers| JSON | JSON dictionary containing headers other than "Subject", "From", "To", and "Reply-To"  | no |See the Header Notes. |
+|headers| JSON | JSON dictionary containing headers other than `Subject`, `From`, `To`, and `Reply-To`  | no |See the Header Notes. |
 |attachments| JSON | JSON array of attachments. | no | For a full description, see Attachment Attributes. |
 |inline_images| JSON | JSON array of inline images. | no | For a full description, see Inline Image Attributes. |
 
 #### Push Attributes
 The following attributes control the contents of push notifications:
+
+<div class="alert alert-info"><strong><a href="https://www.sparkpost.com/enterprise-email/">SparkPost Enterprise</a></strong> customers may send push notifications. Contact your TAM for setup assistance.</div>
 
 | Field         | Type     | Description                           | Required   | Notes   |
 |------------------------|:-:       |---------------------------------------|-------------|--------|
@@ -80,57 +85,57 @@ The following attributes control the contents of push notifications:
 
 #### Header Notes
 
-* Headers such as "Content-Type" and "Content-Transfer-Encoding" are not allowed here as they are auto generated upon construction of the email.
-* The "To" header should not be specified here, since it is generated from each recipient's _address.name_ and _address.email_.
+* Headers such as `Content-Type` and `Content-Transfer-Encoding` are not allowed here as they are auto generated upon construction of the email.
+* The `To` header should not be specified here, since it is generated from each recipient's `address.name` and `address.email`.
 * Each header value is expected in the UTF-8 charset without RFC2047 encoding.
 * Substitution syntax is supported.
 
 #### email_rfc822 Notes
 
-Alternately, the content JSON object may contain a single "email_rfc822" field.  email_rfc822 is mutually exclusive with all of the above fields.
+Alternately, the content JSON object may contain a single `email_rfc822` field. `email_rfc822` is mutually exclusive with all of the above fields.
 
 | Field         | Type     | Description                           | Required   | Notes   |
 |--------------------|:-:       |---------------------------------------|-----------------------|--------|
-|email_rfc822    |string  |Pre-built message with the format as described by the [message/rfc822 Content-Type](http://tools.ietf.org/html/rfc2046#section-5.2.1) |no   |  See the email_rfc822 Notes. |
+|email_rfc822    |string  |Pre-built message as specified by the [message/rfc822 Content-Type](http://tools.ietf.org/html/rfc2046#section-5.2.1) |no   |  See the email_rfc822 Notes. |
 
-* Substitutions will be applied in the top-level headers and the first non-attachment text/plain and
-first non-attachment text/html MIME parts only.
+* Substitutions will be applied in the top-level headers and the first non-attachment `text/plain` and
+first non-attachment `text/html` MIME parts only.
 * Lone `LF`s and lone `CR`s are allowed. The system will convert line endings to `CRLF` where
 necessary.
-* The provided email_rfc822 should NOT be dot stuffed.  The system dot stuffs before sending the outgoing message.
-* The provided email_rfc822 should NOT contain the SMTP terminator `\r\n.\r\n`.  The system always adds this terminator.
-* The provided email_rfc822 in MIME format will be rejected if SparkPost cannot parse the contents into a MIME tree.
+* The provided `email_rfc822` should NOT be dot stuffed.  The system dot stuffs before sending the outgoing message.
+* The provided `email_rfc822` should NOT contain the SMTP terminator `\r\n.\r\n`.  The system always adds this terminator.
+* The provided `email_rfc822` in MIME format will be rejected if SparkPost cannot parse the contents into a MIME tree.
 
 ### Attachment Attributes
 
-**Sending attachments with malicious content is strictly prohibited by SparkPost. This includes (and is not limited to) files with bat and exe extensions.**
+<div class="alert alert-danger">Sending attachments with malicious content is <strong>strictly prohibited</strong> by SparkPost. This includes (and is not limited to) files with `bat` and `exe` extensions.</div>
 
-Attachments for a transmission are specified in the content.attachments JSON array where each JSON object in the array is described by the following fields:
+Attachments for a transmission are specified in the `content.attachments` JSON array where each JSON object in the array is described by the following fields:
 
 | Field         | Type     | Description                           | Required   | Notes   |
 |--------------------|:-:       |---------------------------------------|-------------|------------------|
-|type |string |The MIME type of the attachment; e.g., "text/plain", "image/jpeg", "audio/mp3", "video/mp4", "application/msword", "application/pdf", etc., including the "charset" parameter (text/html; charset="UTF-8") if needed. The value will apply "as-is" to the "Content-Type" header of the generated MIME part for the attachment. | yes |  |
-|name |string |The filename of the attachment (for example, "document.pdf"). This is inserted into the filename parameter of the Content-Disposition header. | yes | Maximum length - 255 bytes |
-|data |string |The content of the attachment as a Base64 encoded string.  The string should not contain \r\n line breaks.  The SparkPost systems will add line breaks as necessary to ensure the Base64 encoded lines contain no more than 76 characters each. | yes | The entirety of transmission content (text + html + attachments + inline images) is limited to 20 MBs |
+|type |string |The MIME type of the attachment; e.g., `text/plain`, `image/jpeg`, `audio/mp3`, `video/mp4`, `application/msword`, `application/pdf`, etc., including the `charset` parameter (ex: `text/html; charset="UTF-8"`) if needed. The value will apply as-is to the `Content-Type` header of the generated MIME part for the attachment. | yes |  |
+|name |string |The filename of the attachment (for example, `document.pdf`). This is inserted into the filename parameter of the `Content-Disposition` header. | yes | Maximum length - 255 bytes |
+|data |string |The content of the attachment as a Base64 encoded string.  The string should not contain `\r\n` line breaks.  The SparkPost systems will add line breaks as necessary to ensure the Base64 encoded lines contain no more than 76 characters each. | yes | The entirety of transmission content (text + html + attachments + inline images) is limited to 20 MBs |
 
 ### Inline Image Attributes
 
-Inline images for a transmission are specified in the content.inline_images JSON array where each JSON object in the array is described by the following fields:
+Inline images for a transmission are specified in the `content.inline_images` JSON array where each JSON object in the array is described by the following fields:
 
 | Field         | Type     | Description                           | Required   | Notes   |
 |--------------------|:-:       |---------------------------------------|-------------|------------------|
-|type |string |The MIME type of the image; e.g., "image/jpeg".  The value will apply "as-is" to the "Content-Type" header of the generated MIME part for the image. | yes |  |
-|name |string |The name of the inline image, which will be inserted into the Content-ID header. The image should be referenced in your HTML content using \<img src="cid:THIS_NAME"\>. The name must be unique within the content.inline_images array. | yes | Maximum length - 255 bytes |
-|data |string | The content of the image as a Base64 encoded string.  The string should not contain \r\n line breaks.  The SparkPost systems will add line breaks as necessary to ensure the Base64 encoded lines contain no more than 76 characters each. | yes | The entirety of transmission content (text + html + attachments + inline images) is limited to 20 MBs |
+|type |string |The MIME type of the image; e.g., `image/jpeg`.  The value will apply as-is to the `Content-Type` header of the generated MIME part for the image. | yes |  |
+|name |string |The name of the inline image, which will be inserted into the `Content-ID` header. The image should be referenced in your HTML content using `<img src="cid:THIS_NAME" />`. The name must be unique within the `content.inline_images` array. | yes | Maximum length - 255 bytes |
+|data |string | The content of the image as a Base64 encoded string.  The string should not contain `\r\n` line breaks.  The SparkPost systems will add line breaks as necessary to ensure the Base64 encoded lines contain no more than 76 characters each. | yes | The entirety of transmission content (text + html + attachments + inline images) is limited to 20 MBs |
 
 ### Using a Stored Template
 
-The following attributes are used when specifying a stored template in the transmission's "content" JSON object. Note that these attributes should not be present when using inline content.
+The following attributes are used when specifying a stored template in the transmission's `content` JSON object. Note that these attributes should not be present when using inline content.
 
 | Field         | Type     | Description                           | Required   | Notes   |
 |------------------------|:-:       |---------------------------------------|-------------|--------|
 |template_id|string| ID of the stored template to use | yes |Specify this field when using a stored template.  Maximum length -- 64 bytes|
-|use_draft_template|boolean |Whether or not to use a draft template|no - defaults to false| If this field is set to true and no draft template exists, the transmission will fail.|
+|use_draft_template|boolean |Whether to use a draft template|no - defaults to false| If this field is set to `true` and no draft template exists, the transmission will fail.|
 
 ### Using a Stored Recipient List
 
@@ -141,15 +146,15 @@ The following recipients attribute is used when specifying a stored recipient li
 |list_id | string  | Identifier of the stored recipient list to use | yes | Specify this field when using a stored recipient list. |
 
 ### Scheduled Transmissions
-Use the _options.start_time_ attribute to delay generation of messages.  The scheduled time cannot be greater than 31 days from the time of submission.  If the scheduled time does not pass validation, the transmission is not accepted.  Transmissions with a scheduled time in the past _are_ accepted and undergo immediate generation.
+Use the `options.start_time` attribute to delay generation of messages.  The scheduled time cannot be greater than 31 days from the time of submission.  If the scheduled time does not pass validation, the transmission is not accepted.  Transmissions with a scheduled time in the past _are_ accepted and undergo immediate generation.
 
 ## Create [/transmissions{?num_rcpt_errors}]
 
 ### Create a Transmission [POST]
 
-You can create a transmission in a number of ways. In all cases, you can use the **num_rcpt_errors** parameter to limit the number of recipient errors returned.
+You can create a transmission in a number of ways. In all cases, you can use the `num_rcpt_errors` parameter to limit the number of recipient errors returned.
 
-**Note:** Sending limits apply to SparkPost only. When a transmission is created in SparkPost, the number of messages in the transmission is compared to the sending limit of your account. If the transmission will cause you to exceed your sending limit, the entire transmission results in an error and no messages are sent.  Note that no messages will be sent for the given transmission, regardless of the number of messages that caused you to exceed your sending limit. In this case, the Transmission API will return an HTTP 420 error code with an error detailing whether you would exceed your hourly, daily, or sandbox sending limit.
+<div class="alert alert-info"><strong>Note</strong>: Sending limits apply to SparkPost customers only. When a transmission is created, the number of messages in the transmission is compared to the sending limit of your account. If the transmission will cause you to exceed your sending limit, the entire transmission results in an error and no messages are sent.  Note that no messages will be sent for the given transmission, regardless of the number of messages that caused you to exceed your sending limit. In this case, the Transmission API will return an HTTP 420 error code with an error detailing whether you would exceed your hourly, daily, or sandbox sending limit.</div>
 
 #### Using Inline Email Part Content
 
@@ -161,17 +166,17 @@ Create a transmission using inline RFC822 content. Content headers are not gener
 
 #### Using a Stored Recipients List
 
-Create a transmission using a stored recipients list by specifying the "list_id" in the "recipients" attribute.
+Create a transmission using a stored recipients list by specifying the `list_id` in the `recipients` attribute.
 
 #### Using a Stored Template
 
-Create a transmission using a stored template by specifying the "template_id" in the "content" attribute.  The "use_draft_template" field is optional and indicates whether to use a draft version or the published version of the template when generating messages.
+Create a transmission using a stored template by specifying the `template_id` in the `content` attribute.  The `use_draft_template` field is optional and indicates whether to use a draft version or the published version of the template when generating messages.
 
 #### Scheduling Transmissions
 
-Create a scheduled transmission to be generated and sent at a future time by specifying "start_time" in the "options" attribute.
+Create a scheduled transmission to be generated and sent at a future time by specifying `start_time` in the `options` attribute.
 
-Scheduling a transmission that specifies a stored template will use the LATEST version of the template available at the time of scheduled generation.  The use of published versus draft versions follows the same logic in all transmission requests, whether scheduled or immediate generation. When "use_draft_template" is not specified (or set to false), the latest published version of the specified stored template is used. If "use_draft_template" is set to true, the latest draft version is used in the transmission instead.
+Scheduling a transmission that specifies a stored template will use the LATEST version of the template available at the time of scheduled generation.  The use of published versus draft versions follows the same logic in all transmission requests, whether scheduled or immediate generation. When `use_draft_template` is not specified (or set to false), the latest published version of the specified stored template is used. If `use_draft_template` is set to `true`, the latest draft version is used in the transmission instead.
 
 Once message generation has been initiated, all messages in the transmission will use the template selected at the start of the generation. If a template update is made during the generation of a transmission that uses that template, the template update will succeed but the transmission will continue to use the version that was selected at the start of the generation.
 
@@ -817,7 +822,7 @@ Once message generation has been initiated, all messages in the transmission wil
 
 
 + Request Create Transmission for Mobile Push Using Inline Content (application/json)
-<div class="alert alert-info">The following request is valid for the <a href="https://www.sparkpost.com/enterprise-email/">SparkPost Enterprise API</a> only.</div>
+<div class="alert alert-info"><strong>Note</strong>: The following request is valid for <a href="https://www.sparkpost.com/enterprise-email/">SparkPost Enterprise customers</a> only.</div>
     + Headers
 
             Authorization: 14ac5499cfdd2bb2859e4476d2e5b1d2bad079bf
@@ -884,11 +889,11 @@ Once message generation has been initiated, all messages in the transmission wil
 
 ### Retrieve a Transmission [GET]
 
-**This endpoint is deprecated and will be removed in due course. For alternatives, [see this article](https://www.sparkpost.com/blog/upcoming-api-transmission-endpoint-changes/).**
+<div class="alert alert-warning">This endpoint is <strong>deprecated</strong> and will be removed in due course. For alternatives, <a href="https://www.sparkpost.com/blog/upcoming-api-transmission-endpoint-changes/">see this article</a>.</div>
 
 Retrieve the details about a transmission by specifying its ID in the URI path.
 
-The response for a transmission using an inline template will include "template_id":"inline".  Inline templates cannot be specifically queried.
+The response for a transmission using an inline template will include `"template_id":"inline"`.  Inline templates cannot be specifically queried.
 
 + Parameters
     + id (required, number, `11714265276872`) ... ID of the transmission
@@ -954,7 +959,7 @@ Delete a transmission by specifying its ID in the URI path.
 
 Only transmissions which are scheduled for future generation may be deleted.
 
-Scheduled transmissions cannot be deleted if the transmission is within 10 minutes of the scheduled generation time.
+<div class="alert alert-warning">Scheduled transmissions cannot be deleted if the transmission is within 10 minutes of the scheduled generation time.</div>
 
 
 + Parameters
@@ -1053,15 +1058,15 @@ Delete all transmissions of a campaign by specifying Campaign ID in the URI path
 
 ### List all Transmissions [GET]
 
-**This endpoint is deprecated and will be removed in due course. For alternatives, [see this article](https://www.sparkpost.com/blog/upcoming-api-transmission-endpoint-changes/).**
+<div class="alert alert-warning">This endpoint is deprecated and will be removed in due course. For alternatives, <a href="https://www.sparkpost.com/blog/upcoming-api-transmission-endpoint-changes/">see this article</a>.</div>
 
-List an array of live transmission summary objects.  A transmission summary object contains _id_, _state_, _template_id_, _campaign_id_ and _description_ fields. The list contains only multi-recipient transmissions in "submitted" or "generating" state or that have "completed" within the last 24 hours.
+List an array of live transmission summary objects.  A transmission summary object contains `id`, `state`, `template_id`, `campaign_id` and `description` fields. The list contains only multi-recipient transmissions in `submitted` or `generating` state or that have `completed` within the last 24 hours.
 
-By default, the list includes transmissions for all campaigns and templates.  Use the _template_id_ parameter to filter by template and _campaign_id_ to filter by campaign. The summary for transmissions using an inline template will include `"template_id": "inline"`.  Transmissions using inline templates cannot be filtered with _template_id_.
+By default, the list includes transmissions for all campaigns and templates.  Use the `template_id` parameter to filter by template and `campaign_id` to filter by campaign. The summary for transmissions using an inline template will include `"template_id": "inline"`.  Transmissions using inline templates cannot be filtered with `template_id`.
 
-**Note: single recipient transmissions are not listed.**
+<div class="alert alert-info"><strong>Note</strong>: single recipient transmissions are not listed.</div>
 
-**Note: transmissions in "completed" state are removed from the list after 24 hours.**
+<div class="alert alert-info"><strong>Note</strong>: transmissions in `completed` state are removed from the list after 24 hours.</div>
 
 + Parameters
   + campaign_id (optional, string,`thanksgiving`) ... ID of the campaign used by the transmissions
