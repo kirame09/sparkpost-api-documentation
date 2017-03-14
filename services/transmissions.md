@@ -65,7 +65,7 @@ The following attributes are used when specifying inline content in the transmis
 |------------------------|:-:       |---------------------------------------|-------------|--------|
 |html    |string  |HTML content for the email's text/html MIME part| yes, for email |Expected in the UTF-8 charset with no Content-Transfer-Encoding applied.  Substitution syntax is supported. |
 |text    |string  |Text content for the email's text/plain MIME part| yes, for email |Expected in the UTF-8 charset with no Content-Transfer-Encoding applied.  Substitution syntax is supported.|
-|push    |JSON object  |Content of push notifications| yes, for email | <a href="https://www.sparkpost.com/enterprise-email/"><span class="label label-warning"><strong>Enterprise</strong></span></a> See Push Attributes. |
+|push    |JSON object  |Content of push notifications| yes, for push | <a href="https://www.sparkpost.com/enterprise-email/"><span class="label label-warning"><strong>Enterprise</strong></span></a> See Push Attributes. |
 |subject |string  |Email subject line   | yes, for email |Expected in the UTF-8 charset without RFC2047 encoding.  Substitution syntax is supported. |
 |from |string or JSON  | Address `"from" : "deals@company.com"` or JSON object composed of the `name` and `email` fields `"from" : { "name" : "My Company", "email" : "deals@company.com" }` used to compose the email's `From` header| yes, for email | Substitution syntax is supported. |
 |reply_to |string  |Email address used to compose the email's "Reply-To" header | no | Substitution syntax is supported. |
