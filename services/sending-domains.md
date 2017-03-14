@@ -19,12 +19,12 @@ If you use [Postman](https://www.getpostman.com/) you can click the following bu
 | Field         | Type     | Description                           | Required   | Notes   |
 |------------------------|:-:       |---------------------------------------|-------------|--------|
 |domain    | string | Name of the sending domain | yes |The domain name will be used as the "From:" header address in the email.|
-|tracking_domain | string | Associated tracking domain | no | example: "click.example1.com". <span class="label label-info"><strong>Note</strong></span> tracking domain and sending domain must belong to the same subaccount to be linked together.|
+|tracking_domain | string | Associated tracking domain | no | example: "click.example1.com"<br/><span class="label label-info"><strong>Note</strong></span> tracking domain and sending domain must belong to the same subaccount to be linked together.|
 |status | JSON object | JSON object containing status details, including whether this domain's ownership has been verified  | no | Read only. For a full description, see the Status Attributes.|
 |dkim | JSON object | JSON object in which DKIM key configuration is defined | no | For a full description, see the DKIM Attributes.|
 |generate_dkim | boolean | Whether to generate a DKIM keypair on creation | no | defaults to true |
-|dkim_key_length | number | Size, in bits, of the DKIM private key to be generated.  | no | This option only applies if generate_dkim is 'true'. Private key size defaults to 1024. <span class="label label-info"><strong>Note</strong></span> public keys for private keys longer than 1024 bits will be longer that 255 characters.  Because of this, the public key `TXT` record in DNS will need to contain multiple strings, see [RFC 7208, section 3.3](https://tools.ietf.org/html/rfc7208#section-3.3) for an example of how the SPF spec addresses this|
-|shared_with_subaccounts | boolean | Setting to true allows this domain to be used by subaccounts | no | Defaults to false, only available to domains belonging to a master account.|
+|dkim_key_length | number | Size, in bits, of the DKIM private key to be generated.  | no | This option only applies if generate_dkim is 'true'. Private key size defaults to 1024.<br/><span class="label label-info"><strong>Note</strong></span> public keys for private keys longer than 1024 bits will be longer that 255 characters.  Because of this, the public key `TXT` record in DNS will need to contain multiple strings, see [RFC 7208, section 3.3](https://tools.ietf.org/html/rfc7208#section-3.3) for an example of how the SPF spec addresses this|
+|shared_with_subaccounts | boolean | Whether this domain can be used by subaccounts | no | Defaults to `false`, only available to domains belonging to a master account.|
 
 ### DKIM Attributes
 
@@ -36,7 +36,7 @@ The DKIM key configuration is described in a JSON object with the following fiel
 
 | Field         | Type     | Description                           | Required   | Notes   |
 |------------------------|:-:       |---------------------------------------|-------------|--------|
-|signing_domain| string | Signing Domain Identifier (SDID) | no | <span class="label label-warning"><strong>Enterprise</strong></span> <a href="https://www.sparkpost.com/enterprise-email/">SparkPost Enterprise</a> customers may use this field.<br/> This will be used in the d= field of the DKIM Signature. If signing_domain is not specified, or is set to the empty string (""), then the Sending Domain will be used as the signing domain.<br>By default, SparkPost uses the Sending Domain as the signing domain. |
+|signing_domain| string | Signing Domain Identifier (SDID) | no | <a href="https://www.sparkpost.com/enterprise-email/"><span class="label label-warning"><strong>Enterprise</strong></span></a> This will be used in the `d=` field of the DKIM Signature. If `signing_domain` is not specified, or is set to the empty string (""), then the Sending Domain will be used as the signing domain.<br/>By default, SparkPost uses the Sending Domain as the signing domain. |
 |private | string | DKIM private key | yes | The private key will be used to create the DKIM Signature.|
 |public | string |DKIM public key  | yes | The public key will be retrieved from DNS of the sending domain.|
 |selector | string |DomainKey selector | yes | The DomainKey selector will be used to indicate the DKIM public key location.|
@@ -60,7 +60,7 @@ Detailed status for this sending domain is described in a JSON object with the f
 
 These are the valid request options for verifying a Sending Domain:
 
-<div class="alert alert-info">Email-based domain verification is available for SparkPost customers only. <a href="https://www.sparkpost.com/enterprise-email/">SparkPost Enterprise</a> customers, check with your TAM for details.</div>
+<div class="alert alert-info"><strong>Note</strong>: Email-based domain verification is available for SparkPost customers only.</div>
 
 | Field         | Type     | Description                           | Required  | Notes   |
 |------------------------|:-:       |---------------------------------------|-------------|--------|

@@ -3577,7 +3577,7 @@ Provides aggregate count of deliveries grouped by the attempt number.
   + sending_domains (optional, list, `sales.sender.com,company.net`) ... delimited list of sending domains to include
   + bindings (optional, list, `Confirmation`) ... <a href="https://www.sparkpost.com/enterprise-email/"><span class="label label-warning">Enterprise</span></a> delimited list of bindings to include
   + binding_groups (optional, list, `Transaction`) ... <a href="https://www.sparkpost.com/enterprise-email/"><span class="label label-warning">Enterprise</span></a> delimited list of binding groups to include
-  + subaccounts (optional, list, `123,125,127`) ... delimited list of subaccount ids to include <span class="label label-info"><strong>Note</strong></span> providing `?subaccounts=0` will filter out all subaccount data, and only return master account data)
+  + subaccounts (optional, list, `123,125,127`) ... delimited list of subaccount ids to include<br/><span class="label label-info"><strong>Note</strong></span> providing `?subaccounts=0` will filter out all subaccount data, and only return master account data)
   + timezone =`UTC` (optional, string, `America/New_York`) ... Standard timezone identification string, defaults to `UTC`
 
 + Request

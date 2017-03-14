@@ -34,7 +34,7 @@ The sandbox domain `sparkpostbox.com` is available to allow each account to send
 |description | string |Description of the transmission|no | Maximum length - 1024 bytes|
 |metadata|JSON object|Transmission level metadata containing key/value pairs |no| Metadata is available during events through the Webhooks and is provided to the substitution engine.  A maximum of 1000 bytes of merged metadata (transmission level + recipient level) is available with recipient metadata taking precedence over transmission metadata when there are conflicts.  |
 |substitution_data|JSON object|Key/value pairs that are provided to the substitution engine| no | Recipient substitution data takes precedence over transmission substitution data. Unlike metadata, substitution data is not included in Webhook events. |
-|return_path | string | Email to use for envelope FROM | required for email transmissions | <span class="label label-warning"><strong>Enterprise</strong></span> <a href="https://www.sparkpost.com/enterprise-email/">SparkPost Enterprise</a> customers may use the `return_path` field. To support Variable Envelope Return Path (VERP), this field can also optionally be specified inside of the address object of a specific recipient in order to give the recipient a unique envelope MAIL FROM. |
+|return_path | string | Email to use for envelope FROM | no | <a href="https://www.sparkpost.com/enterprise-email/"><span class="label label-warning"><strong>Enterprise</strong></span></a> To support Variable Envelope Return Path (VERP), this field can also optionally be specified inside of the address object of a specific recipient in order to give the recipient a unique envelope MAIL FROM. |
 |content| JSON object | Content that will be used to construct a message | yes | Specify a stored template or specify inline template content. When using a stored template, specify the `template_id` as described in Using a Stored Template.  Otherwise, provide the inline content using the fields described in Inline Content Attributes.  Maximum size - 20MBs|
 |total_recipients | number | Computed total recipients | no | Read only|
 |num_generated | number | Computed total number of messages generated | no |Read only|
@@ -48,11 +48,11 @@ The sandbox domain `sparkpostbox.com` is available to allow each account to send
 |start_time | string | Delay generation of messages until this datetime.  For additional information, see Scheduled Transmissions. |no - defaults to immediate generation | Format YYYY-MM-DDTHH:MM:SS+-HH:MM. Example: `2017-02-11T08:00:00-04:00`.|
 |open_tracking|boolean| Whether open tracking is enabled for this transmission| no |If not specified, the setting at template level is used, or defaults to true. |
 |click_tracking|boolean| Whether click tracking is enabled for this transmission| no |If not specified, the setting at template level is used, or defaults to true. |
-|transactional|boolean|Whether message is transactional or non-transactional for unsubscribe and suppression purposes )| no | If not specified, the setting at template level is used, or defaults to false. <span class="label label-info"><strong>Note:</strong></span> no List-Unsubscribe header is included in transactional messages. |
-|sandbox|boolean|Whether or not to use the sandbox sending domain | no |Defaults to false. <span class="label label-primary"><strong>SparkPost</strong></span> customers may use the sandbox |
-|skip_suppression|boolean| Whether to ignore customer suppression rules, for this transmission only. | no | Defaults to false. <span class="label label-warning"><strong>Enterprise</strong></span> <a href="https://www.sparkpost.com/enterprise-email/">SparkPost Enterprise</a> customers may use this flag |
+|transactional|boolean|Whether message is transactional or non-transactional for unsubscribe and suppression purposes )| no | If not specified, the setting at template level is used, or defaults to false. <span class="label label-info"><strong>Note</strong></span> no `List-Unsubscribe` header is included in transactional messages. |
+|sandbox|boolean|Whether to use the sandbox sending domain | no |Defaults to false. <span class="label label-primary"><strong>SparkPost</strong></span> customers may use the sandbox |
+|skip_suppression|boolean| Whether to ignore customer suppression rules, for this transmission only. | no | <a href="https://www.sparkpost.com/enterprise-email/"><span class="label label-warning"><strong>Enterprise</strong></span></a> Defaults to false. |
 | ip_pool | string | The ID of a dedicated IP pool associated with your account. If this field is not provided, the account's default dedicated IP pool is used (if there are IPs assigned to it).  To explicitly bypass the account's default dedicated IP pool and instead fallback to the shared pool, specify a value of `sp_shared`. | no | <span class="label label-primary"><strong>SparkPost</strong></span> customers may use IP pools. For more information on dedicated IPs, see the [Support Center](https://support.sparkpost.com/customer/en/portal/articles/2002977-dedicated-ip-addresses)
-|inline_css|boolean|Whether or not to perform CSS inlining in HTML content | no - Defaults to false | |
+|inline_css|boolean|Whether to perform CSS inlining in HTML content | no - Defaults to false | |
 
 ### Inline Content Attributes
 
@@ -65,7 +65,7 @@ The following attributes are used when specifying inline content in the transmis
 |------------------------|:-:       |---------------------------------------|-------------|--------|
 |html    |string  |HTML content for the email's text/html MIME part| yes, for email |Expected in the UTF-8 charset with no Content-Transfer-Encoding applied.  Substitution syntax is supported. |
 |text    |string  |Text content for the email's text/plain MIME part| yes, for email |Expected in the UTF-8 charset with no Content-Transfer-Encoding applied.  Substitution syntax is supported.|
-|push    |JSON object  |Content of push notifications| yes, for email | <span class="label label-warning"><strong>Enterprise</strong></span> <a href="https://www.sparkpost.com/enterprise-email/">SparkPost Enterprise</a> customers may use the `push` field. See Push Attributes. |
+|push    |JSON object  |Content of push notifications| yes, for email | <a href="https://www.sparkpost.com/enterprise-email/"><span class="label label-warning"><strong>Enterprise</strong></span></a> See Push Attributes. |
 |subject |string  |Email subject line   | yes, for email |Expected in the UTF-8 charset without RFC2047 encoding.  Substitution syntax is supported. |
 |from |string or JSON  | Address `"from" : "deals@company.com"` or JSON object composed of the `name` and `email` fields `"from" : { "name" : "My Company", "email" : "deals@company.com" }` used to compose the email's `From` header| yes, for email | Substitution syntax is supported. |
 |reply_to |string  |Email address used to compose the email's "Reply-To" header | no | Substitution syntax is supported. |
@@ -135,7 +135,7 @@ The following attributes are used when specifying a stored template in the trans
 | Field         | Type     | Description                           | Required   | Notes   |
 |------------------------|:-:       |---------------------------------------|-------------|--------|
 |template_id|string| ID of the stored template to use | yes |Specify this field when using a stored template.  Maximum length -- 64 bytes|
-|use_draft_template|boolean |Whether or not to use a draft template|no - defaults to false| If this field is set to true and no draft template exists, the transmission will fail.|
+|use_draft_template|boolean |Whether to use a draft template|no - defaults to false| If this field is set to `true` and no draft template exists, the transmission will fail.|
 
 ### Using a Stored Recipient List
 
