@@ -55,6 +55,10 @@ mixin Parameters(params)
                         if param.required
                            strong.param-annotation (required) &nbsp;
                         != self.markdown(param.description)
+                        if param.default
+                            p
+                                em
+                                  | Default: #{param.default}
                         if param.example
                             em
                               | Example: #{param.example}

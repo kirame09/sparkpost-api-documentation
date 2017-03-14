@@ -68,7 +68,8 @@ Perform a filtered search for message event data. The response is sorted by desc
     + delimiter = `,` (optional, string, `,`) ... Specifies the delimiter for query parameter lists
     + events (optional, list, `delivery, injection, bounce, delay, policy_rejection, out_of_band, open, click, generation_failure, generation_rejection, spam_complaint, list_unsubscribe, link_unsubscribe`) ... delimited list of event types to search. Defaults to all event types.
     + friendly_froms (optional, list, `sender@mail.example.com`) ... delimited list of friendly from emails to search.
-    + from = `One hour ago` (optional, datetime, `2014-07-20T08:00`) ... Datetime in format of YYYY-MM-DDTHH:MM.
+    + from: `2014-07-20T08:00` (datetime, optional) - Datetime in format of YYYY-MM-DDTHH:MM.
+        + Default: `24 hours ago`
     + message_ids (optional, list, `0e0d94b7-9085-4e3c-ab30-e3f2cd9c273e`) ... delimited list of message ID's to search.
     + page = `1` (optional, number, `1`) ... The results page number to return. Used with per_page for paging through results.
     + per_page = `1000` (optional, number, `1000`) ... Number of results to return per page. Must be between 1 and 10,000 (inclusive).
@@ -78,7 +79,8 @@ Perform a filtered search for message event data. The response is sorted by desc
 
     + template_ids (optional, list, `templ-1234`) ... delimited list of template ID's to search.
     + timezone =`UTC` (optional, string, `America/New_York`) ... Standard timezone identification string.
-    + to = `now` (optional, datetime, `2014-07-20T09:00`) ... Datetime in format of YYYY-MM-DDTHH:MM.
+    + to: `2014-07-20T09:00` (datetime, optional) - Datetime in format of YYYY-MM-DDTHH:MM.
+        + Default: `now`
     + transmission_ids (optional, list, `65832150921904138`) ... delimited list of transmission ID's to search (i.e. id generated during creation of a transmission).
 
 + Request
