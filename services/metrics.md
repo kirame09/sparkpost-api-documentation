@@ -380,7 +380,7 @@ aggregate data, which can be used as "group by" qualifiers.
     + sending_ips (optional, list, `123.456.789.123,123.456.789.124`) ... delimited list of sending IPs to include
     + ip_pools (optional, list, `Transaction`) ... delimited list of IP pools to include
     + sending_domains (optional, list, `sales.sender.com,company.net`) ... delimited list of sending domains to include
-    + subaccounts (optional, list, `123,125,127`) ... delimited list of subaccount ids to include (**Note:** providing ?subaccounts=0 will filter out all subaccount data, and only return master account data)
+    + subaccounts (optional, list, `123,125,127`) ... delimited list of subaccount ids to include<br/><span class="label label-info"><strong>Note</strong></span> providing `?subaccounts=0` will filter out all subaccount data, and only return master account data
     + metrics (required, list, `count_targeted,count_injected,count_rejected,count_sent`) ... delimited list of metrics for filtering
 
         + Values
@@ -618,7 +618,7 @@ Provides aggregate metrics grouped by domain over the time window specified.
   + sending_ips (optional, list, `123.456.789.123,123.456.789.124`) ... delimited list of sending IPs to include
   + ip_pools (optional, list, `Transaction`) ... delimited list of IP pools to include
   + sending_domains (optional, list, `sales.sender.com,company.net`) ... delimited list of sending domains to include
-  + subaccounts (optional, list, `123,125,127`) ... delimited list of subaccount ids to include (**Note:** providing ?subaccounts=0 will filter out all subaccount data, and only return master account data)
+  + subaccounts (optional, list, `123,125,127`) ... delimited list of subaccount ids to include<br/><span class="label label-info"><strong>Note</strong></span> providing `?subaccounts=0` will filter out all subaccount data, and only return master account data
   + metrics (required, list) ... delimited list of metrics for filtering
 
         + Values
@@ -872,7 +872,7 @@ Provides aggregate metrics grouped by sending IP over the time window specified.
   + sending_ips (optional, list, `123.456.789.123,123.456.789.124`) ... delimited list of sending IPs to include
   + ip_pools (optional, list, `Transaction`) ... delimited list of IP pools to include
   + sending_domains (optional, list, `sales.sender.com,company.net`) ... delimited list of sending domains to include
-  + subaccounts (optional, list, `123,125,127`) ... delimited list of subaccount ids to include (**Note:** providing ?subaccounts=0 will filter out all subaccount data, and only return master account data)
+  + subaccounts (optional, list, `123,125,127`) ... delimited list of subaccount ids to include<br/><span class="label label-info"><strong>Note</strong></span> providing `?subaccounts=0` will filter out all subaccount data, and only return master account data
   + metrics (required, list, `count_targeted`) ... delimited list of metrics for filtering
       + Values
           + `count_injected`
@@ -1107,7 +1107,7 @@ Provides aggregate metrics grouped by IP pool over the time window specified.
   + sending_ips (optional, list, `123.456.789.123,123.456.789.124`) ... delimited list of sending IPs to include
   + ip_pools (optional, list, `Transaction`) ... delimited list of IP pools to include
   + sending_domains (optional, list, `sales.sender.com,company.net`) ... delimited list of sending domains to include
-  + subaccounts (optional, list, `123,125,127`) ... delimited list of subaccount ids to include (**Note:** providing ?subaccounts=0 will filter out all subaccount data, and only return master account data)
+  + subaccounts (optional, list, `123,125,127`) ... delimited list of subaccount ids to include<br/><span class="label label-info"><strong>Note</strong></span> providing `?subaccounts=0` will filter out all subaccount data, and only return master account data
   + metrics (required, list, `count_targeted`) ... delimited list of metrics for filtering
       + Values
           + `count_injected`
@@ -1358,7 +1358,7 @@ Provides aggregate metrics grouped by sending domain over the time window specif
   + sending_ips (optional, list, `123.456.789.123,123.456.789.124`) ... delimited list of sending IPs to include
   + ip_pools (optional, list, `Transaction`) ... delimited list of IP pools to include
   + sending_domains (optional, list, `sales.sender.com,company.net`) ... delimited list of sending domains to include
-  + subaccounts (optional, list, `123,125,127`) ... delimited list of subaccount ids to include (**Note:** providing ?subaccounts=0 will filter out all subaccount data, and only return master account data)
+  + subaccounts (optional, list, `123,125,127`) ... delimited list of subaccount ids to include<br/><span class="label label-info"><strong>Note</strong></span> providing `?subaccounts=0` will filter out all subaccount data, and only return master account data
   + metrics (required, list, `count_targeted`) ... delimited list of metrics for filtering
       + Values
           + `count_injected`
@@ -1608,7 +1608,7 @@ Provides aggregate metrics grouped by subaccount over the time window specified.
   + sending_ips (optional, list, `123.456.789.123,123.456.789.124`) ... delimited list of sending IPs to include
   + ip_pools (optional, list, `Transaction`) ... delimited list of IP pools to include
   + sending_domains (optional, list, `sales.sender.com,company.net`) ... delimited list of sending domains to include
-  + subaccounts (optional, list, `123,125,127`) ... delimited list of subaccount ids to include (**Note:** providing ?subaccounts=0 will filter out all subaccount data, and only return master account data)
+  + subaccounts (optional, list, `123,125,127`) ... delimited list of subaccount ids to include<br/><span class="label label-info"><strong>Note</strong></span> providing `?subaccounts=0` will filter out all subaccount data, and only return master account data
   + metrics (required, list, `count_targeted`) ... delimited list of metrics for filtering
       + Values
           + `count_injected`
@@ -1844,7 +1844,7 @@ Provides aggregate metrics grouped by campaign over the time window specified.
     + sending_ips (optional, list, `123.456.789.123,123.456.789.124`) ... delimited list of sending IPs to include
     + ip_pools (optional, list, `Transaction`) ... delimited list of IP pools to include
     + sending_domains (optional, list, `sales.sender.com,company.net`) ... delimited list of sending domains to include
-    + subaccounts (optional, list, `123,125,127`) ... delimited list of subaccount ids to include (**Note:** providing ?subaccounts=0 will filter out all subaccount data, and only return master account data)
+    + subaccounts (optional, list, `123,125,127`) ... delimited list of subaccount ids to include<br/><span class="label label-info"><strong>Note</strong></span> providing `?subaccounts=0` will filter out all subaccount data, and only return master account data
     + metrics (required, list) ... delimited list of metrics for filtering
 
         + Values
@@ -2083,7 +2083,7 @@ Provides aggregate metrics grouped by template over the time window specified.
     + sending_ips (optional, list, `123.456.789.123,123.456.789.124`) ... delimited list of sending IPs to include
     + ip_pools (optional, list, `Transaction`) ... delimited list of IP pools to include
     + sending_domains (optional, list, `sales.sender.com,company.net`) ... delimited list of sending domains to include
-    + subaccounts (optional, list, `123,125,127`) ... delimited list of subaccount ids to include (**Note:** providing ?subaccounts=0 will filter out all subaccount data, and only return master account data)
+    + subaccounts (optional, list, `123,125,127`) ... delimited list of subaccount ids to include<br/><span class="label label-info"><strong>Note</strong></span> providing `?subaccounts=0` will filter out all subaccount data, and only return master account data
     + metrics (required, list) ... delimited list of metrics for filtering
 
         + Values
@@ -2323,7 +2323,7 @@ in the world.
     + templates (optional, list, `summer-sale`) ... delimited list of template IDs to include
     + sending_ips (optional, list, `123.456.789.123,123.456.789.124`) ... delimited list of sending IPs to include
     + ip_pools (optional, list, `Transaction`) ... delimited list of IP pools to include
-    + subaccounts (optional, list, `123,125,127`) ... delimited list of subaccount ids to include (**Note:** providing ?subaccounts=0 will filter out all subaccount data, and only return master account data)
+    + subaccounts (optional, list, `123,125,127`) ... delimited list of subaccount ids to include<br/><span class="label label-info"><strong>Note</strong></span> providing `?subaccounts=0` will filter out all subaccount data, and only return master account data
     + sending_domains (optional, list, `sales.sender.com,company.net`) ... delimited list of sending domains to include
     + metrics (required, list) ... delimited list of metrics for filtering
         + Values
@@ -2616,7 +2616,7 @@ The following table describes the validation for the **precision** parameter:
     + sending_ips (optional, list, `123.456.789.123,123.456.789.124`) ... delimited list of sending IPs to include
     + ip_pools (optional, list, `ip-pool-1,ip-pool-2,ip-pool-3`) ... delimited list of IP pools to include
     + sending_domains (optional, list, `sales.sender.com,company.net`) ... delimited list of sending domains to include
-    + subaccounts (optional, list, `123,125,127`) ... delimited list of subaccount ids to include (**Note:** providing ?subaccounts=0 will filter out all subaccount data, and only return master account data)
+    + subaccounts (optional, list, `123,125,127`) ... delimited list of subaccount ids to include<br/><span class="label label-info"><strong>Note</strong></span> providing `?subaccounts=0` will filter out all subaccount data, and only return master account data
     + precision (optional, string, `day`) ... Precision of timeseries data returned
 
         + Values
@@ -2781,7 +2781,7 @@ Provides deliverability metrics, specific to bounce events, grouped by the bounc
     + sending_ips (optional, list, `123.456.789.123,123.456.789.124`) ... delimited list of sending IPs to include
     + ip_pools (optional, list, `Transaction`) ... delimited list of IP pools to include
     + sending_domains (optional, list, `sales.sender.com,company.net`) ... delimited list of sending domains to include
-    + subaccounts (optional, list, `123,125,127`) ... delimited list of subaccount ids to include (**Note:** providing ?subaccounts=0 will filter out all subaccount data, and only return master account data)
+    + subaccounts (optional, list, `123,125,127`) ... delimited list of subaccount ids to include<br/><span class="label label-info"><strong>Note</strong></span> providing `?subaccounts=0` will filter out all subaccount data, and only return master account data
     + metrics (required, list) ... delimited list of metrics to include
 
         + Values
@@ -2914,7 +2914,7 @@ Provides deliverability metrics, specific to bounce events, grouped by the domai
     + sending_ips (optional, list, `123.456.789.123,123.456.789.124`) ... delimited list of sending IPs to include
     + ip_pools (optional, list, `Transaction`) ... delimited list of IP pools to include
     + sending_domains (optional, list, `sales.sender.com,company.net`) ... delimited list of sending domains to include
-    + subaccounts (optional, list, `123,125,127`) ... delimited list of subaccount ids to include (**Note:** providing ?subaccounts=0 will filter out all subaccount data, and only return master account data)
+    + subaccounts (optional, list, `123,125,127`) ... delimited list of subaccount ids to include<br/><span class="label label-info"><strong>Note</strong></span> providing `?subaccounts=0` will filter out all subaccount data, and only return master account data
     + metrics (required, list) ... delimited list of metrics to include
 
         + Values
@@ -3033,7 +3033,7 @@ Provides deliverability metrics, specific to bounce events, grouped by the bounc
     + sending_ips (optional, list, `123.456.789.123,123.456.789.124`) ... delimited list of sending IPs to include
     + ip_pools (optional, list, `Transaction`) ... delimited list of IP pools to include
     + sending_domains (optional, list, `sales.sender.com,company.net`) ... delimited list of sending domains to include
-    + subaccounts (optional, list, `123,125,127`) ... delimited list of subaccount ids to include (**Note:** providing ?subaccounts=0 will filter out all subaccount data, and only return master account data)
+    + subaccounts (optional, list, `123,125,127`) ... delimited list of subaccount ids to include<br/><span class="label label-info"><strong>Note</strong></span> providing `?subaccounts=0` will filter out all subaccount data, and only return master account data
     + timezone =`UTC` (optional, string, `America/New_York`) ... Standard timezone identification string, defaults to `UTC`
     + metrics (required, list) ... delimited list of metrics to include
 
@@ -3134,7 +3134,7 @@ Provides deliverability metrics, specific to rejection events, grouped by the re
   + sending_ips (optional, list, `123.456.789.123,123.456.789.124`) ... delimited list of sending IPs to include
   + ip_pools (optional, list, `Transaction`) ... delimited list of IP pools to include
   + sending_domains (optional, list, `sales.sender.com,company.net`) ... delimited list of sending domains to include
-  + subaccounts (optional, list, `123,125,127`) ... delimited list of subaccount ids to include (**Note:** providing ?subaccounts=0 will filter out all subaccount data, and only return master account data)
+  + subaccounts (optional, list, `123,125,127`) ... delimited list of subaccount ids to include<br/><span class="label label-info"><strong>Note</strong></span> providing `?subaccounts=0` will filter out all subaccount data, and only return master account data
   + timezone =`UTC` (optional, string, `America/New_York`) ... Standard timezone identification string, defaults to `UTC`
   + limit=1000 (optional, int, `5`) ... Maximum number of results to return within range [1, 10000]
 
@@ -3227,7 +3227,7 @@ Provides deliverability metrics, specific to rejection events, grouped by the do
   + sending_ips (optional, list, `123.456.789.123,123.456.789.124`) ... delimited list of sending IPs to include
   + ip_pools (optional, list, `Transaction`) ... delimited list of IP pools to include
   + sending_domains (optional, list, `sales.sender.com,company.net`) ... delimited list of sending domains to include
-  + subaccounts (optional, list, `123,125,127`) ... delimited list of subaccount ids to include (**Note:** providing ?subaccounts=0 will filter out all subaccount data, and only return master account data)
+  + subaccounts (optional, list, `123,125,127`) ... delimited list of subaccount ids to include<br/><span class="label label-info"><strong>Note</strong></span> providing `?subaccounts=0` will filter out all subaccount data, and only return master account data
   + timezone =`UTC` (optional, string, `America/New_York`) ... Standard timezone identification string, defaults to `UTC`
   + limit=1000 (optional, int, `5`) ... Maximum number of results to return within range [1, 10000]
 
@@ -3308,7 +3308,7 @@ Provides deliverability metrics, specific to delay events, grouped by the delay 
   + sending_ips (optional, list, `123.456.789.123,123.456.789.124`) ... delimited list of sending IPs to include
   + ip_pools (optional, list, `Transaction`) ... delimited list of IP pools to include
   + sending_domains (optional, list, `sales.sender.com,company.net`) ... delimited list of sending domains to include
-  + subaccounts (optional, list, `123,125,127`) ... delimited list of subaccount ids to include (**Note:** providing ?subaccounts=0 will filter out all subaccount data, and only return master account data)
+  + subaccounts (optional, list, `123,125,127`) ... delimited list of subaccount ids to include<br/><span class="label label-info"><strong>Note</strong></span> providing `?subaccounts=0` will filter out all subaccount data, and only return master account data
   + timezone =`UTC` (optional, string, `America/New_York`) ... Standard timezone identification string, defaults to `UTC`
   + limit=1000 (optional, int, `5`) ... Maximum number of results to return within range [1, 10000]
 
@@ -3402,7 +3402,7 @@ Provides deliverability metrics, specific to delay events, grouped by the domain
   + sending_ips (optional, list, `123.456.789.123,123.456.789.124`) ... delimited list of sending IPs to include
   + ip_pools (optional, list, `Transaction`) ... delimited list of IP pools to include
   + sending_domains (optional, list, `sales.sender.com,company.net`) ... delimited list of sending domains to include
-  + subaccounts (optional, list, `123,125,127`) ... delimited list of subaccount ids to include (**Note:** providing ?subaccounts=0 will filter out all subaccount data, and only return master account data)
+  + subaccounts (optional, list, `123,125,127`) ... delimited list of subaccount ids to include<br/><span class="label label-info"><strong>Note</strong></span> providing `?subaccounts=0` will filter out all subaccount data, and only return master account data
   + timezone =`UTC` (optional, string, `America/New_York`) ... Standard timezone identification string, defaults to `UTC`
   + limit=1000 (optional, int, `5`) ... Maximum number of results to return within range [1, 10000]
 
@@ -3494,7 +3494,7 @@ name (or URL if no link name exists).
     + campaigns (optional, list, `Black Friday`) ... delimited list of campaigns to include
     + templates (optional, list, `summer-sale`) ... delimited list of template IDs to include
     + sending_domains (optional, list, `sales.sender.com,company.net`) ... delimited list of sending domains to include
-    + subaccounts (optional, list, `123,125,127`) ... delimited list of subaccount ids to include (**Note:** providing ?subaccounts=0 will filter out all subaccount data, and only return master account data)
+    + subaccounts (optional, list, `123,125,127`) ... delimited list of subaccount ids to include<br/><span class="label label-info"><strong>Note</strong></span> providing `?subaccounts=0` will filter out all subaccount data, and only return master account data
     + limit=1000 (optional, int, `5`) ... Maximum number of results to return within range [1, 10000]
 
 + Request
@@ -3577,7 +3577,7 @@ Provides aggregate count of deliveries grouped by the attempt number.
   + sending_domains (optional, list, `sales.sender.com,company.net`) ... delimited list of sending domains to include
   + bindings (optional, list, `Confirmation`) ... <a href="https://www.sparkpost.com/enterprise-email/"><span class="label label-warning">Enterprise</span></a> delimited list of bindings to include
   + binding_groups (optional, list, `Transaction`) ... <a href="https://www.sparkpost.com/enterprise-email/"><span class="label label-warning">Enterprise</span></a> delimited list of binding groups to include
-  + subaccounts (optional, list, `123,125,127`) ... delimited list of subaccount ids to include<br/><span class="label label-info"><strong>Note</strong></span> providing `?subaccounts=0` will filter out all subaccount data, and only return master account data)
+  + subaccounts (optional, list, `123,125,127`) ... delimited list of subaccount ids to include<br/><span class="label label-info"><strong>Note</strong></span> providing `?subaccounts=0` will filter out all subaccount data, and only return master account data
   + timezone =`UTC` (optional, string, `America/New_York`) ... Standard timezone identification string, defaults to `UTC`
 
 + Request
