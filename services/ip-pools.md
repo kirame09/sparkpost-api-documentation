@@ -3,7 +3,7 @@ description: Manage IP pools, which allow you to group and assign dedicated IPs 
 
 # Group IP Pools
 
-**Note: This endpoint is not available on SparkPost Enterprise.**
+<div class="alert alert-info"><strong>Note</strong>: This endpoint is available for SparkPost customers only. <a href="https://www.sparkpost.com/enterprise-email/">SparkPost Enterprise</a> customers, contact your TAM for details.</div>
 
 ## Using Postman
 
@@ -186,7 +186,9 @@ Updates an IP pool's name. To update sending IP pool assignments see [Sending IP
 
 ## Delete an IP Pool [DELETE]
 
-Deletes an IP Pool and moves all sending IPs in that pool to the default pool. The default pool cannot be deleted.
+Deletes an IP Pool and moves all sending IPs in that pool to the default pool.
+
+<div class="alert alert-info">The default pool cannot be deleted.</div>
 
 
 + Request

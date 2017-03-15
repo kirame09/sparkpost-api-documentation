@@ -3,11 +3,11 @@ description: A/B Testing of templates.
 
 # Group A/B Testing
 
-**Note: This endpoint is available in SparkPost only**
+<div class="alert alert-info"><strong>Note</strong>: This endpoint is available in SparkPost only</div>
 
 <a name="ab-testing-api"></a>
 
-An a/b test is a method of comparing templates to see which one performs better.  You provide a range of templates (2-10), a recipient list (less than 2,000 entries), a sample size, and a test duration to begin. When the test time has expired, the template with the best conversion rate wins. All remaining recipients will be sent the winning template. The A/B Testing API provides the means to create new tests, and view completed results. 
+An A/B test is a method of comparing templates to see which one performs better. You provide a range of templates (2-10), a recipient list (less than 2,000 entries), a sample size, and a test duration to begin. When the test time has expired, the template with the best conversion rate wins. All remaining recipients will be sent the winning template. The A/B Testing API provides the means to create new tests, and view completed results. 
 
 #### A/B Test Properties
 

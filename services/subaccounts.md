@@ -11,7 +11,7 @@ Subaccounts are a way for service providers to provision and manage their custom
 
 The following APIs have subaccount support:
 
-* [Metrics](metrics.html) **(Note: Not available for Subaccount API keys)**
+* [Metrics](metrics.html) <span class="label label-info"><strong>Note</strong></span> Not available for Subaccount API keys
 * [Message Events](message-events.html)
 * [Sending Domains](sending-domains.html)
 * [Suppression List](suppression-list.html)
@@ -19,7 +19,7 @@ The following APIs have subaccount support:
 * [Transmissions](transmissions.html)
 * [Tracking Domains](tracking-domains.html)
 
-**Please note that all subaccount-level transmissions must use _inline_ recipients and content. Recipient lists and stored templates do not support subaccounts.**
+<div class="alert alert-info"><strong>Note</strong>: all subaccount-level transmissions must use <tt>inline</tt> recipients and content. Recipient lists and stored templates do not support subaccounts.</div>
 
 ### Terminology
 * Master Account - This refers to a Service Provider and their data
@@ -83,7 +83,7 @@ Provisions a new subaccount and an initial subaccount API key. Subaccount API ke
 
 Subaccounts are allowed to send mail using the SMTP protocol or Transmissions API, retrieve sending statistics via the Message Events API, manage their Sending Domains, manage their Suppression List.
 
-**Note: Stored recipients lists and stored templates are currently not supported for subaccounts sending mail using the Transmissions API.**
+<div class="alert alert-info"><strong>Note</strong>: Stored recipients lists and stored templates are currently not supported for subaccounts sending mail using the Transmissions API.</div>
 
 #### Request Body Attributes
 
@@ -93,7 +93,7 @@ Subaccounts are allowed to send mail using the SMTP protocol or Transmissions AP
 | key_label     | yes        | string  | User friendly identifier for the initial subaccount api key               |                                                                                                                                                               |
 | key_grants    | yes        | Array   | List of grants to give to the initial subaccount api key                  | Valid values are `smtp/inject`, `sending_domains/manage`, `tracking_domains/view`, `tracking_domains/manage`, `message_events/view`, `suppression_lists/manage`, `transmissions/view`, and `transmissions/modify` |
 | key_valid_ips | no         | Array   | List of IP's that the initial subaccount api key can be used from         | If the supplied `key_valid_ips` is an empty array, the api key is usable by any IP address                                                                    |
-| ip_pool       | no         | string  | The ID of the default IP Pool assigned to this subaccount's transmissions ( **Note:** SparkPost only ) | If the supplied `ip_pool` is an empty string or not present, no default `ip_pool` will be assigned                                                            |
+| ip_pool       | no         | string  | The ID of the default IP Pool assigned to this subaccount's transmissions | If the supplied `ip_pool` is an empty string or not present, no default `ip_pool` will be assigned<br/><a href="https://www.sparkpost.com/enterprise-email/"><span class="label label-warning"><strong>Enterprise</strong></span></a></strong> customers: IPs are managed through your TAM. |
 
 
 + Request (application/json)
