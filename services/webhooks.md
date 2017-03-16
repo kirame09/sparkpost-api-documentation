@@ -175,7 +175,7 @@ As described in "Webhooks Object Properties", webhook creation entails a test PO
                 "expires_in": 3600
               },
               "auth_token": "",
-              "active": false,
+              "active": true,
               "links": [
                 {
                   "href": "http://www.messagesystems-api-url.com/api/v1/webhooks/12affc24-f183-11e3-9234-3c15c2c818c2/validate",
@@ -239,7 +239,7 @@ Retrieve details about a webhook by specifying its id in the URI path.
               "auth_token": "",
               "last_successful": "2014-08-01 16:09:15",
               "last_failure": "2014-06-01 15:15:45",
-              "active": false,
+              "active": true,
               "links": [
                 {
                   "href": "http://www.messagesystems-api-url.com/api/v1/webhooks/a2b83490-10df-11e4-b670-c1ffa86371ff",
@@ -294,7 +294,7 @@ Retrieve details about a webhook by specifying its id in the URI path.
               "auth_request_details": {},
               "auth_credentials": {},
               "auth_token": "5ebe2294ecd0e0f08eab7690d2a6ee69",
-              "active": false,
+              "active": true,
               "links": [
                 {
                   "href": "http://www.messagesystems-api-url.com/api/v1/webhooks/123456-abcd-efgh-7890-123445566778",
