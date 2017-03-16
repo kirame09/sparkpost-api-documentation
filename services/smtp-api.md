@@ -64,11 +64,11 @@ The fields supported in the X-MSYS-API header are as follows:
 |-------|------|-------------|----------|-------|
 | open_tracking | boolean | Whether open tracking is enabled for this SMTP message | no | [See notes](#header-open-and-click-tracking) for defaults. |
 | click_tracking | boolean | Whether click tracking is enabled for this SMTP message | no | [See notes](#header-open-and-click-tracking) for defaults. |
-| transactional | boolean | Is this message [transactional](https://www.sparkpost.com/resources/infographics/email-difference-transactional-vs-commercial-emails/), for unsubscribe and suppression purposes <span class="label label-info"><strong>Note</strong></span> no List-Unsubscribe header is included in transactional messages)| no | Defaults to false. |
+| transactional | boolean | Whether message is [transactional](https://www.sparkpost.com/resources/infographics/email-difference-transactional-vs-commercial-emails/), for unsubscribe and suppression purposes<br/><span class="label label-info"><strong>Note</strong></span> no List-Unsubscribe header is included in transactional messages | no | Defaults to false. |
 | sandbox| boolean| Whether to use the sandbox sending domain | no | <span class="label label-primary"><strong>SparkPost</strong></span> The sandbox domain is available for SparkPost customers. Defaults to false. |
 | skip_suppression| boolean| Whether to ignore customer suppression rules, for this SMTP message only. | no | <a href="https://www.sparkpost.com/enterprise-email/"><span class="label label-warning"><strong>Enterprise</strong></span></a> Defaults to false. |
 | ip_pool | string | The ID of a dedicated IP pool associated with your account.  If this field is not provided, the account's default dedicated IP pool is used (if there are IPs assigned to it).  To explicitly bypass the account's default dedicated IP pool and instead fallback to the shared pool, specify a value of "sp_shared". | no | <span class="label label-primary"><strong>SparkPost</strong></span> For more information on dedicated IPs, see the [Support Center](https://support.sparkpost.com/customer/en/portal/articles/2002977-dedicated-ip-addresses)
-| inline_css| boolean| Whether to perform CSS inlining in HTML content | no | Defaults to false. |
+| inline_css| boolean| Whether to perform CSS inlining in HTML content<br/><span class="label label-info"><strong>Note</strong></span> only rules in `head > style` elements will be inlined | no | Defaults to false. |
 
 ### Open And Click Tracking
 
