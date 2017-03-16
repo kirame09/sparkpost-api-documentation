@@ -273,8 +273,6 @@ In addition to the list entry attributes, the response body also includes `creat
 
 + Response 200 (application/json; charset=utf-8)
 
-    + Body
-
         {
             "results" : [
               {
