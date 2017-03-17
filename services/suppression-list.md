@@ -230,9 +230,14 @@ Perform a filtered search for entries in your suppression list.
 
 Retrieve the suppression status for a specific recipient by specifying the recipient’s email address in the URI path.
 
+This is a search endpoint so delays can occur when searching across subaccounts.  See note below to get real-time lookups.
+
 If the recipient is not in the suppression list, an HTTP status of 404 is returned. If the recipient is in the list, an HTTP status of 200 is returned with the suppression records in the response body. Specifying the `type` key in the request body allows for retrieving only the `transactional` or `non_transactional` record. If type is specified and the recipient isn't suppressed for that type, an HTTP status of 404 is returned.
 
 In addition to the list entry attributes, the response body also includes `created` and `updated` timestamps.
+
+Real-time Lookups:
+For subaccount users, if the X-MSYS-SUBACCOUNT header is provided, the lookup will be real-time for the provided subaccount. A value of zero can be provided for the master account. If the header is not provided a search will lookup across subaccounts and slight delays could occur when retrieving suppressions (up to 20 minutes). The delay is only during the search process, the actual suppression of email will be immediate. Non-subaccount users do not need to provide any additional headers to take advantage of real-time lookups.
 
 + Parameters
   + recipient_email (required, string, `rcpt@example.com`) ... Recipient email address
@@ -244,6 +249,7 @@ In addition to the list entry attributes, the response body also includes `creat
 
             Authorization: 14ac5499cfdd2bb2859e4476d2e5b1d2bad079bf
             Accept: application/json
+            X-MSYS-SUBACCOUNT: <subaccount-id> (optional)
 
 + Response 404 (application/json; charset=utf-8)
 
