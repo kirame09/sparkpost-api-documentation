@@ -236,8 +236,8 @@ If the recipient is not in the suppression list, an HTTP status of 404 is return
 
 In addition to the list entry attributes, the response body also includes `created` and `updated` timestamps.
 
-Real-time Lookups:
- For subaccount users, if the X-MSYS-SUBACCOUNT header is provided, the lookup will be real-time for the provided subaccount. A value of zero can be provided for the master account. If the header is not provided a search will lookup across subaccounts and slight delays could occur when retrieving suppressions (up to 20 minutes). The delay is only during the search process, the actual suppression of email will be immediate. Non-subaccount users do not need to provide any additional headers to take advantage of real-time lookups.
+##### Real-time Lookups for Subaccount Users:
+ If the X-MSYS-SUBACCOUNT header is provided, the lookup will be real-time for the provided subaccount. A value of zero can be provided for the master account. If the header is not provided a search will lookup across subaccounts and slight delays could occur when retrieving suppressions (up to 20 minutes). The delay is only during the search process, the actual suppression of email will be immediate. Non-subaccount users do not need to provide any additional headers to take advantage of real-time lookups.
  
 + Parameters
   + recipient_email (required, string, `rcpt@example.com`) ... Recipient email address
@@ -267,24 +267,6 @@ Real-time Lookups:
             "results" : [
               {
                 "recipient" : "rcpt_1@example.com",
-                "transactional" : true,
-                "non_transactional" : true,
-                "source" : "Manually Added",
-                "description" : "User requested to not receive any further emails.",
-                "created" : "2015-01-01T12:00:00+00:00",
-                "updated" : "2015-01-01T12:00:00+00:00"
-              }
-            ]
-        }
-
-+ Response 200 (application/json; charset=utf-8)
-
-    + Body
-
-        {
-            "results" : [
-              {
-                "recipient" : "rcpt_1@example.com",
                 "non_transactional" : true,
                 "type": "non_transactional",
                 "source" : "Manually Added",
@@ -306,6 +288,33 @@ Real-time Lookups:
             "total_count": 2
         }
 
++ Response 200 (application/json; charset=utf-8)
+
+        {
+            "results" : [
+              {
+                "recipient" : "shared_recip@example.com",
+                "non_transactional" : true,
+                "type": "non_transactional",
+                "source" : "Manually Added",
+                "description" : "User requested to not receive any non-transactional emails.",
+                "created" : "2015-01-01T12:00:00+00:00",
+                "updated" : "2015-01-01T12:00:00+00:00"
+              },
+              {
+                "recipient" : "shared_recip@example.com",
+                "non_transactional" : true,
+                "type": "non_transactional",
+                "source" : "Bounce Rule",
+                "description" : "550: 550 - Domain has been disabled. #7",
+                "created" : "2016-10-01T12:00:00+00:00",
+                "updated" : "2016-10-01T12:00:00+00:00",
+                "subaccount_id": "146"
+              },
+            ],
+            "links": [],
+            "total_count": 2
+        }
 
 
 ### Delete a List Entry [DELETE]
