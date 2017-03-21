@@ -237,7 +237,12 @@ If the recipient is not in the suppression list, an HTTP status of 404 is return
 In addition to the list entry attributes, the response body also includes `created` and `updated` timestamps.
 
 ##### Searching with Subaccounts:
-Please provide the X-MSYS-SUBACCOUNT header when performing a lookup on a specific suppression list. If performing a lookup on the master account suppression list, use a value of 0 for the header; otherwise, use the subaccount's ID to perform a lookup on a subaccount suppression list. If the X-MSYS-SUBACCOUNT header is not provided, a search will be performed across all subaccount and the master account suppression lists. Searches across multiple lists can return out of date results, with a delay of up to 20 minutes. Searches against a specific list are not affected by this delay and return up to date information. If you do not take advantage of SparkPost's subaccounts feature, you do not need to provide the X-MSYS-SUBACCOUNT header in order to perform the lookup with up to date results.
+Please provide the X-MSYS-SUBACCOUNT header when performing a lookup on a specific suppression list. 
+- Use a value of 0 to only search against the master account suppression list. 
+- Use the subaccount's ID to perform a lookup on a specific subaccount suppression list. 
+
+If the X-MSYS-SUBACCOUNT header is not provided, a search will be performed across the master account and all subaccount suppression lists. Searches across multiple lists can return out of date results, with a delay of up to 20 minutes. Searches against a specific list are not affected by this delay and return up-to-date information. If you do not take advantage of SparkPost's subaccounts feature, you do not need to provide the X-MSYS-SUBACCOUNT header in order to receive up-to-date results.
+
  
 + Parameters
   + recipient_email (required, string, `rcpt@example.com`) ... Recipient email address
