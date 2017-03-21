@@ -273,8 +273,6 @@ In addition to the list entry attributes, the response body also includes `creat
 
 + Response 200 (application/json; charset=utf-8)
 
-    + Body
-
         {
             "results" : [
               {
@@ -389,4 +387,32 @@ If the recipient entry was added to the list by Compliance, it cannot be updated
                     "message": "Type must be one of: \'transactional\', \'non_transactional\'"
                 }
             ]
+        }
+
+## List Summary [/suppression-list/summary]
+### Retrieve Suppression List Summary [GET]
+
+**Note:** SparkPost only
+
+Retrieve the total number of suppressions for an account as well as a break down of entries by source.
+
++ Request (application/json)
+
+    + Headers
+
+            Authorization: 14ac5499cfdd2bb2859e4476d2e5b1d2bad079bf
+            Accept: application/json
+
++ Response 200 (application/json; charset=utf-8)
+
+        {
+            "results": {
+                "compliance": 1,
+                "manually_added": 1542,
+                "unsubscribe_link": 1,
+                "bounce_rule": 3891,
+                "list_unsubscribe": 1,
+                "spam_complaint": 1,
+                "total": 5437
+            }
         }
