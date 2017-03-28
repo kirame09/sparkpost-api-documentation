@@ -232,7 +232,7 @@ Retrieve the suppression status for a specific recipient by specifying the recip
 
 This is a search endpoint so delays can occur when searching across multiple suppression lists.  See "Searching with Subaccounts" below.
 
-If the recipient is not in the suppression list, an HTTP status of 404 is returned. If the recipient is in the list, an HTTP status of 200 is returned with the suppression records in the response body. Specifying the `type` key in the request body allows for retrieving only the `transactional` or `non_transactional` record. If type is specified and the recipient isn't suppressed for that type, an HTTP status of 404 is returned.
+If the recipient is not in the suppression list, an HTTP status of 404 is returned. If the recipient is in the list, an HTTP status of 200 is returned with the suppression records in the response body. Specifying the `type` query parameter allows for retrieving only the `transactional` or `non_transactional` record. If type is specified and the recipient isn't suppressed for that type, an HTTP status of 404 is returned.
 
 In addition to the list entry attributes, the response body also includes `created` and `updated` timestamps.
 
@@ -246,6 +246,10 @@ If the X-MSYS-SUBACCOUNT header is not provided, a search will be performed acro
  
 + Parameters
   + recipient_email (required, string, `rcpt@example.com`) ... Recipient email address
+  + types (optional, list, `transactional`) ... Types of entries to include in the search, i.e. entries that are `transactional` or `non_transactional`
+  + cursor (optional, string, `initial`) ... The results cursor location to return, to start paging with cursor, use the value of 'initial'. When cursor is provided the `page` parameter is ignored. ( **Note:** Applicable to multi-list queries only)
+  + per_page (optional, int, `5`) ... Maximum number of results to return per page.  Must be between 1 and 10,000. Default value is 1000. ( **Note:** Applicable to multi-list queries only)
+  + page (optional, int, `5`) ... The results page number to return. Used with per_page for paging through results. The page parameter works up to 10,000 results. You must use the cursor parameter and start with cursor=initial to page result sets larger than 10,000 ( **Note:** Applicable to multi-list queries only)
 
 
 + Request
