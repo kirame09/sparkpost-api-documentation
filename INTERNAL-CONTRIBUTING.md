@@ -1,9 +1,9 @@
 # How To Maintain Our API Docs
 
-1. [Get Set Up](#get-set-up)
-1. [Make Your Edits](#make-your-edits)
-1. [Have Your Work Reviewed](#have-your-work-reviewed)
-1. [Publish!](#publish)
+1. [Get Set Up](#1-get-set-up)
+1. [Make Your Edits](#2-make-your-edits)
+1. [Have Your Work Reviewed](#3-have-your-work-reviewed)
+1. [Publish!](#3-publish)
 
 ## 1. Get Set Up
 
@@ -12,6 +12,7 @@
 - Access to the [SparkPost GitHub organisation][github-org]
 - Node.js
 - Grunt
+- Ruby
 
 ### Setup Steps
 
@@ -20,7 +21,7 @@
     ```sh
     git clone https://github.com/SparkPost/sparkpost-api-documentation-DEV.git
     cd sparkpost-api-documentation-DEV
-    git remote add upstream git@github.com:SparkPost/sparkpost-api-documentation.git
+    git remote add public git@github.com:SparkPost/sparkpost-api-documentation.git
     npm install
     ```
 
@@ -32,7 +33,7 @@
     cd ../
     git clone https://github.com/SparkPost/developers.sparkpost.com.git sparkpost.github.io
     cd sparkpost.github.io
-    ./scripts/bootstrap
+    ./script/bootstrap
     ```
 
     You can use this repo to preview your edits in a version of the DevHub running on your machine.
@@ -126,12 +127,12 @@ One you have addressed any review feedback on your pull request, you can merge i
 
 1. Pull any changes from the public repo into yours:
     ```sh
-    git pull upstream master
+    git pull public master
     ```
 
 1. Publish your changes:
     ```sh
-    git push upstream master
+    git push public master
     ```
 
     Note: it will take a few minutes for the docs to build and publish to developers.sparkpost.com.
@@ -142,18 +143,18 @@ One you have addressed any review feedback on your pull request, you can merge i
 
 There are 3 repos used to manage our API docs:
 
-- [sparkpost-api-documentation-DEV][dev-repo]: This is a private repo for staging unpublished documentation updates. When changes are ready for publication, they are pushed from here to the upstream public repo.
+- [sparkpost-api-documentation-DEV][dev-repo]: This is a private repo for staging unpublished documentation updates. When changes are ready for publication, they are pushed from here to the public repo.
 - [sparkpost-api-documentation][public-repo]: This is a public repo for tracking community-related issues and contributions. The published API docs are built from this repo.
 - [developers.sparkpost.com][devhub-repo]: This is the DevHub repo which contains the final rendered API docs. It's a Jekyll-based static site served from S3.
 
 ## How The Docs Are Published
 
 1. An editor pushes changes to the public repo master branch.
-1. Public repo TravisCI process:
+1. Public repo TravisCI process ([builds visible here](https://travis-ci.org/SparkPost/sparkpost-api-documentation)):
   1. TravisCI renders the docs into the DevHub with a call to `grunt static`
   1. TravisCI commits the new docs to the DevHub repo `develop` branch
   1. TravisCI updates the Algolia search index with the updated docs content
-1. DevHub repo TravisCI process:
+1. DevHub repo TravisCI process ([builds visible here](https://travis-ci.org/SparkPost/developers.sparkpost.com)):
   1. Generates the DevHub using Jekyll
   1. Deploys the DevHub (including API docs) to S3 for public consumption.
 
