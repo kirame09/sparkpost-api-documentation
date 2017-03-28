@@ -70,21 +70,7 @@ services = [
     'smtp-api.md',
     'ab-testing.md',
     'account.md',
-    'bounce-domains.md',
-    'inbound-domains.md',
-    'ip-pools.md',
-    'metrics.md',
-    'message-events.md',
-    'recipient-lists.md',
-    'relay-webhooks.md',
-    'sending-domains.md',
-    'sending-ips.md',
-    'subaccounts.md',
-    'suppression-list.md',
-    'templates.md',
-    'tracking-domains.md',
-    'transmissions.md',
-    'webhooks.md'
+    ...
 ]
 ```
 
