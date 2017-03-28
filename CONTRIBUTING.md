@@ -1,6 +1,11 @@
 # How To Maintain Our API Docs
 
-## Get Set Up
+1. [Get Set Up](#get-set-up)
+1. [Make Your Edits](#make-your-edits)
+1. [Have Your Work Reviewed](#have-your-work-reviewed)
+1. [Publish!](#publish)
+
+## 1. Get Set Up
 
 ### Prerequisites
 
@@ -8,7 +13,7 @@
 - Node.js
 - Grunt
 
-### Setup Steps
+### Setup Steps
 
 1. Clone and prepare the development docs repo:
 
@@ -34,7 +39,7 @@
 
 Note: unless otherwise stated, the commands below are meant for the API docs repo, _not the DevHub one_.
 
-## Make Your Edits
+## 2. Make Your Edits
 
 First, create a branch for your work in the API docs repo:
 
@@ -51,7 +56,7 @@ Each top-level section in the API docs has a Markdown file under `services/`. Ea
 ### Editing API Specifications
 The API endpoint documentation broadly follows the Apiary [API blueprint specification](https://apiblueprint.org/). That's available [here](https://apiblueprint.org/) for reference but you can ape existing content to get started quickly.
 
-### Editing High-level Conceptual Documentation
+### Editing High-level Conceptual Documentation
 These are plain old Markdown. Here's [the standard guide on Markdown](https://daringfireball.net/projects/markdown/) for reference.
 
 ### Adding Items and Menu Ordering
@@ -104,7 +109,7 @@ Your API docs are now available at [http://localhost:4000/api/](http://localhost
 
 Note: Once these processes have started, they will watch for changes and re-render the API docs on demand. Hit Ctrl+C to stop them when you're done. 
 
-## Have Your Work Reviewed
+## 3. Have Your Work Reviewed
 
 1. Commit your edits to your local repo:
     ```sh
@@ -119,7 +124,7 @@ Note: Once these processes have started, they will watch for changes and re-rend
 
 1. Open a pull request in the [API docs dev repo here](https://github.com/SparkPost/sparkpost-api-documentation-DEV/compare) comparing your branch to the `master` branch.
 
-## Publish!
+## 4. Publish!
 
 One you have addressed any review feedback on your pull request, you can merge it into the master branch and publish it:
 
