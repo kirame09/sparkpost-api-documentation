@@ -3,7 +3,7 @@
 1. [Get Set Up](#1-get-set-up)
 1. [Make Your Edits](#2-make-your-edits)
 1. [Have Your Work Reviewed](#3-have-your-work-reviewed)
-1. [Publish!](#3-publish)
+1. [Publish!](#4-publish)
 
 ## 1. Get Set Up
 
@@ -151,12 +151,12 @@ There are 3 repos used to manage our API docs:
 
 1. An editor pushes changes to the public repo master branch.
 1. Public repo TravisCI process ([builds visible here](https://travis-ci.org/SparkPost/sparkpost-api-documentation)):
-  1. TravisCI renders the docs into the DevHub with a call to `grunt static`
-  1. TravisCI commits the new docs to the DevHub repo `develop` branch
-  1. TravisCI updates the Algolia search index with the updated docs content
+    1. TravisCI renders the docs into the DevHub with a call to `grunt static`
+    1. TravisCI commits the new docs to the DevHub repo `develop` branch
+    1. TravisCI updates the Algolia search index with the updated docs content
 1. DevHub repo TravisCI process ([builds visible here](https://travis-ci.org/SparkPost/developers.sparkpost.com)):
-  1. Generates the DevHub using Jekyll
-  1. Deploys the DevHub (including API docs) to S3 for public consumption.
+    1. Generates the DevHub using Jekyll
+    1. Deploys the DevHub (including API docs) to S3 for public consumption.
 
 ## How Search Works
 
