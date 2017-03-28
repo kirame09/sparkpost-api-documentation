@@ -1,12 +1,10 @@
 # How To Maintain Our API Docs
 
-[TOC]
-
 ## Get Set Up
 
 ### Prerequisites
 
-- Access to the SparkPost GitHub organisation
+- Access to the [SparkPost GitHub organisation][github-org]
 - Node.js
 - Grunt
 
@@ -50,14 +48,14 @@ Hint: Most work is done in the files under `services/`.
 
 Each top-level section in the API docs has a Markdown file under `services/`. Each file represents either an API endpoint such as `/api/v1/transmissions` or a high-level concept like "template substitution".
 
-### Editing API Specifications
+### Editing API Specifications
 The API endpoint documentation broadly follows the Apiary [API blueprint specification](https://apiblueprint.org/). That's available [here](https://apiblueprint.org/) for reference but you can ape existing content to get started quickly.
 
 ### Editing High-level Conceptual Documentation
 These are plain old Markdown. Here's [the standard guide on Markdown](https://daringfireball.net/projects/markdown/) for reference.
 
 ### Adding Items and Menu Ordering
-The AIP docs top-level sections (introduction, SMTP API, transmissions, etc) are defined at the top of `Gruntfile.js` like this:
+The API docs top-level sections (introduction, SMTP API, transmissions, etc) are defined at the top of `Gruntfile.js` like this:
 
 ```js
 services = [
@@ -85,11 +83,11 @@ services = [
 ]
 ```
 
-You can reorder this list, add to or remove from it to control the API docs top-level structure.
+You can edit this list to control the API docs top-level structure and ordering.
 
 ### Preview Your Work
 
-You can render and serve the whole DevHub on your machine to preview your changes exactly as they'll look in production. 
+You can render and serve the whole DevHub on your machine to preview your changes exactly as they'll look in production:
 
 1. Start the API docs build process (and leave it running):
     ```sh
@@ -102,19 +100,19 @@ You can render and serve the whole DevHub on your machine to preview your change
     ./script/server
     ```
 
-Your API docs are available at [http://localhost:4000/api/](http://localhost:4000/api/). 
+Your API docs are now available at [http://localhost:4000/api/](http://localhost:4000/api/). 
 
-Note: Once these processes have started, they will watch for changes and re-render the API docs on demand. Hit Ctrl+C to stop those processes when you're done. 
+Note: Once these processes have started, they will watch for changes and re-render the API docs on demand. Hit Ctrl+C to stop them when you're done. 
 
 ## Have Your Work Reviewed
 
-1. Commit your edits to your local repo
+1. Commit your edits to your local repo:
     ```sh
-    git add <the-files-you-have-edited>
+    git add the-files-you-have-edited
     git commit -m "A short message about what you changed"
     ```
 
-1. Push your changes to GitHub
+1. Push your changes to the API docs dev repo on GitHub:
     ```sh
     git push origin -b your-branch-name
     ```
@@ -140,7 +138,7 @@ One you have addressed any review feedback on your pull request, you can merge i
     git pull upstream master
     ```
 
-1. Publish your changes;
+1. Publish your changes:
     ```sh
     git push upstream master
     ```
@@ -153,15 +151,9 @@ One you have addressed any review feedback on your pull request, you can merge i
 
 There are 3 repos used to manage our API docs:
 
-- sparkpost-api-documentation-DEV
-    This is a private repo for staging unpublished documentation updates.
-    When changes are ready for publication, they are pushed from here to the upstream public repo.
-- sparkpost-api-documentation
-    This is a public repo for tracking community-related issues and contributions.
-    The published API docs are built from this repo.
-- developers.sparkpost.com
-    This is the DevHub repo which contains the final rendered API docs.
-    It's a Jekyll-based static site served from S3.
+- [sparkpost-api-documentation-DEV][dev-repo]: This is a private repo for staging unpublished documentation updates. When changes are ready for publication, they are pushed from here to the upstream public repo.
+- [sparkpost-api-documentation][public-repo]: This is a public repo for tracking community-related issues and contributions. The published API docs are built from this repo.
+- [developers.sparkpost.com][devhub-repo]: This is the DevHub repo which contains the final rendered API docs. It's a Jekyll-based static site served from S3.
 
 ## How The Docs Are Published
 
@@ -177,4 +169,9 @@ There are 3 repos used to manage our API docs:
 ## How Search Works
 
 The API docs Grunt file includes tasks for parsing search content out of the Markdown and updating the search index in Algolia, our search service.
+
+[github-org]: https://github.com/SparkPost/ 
+[dev-repo]: https://github.com/SparkPost/sparkpost-api-documentation-dev
+[public-repo]: https://github.com/SparkPost/sparkpost-api-documentation
+[devhub-repo]: https://github.com/SparkPost/developers.sparkpost.com
 
