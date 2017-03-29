@@ -63,11 +63,11 @@ The Travis CI projects can be viewed here:
 * [sparkpost.github.io](https://travis-ci.org/SparkPost/sparkpost.github.io)
 
 ### Contributing
-[Guidelines for adding issues](CONTRIBUTING.md)
+[Guidelines for adding issues](CONTRIBUTING.md#guidelines-for-adding-issues-to-sparkpost-api-documentation)
 
 [API Blueprint Specification](https://github.com/apiaryio/api-blueprint/blob/master/API%20Blueprint%20Specification.md)
 
-[Submitting pull requests](CONTRIBUTING.md)
+[Submitting pull requests](CONTRIBUTING.md#contribution-steps)
 
 ## License
 
