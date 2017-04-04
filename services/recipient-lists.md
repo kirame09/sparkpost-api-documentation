@@ -23,7 +23,7 @@ If you use [Postman](https://www.getpostman.com/) you can click the following bu
 |name    |string       |Short, pretty/readable recipient list display name, not required to be unique |no  |If a name is not specified, then defaults to the same value as id.  Maximum length - 64 bytes |
 |description |string |Detailed description of the recipient list|no | Maximum length - 1024 bytes|
 |attributes |JSON object  |Recipient list attribute object  |no  |This JSON object allows users to store arbitrary metadata related to this list.  This data is not used by the API.  It is only for the user. |
-|recipients |JSON array  |Array of recipient objects |yes |For a full description, see the Recipient Attributes. |
+|recipients |JSON array  |Array of recipient objects |yes |For a full description, see the [Recipient Attributes](#recipient-attributes). |
 
 ### Recipient Attributes
 
@@ -31,7 +31,7 @@ Recipients are described in a JSON array with the following fields:
 
 | Field         | Type     | Description                           | Required   | Notes   |
 |------------------------|:-:       |---------------------------------------|-------------|--------|
-|address | JSON object or string | Address information for a recipient  | At a minimum, address or multichannel_addresses is required| If both address and multichannel_addresses are specified only multichannel_addresses will be used. See the Address Attributes. |
+|address | JSON object or string | Address information for a recipient  | At a minimum, address or multichannel_addresses is required| If both address and multichannel_addresses are specified only multichannel_addresses will be used. See the [Address Attributes](#address-attributes). |
 |multichannel_addresses | JSON array |Array of Multichannel Address objects for a recipient | At a minimum, address or multichannel_addresses is required |If both address and multichannel_addresses are specified only multichannel_addresses will be used.  See Multichannel Address attributes. |
 |return_path | string | Email to use for envelope FROM | no | <a href="https://www.sparkpost.com/enterprise-email/"><span class="label label-warning"><strong>Enterprise</strong></span></a> To support Variable Envelope Return Path (VERP), this field can also optionally be specified inside of the address object of a specific recipient in order to give the recipient a unique envelope MAIL FROM. |
 |tags | JSON array |Array of text labels associated with a recipient | no | Tags are available in Webhook events.  Maximum number of tags - 10 per recipient, 100 system wide.  Any tags over the limits are ignored.|

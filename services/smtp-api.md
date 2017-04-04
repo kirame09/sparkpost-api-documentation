@@ -54,9 +54,9 @@ The fields supported in the X-MSYS-API header are as follows:
 | metadata | JSON object | JSON key value pairs associated with the SMTP message | no | A maximum of 1000 bytes of metadata is available in click/open events. |
 | cc | JSON array | Array of recipient addresses that will be included in the "Cc" header | no | A unique message with a unique tracking URL will be generated for each recipient in this list. |
 | bcc | JSON array | Array of recipient addresses that will be hidden from all other recipients | no | A unique message with a unique tracking URL will be generated for each recipient in this list. |
-| archive | JSON array | Array of recipient addresses that will be hidden from all other recipients | no | A unique message will be generated for each recipient in this list. The archive copy of the message contains tracking URLs identical to the recipient. For a full description, see the "What is an archive recipient?" section.|
+| archive | JSON array | Array of recipient addresses that will be hidden from all other recipients | no | A unique message will be generated for each recipient in this list. The archive copy of the message contains tracking URLs identical to the recipient. For a full description, see the ["What is an archive recipient?"](#what-is-an-archive-recipient) section.|
 | tags | JSON array | Array of text labels associated with the SMTP message | no | Tags are available in click/open events. Maximum number of tags is 10 per recipient, 100 system wide. |
-| options | JSON object | JSON object in which SMTP API options are defined | no | For a full description, see the Options Attributes. |
+| options | JSON object | JSON object in which SMTP API options are defined | no | For a full description, see the [Options Attributes](#options-attributes). |
 
 ## Options Attributes
 
@@ -91,7 +91,7 @@ The sandbox domain `sparkpostbox.com` is available to allow each account to send
 
 ## Sending Messages with cc, bcc, and archive Recipients
 
-When submitting an email via SMTP that includes the X-MSYS-API header, you may specify a JSON array for cc, bcc, and archive lists.  For each address in each of these arrays, a message will be generated. Messages will be generated with the following headers: 
+When submitting an email via SMTP that includes the X-MSYS-API header, you may specify a JSON array for cc, bcc, and archive lists.  For each address in each of these arrays, a message will be generated. Messages will be generated with the following headers:
 * It is the responsibility of the user to include their own `To` header in the body of the message.
 * All messages will display the `Cc` header and the value of that header will include all addresses listed in the `cc` array.
 * The `bcc` recipients will each receive a message with the `To` and `Cc` headers described above and, additionally, will see a `Bcc` header with ONLY their own recipient address as the value of the header.
@@ -113,9 +113,9 @@ For example:
 ```
 X-MSYS-API: {
 
-   "cc" : [ "cc_email1@corp.com", "cc_email2@corp.com" ], 
-   "bcc" : [ "bcc_email1@corp.com", "bcc_email2@corp.com" ], 
-   "archive" : [ "archive_email@corp.com" ], 
+   "cc" : [ "cc_email1@corp.com", "cc_email2@corp.com" ],
+   "bcc" : [ "bcc_email1@corp.com", "bcc_email2@corp.com" ],
+   "archive" : [ "archive_email@corp.com" ],
 
    "options" : {"open_tracking" : false, "click_tracking" : true},
 }

@@ -18,11 +18,11 @@ If you use [Postman](https://www.getpostman.com/) you can click the following bu
 | Field         | Type     | Description                           | Required   | Notes   |
 |------------------------|:-:       |---------------------------------------|-------------|--------|
 |id    |string  |Short, unique, alphanumeric ID used to reference the template   | At a minimum, id or name is required upon creation.  It is auto generated if not provided. |After a template has been created, this property cannot be changed.  Maximum length - 64 bytes   |
-|content              |JSON  |Content that will be used to construct a message  |  yes  |  For a full description, see the Content Attributes. Maximum length - 20 MBs  |
+|content              |JSON  |Content that will be used to construct a message  |  yes  |  For a full description, see the [Content Attributes](#content-attributes). Maximum length - 20 MBs  |
 |published |boolean |Whether the template is published or is a draft version|no - defaults to false|A template cannot be changed from published to draft.|
 |name |string  |Editable display name  | At a minimum, id or name is required upon creation.   |The name does not have to be unique.  Maximum length - 1024 bytes   |
 |description |string  |Detailed description of the template  |no    | Maximum length - 1024 bytes |
-|options |JSON |JSON object in which template options are defined|no| For a full description, see the Options Attributes.|
+|options |JSON |JSON object in which template options are defined|no| For a full description, see the [Options Attributes](#options-attributes).|
 
 
 ### Content Attributes
@@ -36,7 +36,7 @@ Content for a template is described in a JSON object with the following fields:
 |subject |string  |Email subject line   | yes |Expected in the UTF-8 charset without RFC2047 encoding.  Substitution syntax is supported. |
 |from |string or JSON  | Address `"from" : "deals@company.com"` or JSON object composed of the `name` and `email` fields `"from" : { "name" : "My Company", "email" : "deals@company.com" }` used to compose the email's `From` header| yes | Substitution syntax is supported. |
 |reply_to |string  |Email address used to compose the email's `Reply-To` header | no | Substitution syntax is supported. |
-|headers| JSON | JSON dictionary containing headers other than `Subject`, `From`, `To`, and `Reply-To`  | no |See the Header Notes. |
+|headers| JSON | JSON dictionary containing headers other than `Subject`, `From`, `To`, and `Reply-To`  | no | See the [Header Notes](#header-notes). |
 
 #### Header Notes
 
@@ -49,7 +49,7 @@ Alternately, the content JSON object may contain a single `email_rfc822` field. 
 
 | Field         | Type     | Description                           | Required   | Notes   |
 |--------------------|:-:       |---------------------------------------|-----------------------|--------|
-|email_rfc822    |string  |Pre-built message with the format as described by the [message/rfc822 Content-Type](http://tools.ietf.org/html/rfc2046#section-5.2.1) |no   |  See the email_rfc822 Notes. |
+|email_rfc822    |string  |Pre-built message with the format as described by the [message/rfc822 Content-Type](http://tools.ietf.org/html/rfc2046#section-5.2.1) |no   |  See the [email_rfc822 Notes](#email_rfc822-notes). |
 
 #### email_rfc822 Notes
 
@@ -91,7 +91,7 @@ Create a template by providing a **template object** as the POST request body.
 
 At a minimum, the `name` and `content` fields are required, where content must contain the `from`, `subject`, and at least one of `html` or `text` fields.
 
-By default, when a template is referenced in a transmission, it is the published version of that template.  To submit a transmission that uses a draft template, set the transmission field `use_draft_template` to true.  For additional details, see the Transmissions API documentation for Using a Stored Template.
+By default, when a template is referenced in a transmission, it is the published version of that template.  To submit a transmission that uses a draft template, set the transmission field `use_draft_template` to true.  For additional details, see the [Transmissions API documentation](transmissions.html) for [Using a Stored Template](transmissions.html#header-using-a-stored-template).
 
 
 #### Create Parts
@@ -425,7 +425,7 @@ The template's content will be expanded using the substitution data provided and
 in the response. By default, the most recently updated version is returned.  Use the `draft` query parameter to specify a draft or published
 template.
 
-See the Substitutions Reference section for more information.
+See the [Substitutions Reference section](substitutions-reference.html) for more information.
 
 + Parameters
     + id (required, string, `11714265276872`) ... ID of the template

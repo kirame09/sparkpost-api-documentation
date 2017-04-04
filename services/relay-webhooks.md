@@ -39,7 +39,7 @@ The following fields will be included in the JSON object posted to the SMTP rela
 
 | Field     | Type   | Description                                                 | Notes
 |-----------|--------|-----------------------------------------------------------------------|--------------|
-| content   | object | Content that will be used to construct a relay message           | For a full description, see the Content Attributes. |
+| content   | object | Content that will be used to construct a relay message           | For a full description, see the [Content Attributes](#content-attributes). |
 | friendly_from | string | Email address used to compose the "From" header |
 | msg_from | string | [SMTP envelope](http://www.rfcreader.com/#rfc5321_line817) "MAIL FROM", matches "Return-Path" header address |
 | rcpt_to | string | [SMTP envelope](http://www.rfcreader.com/#rfc5321_line817) "RCPT TO" |
@@ -53,7 +53,7 @@ The following fields will be included in the JSON object posted to the SMPP rela
 
 | Field       | Type   | Description                                                           | Notes
 |-------------|--------|-----------------------------------------------------------------------|--------------|
-| text        | string | Contents of the first text/plain part of the message                  | For a full description, see the Content Attributes. |
+| text        | string | Contents of the first text/plain part of the message                  | For a full description, see the [Content Attributes](#content-attributes). |
 | to          | string | SMPP message recipient                                                |              |
 | from        | string | SMPP message sender                                                   |              |
 | date        | string | Date that Sparkpost recieved the SMPP message                         |              |
@@ -316,7 +316,7 @@ Create a relay webhook by providing a **relay webhooks object** as the POST requ
               ]
             }
 
-    
+
 ### List all Relay Webhooks [GET]
 
 List all your relay webhooks.

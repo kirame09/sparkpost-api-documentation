@@ -25,7 +25,7 @@ If you use [Postman](https://www.getpostman.com/) you can click the following bu
 | Field   | Type   | Description | Required | Notes |
 |------------|--------|-------------|----------|-------|
 | domain | string | Name of the bounce domain | yes | Example: `example.domain.com` |
-| status | JSON object| JSON object containing status details, including whether this domain's ownership has been verified  | no | Read only. For a full description, see the Status Attributes.|
+| status | JSON object| JSON object containing status details, including whether this domain's ownership has been verified  | no | Read only. For a full description, see the [Status Attributes](#status-attributes).|
 
 ### Status Attributes
 
@@ -133,7 +133,7 @@ Create a Bounce Domain.
                   "code": "1300",
                   "message": "invalid data format/type",
                   "description": "Error domain name length too short for domain: 'ex'"
-                } 
+                }
               ]
             }
 
@@ -206,7 +206,7 @@ Retrieve a list of all bounce domains.
                     "cname_status": "pending",
                     "compliance_status": "pending"
                   }
-                } 
+                }
               ]
             }
 

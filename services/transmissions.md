@@ -69,9 +69,9 @@ The following attributes are used when specifying inline content in the transmis
 |subject |string  |Email subject line   | yes, for email |Expected in the UTF-8 charset without RFC2047 encoding.  Substitution syntax is supported. |
 |from |string or JSON  | Address `"from" : "deals@company.com"` or JSON object composed of the `name` and `email` fields `"from" : { "name" : "My Company", "email" : "deals@company.com" }` used to compose the email's `From` header| yes, for email | Substitution syntax is supported. |
 |reply_to |string  |Email address used to compose the email's "Reply-To" header | no | Substitution syntax is supported. |
-|headers| JSON | JSON dictionary containing headers other than `Subject`, `From`, `To`, and `Reply-To`  | no |See the Header Notes. |
-|attachments| JSON | JSON array of attachments. | no | For a full description, see Attachment Attributes. |
-|inline_images| JSON | JSON array of inline images. | no | For a full description, see Inline Image Attributes. |
+|headers| JSON | JSON dictionary containing headers other than `Subject`, `From`, `To`, and `Reply-To`  | no |See the [Header Notes](#header-notes). |
+|attachments| JSON | JSON array of attachments. | no | For a full description, see [Attachment Attributes](#attachment-attributes). |
+|inline_images| JSON | JSON array of inline images. | no | For a full description, see [Inline Image Attributes](#inline-image-attributes). |
 
 #### Push Attributes
 The following attributes control the contents of push notifications:
@@ -1035,7 +1035,7 @@ Only transmissions which are scheduled for future generation may be deleted.
 <div class="alert alert-info"><strong>Note:</strong> SparkPost Enterprise only, customer-specific configuration option.</div>
 
 
-Delete all transmissions of a campaign by specifying Campaign ID in the URI path. 
+Delete all transmissions of a campaign by specifying Campaign ID in the URI path.
 
   + Parameters
 

@@ -36,7 +36,7 @@ If you use [Postman](https://www.getpostman.com/) you can click the following bu
 | port | integer | Determines the port to be used when constructing the tracking URL | no | Example: `8080` |
 | secure | boolean | Should the tracking URL should use https? | no | If `false` (the default), http will be used.<br/><a href="https://www.sparkpost.com/enterprise-email/"><span class="label label-warning"><strong>Enterprise</strong></span></a> customers may set `"secure": true` to use https |
 | default | boolean | Should the default tracking domain be used when not explicitly set | no | There can only be one default domain. Defaults to `false`. |
-| status | JSON object| JSON object containing status details, including whether this domain's ownership has been verified  | no | Read only. For a full description, see the Status Attributes.|
+| status | JSON object| JSON object containing status details, including whether this domain's ownership has been verified  | no | Read only. For a full description, see the [Status Attributes](#status-attributes).|
 
 ### Port/Secure Attributes
 
