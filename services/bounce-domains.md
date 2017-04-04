@@ -25,7 +25,7 @@ If you use [Postman](https://www.getpostman.com/) you can click the following bu
 | Field   | Type   | Description | Required | Notes |
 |------------|--------|-------------|----------|-------|
 | domain | string | Name of the bounce domain | yes | Example: `example.domain.com` |
-| status | JSON object| JSON object containing status details, including whether this domain's ownership has been verified  | no | Read only. For a full description, see the [Status Attributes](#status-attributes).|
+| status | JSON object| JSON object containing status details, including whether this domain's ownership has been verified  | no | Read only. For a full description, see the [Status Attributes](#header-status-attributes).|
 
 ### Status Attributes
 

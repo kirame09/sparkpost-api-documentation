@@ -20,8 +20,8 @@ If you use [Postman](https://www.getpostman.com/) you can click the following bu
 |------------------------|:-:       |---------------------------------------|-------------|--------|
 |domain    | string | Name of the sending domain | yes |The domain name will be used as the "From:" header address in the email.|
 |tracking_domain | string | Associated tracking domain | no | example: "click.example1.com"<br/><span class="label label-info"><strong>Note</strong></span> tracking domain and sending domain must belong to the same subaccount to be linked together.|
-|status | JSON object | JSON object containing status details, including whether this domain's ownership has been verified  | no | Read only. For a full description, see the [Status Attributes](#status-attributes).|
-|dkim | JSON object | JSON object in which DKIM key configuration is defined | no | For a full description, see the [DKIM Attributes](#dkim-attributes).|
+|status | JSON object | JSON object containing status details, including whether this domain's ownership has been verified  | no | Read only. For a full description, see the [Status Attributes](#header-status-attributes).|
+|dkim | JSON object | JSON object in which DKIM key configuration is defined | no | For a full description, see the [DKIM Attributes](#header-dkim-attributes).|
 |generate_dkim | boolean | Whether to generate a DKIM keypair on creation | no | defaults to true |
 |dkim_key_length | number | Size, in bits, of the DKIM private key to be generated.  | no | This option only applies if generate_dkim is 'true'. Private key size defaults to 1024.<br/><span class="label label-info"><strong>Note</strong></span> public keys for private keys longer than 1024 bits will be longer that 255 characters.  Because of this, the public key `TXT` record in DNS will need to contain multiple strings, see [RFC 7208, section 3.3](https://tools.ietf.org/html/rfc7208#section-3.3) for an example of how the SPF spec addresses this|
 |shared_with_subaccounts | boolean | Whether this domain can be used by subaccounts | no | Defaults to `false`, only available to domains belonging to a master account.|

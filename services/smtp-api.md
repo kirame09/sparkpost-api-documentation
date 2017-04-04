@@ -54,9 +54,9 @@ The fields supported in the X-MSYS-API header are as follows:
 | metadata | JSON object | JSON key value pairs associated with the SMTP message | no | A maximum of 1000 bytes of metadata is available in click/open events. |
 | cc | JSON array | Array of recipient addresses that will be included in the "Cc" header | no | A unique message with a unique tracking URL will be generated for each recipient in this list. |
 | bcc | JSON array | Array of recipient addresses that will be hidden from all other recipients | no | A unique message with a unique tracking URL will be generated for each recipient in this list. |
-| archive | JSON array | Array of recipient addresses that will be hidden from all other recipients | no | A unique message will be generated for each recipient in this list. The archive copy of the message contains tracking URLs identical to the recipient. For a full description, see the ["What is an archive recipient?"](#what-is-an-archive-recipient) section.|
+| archive | JSON array | Array of recipient addresses that will be hidden from all other recipients | no | A unique message will be generated for each recipient in this list. The archive copy of the message contains tracking URLs identical to the recipient. For a full description, see the ["What is an archive recipient?"](#header-what-is-an-archive-recipient?) section.|
 | tags | JSON array | Array of text labels associated with the SMTP message | no | Tags are available in click/open events. Maximum number of tags is 10 per recipient, 100 system wide. |
-| options | JSON object | JSON object in which SMTP API options are defined | no | For a full description, see the [Options Attributes](#options-attributes). |
+| options | JSON object | JSON object in which SMTP API options are defined | no | For a full description, see the [Options Attributes](#header-options-attributes). |
 
 ## Options Attributes
 
@@ -104,7 +104,7 @@ The following are key points about reporting and tracking for cc, bcc, and archi
 
 <div class="alert alert-info"><strong>Note</strong>: each recipient will only receive a single instance of each message, even if they appear on more than one of the CC, BCC or archive recipient lists.</div>
 
-**What is an archive recipient?**
+#### What is an archive recipient?
 
 Recipients in the `archive` list will receive an exact replica of the message that was sent to the RCPT TO address. In particular, any encoded links intended for the `RCPT TO` recipient will be identical in the archive messages.  In contrast, recipients in the `bcc` list will have links encoded specific to their address. There will be some small differences between the `RCPT TO` message and the `archive` message, for example in headers that contain the delivery address like `X-MSFBL` and `List-Unsubscribe`.
 
@@ -112,11 +112,9 @@ For example:
 
 ```
 X-MSYS-API: {
-
    "cc" : [ "cc_email1@corp.com", "cc_email2@corp.com" ],
    "bcc" : [ "bcc_email1@corp.com", "bcc_email2@corp.com" ],
    "archive" : [ "archive_email@corp.com" ],
-
    "options" : {"open_tracking" : false, "click_tracking" : true},
 }
 ```
