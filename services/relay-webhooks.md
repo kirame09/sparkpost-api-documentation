@@ -20,7 +20,7 @@ If you use [Postman](https://www.getpostman.com/) you can click the following bu
 | name      | string | User-friendly name                   | no       | example: `Inbound Customer Replies` |
 | target    | string | URL of the target to which to POST relay batches | yes | example: `https://webhooks.customer.example/replies` |
 | auth_token | string | Authentication token to present in the X-MessageSystems-Webhook-Token header of POST requests to target | no | Use this token in your target application to confirm that data is coming from the Relay Webhooks API. example: `5ebe2294ecd0e0f08eab7690d2a6ee69` |
-| match     | object | Restrict which inbound messages will be relayed to the target | yes | See Match Object Properties. example: `"match": { "protocol": "SMTP", "domain": "replies.customer.example" }` |
+| match     | object | Restrict which inbound messages will be relayed to the target | yes | See [Match Object Properties](#header-match-object-properties). example: `"match": { "protocol": "SMTP", "domain": "replies.customer.example" }` |
 
 ## Match Object Properties
 

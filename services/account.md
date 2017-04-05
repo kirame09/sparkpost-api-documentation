@@ -28,10 +28,10 @@ Get your SparkPost account information, including subscription status and quota 
 | created | string | ISO date account was created | |
 | updated | string | ISO date account details were last updated | |
 | status | string | account status - `active` | |
-| subscription | object | current subscription details | (see *Subscription Properties* section) |
-| pending_subscription | object | pending subscription details | (see *Subscription Properties* section) |
-| options | object | account-level tracking settings | (see *Options Properties* section) |
-| usage | object | account quota usage details | Specify 'include=usage' in query string to include usage info (see *Usage Properties* section) |
+| subscription | object | current subscription details | (see [Subscription Properties](#header-subscription-properties) section) |
+| pending_subscription | object | pending subscription details | (see [Subscription Properties](#header-subscription-properties) section) |
+| options | object | account-level tracking settings | (see [Options Properties](#header-options-properties) section) |
+| usage | object | account quota usage details | Specify 'include=usage' in query string to include usage info (see [Usage Properties](#header-usage-properties) section) |
 
 #### Subscription Properties
 
@@ -54,8 +54,8 @@ Get your SparkPost account information, including subscription status and quota 
 | Property   | Type    | Description | Notes |
 |------------|---------|-------------|-------|
 | timestamp | string | ISO date usage data was retrieved | |
-| day | object | daily usage report | See *Daily/Monthly Usage Properties* section |
-| month | object | monthly usage report | See *Daily/Monthly Usage Properties* section |
+| day | object | daily usage report | See [Daily/Monthly Usage Properties](#header-daily-monthly-usage-properties) section |
+| month | object | monthly usage report | See [Daily/Monthly Usage Properties](#header-daily-monthly-usage-properties) section |
 
 #### Daily/Monthly Usage Properties
 
@@ -131,7 +131,7 @@ Update your SparkPost account information and account-level options.
 | Field | Type | Description | Required |
 |-------|------|-------------|----------|
 | company_name | string | company name | no |
-| options | object | account-level options (see *Options Properties* section) | no |
+| options | object | account-level options (see [Options Properties](#header-options-properties) section) | no |
 
 #### Options Properties
 
@@ -187,4 +187,3 @@ Update your SparkPost account information and account-level options.
                 }
             ]
         }
-
