@@ -53,13 +53,14 @@ In anticipation of upcoming multichannel support we have added the _multichannel
 
 | Field         | Type     | Description                           | Required  |Notes|
 |------------------------|:-:       |---------------------------------------|-------------|--------|
-|channel|string|The communication channel used to reach recipient|yes|Valid values are `email`, `gcm`, `apns`. See Notes on channel below|
+|channel|string|The communication channel used to reach recipient|yes|Valid values are `email`, `gcm`, `apns`. See [Notes on channel](#header-notes-on-channel) below|
 |email    |string       |Valid email address   |required if channel is `email` | |
 |name |string |User-friendly name for the email address |no |Used when channel is `email`|
 |header_to|string       |Email address to display in the `To` header instead of _address.email_ (for BCC)|no|Used when channel is `email`|
-|token|string| See Push Specific Attributes |required if channel is `gcm` or `apns`|<a href="https://www.sparkpost.com/enterprise-email/"><span class="label label-warning"><strong>Enterprise</strong></span></a> |
-|app_id|string|See Push Specific Attributes |required if channel is `gcm` or `apns`| <a href="https://www.sparkpost.com/enterprise-email/"><span class="label label-warning"><strong>Enterprise</strong></span></a> |
-##### Notes on channel
+|token|string| See [Push Specific Attributes](#header-push-specific-attributes) |required if channel is `gcm` or `apns`|<a href="https://www.sparkpost.com/enterprise-email/"><span class="label label-warning"><strong>Enterprise</strong></span></a> |
+|app_id|string|See [Push Specific Attributes](#header-push-specific-attributes) |required if channel is `gcm` or `apns`| <a href="https://www.sparkpost.com/enterprise-email/"><span class="label label-warning"><strong>Enterprise</strong></span></a> |
+
+#### Notes on channel
 Communication channels other than email are currently only supported for inline recipient lists. Fields unrelated to the value of _channel_ are ignored. A field is considered unrelated if it is not required for that value of _channel_ unless mentioned otherwise in Notes
 
 **Constructing Headers using the Address Attributes**
@@ -95,7 +96,8 @@ or:
 
 The `To` header is only constructed for messages built from email part content.  The `To` header is not built for email_rfc822 content.
 
-#### Push Specific Attributes (Only supported for inline recipient lists)
+#### Push Specific Attributes
+<div class="alert alert-info">This is supported only for inline recipient lists</div>
 
 | Field         | Type     | Description                           | Notes |
 |------------------------|:-:       |---------------------------------------|-------------|
