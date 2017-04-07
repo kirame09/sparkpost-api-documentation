@@ -230,12 +230,26 @@ Perform a filtered search for entries in your suppression list.
 
 Retrieve the suppression status for a specific recipient by specifying the recipient’s email address in the URI path.
 
-If the recipient is not in the suppression list, an HTTP status of 404 is returned. If the recipient is in the list, an HTTP status of 200 is returned with the suppression records in the response body. Specifying the `type` key in the request body allows for retrieving only the `transactional` or `non_transactional` record. If type is specified and the recipient isn't suppressed for that type, an HTTP status of 404 is returned.
+This is a search endpoint so delays can occur when searching across multiple suppression lists.  See "Searching with Subaccounts" below.
+
+If the recipient is not in the suppression list, an HTTP status of 404 is returned. If the recipient is in the list, an HTTP status of 200 is returned with the suppression records in the response body. Specifying the `type` query parameter allows for retrieving only the `transactional` or `non_transactional` record. If type is specified and the recipient isn't suppressed for that type, an HTTP status of 404 is returned.
 
 In addition to the list entry attributes, the response body also includes `created` and `updated` timestamps.
 
+##### Searching with Subaccounts:
+Please provide the X-MSYS-SUBACCOUNT header when performing a lookup on a specific suppression list. 
+- Use a value of 0 to only search against the master account suppression list. 
+- Use the subaccount's ID to perform a lookup on a specific subaccount suppression list. 
+
+If the X-MSYS-SUBACCOUNT header is not provided, a search will be performed across the master account and all subaccount suppression lists. Searches across multiple lists can return out of date results, with a delay of up to 20 minutes. Searches against a specific list are not affected by this delay and return up-to-date information. If you do not take advantage of SparkPost's subaccounts feature, you do not need to provide the X-MSYS-SUBACCOUNT header in order to receive up-to-date results.
+
+ 
 + Parameters
   + recipient_email (required, string, `rcpt@example.com`) ... Recipient email address
+  + types (optional, list, `transactional`) ... Types of entries to include in the search, i.e. entries that are `transactional` or `non_transactional`
+  + cursor (optional, string, `initial`) ... The results cursor location to return, to start paging with cursor, use the value of 'initial'. When cursor is provided the `page` parameter is ignored. ( **Note:** Applicable to multi-list queries only)
+  + per_page (optional, int, `5`) ... Maximum number of results to return per page.  Must be between 1 and 10,000. Default value is 1000. ( **Note:** Applicable to multi-list queries only)
+  + page (optional, int, `5`) ... The results page number to return. Used with per_page for paging through results. The page parameter works up to 10,000 results. You must use the cursor parameter and start with cursor=initial to page result sets larger than 10,000 ( **Note:** Applicable to multi-list queries only)
 
 
 + Request
@@ -244,6 +258,7 @@ In addition to the list entry attributes, the response body also includes `creat
 
             Authorization: 14ac5499cfdd2bb2859e4476d2e5b1d2bad079bf
             Accept: application/json
+            X-MSYS-SUBACCOUNT: <subaccount-id> (optional)
 
 + Response 404 (application/json; charset=utf-8)
 
@@ -252,22 +267,6 @@ In addition to the list entry attributes, the response body also includes `creat
                 {
                     "message": "Recipient could not be found"
                 }
-            ]
-        }
-
-+ Response 200 (application/json; charset=utf-8)
-
-        {
-            "results" : [
-              {
-                "recipient" : "rcpt_1@example.com",
-                "transactional" : true,
-                "non_transactional" : true,
-                "source" : "Manually Added",
-                "description" : "User requested to not receive any further emails.",
-                "created" : "2015-01-01T12:00:00+00:00",
-                "updated" : "2015-01-01T12:00:00+00:00"
-              }
             ]
         }
 
@@ -298,6 +297,33 @@ In addition to the list entry attributes, the response body also includes `creat
             "total_count": 2
         }
 
++ Response 200 (application/json; charset=utf-8)
+
+        {
+            "results" : [
+              {
+                "recipient" : "shared_recip@example.com",
+                "non_transactional" : true,
+                "type": "non_transactional",
+                "source" : "Manually Added",
+                "description" : "User requested to not receive any non-transactional emails.",
+                "created" : "2015-01-01T12:00:00+00:00",
+                "updated" : "2015-01-01T12:00:00+00:00"
+              },
+              {
+                "recipient" : "shared_recip@example.com",
+                "non_transactional" : true,
+                "type": "non_transactional",
+                "source" : "Bounce Rule",
+                "description" : "550: 550 - Domain has been disabled. #7",
+                "created" : "2016-10-01T12:00:00+00:00",
+                "updated" : "2016-10-01T12:00:00+00:00",
+                "subaccount_id": "146"
+              },
+            ],
+            "links": [],
+            "total_count": 2
+        }
 
 
 ### Delete a List Entry [DELETE]
