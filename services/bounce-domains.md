@@ -4,9 +4,9 @@ description: Manage custom bounce domains, which are used for bounce reporting.
 # Group Bounce Domains
 <a name="bounce-domains-api"></a>
 
-<div class="alert alert-danger"><strong>For maximum deliverability</strong>, we recommend <a href="https://support.sparkpost.com/customer/portal/articles/2371794" style="text-decoration: underline;">setting up a custom bounce domain</a>. This is an easy way to help mailbox providers differentiate your email from other senders using SparkPost.</div>
+<div class="alert alert-danger">The Bounce Domains API is <strong>deprecated</strong>.  Please use the Sending Domains API to configure one or more bounce domains (TODO: link to support article)</div><br>
 
-<div class="alert alert-info"><strong>Note:</strong> Only one custom bounce domain is permitted per account at this time.</div>
+<div class="alert alert-info"><strong>Note:</strong> Only one custom bounce domain is permitted per account via the Bounce Domains API.  Please use the Sending Domains API to configure multiple bounce domains.</div>
 
 Bounce domains are used to report bounces, which are emails that were rejected from the recipient server. By adding a custom bounce domain to your account, you can customize the address that is used for the `Return-Path` header, which is the destination for out of band (OOB) bounces. This custom bounce domain overrides the default `Return-Path` (also known as the envelope FROM) for all messages sent. The default bounce domain is similar to "sparkpostmail.com".
 

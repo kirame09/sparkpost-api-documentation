@@ -25,6 +25,7 @@ If you use [Postman](https://www.getpostman.com/) you can click the following bu
 |generate_dkim | boolean | Whether to generate a DKIM keypair on creation | no | defaults to true |
 |dkim_key_length | number | Size, in bits, of the DKIM private key to be generated.  | no | This option only applies if generate_dkim is 'true'. Private key size defaults to 1024.<br/><span class="label label-info"><strong>Note</strong></span> public keys for private keys longer than 1024 bits will be longer that 255 characters.  Because of this, the public key `TXT` record in DNS will need to contain multiple strings, see [RFC 7208, section 3.3](https://tools.ietf.org/html/rfc7208#section-3.3) for an example of how the SPF spec addresses this|
 |shared_with_subaccounts | boolean | Whether this domain can be used by subaccounts | no | Defaults to `false`, only available to domains belonging to a master account.|
+|is_default_bounce_domain | boolean | Whether this domain should be used as the bounce domain when no other valid bounce domain has been specified in the transmission or SMTP injection. | no | <span class="label label-primary"><strong>SparkPost</strong></span> only.  Defaults to `false`.  Only available to domains belonging to a master account, with cname_status of "valid"|
 
 ### DKIM Attributes
 
@@ -50,6 +51,7 @@ Detailed status for this sending domain is described in a JSON object with the f
 |------------------------|:-:       |---------------------------------------|-------------|--------|
 |ownership_verified | boolean | Whether domain ownership has been verified |false |Read only. This field will return `true` if any of dkim_status, spf_status, abuse_at_status, or postmaster_at_status are `true`.|
 |dkim_status | string | Verification status of DKIM configuration |unverified|Read only. Valid values are `unverified`, `pending`, `invalid` or `valid`.|
+|cname_status | string | Verification status of CNAME configuration |unverified |Read only. Valid values are `unverified`, `pending`, `invalid` or `valid`.|
 |spf_status | string | Verification status of SPF configuration |unverified |Read only. Valid values are `unverified`, `pending`, `invalid` or `valid`.|
 |abuse_at_status | string | Verification status of abuse@ mailbox |unverified |Read only. Valid values are `unverified`, `pending`, `invalid` or `valid`.|
 |postmaster_at_status | string | Verification status of postmaster@ mailbox |unverified |Read only. Valid values are `unverified`, `pending`, `invalid` or `valid`.|
@@ -65,6 +67,7 @@ These are the valid request options for verifying a Sending Domain:
 | Field         | Type     | Description                           | Required  | Notes   |
 |------------------------|:-:       |---------------------------------------|-------------|--------|
 |dkim_verify | boolean | Request verification of DKIM record | no | |
+|cname_verify | boolean | Request verification of CNAME record | no | <span class="label label-primary"><strong>SparkPost</strong></span> only.  CNAME verification is a pre-requisite for the domain being used as a bounce domain (TODO: link to support article) |
 |spf_verify | boolean | Request verification of SPF record | no | <span class="label label-danger"><strong>Deprecated</strong></span> |
 |postmaster_at_verify | boolean | Request an email with a verification link to be sent to the sending domain's postmaster@ mailbox. | no | |
 |abuse_at_verify | boolean | Request an email with a verification link to be sent to the sending domain's abuse@ mailbox. | no | |
@@ -279,7 +282,8 @@ Retrieve a sending domain by specifying its domain name in the URI path.  The re
                     "public": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC+W6scd3XWwvC/hPRksfDYFi3ztgyS9OSqnnjtNQeDdTSD1DRx/xFar2wjmzxp2+SnJ5pspaF77VZveN3P/HVmXZVghr3asoV9WBx/uW1nDIUxU35L4juXiTwsMAbgMyh3NqIKTNKyMDy4P8vpEhtH1iv/BrwMdBjHDVCycB8WnwIDAQAB",
                     "selector": "hello_selector"
                 },
-                "shared_with_subaccounts": false
+                "shared_with_subaccounts": false,
+                "is_default_bounce_domain" : false
             }
         }
 
@@ -311,7 +315,8 @@ If a DKIM object is provided in the update request, it must contain all relevant
                    "public": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC+W6scd3XWwvC/hPRksfDYFi3ztgyS9OSqnnjtNQeDdTSD1DRx/xFar2wjmzxp2+SnJ5pspaF77VZveN3P/HVmXZVghr3asoV9WBx/uW1nDIUxU35L4juXiTwsMAbgMyh3NqIKTNKyMDy4P8vpEhtH1iv/BrwMdBjHDVCycB8WnwIDAQAB",
                    "selector": "hello_selector",
                    "headers": "from:to:subject:date"
-               }
+               },
+               "is_default_bounce_domain": true
            }
 
 + Response 200 (application/json)
@@ -384,7 +389,7 @@ Delete an existing sending domain.
 ### Verify a Sending Domain [POST]
 
 The verify resource operates differently depending on the provided request fields:
-  * Including the fields `dkim_verify` and/or `spf_verify` in the request initiates a check against the associated DNS record type for the specified sending domain.
+  * Including the fields `dkim_verify`, `cname_verify`, and/or `spf_verify` in the request initiates a check against the associated DNS record type for the specified sending domain.
   * Including the fields `postmaster_at_verify` and/or `abuse_at_verify` in the request results in an email sent to the specified sending domain's postmaster@ and/or abuse@ mailbox where a verification link can be clicked.
   * Including the fields `postmaster_at_token` and/or `abuse_at_token` in the request initiates a check of the provided token(s) against the stored token(s) for the specified sending domain.
 
@@ -393,6 +398,11 @@ DKIM public key verification requires the following:
   * The record must use the sending domain's public key in the `p=` tag.
   * If a k= tag is defined, it must be set to `rsa`.
   * If an h= tag is defined, it must be set to `sha256`.
+
+CNAME verification requires the following:
+  * A valid CNAME record in DNS (TODO: support article)
+
+<span class="label label-primary"><strong>SparkPost</strong></span> With the CNAME record in place and verified via "cname_verify":true, the domain will be eligible to be used as a bounce domain by including it as part of the transmission return_path or SMTP MAIL FROM email address. Bounce domains are used to report bounces, which are emails that were rejected from the recipient server. By adding a CNAME verified bounce domain to your account, you can customize the address that is used for the `Return-Path` header, which is the destination for out of band (OOB) bounces.  <div class="alert alert-danger"><strong>For maximum deliverability</strong>, we recommend <a href="https://support.sparkpost.com/customer/portal/articles/TODO" style="text-decoration: underline;">configuring at least one domain as a bounce domain</a>. This is an easy way to help mailbox providers differentiate your email from other senders using SparkPost.</div><br>
 
 <div class="alert alert-warning"><strong>Note</strong>: SPF sending domain verification is deprecated. You can use DKIM and/or email to verify your sending domain. We recommend using DKIM since it has authentication benefits.</div>
 
@@ -407,7 +417,7 @@ The domain's `status` object is returned on success.
 + Parameters
   + domain (required, string, `example1.com`) ... Name of the domain
 
-+ Request Verify DKIM and SPF (application/json)
++ Request Verify DKIM and CNAME (application/json)
 
     + Headers
 
@@ -416,7 +426,7 @@ The domain's `status` object is returned on success.
 
            {
                "dkim_verify": true,
-               "spf_verify": true
+               "cname_verify": true
            }
 
 
@@ -425,13 +435,15 @@ The domain's `status` object is returned on success.
         {
             "results": {
                 "ownership_verified": true,
-                "spf_status": "valid",
+
                 "dns": {
                     "dkim_record": "k=rsa; h=sha256; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC+W6scd3XWwvC/hPRksfDYFi3ztgyS9OSqnnjtNQeDdTSD1DRx/xFar2wjmzxp2+SnJ5pspaF77VZveN3P/HVmXZVghr3asoV9WBx/uW1nDIUxU35L4juXiTwsMAbgMyh3NqIKTNKyMDy4P8vpEhtH1iv/BrwMdBjHDVCycB8WnwIDAQAB",
                     "spf_record": "v=spf1 include:sparkpostmail.com ~all"
                 },
-                "compliance_status": "pending",
                 "dkim_status": "valid",
+                "cname_status": "valid",
+                "compliance_status": "pending",
+                "spf_status": "unverified",
                 "abuse_at_status": "unverified",
                 "postmaster_at_status": "unverified"
             }
@@ -456,6 +468,7 @@ The domain's `status` object is returned on success.
                 "spf_status": "unverified",
                 "compliance_status": "valid",
                 "dkim_status": "unverified",
+                "cname_status": "unverified",
                 "abuse_at_status": "unverified",
                 "postmaster_at_status": "unverified"
             }
@@ -480,6 +493,7 @@ The domain's `status` object is returned on success.
                 "spf_status": "unverified",
                 "compliance_status": "valid",
                 "dkim_status": "unverified",
+                "cname_status": "unverified",
                 "abuse_at_status": "unverified",
                 "postmaster_at_status": "valid"
             }
@@ -504,6 +518,7 @@ The domain's `status` object is returned on success.
                 "spf_status": "unverified",
                 "compliance_status": "valid",
                 "dkim_status": "unverified",
+                "cname_status": "unverified",
                 "abuse_at_status": "unverified",
                 "postmaster_at_status": "unverified"
             }
