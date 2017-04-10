@@ -67,7 +67,10 @@ Perform a filtered search for message event data. The response is sorted by desc
     + campaign_ids (optional, string, `Example Campaign Name`) ... delimited list of campaign ID's to search (i.e. the campaign id used during creation of a transmission).
     + delimiter = `,` (optional, string, `,`) ... Specifies the delimiter for query parameter lists
     + events (optional, list, `delivery, injection, bounce, delay, policy_rejection, out_of_band, open, click, generation_failure, generation_rejection, spam_complaint, list_unsubscribe, link_unsubscribe`) ... delimited list of event types to search. Defaults to all event types.
-    + friendly_froms (optional, list, `sender@mail.example.com`) ... delimited list of friendly from emails to search.
+    + friendly_froms (optional, list, `sender@mail.example.com`) ... delimited list of friendly from emails to search. 
+        
+        **Notes:** Not available for tracking events like `open`, `click`.
+        
     + from: `2014-07-20T08:00` (datetime, optional) - Datetime in format of YYYY-MM-DDTHH:MM.
         + Default: `24 hours ago`
     + message_ids (optional, list, `0e0d94b7-9085-4e3c-ab30-e3f2cd9c273e`) ... delimited list of message ID's to search.
