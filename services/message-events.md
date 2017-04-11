@@ -65,11 +65,14 @@ Perform a filtered search for message event data. The response is sorted by desc
 + Parameters
     + bounce_classes (optional, number, `1`) ... delimited list of bounce classification codes to search. (See [Bounce Classification Codes.](https://support.sparkpost.com/customer/portal/articles/1929896))
     + campaign_ids (optional, string, `Example Campaign Name`) ... delimited list of campaign ID's to search (i.e. the campaign id used during creation of a transmission).
+        
+        **Notes:** Not available for `sms_status` type.
+        
     + delimiter = `,` (optional, string, `,`) ... Specifies the delimiter for query parameter lists
     + events (optional, list, `delivery, injection, bounce, delay, policy_rejection, out_of_band, open, click, generation_failure, generation_rejection, spam_complaint, list_unsubscribe, link_unsubscribe`) ... delimited list of event types to search. Defaults to all event types.
     + friendly_froms (optional, list, `sender@mail.example.com`) ... delimited list of friendly from emails to search. 
         
-        **Notes:** Not available for tracking events like `open`, `click`.
+        **Notes:** Not available for `sms_status` type.
         
     + from: `2014-07-20T08:00` (datetime, optional) - Datetime in format of YYYY-MM-DDTHH:MM.
         + Default: `24 hours ago`
