@@ -55,7 +55,7 @@ function htmlFile(md) {
 module.exports = function(grunt) {
     // Relative to staticTempDir (!)
     if (!grunt.option('output')) {
-      grunt.option('output', '../sparkpost.github.io/_api/');
+      grunt.option('output', '../developers.sparkpost.com/_api/');
     }
 
     if (!grunt.option('searchContentFile')) {

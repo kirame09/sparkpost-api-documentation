@@ -2,8 +2,9 @@
 
 1. [Get Set Up](#1-get-set-up)
 1. [Make Your Edits](#2-make-your-edits)
-1. [Have Your Work Reviewed](#3-have-your-work-reviewed)
-1. [Publish!](#4-publish)
+1. [Preview Your Work](#3-preview-your-work)
+1. [Have Your Work Reviewed](#4-have-your-work-reviewed)
+1. [Publish!](#5-publish)
 
 ## 1. Get Set Up
 
@@ -31,8 +32,8 @@
 
     ```sh
     cd ../
-    git clone https://github.com/SparkPost/developers.sparkpost.com.git sparkpost.github.io
-    cd sparkpost.github.io
+    git clone https://github.com/SparkPost/developers.sparkpost.com.git
+    cd developers.sparkpost.com
     ./script/bootstrap
     ```
 
@@ -77,7 +78,7 @@ services = [
 
 You can edit this list to control the API docs top-level structure and ordering.
 
-### Preview Your Work
+### 3. Preview Your Work
 
 You can render and serve the whole DevHub on your machine to preview your changes exactly as they'll look in production:
 
@@ -88,15 +89,15 @@ You can render and serve the whole DevHub on your machine to preview your change
 
 1. Start the DevHub server (from within the DevHub repo) in a 2nd terminal:
     ```sh
-    cd ../sparkpost.github.io
+    cd ../developers.sparkpost.com
     ./script/server
     ```
 
-Your API docs are now available at [http://localhost:4000/api/](http://localhost:4000/api/). 
+Your API docs are now available at [http://localhost:4000/api/](http://localhost:4000/api/).
 
-Note: Once these processes have started, they will watch for changes and re-render the API docs on demand. Hit Ctrl+C to stop them when you're done. 
+Note: Once these processes have started, they will watch for changes and re-render the API docs on demand. Hit Ctrl+C to stop them when you're done.
 
-## 3. Have Your Work Reviewed
+## 4. Have Your Work Reviewed
 
 1. Commit your edits to your local repo:
     ```sh
@@ -111,7 +112,7 @@ Note: Once these processes have started, they will watch for changes and re-rend
 
 1. Open a pull request in the [API docs dev repo here](https://github.com/SparkPost/sparkpost-api-documentation-DEV/compare) comparing your branch to the `master` branch.
 
-## 4. Publish!
+## 5. Publish!
 
 One you have addressed any review feedback on your pull request, you can merge it into the master branch and publish it:
 
@@ -162,8 +163,7 @@ There are 3 repos used to manage our API docs:
 
 The API docs Grunt file includes tasks for parsing search content out of the Markdown and updating the search index in Algolia, our search service.
 
-[github-org]: https://github.com/SparkPost/ 
+[github-org]: https://github.com/SparkPost/
 [dev-repo]: https://github.com/SparkPost/sparkpost-api-documentation-dev
 [public-repo]: https://github.com/SparkPost/sparkpost-api-documentation
 [devhub-repo]: https://github.com/SparkPost/developers.sparkpost.com
-
