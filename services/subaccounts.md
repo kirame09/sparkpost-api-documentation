@@ -83,14 +83,14 @@ Endpoint for retrieving a list of your subaccounts. This endpoint only returns i
 
 Retrieve the total number of subaccounts for an account.
 
-Request (application/json)
++ Request (application/json)
 
-    Headers
+    + Headers
 
            Authorization: 14ac5499cfdd2bb2859e4476d2e5b1d2bad079bf
            Accept: application/json
 
-Response 200 (application/json; charset=utf-8)
++ Response 200 (application/json; charset=utf-8)
 
        {
            "results": {
