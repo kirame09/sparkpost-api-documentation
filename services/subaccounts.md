@@ -77,27 +77,6 @@ Endpoint for retrieving a list of your subaccounts. This endpoint only returns i
           ]
         }
 
-## Subaccounts Summary [/subaccounts/summary]
-
-### Retrieve Subaccounts Summary [GET]
-
-Retrieve the total number of subaccounts for an account.
-
-+ Request (application/json)
-
-    + Headers
-
-           Authorization: 14ac5499cfdd2bb2859e4476d2e5b1d2bad079bf
-           Accept: application/json
-
-+ Response 200 (application/json; charset=utf-8)
-
-       {
-           "results": {
-               "total": 46
-           }
-       }
-
 ## Create Subaccount [/subaccounts]
 
 ### Create a new Subaccount [POST]
@@ -192,6 +171,27 @@ Subaccounts are allowed to send mail using the SMTP protocol or Transmissions AP
             }
           ]
         }
+
+## Subaccounts Summary [/subaccounts/summary]
+
+### Retrieve Subaccounts Summary [GET]
+
+Retrieve the total number of subaccounts for an account.
+
++ Request (application/json)
+
+    + Headers
+
+           Authorization: 14ac5499cfdd2bb2859e4476d2e5b1d2bad079bf
+           Accept: application/json
+
++ Response 200 (application/json; charset=utf-8)
+
+       {
+           "results": {
+               "total": 46
+           }
+       }
 
 ## Subaccounts Entity [/subaccounts/{subaccount_id}]
 
