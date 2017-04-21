@@ -77,8 +77,6 @@ Endpoint for retrieving a list of your subaccounts. This endpoint only returns i
           ]
         }
 
-## Create Subaccount [/subaccounts]
-
 ### Create a new Subaccount [POST]
 
 Provisions a new subaccount and an initial subaccount API key. Subaccount API keys are only allowed very specific grants, which are limited to: `smtp/inject`, `sending_domains/manage`, `tracking_domains/view`, `tracking_domains/manage`, `message_events/view`, `suppression_lists/manage`, `transmissions/view`, and `transmissions/modify`.
@@ -182,16 +180,16 @@ Retrieve the total number of subaccounts for an account.
 
     + Headers
 
-           Authorization: 14ac5499cfdd2bb2859e4476d2e5b1d2bad079bf
-           Accept: application/json
+            Authorization: 14ac5499cfdd2bb2859e4476d2e5b1d2bad079bf
+            Accept: application/json
 
-+ Response 200 (application/json; charset=utf-8)
++ Response 200 (application/json)
 
-       {
-           "results": {
-               "total": 46
-           }
-       }
+        {
+          "results": {
+            "total": 46
+          }
+        }
 
 ## Subaccounts Entity [/subaccounts/{subaccount_id}]
 
