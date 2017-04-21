@@ -4,6 +4,8 @@ description: Manage custom bounce domains, which are used for bounce reporting.
 # Group Bounce Domains
 <a name="bounce-domains-api"></a>
 
+<div class="alert alert-warning"><strong>Deprecation Notice</strong>: This endpoint has been deprecated pending upcoming enhanced features on the <a href="sending-domains.html">Sending Domains</a> endpoint.</div>
+
 <div class="alert alert-danger"><strong>For maximum deliverability</strong>, we recommend <a href="https://support.sparkpost.com/customer/portal/articles/2371794" style="text-decoration: underline;">setting up a custom bounce domain</a>. This is an easy way to help mailbox providers differentiate your email from other senders using SparkPost.</div>
 
 <div class="alert alert-info"><strong>Note:</strong> Only one custom bounce domain is permitted per account at this time.</div>
