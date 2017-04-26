@@ -478,7 +478,7 @@ are currently in a failed state.
           "batch_id": "13c6764994a8f6b4e29906d5712ca7d",
           "ts": "2014-07-30T20:38:08.000Z",
           "attempts": 2,
-          "failure_code": "400"
+          "failure_code": "400",
           "response_code": "400"
         }
       ]
