@@ -100,13 +100,6 @@ If TLS is not supported by your application, SparkPost recommends using API keys
 
 <div class="alert alert-danger"><strong>Note</strong>: API keys should be treated like passwords, and as stated in <a href="https://www.sparkpost.com/policies/tou/">our Terms of Use</a>, you "are solely responsible for all use of [your account]." That includes use of your account by someone who sniffed your API key on the unsecured wifi at your favorite coffee shop because you weren't using TLS.</div>
 
-## SMTP MAIL FROM
-
-In many cases the SMTP MAIL FROM (or "envelope from") address may be any email address.  The address will be overwritten with a SparkPost specific email address before the email is delivered.
-If you would like SparkPost to deliver the email with a custom MAIL FROM domain then the domain specified in the MAIL FROM address must be set up ahead of time as a **CNAME-verified sending domain**.  Please see the [Sending Domains API endpoint](sending-domains.html) for details on creating and CNAME verifying a sending domain.
-
-**Note:** Sparkpost will **not** overwrite the MAIL FROM address for SparkPost Enterprise customers.
-
 ## Rate Limiting
 <div class="alert alert-info"><strong>Note</strong>: To prevent abuse, our servers enforce request rate limiting, which may trigger responses with HTTP status code 429.</div>
 
