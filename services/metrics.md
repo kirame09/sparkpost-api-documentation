@@ -3598,7 +3598,7 @@ Provides aggregate count of deliveries grouped by the attempt number.
 ### Bindings Groups List [GET]
 
 
-## Binding Groups List [/metrics/bindings{?from,to,timezone,match,limit}]
+## Bindings List [/metrics/bindings{?from,to,timezone,match,limit}]
 
 <div class="alert alert-warning"><strong>Deprecation Notice</strong>: This endpoint has been deprecated. Please use the <a href="metrics.html#metrics-deliverability-metrics-by-sending-ip-get">Sending IPs listing endpoint instead.</div>
 

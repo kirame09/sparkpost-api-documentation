@@ -6,9 +6,9 @@ DOCS_REVISION=`git rev-parse --short HEAD`
 # check out the dev hub code
 [ -d devhub ] && rm -rf devhub
 if env | grep -q ^TRAVIS=; then
-  git clone --branch develop https://${GIT_NAME}:${GH_TOKEN}@github.com/SparkPost/sparkpost.github.io.git devhub || exit 255
+  git clone --branch develop https://${GIT_NAME}:${GH_TOKEN}@github.com/SparkPost/developers.sparkpost.com.git devhub || exit 255
 else
-  git clone --branch develop git@github.com:SparkPost/sparkpost.github.io.git devhub || exit 255
+  git clone --branch develop git@github.com:SparkPost/developers.sparkpost.com.git devhub || exit 255
 fi
 echo ""
 
@@ -40,4 +40,3 @@ if env | grep -q ^TRAVIS=; then
   git commit -m "API docs build SparkPost/sparkpost-api-documentation@${DOCS_REVISION}" || exit 255
   git push origin develop || exit 255
 fi
-

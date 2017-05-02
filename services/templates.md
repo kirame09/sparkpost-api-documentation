@@ -347,8 +347,11 @@ If the template was used for message generation, the result will also include a 
 
 ### Update a Template [PUT]
 
-Update an existing template by specifying its ID in the URI path and use a **template object** as the PUT request body.
-By default, the update will result in a new draft version, but the published version can be overwritten directly by using the `update_published` query parameter.
+Update an existing template by specifying its ID in the URI path and a **template object** as the PUT request body.
+By default, an update operates on an existing draft version.
+An existing published version can be overwritten directly by setting the `update_published` query parameter to `true`.
+
+<div class="alert alert-info"><strong>Note</strong>: Attempting to update the published version of a template when only a draft version exists (and vice versa) will result in an error.</div>
 
 The `name` field may be modified, but the `id` field is read only.
 
@@ -360,13 +363,13 @@ The example shows an update that will rename the template, enable open tracking,
 and update the content all in one API call. All content fields are included whether they are being
 changed or not.
 
-Publishing a template is a specific case of an update.  The body of the PUT
-request should contain the `"published": true` field as shown in the example. The
-`update_published` query parameter does not apply.
+Publishing a template is a special kind of update.
+It uses the most recent draft version to create a new published version, even if one does not already exist.
+The body of the PUT request should contain the `"published": true` field as shown in the second example below (`Publish`).
 
 + Parameters
     + id (required, string, `11714265276872`) ... ID of the template
-    + update_published = `false` (optional, boolean, `true`) ...If true, directly overwrite the existing published template.  If false, create a new draft.
+    + update_published = `false` (optional, boolean, `false`) ...If true, directly overwrite the existing published template.  If false, update the existing draft.
 
 + Request Update (application/json)
 
@@ -399,6 +402,8 @@ request should contain the `"published": true` field as shown in the example. Th
 
 
 + Request Publish (application/json)
+
+  When publishing a draft template, `update_published` should be omitted, or specified as `false`.
 
   + Headers
 

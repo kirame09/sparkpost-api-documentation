@@ -53,14 +53,14 @@ You can use `grunt preview` to generate API docs under `static/` and start an au
 
 The API documentation lives at https://developers.sparkpost.com/api/. When a commit is made to the `master` branch of this repo, it triggers a Travis CI run that executes the code in `bin/copy-to-devhub.sh`. The automated workflow is as follows:
 
-* Clone the develop branch of the [SparkPost/sparkpost.github.io](https://github.com/SparkPost/sparkpost.github.io) repo
-* Generate the HTML files for the API docs into `sparkpost.gitub.io/_api`
-* Commit the changes, which triggers a Travis CI build for the `sparkpost.github.io` repo
+* Clone the develop branch of the [DevHub](https://github.com/SparkPost/developers.sparkpost.com) repo
+* Generate the HTML files for the API docs into `developers.sparkpost.com/_api`
+* Commit the changes, which triggers a Travis CI build for the `developers.sparkpost.com` repo
 
 The Travis CI projects can be viewed here:
 
 * [sparkpost-api-documentation](https://travis-ci.org/SparkPost/sparkpost-api-documentation)
-* [sparkpost.github.io](https://travis-ci.org/SparkPost/sparkpost.github.io)
+* [developers.sparkpost.com](https://travis-ci.org/SparkPost/developers.sparkpost.com)
 
 ### Contributing
 [Guidelines for adding issues](CONTRIBUTING.md#guidelines-for-adding-issues-to-sparkpost-api-documentation)
