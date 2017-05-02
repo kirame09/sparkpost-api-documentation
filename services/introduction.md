@@ -13,8 +13,7 @@ SparkPost presents a unified core API to all customers with a few noted exceptio
 |------------|---------|
 | `https://api.sparkpost.com/api/v1` | SparkPost and SparkPost Premium |
 | `https://api.sparkpost.com/api/labs` | SparkPost Labs |
-| `https://yourdomain.sparkpostelite.com/api/v1` | SparkPost Enterprise API |
-| `https://yourdomain.msyscloud.com/api/v1` | SparkPost Enterprise API (formerly 'SparkPost Elite' - prior to June 2015) |
+| `https://yourdomain.api.e.sparkpost.com/api/v1` | SparkPost Enterprise API |
 
 ## API Conventions
 * API versioning is handled using a major version number in the URL, e.g. /api/v1/endpoint.
@@ -76,7 +75,7 @@ To use SparkPost as an SMTP relay you need to point your SMTP client (or local M
 <a name="header-sparkpost-enterprise-smtp-endpoint"></a>
 <div class="alert alert-info"><strong>Note</strong>: SparkPost Enterprise customers should contact their Technical Account Manager for SMTP details.</div>
 
-* Host: smtp.sparkpostmail.com 
+* Host: smtp.sparkpostmail.com
 * Port: 587 or 2525
 * Encryption: STARTTLS
 * Authentication: AUTH LOGIN
@@ -151,4 +150,3 @@ When you make an API call you may receive an error message in response. Either t
 |429 |Exceed Sending Limit  |You sent too many requests in a given time period.                            |Check that you are with in the limits of your SparkPost plan. (If you are using the sandbox domain you'll need to add a sending domain to continue.)|
 |500 |Internal Server Error |Something went wrong on our end.                                              |Try the request again later. If the error does not resolve, [contact support](https://support.sparkpost.com/).                                      |
 |503 |Service Unavailable   |We are experiencing higher than normal levels of traffic.                     |Try the request again.                                                                                                                              |
-
