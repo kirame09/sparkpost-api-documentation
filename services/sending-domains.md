@@ -209,7 +209,7 @@ We allow any given domain (including its subdomains) to only be used by a single
              ]
            }
 
-## List [/sending-domains/{?status,verified,compliant}]
+## List [/sending-domains/{?status,verified}]
 
 ### List all Sending Domains [GET]
 
