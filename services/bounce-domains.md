@@ -4,7 +4,7 @@ description: Manage custom bounce domains, which are used for bounce reporting.
 # Group Bounce Domains
 <a name="bounce-domains-api"></a>
 
-<div class="alert alert-danger">The Bounce Domains endpoint is <strong>deprecated</strong>.  Please use the <a href="sending-domains.html">Sending Domains endpoint</a> to configure one or more bounce domains</div><br>
+<div class="alert alert-danger">The Bounce Domains endpoint is <strong>deprecated</strong>.  Please use the <a href="sending-domains.html">Sending Domains endpoint</a> to configure one or more CNAME-verified domains to be used as custom bounce domains.</div><br>
 
 <div class="alert alert-info"><strong>Note:</strong> Only one custom bounce domain is permitted per account via the Bounce Domains API.  Please use the Sending Domains API to configure multiple bounce domains.</div>
 

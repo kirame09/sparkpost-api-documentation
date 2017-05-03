@@ -64,12 +64,12 @@ Detailed status for this sending domain is described in a JSON object with the f
 
 These are the valid request options for verifying a Sending Domain:
 
-<div class="alert alert-info"><strong>Note</strong>: CNAME and Email-based domain verification is available for SparkPost customers only.</div>
+<div class="alert alert-info"><strong>Note</strong>: CNAME and Email-based domain verification is available for SparkPost accounts only.</div>
 
 | Field         | Type     | Description                           | Required  | Notes   |
 |------------------------|:-:       |---------------------------------------|-------------|--------|
 |dkim_verify | boolean | Request verification of DKIM record | no | |
-|cname_verify | boolean | Request verification of CNAME record | no | CNAME verification is a pre-requisite for the domain to be used as a bounce domain.  See the [verify endpoint](#header-sending-domains-verify-post).<br><br>Not available in <span class="label label-warning"><strong>Enterprise</strong></span> |
+|cname_verify | boolean | Request verification of CNAME record | no | CNAME verification is a pre-requisite for the domain to be used as a bounce domain.  See the [verify endpoint](#sending-domains-verify-post).<br><br>Not available in <span class="label label-warning"><strong>Enterprise</strong></span> |
 |spf_verify | boolean | Request verification of SPF record | no | <span class="label label-danger"><strong>Deprecated</strong></span> |
 |postmaster_at_verify | boolean | Request an email with a verification link to be sent to the sending domain's postmaster@ mailbox. | no | |
 |abuse_at_verify | boolean | Request an email with a verification link to be sent to the sending domain's abuse@ mailbox. | no | |
@@ -95,9 +95,9 @@ Create a sending domain by providing a **sending domain object** as the POST req
 
 We allow any given domain (including its subdomains) to only be used by a single customer account.  Please see our [support article](https://support.sparkpost.com/customer/en/portal/articles/1933318-creating-sending-domains) for additional reasons a domain might not be approved for sending.
 
-<div class="alert alert-info"><strong><a href="https://www.sparkpost.com/enterprise-email/">SparkPost Enterprise</a></strong> customers: To use a DKIM Signing Domain Identifier different to the Sending Domain, set the <tt>dkim.signing_domain</tt> field.</div>
+<div class="alert alert-info"><strong><a href="https://www.sparkpost.com/enterprise-email/">SparkPost Enterprise</a></strong> accounts: To use a DKIM Signing Domain Identifier different to the Sending Domain, set the <tt>dkim.signing_domain</tt> field.</div>
 
-<div class="alert alert-info"><strong><a href="https://www.sparkpost.com/enterprise-email/">SparkPost Enterprise</a></strong> customers: In some configurations, Sending Domains will be set to verified automatically when they are created, and can be used to send messages immediately. In that case, there is no need to use the <tt>verify</tt> endpoint to verify Sending Domains. To find out if this applies to your SparkPost Enterprise service, please contact support <a href="mailto:support@sparkpostelite.com">support@sparkpostelite.com</a>, or your TAM.</div>
+<div class="alert alert-info"><strong><a href="https://www.sparkpost.com/enterprise-email/">SparkPost Enterprise</a></strong> accounts: In some configurations, Sending Domains will be set to verified automatically when they are created, and can be used to send messages immediately. In that case, there is no need to use the <tt>verify</tt> endpoint to verify Sending Domains. To find out if this applies to your SparkPost Enterprise service, please contact support <a href="mailto:support@sparkpostelite.com">support@sparkpostelite.com</a>, or your TAM.</div>
 
 + Request Create New Sending Domain with Auto-Generated DKIM Keypair (application/json)
 
@@ -304,7 +304,7 @@ If a tracking domain is specified, it will replace any currently specified track
 
 If a DKIM object is provided in the update request, it must contain all relevant fields whether they are being changed or not.  The new DKIM object will completely overwrite the existing one.
 
-<div class="alert alert-info"><strong><a href="https://www.sparkpost.com/enterprise-email/">SparkPost Enterprise</a></strong> customers: To remove the DKIM Signing Domain Identifier for a Sending Domain, use an empty string for the value of the <tt>dkim.signing_domain</tt> field.</div>
+<div class="alert alert-info"><strong><a href="https://www.sparkpost.com/enterprise-email/">SparkPost Enterprise</a></strong> accounts: To remove the DKIM Signing Domain Identifier for a Sending Domain, use an empty string for the value of the <tt>dkim.signing_domain</tt> field.</div>
 
 + Parameters
     + domain (required, string, `example1.com`) ... Name of the domain
@@ -408,24 +408,24 @@ The verify resource operates differently depending on the provided request field
   * If a k= tag is defined, it must be set to `rsa`.
   * If an h= tag is defined, it must be set to `sha256`.
 
-For example, here is what a DKIM record might look like for domain `mail.example.com` with selector `scph1015`:
+For example, here is what a DKIM record might look like for domain *mail<span></span>.example.com* with selector *scph1015*:
 
 | Hostname         | Type     | Value                           |
 |------------------------|:-:       |---------------------------------------|
 |scph1015._domainkey.mail.example.com | TXT | v=DKIM1; k=rsa; h=sha256; p=MIGfMA0GCSqGSIb3DQEBAQUAA5GNADCBiQKBgQCzMTqqPX9jry+nKZjqYhKt5CP4+vBoEpf24POjc5ubWJQnZmY0wdBXawskxC7mBekUlAjOcsbZIhnFt+2asb1XTyLcTjGyqMvVcoUou6olzfMnfB06W9awRahQrrs9E0LZ4hYKSBDTm3MvoJo004+dNpTSnTlGqMyOoBuiD6KX8QIDAQAB |
 
 **CNAME** verification requires the following:
-  * A valid CNAME record in DNS with value "sparkpostmail.com"
+  * A valid CNAME record in DNS with value `sparkpostmail.com`
 
-An example CNAME record for domain `mail.example.com`:
+An example CNAME record for domain *mail<span></span>.example.com*:
 
 | Hostname         | Type     | Value                           |
 |------------------------|:-:       |---------------------------------------|
-|mail.example.com | CNAME | sparkpostmail.com |
+|mail<span></span>.example.com | CNAME | sparkpostmail<span></span>.com |
 
-With the CNAME record in place and verified via "cname_verify":true, the domain will be eligible to be used as a bounce domain by including it as part of the transmission return_path or SMTP MAIL FROM email address. Bounce domains are used to report bounces, which are emails that were rejected from the recipient server. By adding a CNAME verified bounce domain to your account, you can customize the address that is used for the `Return-Path` header, which is the destination for out of band (OOB) bounces.  For additional details, see this [Support Article](https://support.sparkpost.com/customer/portal/articles/2371794).
+With the CNAME record in place and verified via "cname_verify":true, the domain will be eligible to be used as a bounce domain by including it as part of the transmission return_path or SMTP MAIL FROM email address. Bounce domains are used to report bounces, which are emails that were rejected from the recipient server. By adding a CNAME-verified bounce domain to your account, you can customize the address that is used for the `Return-Path` header, which is the destination for out of band (OOB) bounces.
 
-<div class="alert alert-info"><strong><a href="https://www.sparkpost.com/enterprise-email/">SparkPost Enterprise</a></strong> customers, your TAM will handle bounce domain verification for you.</div><br>
+<div class="alert alert-info"><strong><a href="https://www.sparkpost.com/enterprise-email/">SparkPost Enterprise</a></strong> accounts, your TAM will handle bounce domain verification for you.</div><br>
 
 
 **SPF** verification requires the following:
@@ -440,7 +440,7 @@ The domain's `status` object is returned on success.
 + Parameters
   + domain (required, string, `example1.com`) ... Name of the domain
 
-+ Request Verify DKIM and CNAME (application/json)
++ Request Verify DKIM (application/json)
 
     + Headers
 
@@ -448,7 +448,35 @@ The domain's `status` object is returned on success.
     + Body
 
            {
-               "dkim_verify": true,
+               "dkim_verify": true
+           }
+
+
++ Response 200 (application/json)
+
+        {
+            "results": {
+                "ownership_verified": true,
+                "dns": {
+                    "dkim_record": "k=rsa; h=sha256; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC+W6scd3XWwvC/hPRksfDYFi3ztgyS9OSqnnjtNQeDdTSD1DRx/xFar2wjmzxp2+SnJ5pspaF77VZveN3P/HVmXZVghr3asoV9WBx/uW1nDIUxU35L4juXiTwsMAbgMyh3NqIKTNKyMDy4P8vpEhtH1iv/BrwMdBjHDVCycB8WnwIDAQAB"
+                },
+                "dkim_status": "valid",
+                "cname_status": "unverified",
+                "compliance_status": "pending",
+                "spf_status": "unverified",
+                "abuse_at_status": "unverified",
+                "postmaster_at_status": "unverified"
+            }
+        }
+
++ Request Verify CNAME (application/json)
+
+    + Headers
+
+            Authorization: 14ac5499cfdd2bb2859e4476d2e5b1d2bad079bf
+    + Body
+
+           {
                "cname_verify": true
            }
 
@@ -459,11 +487,9 @@ The domain's `status` object is returned on success.
             "results": {
                 "ownership_verified": true,
                 "dns": {
-                    "dkim_record": "k=rsa; h=sha256; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC+W6scd3XWwvC/hPRksfDYFi3ztgyS9OSqnnjtNQeDdTSD1DRx/xFar2wjmzxp2+SnJ5pspaF77VZveN3P/HVmXZVghr3asoV9WBx/uW1nDIUxU35L4juXiTwsMAbgMyh3NqIKTNKyMDy4P8vpEhtH1iv/BrwMdBjHDVCycB8WnwIDAQAB",
                     "cname_record": "sparkpostmail.com"
-                    "spf_record": "v=spf1 include:sparkpostmail.com ~all"
                 },
-                "dkim_status": "valid",
+                "dkim_status": "unverified",
                 "cname_status": "valid",
                 "compliance_status": "pending",
                 "spf_status": "unverified",
