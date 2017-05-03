@@ -185,3 +185,10 @@ If the `X-MSYS-API` header contains invalid JSON, the SMTP message will be rejec
 |------|---------|
 | 550  | `5.6.0 X-MSYS-API 'metadata' must be of type 'json object'`<br/>`5.6.0 smtpapi_campaign_id context is limited to 64 bytes` |
 | 421  | `4.3.3 [internal] smtpapi unable to generate unique transmission id` |
+
+## SMTP MAIL FROM
+
+In many cases the SMTP MAIL FROM (or "envelope from") address may be any email address.  The address will be overwritten with a SparkPost specific email address before the email is delivered.
+If you would like SparkPost to deliver the email with a custom MAIL FROM domain then the domain specified in the MAIL FROM address must be set up ahead of time as a [CNAME-verified sending domain](sending-domains.html#sending-domains-verify-post).
+
+**Note:** Sparkpost will **not** overwrite the MAIL FROM address for <a href="https://www.sparkpost.com/enterprise-email/"><span class="label label-warning"><strong>Enterprise</strong></span></a> accounts.
