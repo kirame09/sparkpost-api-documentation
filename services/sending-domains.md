@@ -209,15 +209,14 @@ We allow any given domain (including its subdomains) to only be used by a single
              ]
            }
 
-## List [/sending-domains/{?status,verified}]
+## List [/sending-domains/{?status}]
 
 ### List all Sending Domains [GET]
 
-List an overview of all sending domains in the system.  By default, all domains are returned.  Use the query parameters to filter on status and verification flag.
+List an overview of all sending domains in the system.  By default, all domains are returned.  Use the query parameter to filter on status.
 
 + Parameters
-    + status (optional, string, `sending`) ... Status filter.  Specify `sending` to get a list of all verified sending domains.  Specify `dkim` to get a list of all domains where DKIM status is valid.  Specify `bounce` to get a list of all domains where CNAME status is valid.  If not provided, get a list of all domains regardless of status.
-    + verified (optional, boolean, `true`) ... Verification flag.  If true, returns only verified domains.  If false, returns only domains that are not verified.  If not provided, returns all domains regardless of verification.
+    + status (optional, string, `verified`) ... Status filter.  Specify `verified` to get a list of all verified sending domains.  Specify `unverified` to get a list of all sending domains that are not verified.  Specify `dkim` to get a list of all domains where DKIM status is valid.  Specify `bounce` to get a list of all domains where CNAME status is valid.  If not provided, get a list of all domains regardless of status.
 
 
 + Request
