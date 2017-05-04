@@ -69,7 +69,7 @@ Perform a filtered search for message event data. The response is sorted by desc
         **Notes:** Not available for `sms_status` type.
         
     + delimiter = `,` (optional, string, `,`) ... Specifies the delimiter for query parameter lists
-    + events (optional, list, `delivery, injection, bounce, delay, policy_rejection, out_of_band, open, click, generation_failure, generation_rejection, spam_complaint, list_unsubscribe, link_unsubscribe`) ... delimited list of event types to search. Defaults to all event types.
+    + events (optional, list, `delivery,injection,bounce,delay,policy_rejection,out_of_band,open,click,generation_failure,generation_rejection,spam_complaint,list_unsubscribe,link_unsubscribe`) ... delimited list of event types to search. Defaults to all event types.
     + friendly_froms (optional, list, `sender@mail.example.com`) ... delimited list of friendly from emails to search. 
         
         **Notes:** Not available for `sms_status` type.
