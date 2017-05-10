@@ -127,14 +127,14 @@ Perform a filtered search for entries in your suppression list.
 + Parameters
     + to = `now` (optional, datetime, `2014-07-21T09:00:00-0400`) ... Datetime the entries were last updated, in the format of YYYY-MM-DDTHH:mm:ssZ
     + from (optional, datetime, `2014-07-20T09:00:00-0400`) ... Datetime the entries were last updated, in the format YYYY-MM-DDTHH:mm:ssZ
-    + domain (optional, string, `yahoo.com`) ... Domain of entries to include in the search. ( **Note:** SparkPost only)
-    + cursor (optional, string, `initial`) ... The results cursor location to return, to start paging with cursor, use the value of 'initial'. When cursor is provided the `page` parameter is ignored. ( **Note:** SparkPost only)
+    + domain (optional, string, `yahoo.com`) ... Domain of entries to include in the search.
+    + cursor (optional, string, `initial`) ... The results cursor location to return, to start paging with cursor, use the value of 'initial'. When cursor is provided the `page` parameter is ignored.
     + limit (optional, int, `5`) ... Maximum number of results to return per page.  Must be between 1 and 10,000.
-    + per_page (optional, int, `5`) ... Maximum number of results to return per page.  Must be between 1 and 10,000. Default value is 1000. ( **Note:** SparkPost only)
-    + page (optional, int, `5`) ... The results page number to return. Used with per_page for paging through results. The page parameter works up to 10,000 results. You must use the cursor parameter and start with cursor=initial to page result sets larger than 10,000 ( **Note:** SparkPost only)
+    + per_page (optional, int, `5`) ... Maximum number of results to return per page.  Must be between 1 and 10,000. Default value is 1000.
+    + page (optional, int, `5`) ... The results page number to return. Used with per_page for paging through results. The page parameter works up to 10,000 results. You must use the cursor parameter and start with cursor=initial to page result sets larger than 10,000
     + sources (optional, list, `Bounce%20Rule,Manually%20Added`) ... Sources of the entries to include in the search, i.e. entries that were added by this source
     + types (optional, list, `transactional`) ... Types of entries to include in the search, i.e. entries that are `transactional` or `non_transactional`
-    + description (optional, string, `Invalid%20Recipient`) ... Description of the entries to include in the search, i.e descriptions that include the text submitted. ( **Note:** SparkPost only)
+    + description (optional, string, `Invalid%20Recipient`) ... Description of the entries to include in the search, i.e descriptions that include the text submitted.
 
 + Request
 
@@ -237,13 +237,13 @@ If the recipient is not in the suppression list, an HTTP status of 404 is return
 In addition to the list entry attributes, the response body also includes `created` and `updated` timestamps.
 
 ##### Searching with Subaccounts:
-Please provide the X-MSYS-SUBACCOUNT header when performing a lookup on a specific suppression list. 
-- Use a value of 0 to only search against the master account suppression list. 
-- Use the subaccount's ID to perform a lookup on a specific subaccount suppression list. 
+Please provide the X-MSYS-SUBACCOUNT header when performing a lookup on a specific suppression list.
+- Use a value of 0 to only search against the master account suppression list.
+- Use the subaccount's ID to perform a lookup on a specific subaccount suppression list.
 
 If the X-MSYS-SUBACCOUNT header is not provided, a search will be performed across the master account and all subaccount suppression lists. Searches across multiple lists can return out of date results, with a delay of up to 20 minutes. Searches against a specific list are not affected by this delay and return up-to-date information. If you do not take advantage of SparkPost's subaccounts feature, you do not need to provide the X-MSYS-SUBACCOUNT header in order to receive up-to-date results.
 
- 
+
 + Parameters
   + recipient_email (required, string, `rcpt@example.com`) ... Recipient email address
   + types (optional, list, `transactional`) ... Types of entries to include in the search, i.e. entries that are `transactional` or `non_transactional`
@@ -366,8 +366,6 @@ If the recipient is not in the suppression list, an HTTP status of 404 is return
 
 ### Insert or Update a List Entry [PUT]
 
-**Note:** SparkPost only
-
 Insert or update a single entry in the suppression list by providing a JSON object. At a minimum, the JSON object should include a suppression type: `transactional` or `non_transactional`. The optional `description` key can be used to include an explanation of what type of message should be suppressed.
 
 If the recipient entry was added to the list by Compliance, it cannot be updated.
@@ -417,8 +415,6 @@ If the recipient entry was added to the list by Compliance, it cannot be updated
 
 ## List Summary [/suppression-list/summary]
 ### Retrieve Suppression List Summary [GET]
-
-**Note:** SparkPost only
 
 Retrieve the total number of suppressions for an account as well as a break down of entries by source.
 
