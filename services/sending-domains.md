@@ -209,19 +209,19 @@ We allow any given domain (including its subdomains) to only be used by a single
              ]
            }
 
-## List [/sending-domains/{?ownership_verified,dkim_status,cname_status,abuse_at_status,postmaster_at_status,compliance_status}]
+## List [/sending-domains{?ownership_verified,dkim_status,cname_status,abuse_at_status,postmaster_at_status,compliance_status}]
 
 ### List all Sending Domains [GET]
 
 List an overview of all sending domains in the system.  By default, all domains are returned.  Use the query parameters to filter on the various status options.
 
 + Parameters
-    + ownership_verified (optional, boolean, `true`) ... Ownership verified flag.  Valid values are `true` or `false`.  If not provided, get a list of all domains regardless of ownership verification.
-    + dkim_status (optional, string, `valid`) ... DKIM status filter.  Valid values are `valid`, `invalid`, `unverified`, or `pending`.  If not provided, get a list of all domains regardless of DKIM status.
-    + cname_status (optional, string, `valid`) ... CNAME status filter.  Valid values are `valid`, `invalid`, `unverified`, or `pending`.  If not provided, get a list of all domains regardless of CNAME status.
-    + abuse_at_status (optional, string, `valid`) ... abuse@ status filter.  Valid values are `valid`, `invalid`, `unverified`, or `pending`.  If not provided, get a list of all domains regardless of abuse@ status.
-    + postmaster_at_status (optional, string, `valid`) ... postmaster@ status filter.  Valid values are `valid`, `invalid`, `unverified`, or `pending`.  If not provided, get a list of all domains regardless of postmaster@ status.
-    + compliance_status (optional, string, `valid`) ... compliance status filter.  Valid values are `valid`, `blocked`, or `pending`.  If not provided, get a list of all domains regardless of compliance status.
+    + ownership_verified (optional, boolean, `true`) ... Ownership verified flag.  Valid values are `true` or `false`.  If not provided, returns a list of all domains regardless of ownership verification.
+    + dkim_status (optional, string, `valid`) ... DKIM status filter.  Valid values are `valid`, `invalid`, `unverified`, or `pending`.  If not provided, returns a list of all domains regardless of DKIM status.
+    + cname_status (optional, string, `valid`) ... CNAME status filter.  Valid values are `valid`, `invalid`, `unverified`, or `pending`.  If not provided, returns a list of all domains regardless of CNAME status.
+    + abuse_at_status (optional, string, `valid`) ... abuse@ status filter.  Valid values are `valid`, `invalid`, `unverified`, or `pending`.  If not provided, returns a list of all domains regardless of abuse@ status.
+    + postmaster_at_status (optional, string, `valid`) ... postmaster@ status filter.  Valid values are `valid`, `invalid`, `unverified`, or `pending`.  If not provided, returns a list of all domains regardless of postmaster@ status.
+    + compliance_status (optional, string, `valid`) ... compliance status filter.  Valid values are `valid`, `blocked`, or `pending`.  If not provided, returns a list of all domains regardless of compliance status.
 
 + Request
 
