@@ -209,15 +209,19 @@ We allow any given domain (including its subdomains) to only be used by a single
              ]
            }
 
-## List [/sending-domains/{?status}]
+## List [/sending-domains/{?ownership_verified,dkim_status,cname_status,abuse_at_status,postmaster_at_status,compliance_status}]
 
 ### List all Sending Domains [GET]
 
-List an overview of all sending domains in the system.  By default, all domains are returned.  Use the query parameter to filter on status.
+List an overview of all sending domains in the system.  By default, all domains are returned.  Use the query parameters to filter on the various status options.
 
 + Parameters
-    + status (optional, string, `verified`) ... Status filter.  Specify `verified` to get a list of all verified sending domains.  Specify `unverified` to get a list of all sending domains that are not verified.  Specify `dkim` to get a list of all domains where DKIM status is valid.  Specify `bounce` to get a list of all domains where CNAME status is valid.  If not provided, get a list of all domains regardless of status.
-
+    + ownership_verified (optional, boolean, `true`) ... Ownership verified flag.  Valid values are `true` or `false`.  If not provided, get a list of all domains regardless of ownership verification.
+    + dkim_status (optional, string, `valid`) ... DKIM status filter.  Valid values are `valid`, `invalid`, `unverified`, or `pending`.  If not provided, get a list of all domains regardless of DKIM status.
+    + cname_status (optional, string, `valid`) ... CNAME status filter.  Valid values are `valid`, `invalid`, `unverified`, or `pending`.  If not provided, get a list of all domains regardless of CNAME status.
+    + abuse_at_status (optional, string, `valid`) ... abuse@ status filter.  Valid values are `valid`, `invalid`, `unverified`, or `pending`.  If not provided, get a list of all domains regardless of abuse@ status.
+    + postmaster_at_status (optional, string, `valid`) ... postmaster@ status filter.  Valid values are `valid`, `invalid`, `unverified`, or `pending`.  If not provided, get a list of all domains regardless of postmaster@ status.
+    + compliance_status (optional, string, `valid`) ... compliance status filter.  Valid values are `valid`, `blocked`, or `pending`.  If not provided, get a list of all domains regardless of compliance status.
 
 + Request
 
@@ -249,12 +253,12 @@ List an overview of all sending domains in the system.  By default, all domains 
                     "domain": "example2.com",
                     "status": {
                         "ownership_verified": true,
-                        "spf_status": "pending",
-                        "abuse_at_status": "pending",
-                        "dkim_status": "pending",
+                        "spf_status": "valid",
+                        "abuse_at_status": "valid",
+                        "dkim_status": "valid",
                         "cname_status": "valid",
                         "compliance_status": "valid",
-                        "postmaster_at_status": "pending"
+                        "postmaster_at_status": "valid"
                     },
                     "shared_with_subaccounts": false,
                     "is_default_bounce_domain" : true
