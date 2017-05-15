@@ -209,7 +209,7 @@ We allow any given domain (including its subdomains) to only be used by a single
              ]
            }
 
-## List [/sending-domains{?ownership_verified,dkim_status,cname_status,abuse_at_status,postmaster_at_status,compliance_status}]
+## List [/sending-domains{?ownership_verified,dkim_status,cname_status,abuse_at_status,postmaster_at_status,compliance_status,is_default_bounce_domain}]
 
 ### List all Sending Domains [GET]
 
@@ -222,6 +222,7 @@ List an overview of all sending domains in the system.  By default, all domains 
     + abuse_at_status (optional, string, `unverified`) ... abuse@ status filter.  Valid values are `valid`, `invalid`, `unverified`, or `pending`.  If not provided, returns a list of all domains regardless of abuse@ status.
     + postmaster_at_status (optional, string, `unverified`) ... postmaster@ status filter.  Valid values are `valid`, `invalid`, `unverified`, or `pending`.  If not provided, returns a list of all domains regardless of postmaster@ status.
     + compliance_status (optional, string, `valid`) ... compliance status filter.  Valid values are `valid`, `blocked`, or `pending`.  If not provided, returns a list of all domains regardless of compliance status.
+    + is_default_bounce_domain (optional, boolean, `false`) ... Is default bounce domain flag.  Valid values are `true` or `false`.  If not provided, returns a list of all domains regardless of whether it is the default bounce domain.
 
 + Request
 
@@ -261,7 +262,7 @@ List an overview of all sending domains in the system.  By default, all domains 
                         "postmaster_at_status": "unverified"
                     },
                     "shared_with_subaccounts": false,
-                    "is_default_bounce_domain" : true
+                    "is_default_bounce_domain" : false
                 }
             ]
         }
