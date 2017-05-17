@@ -87,7 +87,7 @@ X-MSYS-API: { "options" : { "open_tracking" : true, "click_tracking" : true } }
 
 <div class="alert alert-info"><strong>Note</strong>: The Sandbox Domain is available to SparkPost customers only</div>
 
-The sandbox domain `sparkpostbox.com` is available to allow each account to send test messages in advance of configuring a real sending domain. Each SparkPost account has a lifetime allowance of 50 sandbox domain messages. That means one may send up to 50 test messages using `From: something@sparkpostbox.com`. Note that you can set the 'local part' (the part before the @) to any valid email local part.
+The sandbox domain `sparkpostbox.com` is available to allow each account to send test messages in advance of configuring a real sending domain. Each SparkPost account has a lifetime allowance of 5 sandbox domain messages. That means one may send up to 5 test messages using `From: something@sparkpostbox.com`. Note that you can set the 'local part' (the part before the @) to any valid email local part.
 
 ## Sending Messages with cc, bcc, and archive Recipients
 

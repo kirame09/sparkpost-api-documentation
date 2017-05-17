@@ -111,7 +111,7 @@ The limits imposed here are dynamic but as a general rule, polling these endpoin
 
 **Alternatives To Polling:** For some common use cases, the SparkPost API offers more efficient alternatives to polling, especially of the message events endpoint. For instance, A single call to the [metrics deliverability summary](api/metrics.html#metrics-deliverability-metrics-get) endpoint offers a summary of deliveries, bounces, opens, clicks and more for some time period. If your application requires low latency access to each message event, using a [webhook-based](/api/webhooks.html) process will be more efficient than polling message events and will avoid rate limiting.
 
-**Sandbox Domain Limits (sparkpostbox.com):** If you use the sandbox domain for testing you are limited to 50 emails for the lifetime of your SparkPost account.
+**Sandbox Domain Limits (sparkpostbox.com):** If you use the sandbox domain for testing you are limited to 5 emails for the lifetime of your SparkPost account.
 
 ## Account Suspension
 
