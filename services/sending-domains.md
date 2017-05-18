@@ -209,9 +209,20 @@ We allow any given domain (including its subdomains) to only be used by a single
              ]
            }
 
+## List [/sending-domains{?ownership_verified,dkim_status,cname_status,abuse_at_status,postmaster_at_status,compliance_status,is_default_bounce_domain}]
+
 ### List all Sending Domains [GET]
 
-List an overview of all sending domains in the system.
+List an overview of all sending domains in the system.  By default, all domains are returned.  Use the query parameters to filter on the various status options.
+
++ Parameters
+    + ownership_verified (optional, boolean, `true`) ... Ownership verified flag.  Valid values are `true` or `false`.  If not provided, returns a list of all domains regardless of ownership verification.
+    + dkim_status (optional, string, `valid`) ... DKIM status filter.  Valid values are `valid`, `invalid`, `unverified`, or `pending`.  If not provided, returns a list of all domains regardless of DKIM status.
+    + cname_status (optional, string, `valid`) ... CNAME status filter.  Valid values are `valid`, `invalid`, `unverified`, or `pending`.  If not provided, returns a list of all domains regardless of CNAME status.
+    + abuse_at_status (optional, string, `unverified`) ... abuse@ status filter.  Valid values are `valid`, `invalid`, `unverified`, or `pending`.  If not provided, returns a list of all domains regardless of abuse@ status.
+    + postmaster_at_status (optional, string, `unverified`) ... postmaster@ status filter.  Valid values are `valid`, `invalid`, `unverified`, or `pending`.  If not provided, returns a list of all domains regardless of postmaster@ status.
+    + compliance_status (optional, string, `valid`) ... compliance status filter.  Valid values are `valid`, `blocked`, or `pending`.  If not provided, returns a list of all domains regardless of compliance status.
+    + is_default_bounce_domain (optional, boolean, `false`) ... Is default bounce domain flag.  Valid values are `true` or `false`.  If not provided, returns a list of all domains regardless of whether it is the default bounce domain.
 
 + Request
 
@@ -229,12 +240,12 @@ List an overview of all sending domains in the system.
                     "tracking_domain": "click.example1.com",
                     "status": {
                         "ownership_verified": true,
-                        "spf_status": "valid",
-                        "abuse_at_status": "valid",
+                        "spf_status": "unverified",
+                        "abuse_at_status": "unverified",
                         "dkim_status": "valid",
                         "cname_status": "valid",
                         "compliance_status": "valid",
-                        "postmaster_at_status": "valid"
+                        "postmaster_at_status": "unverified"
                     },
                     "shared_with_subaccounts": false,
                     "is_default_bounce_domain" : false
@@ -242,16 +253,16 @@ List an overview of all sending domains in the system.
                 {
                     "domain": "example2.com",
                     "status": {
-                        "ownership_verified": false,
-                        "spf_status": "pending",
-                        "abuse_at_status": "pending",
-                        "dkim_status": "pending",
+                        "ownership_verified": true,
+                        "spf_status": "unverified",
+                        "abuse_at_status": "unverified",
+                        "dkim_status": "valid",
                         "cname_status": "valid",
-                        "compliance_status": "pending",
-                        "postmaster_at_status": "pending"
+                        "compliance_status": "valid",
+                        "postmaster_at_status": "unverified"
                     },
                     "shared_with_subaccounts": false,
-                    "is_default_bounce_domain" : true
+                    "is_default_bounce_domain" : false
                 }
             ]
         }
