@@ -35,6 +35,7 @@ The following APIs have subaccount support:
 ### Managing master account data as a Service Provider
 * Setting `X-MSYS-SUBACCOUNT` to `0` will retrieve or manage Master Account data only
 * For POST/PUT/DELETE requests, omitting `X-MSYS-SUBACCOUNT` will result in the same behavior as setting `X-MSYS-SUBACCOUNT` to `0`
+    * When creating or updating webhooks, `X-MSYS-SUBACCOUNT` must be set explicitly. Omitting the `X-MSYS-SUBACCOUNT` header will create a webhook for the entire account, while setting `X-MSYS-SUBACCOUNT` to `0` will create a webhook for the Master Account only.
 * For GET requests, omitting `X-MSYS-SUBACCOUNT` will result in Master Account and Subaccount data in the response
   * Subaccount data will have the key `subaccount_id` in the response object
 * Metrics and Message Events APIs do not use `X-MSYS-SUBACCOUNT`. Instead, setting the query parameter `subaccounts` to `0` will return only Master Account reporting data
