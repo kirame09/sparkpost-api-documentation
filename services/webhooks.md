@@ -405,7 +405,7 @@ and returns detailed information on the response received from the target.
 
 | Property   | Type   | Description | Required | Notes |
 |------------|--------|-------------|----------|-------|
-| message    | object | Example batch to send | yes | example: `{"msys": {}}`  |
+| message    | object | Example batch to send | yes | example: `[ { "msys": {} } ]`  |
 
 + Parameters
   + id (required, uuid, `12affc24-f183-11e3-9234-3c15c2c818c2`) ... UUID identifying a webhook
@@ -419,11 +419,11 @@ and returns detailed information on the response received from the target.
   + Body
 
         ```js
-        {
-            "message": {
+        [
+            {
                 "msys": {}
             }
-        }
+        ]
         ```
 
 + Response 200 (application/json)
