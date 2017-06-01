@@ -364,9 +364,9 @@ If the recipient is not in the suppression list, an HTTP status of 404 is return
 
 + Response 204 (application/json; charset=utf-8)
 
-### Insert or Update a List Entry [PUT]
+### Update a List Entry [PUT]
 
-Insert or update a single entry in the suppression list by providing a JSON object. At a minimum, the JSON object should include a suppression type: `transactional` or `non_transactional`. The optional `description` key can be used to include an explanation of what type of message should be suppressed.
+Update a single entry in the suppression list by providing a JSON object. At a minimum, the JSON object should include a suppression type: `transactional` or `non_transactional`. The optional `description` key can be used to include an explanation of what type of message should be suppressed.
 
 If the recipient entry was added to the list by Compliance, it cannot be updated.
 
