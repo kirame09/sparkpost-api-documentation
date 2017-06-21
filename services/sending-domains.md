@@ -51,7 +51,7 @@ Detailed status for this sending domain is described in a JSON object with the f
 
 | Field         | Type     | Description                           | Default   | Notes   |
 |------------------------|:-:       |---------------------------------------|-------------|--------|
-|ownership_verified | boolean | Whether domain ownership has been verified |false |Read only. This field will return `true` if any of dkim_status, cname_status, spf_status, abuse_at_status, or postmaster_at_status are `true`.|
+|ownership_verified | boolean | Whether domain ownership has been verified |false |Read only. This field will return `true` if any of dkim_status, cname_status, spf_status, abuse_at_status, or postmaster_at_status are `true` or ownership had been verified previously.|
 |dkim_status | string | Verification status of DKIM configuration |unverified|Read only. Valid values are `unverified`, `pending`, `invalid` or `valid`.|
 |cname_status | string | Verification status of CNAME configuration |unverified |Read only. Valid values are `unverified`, `pending`, `invalid` or `valid`.|
 |spf_status | string | Verification status of SPF configuration |unverified |Read only. Valid values are `unverified`, `pending`, `invalid` or `valid`.  <span class="label label-danger"><strong>Deprecated</strong></span>|
